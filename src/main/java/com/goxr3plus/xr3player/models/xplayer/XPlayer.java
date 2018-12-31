@@ -12,12 +12,11 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
  */
 public class XPlayer extends StreamPlayer {
 
-    /**
-     * Constructor.
-     */
-    public XPlayer() {
-        super();
-    }
+	/**
+	 * Constructor.
+	 */
+	public XPlayer() {
+		super();
+	}
 
-	
 }

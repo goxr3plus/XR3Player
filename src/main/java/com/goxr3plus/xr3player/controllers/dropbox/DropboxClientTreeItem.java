@@ -9,24 +9,23 @@ import javafx.scene.control.TreeItem;
  * A custom TreeItem which represents a File
  */
 public class DropboxClientTreeItem extends TreeItem<String> {
-	
+
 	private final String accessToken;
 	private final String email;
-	
+
 	/**
 	 * Constructor.
 	 *
-	 * @param accessToken
-	 *            The client accessToken
+	 * @param accessToken The client accessToken
 	 * 
 	 */
 	public DropboxClientTreeItem(String value, String accessToken, String email) {
 		super(value);
 		this.accessToken = accessToken;
 		this.email = email;
-		
+
 	}
-	
+
 	/**
 	 * @return the accessToken
 	 */
@@ -40,5 +39,5 @@ public class DropboxClientTreeItem extends TreeItem<String> {
 	public String getEmail() {
 		return email;
 	}
-	
+
 }

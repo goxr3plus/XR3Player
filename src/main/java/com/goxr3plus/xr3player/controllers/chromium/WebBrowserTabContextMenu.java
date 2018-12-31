@@ -11,85 +11,88 @@ import javafx.scene.control.MenuItem;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class WebBrowserTabContextMenu extends ContextMenu {
-	
-	//--------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------
+
 	@FXML
 	private MenuItem newTab;
-	
+
 	@FXML
 	private MenuItem reloadTab;
-	
+
 	@FXML
 	private MenuItem closeOtherTabs;
-	
+
 	@FXML
 	private MenuItem closeTabsRight;
-	
+
 	@FXML
 	private MenuItem closeTabsLeft;
-	
+
 	@FXML
 	private MenuItem closeTab;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	private final WebBrowserTabController webBrowserTabController;
-	
+
 	private final WebBrowserController webBrowserController;
-	
+
 	/**
 	 * Constructor
 	 * 
 	 * @param tab
 	 * @param webBrowserController
 	 */
-	public WebBrowserTabContextMenu(WebBrowserTabController webBrowserTabController, WebBrowserController webBrowserController) {
+	public WebBrowserTabContextMenu(WebBrowserTabController webBrowserTabController,
+			WebBrowserController webBrowserController) {
 		this.webBrowserTabController = webBrowserTabController;
 		this.webBrowserController = webBrowserController;
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabContextMenu.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
 	@FXML
 	private void initialize() {
-		
-		//newTab
+
+		// newTab
 		newTab.setOnAction(a -> webBrowserController.createAndAddNewTab());
-		
-		//reloadTab
+
+		// reloadTab
 		reloadTab.setOnAction(a -> webBrowserTabController.reloadWebSite());
-		
-		//closeTabsRight
+
+		// closeTabsRight
 		closeTabsRight.setOnAction(a -> webBrowserController.closeTabsToTheRight(webBrowserTabController.getTab()));
-		
-		//closeTabsLeft
+
+		// closeTabsLeft
 		closeTabsLeft.setOnAction(a -> webBrowserController.closeTabsToTheLeft(webBrowserTabController.getTab()));
-		
-		//closeOtherTabs
+
+		// closeOtherTabs
 		closeOtherTabs.setOnAction(a -> {
 			webBrowserController.closeTabsToTheLeft(webBrowserTabController.getTab());
 			webBrowserController.closeTabsToTheRight(webBrowserTabController.getTab());
 		});
-		
-		//closeTab
+
+		// closeTab
 		closeTab.setOnAction(a -> webBrowserController.removeTab(webBrowserTabController.getTab()));
-		
+
 	}
 }

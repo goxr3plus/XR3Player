@@ -18,86 +18,86 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 public class MediaViewerService extends Service<Void> {
-	
+
 	private final SmartController smartController;
 	private boolean positionReverter;
-	
+
 	/**
 	 * Constructor.
 	 */
 	public MediaViewerService(SmartController smartController) {
 		this.smartController = smartController;
-		
+
 		setOnSucceeded(s -> done());
 		setOnFailed(f -> done());
 		setOnCancelled(c -> done());
 	}
-	
+
 	public void startService() {
-		
-		//Delete all items
+
+		// Delete all items
 		smartController.getMediaViewer().deleteAllItems(true);
-		
-		//Restart
+
+		// Restart
 		restart();
 	}
-	
+
 	/**
 	 * Done.
 	 */
 	// Work done
 	public void done() {
-		
-		//Below is a smart trick to fix splitpane glitch--------
+
+		// Below is a smart trick to fix splitpane glitch--------
 		positionReverter = !positionReverter;
-		
+
 		if (positionReverter) {
 			double[] positions = smartController.getViewerSplitPane().getDividerPositions();
 			positions[0] += 0.05;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
-			
+
 			positions[0] -= 0.07;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
 		} else {
 			double[] positions = smartController.getViewerSplitPane().getDividerPositions();
 			positions[0] -= 0.05;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
-			
+
 			positions[0] += 0.07;
 			smartController.getViewerSplitPane().setDividerPositions(positions);
 		}
-		//----------------------------------------------------------------
-		
+		// ----------------------------------------------------------------
+
 	}
-	
+
 	@Override
 	protected Task<Void> createTask() {
 		return new Task<Void>() {
-			
+
 			@Override
 			protected Void call() throws Exception {
-				
+
 				// counter
 				int[] counter = { 0 };
 				int total = smartController.getItemsObservableList().size();
-				
-				//Update Message
+
+				// Update Message
 				updateMessage("Generating album views");
-				
-				//Update the Viewer
+
+				// Update the Viewer
 				List<Node> mediaList = smartController.getItemsObservableList().stream().map(media -> {
-					
-					//Update Progress
+
+					// Update Progress
 					updateProgress(++counter[0], total);
-					
-					//Create MediViewer
+
+					// Create MediViewer
 					MediaViewer mediaViewer = new MediaViewer(media);
-					
+
 					try {
-						//Image can be null , remember.
+						// Image can be null , remember.
 						Image image = media.getAlbumImage();
-						
-						//Image exists?
+
+						// Image exists?
 						if (image != null) {
 							mediaViewer.getImageView().setImage(image);
 							mediaViewer.getNameLabel().setVisible(false);
@@ -105,37 +105,37 @@ public class MediaViewerService extends Service<Void> {
 							mediaViewer.getNameLabel().setText(media.getTitle());
 							mediaViewer.getNameLabel().setVisible(true);
 						}
-						
+
 						// --Drag Detected
 						mediaViewer.setOnDragDetected(event -> {
-							
+
 							/* allow copy transfer mode */
 							Dragboard db = mediaViewer.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-							
+
 							/* put a string on drag board */
 							ClipboardContent content = new ClipboardContent();
-							
+
 							// PutFiles
 							content.putFiles(Arrays.asList(new File(media.getFilePath())));
-							
-							//Set DragView
+
+							// Set DragView
 							JavaFXTools.setDragView(db, media);
-							
-							//Set Content
+
+							// Set Content
 							db.setContent(content);
-							
+
 							event.consume();
 						});
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
-					
+
 					return mediaViewer;
 				}).collect(Collectors.toList());
-				
-				//Run on JavaFX Thread
+
+				// Run on JavaFX Thread
 				Platform.runLater(() -> smartController.getMediaViewer().addMultipleItems(mediaList));
-				
+
 				return null;
 			}
 		};

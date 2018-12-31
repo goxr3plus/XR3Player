@@ -13,44 +13,45 @@ import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class MovieModeController extends BorderPane {
-	
-	//-----------------------------------------------------
-	
+
+	// -----------------------------------------------------
+
 	@FXML
 	private StackPane stack1;
-	
+
 	@FXML
 	private ImageView imageView1;
-	
+
 	@FXML
 	private Label label1;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/**
 	 * Constructor.
 	 */
 	public MovieModeController() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "MoviesMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .fxml is initialised
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		imageView1.fitWidthProperty().bind(this.widthProperty());
 		imageView1.fitHeightProperty().bind(this.heightProperty());
 		stack1.setOnMouseReleased(m -> {
@@ -59,5 +60,5 @@ public class MovieModeController extends BorderPane {
 			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
 		});
 	}
-	
+
 }

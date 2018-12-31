@@ -25,40 +25,41 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class LibraryInformation extends BorderPane {
-	
+
 	@FXML
 	private Label totalItems;
-	
+
 	@FXML
 	private Label dateLabel;
-	
+
 	@FXML
 	private Label starsLabel;
-	
+
 	@FXML
 	private Label commentsLabel;
-	
+
 	@FXML
 	private TextArea commentsArea;
-	
+
 	// --------------------------------------------------------------------
-	
+
 	/** The library. */
 	private Library library;
-	
+
 	/** The Constant popOver. */
 	private SpecialPopOver popOver;
-	
+
 	/**
 	 * Constructor.
 	 */
 	public LibraryInformation() {
-		
+
 		// ----------------------------------FXMLLoader-------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryInformation.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.LIBRARIES_FXMLS + "LibraryInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		// -------------Load the FXML-------------------------------
 		try {
 			loader.load();
@@ -66,30 +67,29 @@ public class LibraryInformation extends BorderPane {
 			Main.logger.log(Level.WARNING, "", ex);
 		}
 	}
-	
+
 	/**
 	 * Shows the window with the Library settings.
 	 *
-	 * @param library
-	 *            The given library
+	 * @param library The given library
 	 */
 	public void showWindow(Library library) {
 		this.library = library;
-		
-		//--Date Label
+
+		// --Date Label
 		dateLabel.setText(library.getDateCreated() + " " + library.getTimeCreated());
-		//--Stars Label
+		// --Stars Label
 		starsLabel.textProperty().bind(library.getRatingLabel().textProperty());
-		//--Total Items
+		// --Total Items
 		totalItems.textProperty().bind(library.getTotalItemsLabel().textProperty());
-		//--Comments Area
+		// --Comments Area
 		commentsArea.setText(library.getDescription());
-		
-		//Show the PopOver
+
+		// Show the PopOver
 		popOver.showPopOver(library);
-		
+
 	}
-	
+
 	/**
 	 * Check if the PopOver is Showing
 	 * 
@@ -98,7 +98,7 @@ public class LibraryInformation extends BorderPane {
 	public boolean isShowing() {
 		return popOver.isShowing();
 	}
-	
+
 	/**
 	 * Checking if commentsArea is Focused.
 	 *
@@ -106,9 +106,9 @@ public class LibraryInformation extends BorderPane {
 	 */
 	public boolean isCommentsAreaFocused() {
 		return commentsArea.isFocused();
-		
+
 	}
-	
+
 	/**
 	 * Returns the StarLabel.
 	 *
@@ -117,7 +117,7 @@ public class LibraryInformation extends BorderPane {
 	public Label getStarsLabel() {
 		return starsLabel;
 	}
-	
+
 	/**
 	 * The library that lastly opened it's information's PopOver
 	 *
@@ -126,13 +126,13 @@ public class LibraryInformation extends BorderPane {
 	public Library getLibrary() {
 		return library;
 	}
-	
+
 	/**
 	 * Called as soon as .fxml is initialized
 	 */
 	@FXML
 	public void initialize() {
-		
+
 		// -------------Create the PopOver-------------------------------
 		popOver = new SpecialPopOver();
 		popOver.setTitle("Information");
@@ -143,24 +143,24 @@ public class LibraryInformation extends BorderPane {
 		popOver.setAutoHide(true);
 		popOver.setHeaderAlwaysVisible(true);
 		popOver.setContentNode(this);
-		popOver.showingProperty().addListener((observable , oldValue , newValue) -> {
+		popOver.showingProperty().addListener((observable, oldValue, newValue) -> {
 			if (library != null)
 				library.updateDescription();
-			if (!newValue) {  //on hidden
-				//--Stars Label
+			if (!newValue) { // on hidden
+				// --Stars Label
 				starsLabel.textProperty().unbind();
-				//--Total Items
+				// --Total Items
 				totalItems.textProperty().unbind();
 			}
 		});
-		
+
 		// starsLabel
 		starsLabel.setOnMouseReleased(m -> library.updateLibraryStars(library));
-		
-		//-- Total Characters
+
+		// -- Total Characters
 		commentsLabel.textProperty().bind(commentsArea.textProperty().length().asString());
-		
-		//-- Comments Area
+
+		// -- Comments Area
 		int maximumChars = 400;
 		commentsArea.textProperty().addListener(c -> {
 			if (library != null)
@@ -169,19 +169,19 @@ public class LibraryInformation extends BorderPane {
 				else
 					commentsArea.setText(commentsArea.getText().substring(0, maximumChars));
 		});
-		
+
 		commentsArea.setOnMouseExited(exit -> {
 			if (library != null)
 				library.updateDescription();
 		});
-		
+
 		commentsArea.hoverProperty().addListener(l -> commentsArea.requestFocus());
-		
+
 		commentsArea.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
 				popOver.hide();
 		});
-		
+
 	}
-	
+
 }

@@ -24,86 +24,86 @@ import main.java.com.goxr3plus.xr3player.utils.general.Util;
  *
  */
 public class WelcomeScreen extends StackPane {
-	
-	//---------------------------------------------
-	
+
+	// ---------------------------------------------
+
 	@FXML
 	private ImageView backgroundImage;
-	
+
 	@FXML
 	private HBox topHBox;
-	
+
 	@FXML
 	private CheckBox showOnStartUp;
-	
+
 	@FXML
 	private JFXToggleButton sound;
-	
+
 	@FXML
 	private Label versionLabel;
-	
+
 	@FXML
 	private JFXButton startButton;
-	
+
 	@FXML
 	private JFXButton exit;
-	
+
 	// -------------------------------------------------------------
 	/** The logger. */
 	private Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	private MediaPlayer mediaPlayer;
 	private MediaPlayer soundPlayer;
-	
+
 	/**
 	 * Constructor
 	 */
 	public WelcomeScreen() {
-		
+
 		// ------------------------------------FXMLLOADER--------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.FXMLS + "WelcomeScreen.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
-			
+
 		}
-		
+
 	}
-	
+
 	@FXML
 	private void initialize() {
-		
-		//startButton
+
+		// startButton
 		startButton.setOnAction(a -> {
-			
-			//Unbind
+
+			// Unbind
 			unBindBackgroundImageView();
-			
-			//Hide Welcome Screen
+
+			// Hide Welcome Screen
 			hideWelcomeScreen();
-			
+
 		});
-		
-		//dontShowAgain
-		showOnStartUp.selectedProperty()
-				.addListener((observable , oldValue , newValue) -> Main.applicationProperties.updateProperty("Show-Welcome-Screen", String.valueOf(newValue.booleanValue())));
-		
-		//exit
-		exit.setOnAction(a -> Util.terminateXR3Player(0));
-		
-		//mediaView
-		//mediaView.setVisible(false)
-		
-		//backgroundImage
+
+		// dontShowAgain
+		showOnStartUp.selectedProperty().addListener((observable, oldValue, newValue) -> Main.applicationProperties
+				.updateProperty("Show-Welcome-Screen", String.valueOf(newValue.booleanValue())));
+
+		// exit
+		exit.setOnAction(a -> Main.terminateXR3Player(0));
+
+		// mediaView
+		// mediaView.setVisible(false)
+
+		// backgroundImage
 		backgroundImage.fitWidthProperty().bind(this.widthProperty());
 		backgroundImage.fitHeightProperty().bind(this.heightProperty());
-		
+
 	}
-	
+
 	/**
 	 * Un-bind backgroundImage
 	 */
@@ -111,96 +111,102 @@ public class WelcomeScreen extends StackPane {
 		backgroundImage.fitWidthProperty().unbind();
 		backgroundImage.fitHeightProperty().unbind();
 	}
-	
+
 	/**
 	 * This method should be called only once!! Show the welcome screen
 	 */
 	public void showWelcomeScreen() {
-		
-		//		try {
-		//			
-		//			if (mediaPlayer != null && soundPlayer != null) {
-		//				//mediaPlayer.play();
-		//				soundPlayer.play();
-		//			} else {
-		//				
-		//				//				mediaView.setFitWidth(Main.window.getWidth());
-		//				//				mediaView.setFitHeight(Main.window.getHeight());
-		//				//				mediaPlayer = new MediaPlayer(new Media(getClass().getResource(InfoTool.VIDEOS + "lights.mp4").toURI().toString()));
-		//				//				mediaView.setMediaPlayer(mediaPlayer);
-		//				//				mediaPlayer.setAutoPlay(true);
-		//				//				//mediaPlayer.setRate(3.0)
-		//				//				mediaPlayer.setStartTime(Duration.seconds(0));
-		//				//				mediaPlayer.setStopTime(Duration.seconds(8));
-		//				//				//mediaPlayer.setCycleCount(50)
-		//				//				mediaPlayer.play();
-		//				//				mediaPlayer.setAutoPlay(true);
-		//				//				//mediaPlayer.setCycleCount(50)
-		//				//				mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
-		//				
-		//				Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS + "anonymous.mp3").toURI().toString());
-		//				soundPlayer = new MediaPlayer(m1);
-		//				soundPlayer.muteProperty().bind(sound.selectedProperty().not());
-		//				soundPlayer.play();
-		//				
-		//				//Set the background Image
-		//				//setBackground(new Background(new BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"), BackgroundRepeat.NO_REPEAT,
-		//				//		BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true, true, true))));
-		//			}
-		//		} catch (Exception ex) {
-		//			ex.printStackTrace();
-		//		}
-		
+
+		// try {
+		//
+		// if (mediaPlayer != null && soundPlayer != null) {
+		// //mediaPlayer.play();
+		// soundPlayer.play();
+		// } else {
+		//
+		// // mediaView.setFitWidth(Main.window.getWidth());
+		// // mediaView.setFitHeight(Main.window.getHeight());
+		// // mediaPlayer = new MediaPlayer(new
+		// Media(getClass().getResource(InfoTool.VIDEOS +
+		// "lights.mp4").toURI().toString()));
+		// // mediaView.setMediaPlayer(mediaPlayer);
+		// // mediaPlayer.setAutoPlay(true);
+		// // //mediaPlayer.setRate(3.0)
+		// // mediaPlayer.setStartTime(Duration.seconds(0));
+		// // mediaPlayer.setStopTime(Duration.seconds(8));
+		// // //mediaPlayer.setCycleCount(50)
+		// // mediaPlayer.play();
+		// // mediaPlayer.setAutoPlay(true);
+		// // //mediaPlayer.setCycleCount(50)
+		// // mediaPlayer.setOnEndOfMedia(() -> mediaView.setVisible(false));
+		//
+		// Media m1 = new Media(getClass().getResource(InfoTool.SOUNDS +
+		// "anonymous.mp3").toURI().toString());
+		// soundPlayer = new MediaPlayer(m1);
+		// soundPlayer.muteProperty().bind(sound.selectedProperty().not());
+		// soundPlayer.play();
+		//
+		// //Set the background Image
+		// //setBackground(new Background(new
+		// BackgroundImage(InfoTool.getImageFromResourcesFolder("application_background.jpg"),
+		// BackgroundRepeat.NO_REPEAT,
+		// // BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new
+		// BackgroundSize(Main.window.getWidth(), Main.window.getHeight(), true, true,
+		// true, true))));
+		// }
+		// } catch (Exception ex) {
+		// ex.printStackTrace();
+		// }
+
 		setVisible(true);
 	}
-	
+
 	/**
 	 * Hide the welcome screen
 	 */
 	public void hideWelcomeScreen() {
-		
+
 		if (mediaPlayer != null) {
 			mediaPlayer.dispose();
 		}
-		
+
 		if (soundPlayer != null) {
 			soundPlayer.dispose();
 		}
-		
-		//Load the informations about every user
+
+		// Load the informations about every user
 		Main.loginMode.usersLoaderService.start();
-		
+
 		setVisible(false);
-		
+
 	}
-	
+
 	/**
 	 * @return the showOnStartUp
 	 */
 	public CheckBox getShowOnStartUp() {
 		return showOnStartUp;
 	}
-	
+
 	/**
 	 * @return the versionLabel
 	 */
 	public Label getVersionLabel() {
 		return versionLabel;
 	}
-	
+
 	/**
-	 * @param versionLabel
-	 *            the versionLabel to set
+	 * @param versionLabel the versionLabel to set
 	 */
 	public void setVersionLabel(Label versionLabel) {
 		this.versionLabel = versionLabel;
 	}
-	
+
 	/**
 	 * @return the topHBox
 	 */
 	public HBox getTopHBox() {
 		return topHBox;
 	}
-	
+
 }

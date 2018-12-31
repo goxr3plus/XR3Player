@@ -10,12 +10,11 @@ import javafx.scene.control.MenuItem;
  *
  */
 public class TitleMenuItem extends MenuItem {
-	
+
 	/**
 	 * Constructor
 	 * 
-	 * @param text
-	 *            The Text of The Menu Item
+	 * @param text The Text of The Menu Item
 	 * 
 	 */
 	public TitleMenuItem(String text) {
@@ -24,5 +23,5 @@ public class TitleMenuItem extends MenuItem {
 		getStyleClass().clear();
 		getStyleClass().add("title-menu-item");
 	}
-	
+
 }

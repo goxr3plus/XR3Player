@@ -21,78 +21,85 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 
 /**
- * This class is used as a Service which is exporting the applications database as a zip folder.
+ * This class is used as a Service which is exporting the applications database
+ * as a zip folder.
  *
  * @author SuperGoliath
  */
 public class DatabaseExportService extends Service<Boolean> {
-	
+
 	/** The file list. */
 	List<String> fileList = new ArrayList<>();
-	
+
 	/** The zip file. */
 	String zipFile;
-	
+
 	/** The source folder. */
 	String sourceFolder;
-	
+
 	/** The exception. */
 	String exception;
-	
+
 	/**
 	 * This method is using a Service to export the dataBase into a zip folder.
 	 *
-	 * @param zipFile
-	 *            The Destination zip Folder
-	 * @param sourceFolder
-	 *            The source Folder
+	 * @param zipFile      The Destination zip Folder
+	 * @param sourceFolder The source Folder
 	 */
-	public void exportDataBase(String zipFile , String sourceFolder) {
+	public void exportDataBase(String zipFile, String sourceFolder) {
 		this.zipFile = zipFile;
 		this.sourceFolder = sourceFolder;
-		
-		//Success
+
+		// Success
 		setOnSucceeded(s -> {
 			done();
-			
+
 			// Check the Value
 			if (getValue()) {
-				ActionTool.showNotification("Completed", "Successfully exported the database", Duration.seconds(3), NotificationType.SUCCESS);
+				ActionTool.showNotification("Completed", "Successfully exported the database", Duration.seconds(3),
+						NotificationType.SUCCESS);
 			} else
 				showErrorNotification(exception);
 		});
-		
-		//Failure
+
+		// Failure
 		setOnFailed(f -> {
 			done();
 			showErrorNotification("Service Failed");
 		});
-		
-		//Cancelled
+
+		// Cancelled
 		setOnCancelled(c -> done());
-		
-		//Set Cancel Action
+
+		// Set Cancel Action
 		Main.updateScreen.getCancelButton().setDisable(false);
 		Main.updateScreen.getCancelButton().setOnAction(a -> cancel());
-		
-		//Restart the Service
+
+		// Restart the Service
 		restart();
-		
-		//Testing notifications :)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.SUCCESS)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.ERROR)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.CONFIRM)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.INFORMATION)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.WARNING)
-		//ActionTool.showNotification("Database Import", exception, Duration.seconds(5), NotificationType.SIMPLE)
-		
+
+		// Testing notifications :)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.SUCCESS)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.ERROR)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.CONFIRM)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.INFORMATION)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.WARNING)
+		// ActionTool.showNotification("Database Import", exception,
+		// Duration.seconds(5), NotificationType.SIMPLE)
+
 	}
-	
+
 	private void showErrorNotification(String reason) {
-		ActionTool.showNotification("Failed", "Failed to export database :\n Reason [ " + ( reason.isEmpty() ? "Unknown" : reason ) + "]", Duration.seconds(3),
-				NotificationType.ERROR);
+		ActionTool.showNotification("Failed",
+				"Failed to export database :\n Reason [ " + (reason.isEmpty() ? "Unknown" : reason) + "]",
+				Duration.seconds(3), NotificationType.ERROR);
 	}
-	
+
 	/**
 	 * Service done.
 	 */
@@ -100,110 +107,107 @@ public class DatabaseExportService extends Service<Boolean> {
 		Main.updateScreen.setVisible(false);
 		Main.updateScreen.getProgressBar().progressProperty().unbind();
 		Main.updateScreen.getCancelButton().setDisable(true);
-		
+
 	}
-	
+
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
-				
+
 				// Create a list with all the files and folders of the
 				// sourceFolder
 				fileList.clear();
 				generateFileList(new File(sourceFolder), sourceFolder);
 				byte[] buffer = new byte[1024];
-				
-				double total = fileList.size() , counter = 0;
-				
+
+				double total = fileList.size(), counter = 0;
+
 				// GO
-				try (FileOutputStream fos = new FileOutputStream(zipFile); ZipOutputStream zos = new ZipOutputStream(fos)) {
-					
+				try (FileOutputStream fos = new FileOutputStream(zipFile);
+						ZipOutputStream zos = new ZipOutputStream(fos)) {
+
 					// Start
 					for (String file : fileList) {
-						
-						//Check if service is cancelled
+
+						// Check if service is cancelled
 						if (isCancelled())
 							break;
-						
+
 						// Refresh the label Text
 						Platform.runLater(() -> Main.updateScreen.getLabel().setText("OUT:" + file));
-						
-						// Create zipEntry		
+
+						// Create zipEntry
 						zos.putNextEntry(new ZipEntry(file));
-						
-						//Create File Input Stream
+
+						// Create File Input Stream
 						try (FileInputStream in = new FileInputStream(sourceFolder + File.separator + file)) {
-							
-							//Copy byte by byte
+
+							// Copy byte by byte
 							int len;
-							while ( ( len = in.read(buffer) ) > 0)
+							while ((len = in.read(buffer)) > 0)
 								zos.write(buffer, 0, len);
-							
+
 						} catch (IOException ex) {
 							ex.printStackTrace();
 							exception = ex.getMessage();
 						}
-						
-						//Update Progress
+
+						// Update Progress
 						updateProgress(++counter / total, 1);
-						
+
 					}
-					
+
 					// Close the motherFuckers
 					zos.closeEntry();
-					
+
 				} catch (IOException ex) {
 					ex.printStackTrace();
 					exception = ex.getMessage();
 					return false;
 				}
-				
-				//Delete the zip folder if cancelled
+
+				// Delete the zip folder if cancelled
 				if (isCancelled())
 					new File(zipFile).delete();
-				
+
 				return true;
 			}
-			
+
 		};
 	}
-	
+
 	/**
 	 * Traverse a directory and get all files, and add the file into fileList.
 	 *
-	 * @param f
-	 *            the file
-	 * @param file2
-	 *            the file 2
+	 * @param f     the file
+	 * @param file2 the file 2
 	 */
-	public void generateFileList(File f , String file2) {
-		
+	public void generateFileList(File f, String file2) {
+
 		// add file only
 		if (f.isFile())
 			fileList.add(generateZipEntry(f.getAbsoluteFile() + "", file2));
-		
+
 		if (!f.isDirectory())
 			return;
 		String[] subNote = f.list();
 		if (subNote != null)
 			for (String filename : subNote)
 				generateFileList(new File(f, filename), file2);
-			
+
 	}
-	
+
 	/**
 	 * Format the file path for zip.
 	 *
-	 * @param file
-	 *            file path
-	 * @param sourceFolder
-	 *            the source folder
+	 * @param file         file path
+	 * @param sourceFolder the source folder
 	 * @return Formatted file path
 	 */
-	private String generateZipEntry(String file , String sourceFolder) {
+	private String generateZipEntry(String file, String sourceFolder) {
 		return file.substring(sourceFolder.length() + 1, file.length());
 	}
-	
+
 }

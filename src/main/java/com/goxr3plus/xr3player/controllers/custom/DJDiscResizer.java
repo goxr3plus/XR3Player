@@ -9,26 +9,28 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class DJDiscResizer extends Application {
-	
+
 	StackPane stackPane = new StackPane();
 	DJDisc djDisc = new DJDisc(200, Color.FIREBRICK, 50, 150);
-	
+
 	public void start(Stage primary) {
-		
-		//BorderPane
+
+		// BorderPane
 		BorderPane borderPane = new BorderPane();
 		borderPane.setCenter(stackPane);
-		
-		//StackPane
+
+		// StackPane
 		stackPane.setStyle("-fx-background-color:orange");
 		stackPane.getChildren().add(djDisc);
-		
-		//Add Listeners the the StackPane
-		//stackPane.boundsInParentProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize())
-		stackPane.layoutBoundsProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize());
-		//stackPane.heightProperty().addListener((observable , oldValue , newValue) -> reCalculateCanvasSize())
-		
-		//Scene
+
+		// Add Listeners the the StackPane
+		// stackPane.boundsInParentProperty().addListener((observable , oldValue ,
+		// newValue) -> reCalculateCanvasSize())
+		stackPane.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> reCalculateCanvasSize());
+		// stackPane.heightProperty().addListener((observable , oldValue , newValue) ->
+		// reCalculateCanvasSize())
+
+		// Scene
 		Scene scene = new Scene(borderPane, 500, 500);
 		primary.setScene(scene);
 		primary.setOnCloseRequest(c -> System.exit(0));
@@ -38,20 +40,20 @@ public class DJDiscResizer extends Application {
 		});
 		primary.show();
 	}
-	
+
 	/**
 	 * Recalculates the Canvas size to the preffered size
 	 */
 	public void reCalculateCanvasSize() {
 		double size = Math.min(stackPane.getWidth(), stackPane.getHeight()) / 1.2;
-		
+
 		djDisc.resizeDisc(size);
-		///djDisc.getCanvas().redraw()
-		//System.out.println("Redrawing canvas")
+		/// djDisc.getCanvas().redraw()
+		// System.out.println("Redrawing canvas")
 		System.out.println(size);
-		
+
 	}
-	
+
 	/**
 	 * Main Method
 	 * 

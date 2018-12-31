@@ -25,103 +25,102 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class XPlayerPlaylist extends StackPane {
-	
-	//----------------------------------------------------------
-	
+
+	// ----------------------------------------------------------
+
 	@FXML
 	private BorderPane borderPane;
-	
+
 	@FXML
 	private Button play;
-	
+
 	@FXML
 	private Region region;
-	
+
 	@FXML
 	private ProgressIndicator progressSpinner;
-	
+
 	@FXML
 	private HBox horizontalBox;
-	
+
 	@FXML
 	private Button previousButton;
-	
+
 	@FXML
 	private Button stopPlayingList;
-	
+
 	@FXML
 	private Button nextButton;
-	
-	//--------------------------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------------------------
+
 	/** The controller. */
 	private SmartController smartController;
-	
+
 	/** The play service. */
-	//private PlayListService playService = new PlayListService();;
-	
+	// private PlayListService playService = new PlayListService();;
+
 	/** The x player UI. */
 	XPlayerController xPlayerUI;
-	
+
 	/**
 	 * Constructor.
 	 *
-	 * @param maximumItems
-	 *            maximumItems allowed to be inserted into the playList
-	 * @param xPlayerUI
-	 *            the x player UI
+	 * @param maximumItems maximumItems allowed to be inserted into the playList
+	 * @param xPlayerUI    the x player UI
 	 */
 	public XPlayerPlaylist(final XPlayerController xPlayerUI) {
 		this.xPlayerUI = xPlayerUI;
-		
+
 		// ------------------------------FXMLLoader-----------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerPlaylist.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			Main.logger.log(Level.WARNING, "", ex);
 		}
-		
+
 	}
-	
+
 	/** Called as soon as the fxml has been loaded */
 	@FXML
 	public void initialize() {
-		
+
 		// progressSpinner
 		region.visibleProperty().bind(progressSpinner.visibleProperty());
 		// region.visibleProperty().bind(controller.getRegion().visibleProperty());
 		// progressSpinner.visibleProperty().bind(controller.getRegion().visibleProperty());
-		
+
 		// play
-		//play.setDisable(false);
-		//play.setOnAction(a -> playService.startService());
-		
+		// play.setDisable(false);
+		// play.setOnAction(a -> playService.startService());
+
 		// horizontalBox
 		horizontalBox.visibleProperty().bind(stopPlayingList.visibleProperty());
-		
+
 		// stopPlayingList
 		stopPlayingList.setVisible(false);
-		//stopPlayingList.setOnAction(a -> playService.stopService());
-		
+		// stopPlayingList.setOnAction(a -> playService.stopService());
+
 		// previousButton
 		previousButton.visibleProperty().bind(stopPlayingList.visibleProperty());
-		//previousButton.setOnAction(a -> xPlayerUI.getRadialMenu().goPrevious());
-		//previousButton.disableProperty().bind(xPlayerUI.getRadialMenu().previous.disabledProperty());
-		
+		// previousButton.setOnAction(a -> xPlayerUI.getRadialMenu().goPrevious());
+		// previousButton.disableProperty().bind(xPlayerUI.getRadialMenu().previous.disabledProperty());
+
 		// nextButton
 		nextButton.visibleProperty().bind(stopPlayingList.visibleProperty());
-		//nextButton.setOnAction(a -> xPlayerUI.getRadialMenu().goNext());
-		//nextButton.disableProperty().bind(xPlayerUI.getRadialMenu().next.disabledProperty());
-		
+		// nextButton.setOnAction(a -> xPlayerUI.getRadialMenu().goNext());
+		// nextButton.disableProperty().bind(xPlayerUI.getRadialMenu().next.disabledProperty());
+
 		// SmartController
-		smartController = new SmartController(Genre.LIBRARYMEDIA, "XPlayer " + xPlayerUI.getKey() + " PlayList", "XPPL" + xPlayerUI.getKey());
+		smartController = new SmartController(Genre.LIBRARYMEDIA, "XPlayer " + xPlayerUI.getKey() + " PlayList",
+				"XPPL" + xPlayerUI.getKey());
 		borderPane.setCenter(smartController);
 	}
-	
+
 	/**
 	 * Determines if the user has chosen the play list to be played.
 	 *
@@ -130,14 +129,14 @@ public class XPlayerPlaylist extends StackPane {
 	public boolean isPlayTheListActive() {
 		return stopPlayingList.isVisible();
 	}
-	
+
 	/**
 	 * @return the controller
 	 */
 	public SmartController getSmartController() {
 		return smartController;
 	}
-	
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 

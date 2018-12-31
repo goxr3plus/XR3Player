@@ -24,140 +24,141 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class MP3BasicInfo extends StackPane {
-	
-	//--------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------
+
 	@FXML
 	private Label title;
-	
+
 	@FXML
 	private Button moreButton;
-	
+
 	@FXML
 	private Label drive;
-	
+
 	@FXML
 	private Label stars;
-	
+
 	@FXML
 	private Label duration;
-	
+
 	@FXML
 	private Label type;
-	
+
 	@FXML
 	private Label size;
-	
+
 	@FXML
 	private Label bitRate;
-	
+
 	@FXML
 	private Label sampleRate;
-	
+
 	@FXML
 	private Label encoder;
-	
+
 	@FXML
 	private Label channel;
-	
+
 	@FXML
 	private Label format;
-	
+
 	@FXML
 	private Label isPrivate;
-	
+
 	@FXML
 	private Label isProtected;
-	
+
 	@FXML
 	private Label isPadding;
-	
+
 	@FXML
 	private Label isCopyrighted;
-	
+
 	@FXML
 	private Label isOriginal;
-	
+
 	@FXML
 	private Label isVariableBitRate;
-	
+
 	@FXML
 	private Label empasis;
-	
+
 	@FXML
 	private Label mp3StartByte;
-	
+
 	@FXML
 	private Label totalFrames;
-	
+
 	@FXML
 	private Label noOfSamples;
-	
+
 	@FXML
 	private Label mpegLayer;
-	
+
 	@FXML
 	private Label mpegVersion;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	private Media media;
-	
+
 	private final UpdateInformationService service = new UpdateInformationService();
-	
+
 	/**
 	 * Constructor.
 	 */
 	public MP3BasicInfo() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.TAGS_FXMLS + "MP3BasicInfo.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
 	@FXML
 	private void initialize() {
-		
+
 	}
-	
+
 	/**
 	 * Updates the image shown.
 	 * 
-	 * @param media
-	 *            the media [[SuppressWarningsSpartan]]
+	 * @param media the media [[SuppressWarningsSpartan]]
 	 */
 	public void updateInformation(Media mediar) {
 		service.updateInformation(mediar);
 	}
-	
+
 	/**
-	 * Using this Service as an external Thread which updates the Information based on the selected Media
+	 * Using this Service as an external Thread which updates the Information based
+	 * on the selected Media
 	 * 
 	 * @author GOXR3PLUS
 	 *
 	 */
 	public class UpdateInformationService extends Service<Void> {
-		
+
 		private String _sampleRate;
 		private String _bitRate;
 		private String _encoder;
 		private String _Channel;
 		private String _format;
-		
+
 		private String _mpegVersion;
 		private String _mpegLayer;
 		private String _totalFrames;
@@ -170,68 +171,67 @@ public class MP3BasicInfo extends StackPane {
 		private String _isPadding;
 		private String _isProtected;
 		private String _isPrivate;
-		
+
 		/**
 		 * Updates the image shown.
 		 * 
-		 * @param media
-		 *            the media [[SuppressWarningsSpartan]]
+		 * @param media the media [[SuppressWarningsSpartan]]
 		 */
 		public void updateInformation(Media mediar) {
 			media = mediar;
-			
-			//We don't want thugs here
+
+			// We don't want thugs here
 			if (media == null)
 				return;
-			
-			//Restart the Service
+
+			// Restart the Service
 			this.restart();
-			
+
 		}
-		
+
 		@Override
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
-				
+
 				@Override
 				protected Void call() throws Exception {
-					
+
 					Platform.runLater(() -> {
-						
-						//== title
+
+						// == title
 						title.textProperty().bind(media.titleProperty());
-						
-						//== duration
+
+						// == duration
 						duration.setText(media.durationEditedProperty().get());
-						
-						//== stars
+
+						// == stars
 						stars.textProperty().bind(media.starsProperty().asString());
-						
-						//== drive
+
+						// == drive
 						drive.setText(media.getDrive());
-						
-						//== type
+
+						// == type
 						type.setText(media.getFileType());
-						
-						//== size
+
+						// == size
 						size.setText(media.fileSizeProperty().get());
-						
+
 					});
-					
-					//Try to get other information
+
+					// Try to get other information
 					try {
 						File file = new File(media.getFilePath());
-						
-						//---------------------MP3--------------------------------------
+
+						// ---------------------MP3--------------------------------------
 						if ("mp3".equals(media.fileTypeProperty().get()) && file.exists() && file.length() != 0) {
 							MP3AudioHeader mp3Header = new MP3File(file).getMP3AudioHeader();
-							
+
 							_sampleRate = mp3Header.getSampleRate();
 							_bitRate = Long.toString(mp3Header.getBitRateAsNumber());
 							_encoder = mp3Header.getEncoder();
 							_Channel = mp3Header.getChannels();
 							_format = mp3Header.getFormat();
-							
+
 							_mpegVersion = mp3Header.getMpegVersion();
 							_mpegLayer = mp3Header.getMpegLayer();
 							_totalFrames = Long.toString(mp3Header.getNumberOfFrames());
@@ -244,15 +244,15 @@ public class MP3BasicInfo extends StackPane {
 							_isPadding = mp3Header.isPadding() ? "yes" : "no";
 							_isProtected = mp3Header.isProtected() ? "yes" : "no";
 							_isPrivate = mp3Header.isPrivate() ? "yes" : "no";
-							
-							//Run it on JavaFX Thread
+
+							// Run it on JavaFX Thread
 							Platform.runLater(() -> {
 								sampleRate.setText(_sampleRate);
 								bitRate.setText(_bitRate);
 								encoder.setText(_encoder);
 								channel.setText(_Channel);
 								format.setText(_format);
-								
+
 								mpegVersion.setText(_mpegVersion);
 								mpegLayer.setText(_mpegLayer);
 								totalFrames.setText(_totalFrames);
@@ -266,18 +266,18 @@ public class MP3BasicInfo extends StackPane {
 								isProtected.setText(_isProtected);
 								isPrivate.setText(_isPrivate);
 							});
-							
-							//------------------------OTHER FORMAT-------------------------
+
+							// ------------------------OTHER FORMAT-------------------------
 						} else {
-							
-							//Run it on JavaFX Thread
+
+							// Run it on JavaFX Thread
 							Platform.runLater(() -> {
 								sampleRate.setText("-");
 								bitRate.setText("-");
 								encoder.setText("-");
 								channel.setText("-");
 								format.setText("-");
-								
+
 								mpegVersion.setText("-");
 								mpegLayer.setText("-");
 								totalFrames.setText("-");
@@ -292,15 +292,16 @@ public class MP3BasicInfo extends StackPane {
 								isPrivate.setText("-");
 							});
 						}
-					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException ex) {
-						//ex.printStackTrace()
+					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException
+							| CannotReadException ex) {
+						// ex.printStackTrace()
 					}
-					
+
 					return null;
 				}
 			};
 		}
-		
+
 	}
-	
+
 }

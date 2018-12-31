@@ -37,18 +37,18 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class FiltersModeService extends Service<Void> {
-	
+
 	/** A private instance of the SmartController it belongs */
 	private final SmartControllerFiltersMode smartControllerArtistsMode;
 	private final SmartController smartController;
-	
+
 	private Filter filter = Filter.ARTIST;
-	
+
 	private enum Filter {
-		
+
 		ARTIST, ALBUM, GENRE, YEAR, BPM, KEY, COMPOSER, BIT_RATE;
 	}
-	
+
 	/**
 	 * The operation to be done by the Service
 	 */
@@ -57,19 +57,19 @@ public class FiltersModeService extends Service<Void> {
 	 * The given artistName
 	 */
 	private String filterValue = "";
-	
+
 	/**
 	 * Service Progress
 	 */
 	private int progress;
-	
+
 	/**
 	 * Service Total Progress
 	 */
 	private int totalProgress;
-	
+
 	private final MediaTagsService allDetailsService;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -80,26 +80,26 @@ public class FiltersModeService extends Service<Void> {
 		this.smartControllerArtistsMode = smartControllerArtistsMode;
 		this.allDetailsService = new MediaTagsService();
 	}
-	
+
 	/**
 	 * Regenerates all the artists for the ArtistsMode
 	 */
 	public void regenerate() {
 		this.operation = Operation.REFRESH;
-		
-		//Clear List
+
+		// Clear List
 		smartControllerArtistsMode.getListView().getItems().clear();
-		
-		//Progress Label
+
+		// Progress Label
 		smartControllerArtistsMode.getProgressLabel().setText("Generating ...");
-		
-		//determineFilter()
+
+		// determineFilter()
 		determineFilter(false);
-		
-		//Restart the Service
+
+		// Restart the Service
 		this.restart();
 	}
-	
+
 	/**
 	 * Refreshes the TableView based on the current artist
 	 * 
@@ -108,49 +108,50 @@ public class FiltersModeService extends Service<Void> {
 	public void refreshTableView(String filterValue) {
 		this.filterValue = filterValue;
 		this.operation = Operation.UPDATE_TABLE_VIEW;
-		
-		//determineFilter()
+
+		// determineFilter()
 		determineFilter(true);
-		
-		//Restart the Service
+
+		// Restart the Service
 		this.restart();
 	}
-	
+
 	private void determineFilter(boolean changeLabel) {
-		switch ( ( (MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle() ).getText()) {
-			case "Artist":
-				filter = Filter.ARTIST;
-				break;
-			case "Album":
-				filter = Filter.ALBUM;
-				break;
-			case "Genre":
-				filter = Filter.GENRE;
-				break;
-			case "Year":
-				filter = Filter.YEAR;
-				break;
-			case "BPM":
-				filter = Filter.BPM;
-				break;
-			case "Key":
-				filter = Filter.KEY;
-				break;
-			case "Composer":
-				filter = Filter.COMPOSER;
-				break;
-			case "Bit Rate":
-				filter = Filter.BIT_RATE;
-				break;
-			default:
-				filter = Filter.ARTIST;
+		switch (((MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle()).getText()) {
+		case "Artist":
+			filter = Filter.ARTIST;
+			break;
+		case "Album":
+			filter = Filter.ALBUM;
+			break;
+		case "Genre":
+			filter = Filter.GENRE;
+			break;
+		case "Year":
+			filter = Filter.YEAR;
+			break;
+		case "BPM":
+			filter = Filter.BPM;
+			break;
+		case "Key":
+			filter = Filter.KEY;
+			break;
+		case "Composer":
+			filter = Filter.COMPOSER;
+			break;
+		case "Bit Rate":
+			filter = Filter.BIT_RATE;
+			break;
+		default:
+			filter = Filter.ARTIST;
 		}
-		
-		//Finally update the text
+
+		// Finally update the text
 		if (changeLabel)
-			setLabelText("Detecting media : Filter -> " + ( (MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle() ).getText());
+			setLabelText("Detecting media : Filter -> "
+					+ ((MenuItem) smartControllerArtistsMode.getSelectedFilter().getSelectedToggle()).getText());
 	}
-	
+
 	/**
 	 * Shortcut for set the progress label text
 	 * 
@@ -159,7 +160,7 @@ public class FiltersModeService extends Service<Void> {
 	private void setLabelText(String text) {
 		smartControllerArtistsMode.getProgressLabel().setText(text + " [ " + filterValue + " ]");
 	}
-	
+
 	@Override
 	protected Task<Void> createTask() {
 		return new Task<Void>() {
@@ -168,108 +169,114 @@ public class FiltersModeService extends Service<Void> {
 			 */
 			@Override
 			protected Void call() throws Exception {
-				
-				//Create a new LinkedHashSet
+
+				// Create a new LinkedHashSet
 				Set<String> set = new HashSet<>();
 				List<Media> matchingMediaList = new ArrayList<>();
-				
+
 				try {
-					
-					//Total and Count = 0
+
+					// Total and Count = 0
 					progress = totalProgress = 0;
-					
-					//================Prepare based on the Files User want to Export=============
-					if (smartControllerArtistsMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) {  // CURRENT_PAGE
-						//System.out.println("Entered for Search Window");
-						
-						//Count total files that will be exported
+
+					// ================Prepare based on the Files User want to Export=============
+					if (smartControllerArtistsMode.getSmartController().getGenre() == Genre.SEARCHWINDOW) { // CURRENT_PAGE
+						// System.out.println("Entered for Search Window");
+
+						// Count total files that will be exported
 						totalProgress = smartControllerArtistsMode.getSmartController().getItemsObservableList().size();
-						
+
 						// Stream
-						Stream<Media> stream = smartControllerArtistsMode.getSmartController().getItemsObservableList().stream();
+						Stream<Media> stream = smartControllerArtistsMode.getSmartController().getItemsObservableList()
+								.stream();
 						stream.forEach(media -> {
 							if (!smartController.filtersModeSelected || isCancelled())
 								stream.close();
 							else {
-								
+
 								if (operation == Operation.REFRESH)
-									
-									//Add the artist
+
+									// Add the artist
 									set.add(findTagFromAudioFile(new File(media.getFilePath()), media));
-								
+
 								else {
-									
-									//Find the artist Name
+
+									// Find the artist Name
 									String filterVal = findTagFromAudioFile(new File(media.getFilePath()), media);
-									
-									//If it equals
+
+									// If it equals
 									if (filterVal.equals(filterValue))
 										matchingMediaList.add(media);
-									
+
 								}
-								
-								//Update the progress
+
+								// Update the progress
 								updateProgress(++progress, totalProgress);
-								
+
 							}
 						});
-						
+
 					} else if (smartControllerArtistsMode.getSmartController().getGenre() != Genre.SEARCHWINDOW) { // EVERYTHING_ON_PLAYLIST
-						
-						//Count total files that will be exported
+
+						// Count total files that will be exported
 						totalProgress = smartControllerArtistsMode.getSmartController().getTotalInDataBase();
-						
+
 						// Stream
-						String query = "SELECT" + ( operation == Operation.UPDATE_TABLE_VIEW ? "*" : "(PATH)" ) + "FROM '"
+						String query = "SELECT" + (operation == Operation.UPDATE_TABLE_VIEW ? "*" : "(PATH)") + "FROM '"
 								+ smartControllerArtistsMode.getSmartController().getDataBaseTableName() + "'";
-						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);) {
-							
+						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement()
+								.executeQuery(query);) {
+
 							int counter = 0;
 							// Fetch the items from the database
 							while (resultSet.next()) {
-								//	System.out.println("Is cancelled :?" + isCancelled());
+								// System.out.println("Is cancelled :?" + isCancelled());
 								if (!smartController.filtersModeSelected || isCancelled())
 									break;
 								else {
-									
+
 									if (operation == Operation.REFRESH)
-										
-										//Add the artist
+
+										// Add the artist
 										set.add(findTagFromAudioFile(new File(resultSet.getString("PATH")), null));
-									
+
 									else {
-										
-										//Find the artist Name
-										String filterVal = findTagFromAudioFile(new File(resultSet.getString("PATH")), null);
-										
-										//If it equals
+
+										// Find the artist Name
+										String filterVal = findTagFromAudioFile(new File(resultSet.getString("PATH")),
+												null);
+
+										// If it equals
 										if (filterVal.equals(filterValue))
-											//Add the Media
-											matchingMediaList.add(new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
-													resultSet.getString("DATE"), resultSet.getString("HOUR"), smartControllerArtistsMode.getSmartController().getGenre(),
+											// Add the Media
+											matchingMediaList.add(new Audio(resultSet.getString("PATH"),
+													resultSet.getDouble("STARS"), resultSet.getInt("TIMESPLAYED"),
+													resultSet.getString("DATE"), resultSet.getString("HOUR"),
+													smartControllerArtistsMode.getSmartController().getGenre(),
 													++counter));
-										
+
 									}
-									
-									//Update the progress
+
+									// Update the progress
 									updateProgress(++progress, totalProgress);
 								}
 							}
 						} catch (Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 						}
-						
+
 					}
-					
-					//Security check
+
+					// Security check
 					if (smartController.filtersModeSelected && !isCancelled()) {
 						if (operation == Operation.REFRESH) {
-							//For each item on set
+							// For each item on set
 							set.remove("");
-							ObservableList<String> observableList = set.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
+							ObservableList<String> observableList = set.stream()
+									.collect(Collectors.toCollection(FXCollections::observableArrayList));
 							Platform.runLater(() -> {
-								
-								//Details Label text
+
+								// Details Label text
 								if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 									smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
 									smartControllerArtistsMode.getDetailsLabel().setVisible(true);
@@ -279,90 +286,94 @@ public class FiltersModeService extends Service<Void> {
 									smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 									smartControllerArtistsMode.getNothingFoundLabel().setVisible(false);
 								}
-								
-								//Set list view items
+
+								// Set list view items
 								smartControllerArtistsMode.getListView().setItems(observableList);
 								if (!observableList.isEmpty())
 									smartControllerArtistsMode.getListView().getSelectionModel().select(0);
 								else
-									//Empty the TableView
+									// Empty the TableView
 									smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
 							});
 						} else if (operation == Operation.UPDATE_TABLE_VIEW) {
-							//For each item on set
-							ObservableList<Media> observableList = matchingMediaList.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
+							// For each item on set
+							ObservableList<Media> observableList = matchingMediaList.stream()
+									.collect(Collectors.toCollection(FXCollections::observableArrayList));
 							Platform.runLater(() -> {
-								
-								//Details Label text
+
+								// Details Label text
 								if (smartControllerArtistsMode.getSmartController().getTotalInDataBase() == 0) {
 									smartControllerArtistsMode.getDetailsLabel().setText("Playlist has no songs");
 									smartControllerArtistsMode.getDetailsLabel().setVisible(true);
-									//							} else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
-									//								smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
-									//								smartControllerArtistsMode.getDetailsLabel().setVisible(true);
+									// } else if (smartControllerArtistsMode.getListView().getItems().isEmpty()) {
+									// smartControllerArtistsMode.getDetailsLabel().setText("No artists found");
+									// smartControllerArtistsMode.getDetailsLabel().setVisible(true);
 								} else {
 									smartControllerArtistsMode.getDetailsLabel().setVisible(false);
 								}
-								
-								//Check if any songs are containing this artist
+
+								// Check if any songs are containing this artist
 								if (!observableList.isEmpty()) {
-									
-									//Set list view items					
-									smartControllerArtistsMode.getMediaTableViewer().getTableView().setItems(observableList);
+
+									// Set list view items
+									smartControllerArtistsMode.getMediaTableViewer().getTableView()
+											.setItems(observableList);
 									smartControllerArtistsMode.getSmartController().updateLabel();
-									
-									//Populate Media Information
+
+									// Populate Media Information
 									allDetailsService.restartService(smartControllerArtistsMode.getMediaTableViewer());
 								} else {
-									
-									//Remove the artist from the List
+
+									// Remove the artist from the List
 									smartControllerArtistsMode.getListView().getItems().remove(filterValue);
-									
-									//Empty the TableView
+
+									// Empty the TableView
 									smartControllerArtistsMode.getMediaTableViewer().getTableView().getItems().clear();
 								}
-								
+
 							});
 						}
 					}
-					
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				
+
 				return null;
-				
+
 			}
-			
+
 			/**
 			 * Return the artist of the given audio file (mp3) actually
 			 * 
-			 * @param file
-			 *            The audio File
-			 * @param media
-			 *            The audio File in case it is already a Media Class File
+			 * @param file  The audio File
+			 * @param media The audio File in case it is already a Media Class File
 			 * @return Return the artist of the given audio file (mp3) actually
 			 */
-			private String findTagFromAudioFile(File file , Media media) {
-				//System.out.println(file.getName());
-				
-				//Check file existence , length and extension
-				if (file.exists() && "mp3".equals(media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath())) && file.length() != 0) {
-					
-					//MP3File
+			private String findTagFromAudioFile(File file, Media media) {
+				// System.out.println(file.getName());
+
+				// Check file existence , length and extension
+				if (file.exists()
+						&& "mp3".equals(
+								media != null ? media.getFileType() : InfoTool.getFileExtension(file.getAbsolutePath()))
+						&& file.length() != 0) {
+
+					// MP3File
 					MP3File mp3File;
 					try {
 						mp3File = new MP3File(file);
-					} catch (IOException | TagException | ReadOnlyFileException | CannotReadException | InvalidAudioFrameException e) {
-						//e.printStackTrace()
+					} catch (IOException | TagException | ReadOnlyFileException | CannotReadException
+							| InvalidAudioFrameException e) {
+						// e.printStackTrace()
 						return "";
 					}
-					
-					//Does it have artist	
+
+					// Does it have artist
 					if (mp3File.hasID3v2Tag()) {
-						
+
 						ID3v24Tag tag = mp3File.getID3v2TagAsv24();
-						
+
 						if (filter == Filter.ARTIST)
 							return tag.getFirst(ID3v24FieldKey.ARTIST);
 						else if (filter == Filter.ALBUM)
@@ -379,13 +390,14 @@ public class FiltersModeService extends Service<Void> {
 							return tag.getFirst(ID3v24FieldKey.COMPOSER);
 						else if (filter == Filter.BIT_RATE)
 							return mp3File.getMP3AudioHeader().getBitRate();
-						
-						//System.out.println("Artist : " + artist);// + " , Album Artist : " + tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST))
-						
+
+						// System.out.println("Artist : " + artist);// + " , Album Artist : " +
+						// tag.getFirst(ID3v24FieldKey.ALBUM_ARTIST))
+
 					} else if (mp3File.hasID3v1Tag()) {
-						
+
 						ID3v1Tag tag = mp3File.getID3v1Tag();
-						
+
 						if (filter == Filter.ARTIST)
 							return tag.getFirst(ID3v1FieldKey.ARTIST.toString());
 						else if (filter == Filter.ALBUM)
@@ -395,13 +407,13 @@ public class FiltersModeService extends Service<Void> {
 						else if (filter == Filter.YEAR)
 							return tag.getFirst(ID3v1FieldKey.YEAR.toString());
 					}
-					
+
 				}
-				
+
 				return "";
 			}
-			
+
 		};
 	}
-	
+
 }

@@ -9,12 +9,12 @@ package main.java.com.goxr3plus.xr3player.controllers.custom;
  */
 @FunctionalInterface
 public interface DJFilterListener {
-	
+
 	/**
 	 * The new value of the DJFilter
 	 * 
 	 * @param value
 	 */
 	void valueChanged(double value);
-	
+
 }

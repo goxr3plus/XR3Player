@@ -12,48 +12,50 @@ import java.util.Map;
  *
  */
 public class SetEnv {
-	
-	public static void setEnv(Map<String,String> newenv) throws ClassNotFoundException , IllegalAccessException , NoSuchFieldException {
+
+	public static void setEnv(Map<String, String> newenv)
+			throws ClassNotFoundException, IllegalAccessException, NoSuchFieldException {
 		try {
 			Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
-			
-			//Field 1
+
+			// Field 1
 			Field theEnvironmentField = processEnvironmentClass.getDeclaredField("theEnvironment");
 			theEnvironmentField.setAccessible(true);
-			
-			//env
+
+			// env
 			@SuppressWarnings("unchecked")
-			Map<String,String> env = (Map<String,String>) theEnvironmentField.get(null);
+			Map<String, String> env = (Map<String, String>) theEnvironmentField.get(null);
 			env.putAll(newenv);
-			
-			//Field2
-			Field theCaseInsensitiveEnvironmentField = processEnvironmentClass.getDeclaredField("theCaseInsensitiveEnvironment");
+
+			// Field2
+			Field theCaseInsensitiveEnvironmentField = processEnvironmentClass
+					.getDeclaredField("theCaseInsensitiveEnvironment");
 			theCaseInsensitiveEnvironmentField.setAccessible(true);
-			
-			//cienv
+
+			// cienv
 			@SuppressWarnings("unchecked")
-			Map<String,String> cienv = (Map<String,String>) theCaseInsensitiveEnvironmentField.get(null);
+			Map<String, String> cienv = (Map<String, String>) theCaseInsensitiveEnvironmentField.get(null);
 			cienv.putAll(newenv);
-			
+
 		} catch (NoSuchFieldException e) {
-			
-			//Env
-			Map<String,String> env = System.getenv();
-			
-			//Foe each
+
+			// Env
+			Map<String, String> env = System.getenv();
+
+			// Foe each
 			Arrays.asList(Collections.class.getDeclaredClasses()).forEach(cl -> {
 				if ("java.util.Collections$UnmodifiableMap".equals(cl.getName())) {
 					try {
 						Field field = cl.getDeclaredField("m");
 						field.setAccessible(true);
 						@SuppressWarnings("unchecked")
-						Map<String,String> map = (Map<String,String>) field.get(env);
+						Map<String, String> map = (Map<String, String>) field.get(env);
 						map.clear();
 						map.putAll(newenv);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
-					
+
 				}
 			});
 		}

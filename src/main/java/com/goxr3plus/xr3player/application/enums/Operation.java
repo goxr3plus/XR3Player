@@ -6,7 +6,7 @@ package main.java.com.goxr3plus.xr3player.application.enums;
  * @author GOXR3PLUS
  */
 public enum Operation {
-	
+
 	/** The move. */
 	MOVE,
 	/** The copy. */
@@ -19,5 +19,5 @@ public enum Operation {
 	REFRESH,
 	/** The update */
 	UPDATE_TABLE_VIEW, UNKNOWN;
-	
+
 }

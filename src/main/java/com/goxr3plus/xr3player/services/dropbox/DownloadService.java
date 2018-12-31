@@ -44,7 +44,8 @@ public class DownloadService extends Service<Boolean> {
 	 * 
 	 * @param dropBoxViewer
 	 */
-	public DownloadService(final DropboxViewer dropBoxViewer, final DropboxFile dropboxFile, final String localFileAbsolutePath) {
+	public DownloadService(final DropboxViewer dropBoxViewer, final DropboxFile dropboxFile,
+			final String localFileAbsolutePath) {
 		this.dropBoxViewer = dropBoxViewer;
 
 		this.dropboxFile = dropboxFile;
@@ -111,8 +112,8 @@ public class DownloadService extends Service<Boolean> {
 			 * @throws DownloadErrorException
 			 * @throws IOException
 			 */
-			public void downloadFile(final DbxClientV2 client, final DropboxFile dropboxFile, final String localFileAbsolutePath)
-					throws DownloadErrorException, DbxException, IOException {
+			public void downloadFile(final DbxClientV2 client, final DropboxFile dropboxFile,
+					final String localFileAbsolutePath) throws DownloadErrorException, DbxException, IOException {
 				final String dropBoxFilePath = dropboxFile.getMetadata().getPathLower();
 
 				// Simple File

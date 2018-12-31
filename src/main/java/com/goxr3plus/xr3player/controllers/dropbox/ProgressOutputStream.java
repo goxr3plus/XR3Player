@@ -10,31 +10,31 @@ import java.io.OutputStream;
  *
  */
 public class ProgressOutputStream extends OutputStream {
-	
+
 	private OutputStream underlying;
 	private Listener listener;
 	private int completed;
 	private long totalSize;
-	
+
 	public ProgressOutputStream(OutputStream underlying, long totalSize, Listener listener) {
 		this.underlying = underlying;
 		this.listener = listener;
 		this.completed = 0;
 		this.totalSize = totalSize;
 	}
-	
+
 	@Override
-	public void write(byte[] data , int off , int len) throws IOException {
+	public void write(byte[] data, int off, int len) throws IOException {
 		this.underlying.write(data, off, len);
 		track(len);
 	}
-	
+
 	@Override
 	public void write(byte[] data) throws IOException {
 		this.underlying.write(data);
 		track(data.length);
 	}
-	
+
 	@Override
 	public void write(int c) {
 		try {
@@ -43,14 +43,14 @@ public class ProgressOutputStream extends OutputStream {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	private void track(int len) {
 		this.completed += len;
 		this.listener.progress(this.completed, this.totalSize);
 	}
-	
+
 	/**
 	 * The total File size
 	 * 
@@ -59,8 +59,8 @@ public class ProgressOutputStream extends OutputStream {
 	public long getTotalSize() {
 		return totalSize;
 	}
-	
+
 	public interface Listener {
-		public void progress(long completed , long totalSize);
+		public void progress(long completed, long totalSize);
 	}
 }

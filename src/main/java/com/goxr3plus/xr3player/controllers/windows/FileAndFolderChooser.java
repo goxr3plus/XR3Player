@@ -20,20 +20,19 @@ import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
  * @author GOXR3PLUS
  */
 public class FileAndFolderChooser {
-	
-	
+
 	private static SimpleObjectProperty<File> lastKnownDirectoryProperty = new SimpleObjectProperty<>();
 	private static SimpleObjectProperty<File> lastKnownDBDirectoryProperty = new SimpleObjectProperty<>();
 	private static SimpleObjectProperty<File> lastKnownMediaDirectoryProperty = new SimpleObjectProperty<>();
 	private static SimpleObjectProperty<File> lastKnownImageDirectoryProperty = new SimpleObjectProperty<>();
-	
+
 	private DirectoryChooser directoryChooser = new DirectoryChooser();
 	private FileChooser databaseFolderChooser = new FileChooser();
 	private FileChooser mediaFileChooser = new FileChooser();
 	private FileChooser imageFileChooser = new FileChooser();
-	
+
 	private final ExtensionFilter audioFilter;
-	
+
 	/**
 	 * Constructor
 	 */
@@ -42,18 +41,18 @@ public class FileAndFolderChooser {
 		databaseFolderChooser.initialDirectoryProperty().bindBidirectional(lastKnownDBDirectoryProperty);
 		mediaFileChooser.initialDirectoryProperty().bindBidirectional(lastKnownMediaDirectoryProperty);
 		imageFileChooser.initialDirectoryProperty().bindBidirectional(lastKnownImageDirectoryProperty);
-		
-		//Special Audio Files Filter
+
+		// Special Audio Files Filter
 		audioFilter = new FileChooser.ExtensionFilter("Audio Files",
-				Stream.of(InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST, InfoTool.POPULAR_VIDEO_EXTENSIONS_LIST).flatMap(List::stream).map(m -> "*." + m).collect(Collectors.toList()));
+				Stream.of(InfoTool.POPULAR_AUDIO_EXTENSIONS_LIST, InfoTool.POPULAR_VIDEO_EXTENSIONS_LIST)
+						.flatMap(List::stream).map(m -> "*." + m).collect(Collectors.toList()));
 	}
-	
+
 	// -----------------------------------------------------------------------------------------------------------------/
 	/**
 	 * Show the dialog to connectedUser to select the dataBase that wants to import.
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return the file
 	 */
 	public File selectDBFile(Stage window) {
@@ -69,12 +68,11 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * Prepare to export dbManager.
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return the file
 	 */
 	public File exportDBFile(Stage window) {
@@ -90,12 +88,12 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	/**
-	 * Show's a dialog that allows user to select any directory from the operating system
+	 * Show's a dialog that allows user to select any directory from the operating
+	 * system
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return the file
 	 */
 	public File selectFolder(Stage window) {
@@ -108,22 +106,22 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	// -----------------------------------------------------------------------------------------------------------------/
-	
+
 	/**
 	 * Prepares to save an ImageFile
 	 *
-	 * @param window
-	 *            the window
+	 * @param window    the window
 	 * @param imagePath
 	 * @return the file
 	 */
-	public File prepareToExportImage(Stage window , String imagePath) {
+	public File prepareToExportImage(Stage window, String imagePath) {
 		imageFileChooser.getExtensionFilters().clear();
 		imageFileChooser.setTitle("Type a File Name and press save");
 		imageFileChooser.setInitialFileName(InfoTool.getFileTitle(imagePath));
-		imageFileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Extension", "*." + InfoTool.getFileExtension(imagePath)));
+		imageFileChooser.getExtensionFilters()
+				.add(new FileChooser.ExtensionFilter("Extension", "*." + InfoTool.getFileExtension(imagePath)));
 		File file = imageFileChooser.showSaveDialog(window);
 		if (file != null) {
 			// Set the property to the directory of the chosenFile so the
@@ -132,17 +130,17 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * Prepares to select an image.
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return The Selected Image or Null if nothing is selected
 	 */
 	public File prepareToSelectImage(Stage window) {
 		imageFileChooser.getExtensionFilters().clear();
-		imageFileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Images", new String[]{ "*.png" , "*.jpg" , "*.jpeg" , "*.gif" }));
+		imageFileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("All Images", new String[] { "*.png", "*.jpg", "*.jpeg", "*.gif" }));
 		imageFileChooser.setTitle("Choose an Image");
 		File file = imageFileChooser.showOpenDialog(window);
 		if (file != null) {
@@ -152,14 +150,13 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	// -----------------------------------------------------------------------------------------------------------------/
-	
+
 	/**
 	 * Prepares to import multiple Song Files and Folders.
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return the list
 	 */
 	public List<File> prepareToImportSongFiles(Stage window) {
@@ -173,9 +170,9 @@ public class FileAndFolderChooser {
 			lastKnownMediaDirectoryProperty.setValue(files.get(0).getParentFile());
 		}
 		return files;
-		
+
 	}
-	
+
 	/**
 	 * Shows the default FileExplorer so the user can select a song File.
 	 * 
@@ -183,7 +180,7 @@ public class FileAndFolderChooser {
 	 * @return The Selected file from the User
 	 */
 	public File selectSongFile(Stage window) {
-		
+
 		mediaFileChooser.getExtensionFilters().clear();
 		mediaFileChooser.getExtensionFilters().addAll(audioFilter);
 		mediaFileChooser.setTitle("Choose Media File");
@@ -195,7 +192,7 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * Showing the save Dialog.
 	 * 
@@ -203,9 +200,9 @@ public class FileAndFolderChooser {
 	 *
 	 * @return the file
 	 */
-	public File showSaveDialog(String initialFileName,FileType fileType) {
+	public File showSaveDialog(String initialFileName, FileType fileType) {
 		databaseFolderChooser.getExtensionFilters().clear();
-		if(fileType == FileType.ZIP) {
+		if (fileType == FileType.ZIP) {
 			databaseFolderChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("zip", "*.zip"));
 		}
 		databaseFolderChooser.setInitialFileName(initialFileName);
@@ -217,16 +214,15 @@ public class FileAndFolderChooser {
 		}
 		return file;
 	}
-	
+
 	/**
 	 * Open a dialog that allows user to select a directory.
 	 *
-	 * @param window
-	 *            the window
+	 * @param window the window
 	 * @return the file
 	 */
-	//    public File chooseDirectory(Stage window) {
-	//	return folderChooser.showDialog(window)
-	//    }
-	
+	// public File chooseDirectory(Stage window) {
+	// return folderChooser.showDialog(window)
+	// }
+
 }

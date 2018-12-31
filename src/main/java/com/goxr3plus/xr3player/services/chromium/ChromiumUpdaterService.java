@@ -20,27 +20,29 @@ import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
  * The Class FileFilterThread.
  */
 public class ChromiumUpdaterService {
-	
+
 	/**
 	 * The name of the running Thread/s
 	 */
 	private final String threadName = "Chromium Updater Service ";
-	
+
 	/**
 	 * If is true then the Thread has stopped , so i restart it again...
 	 */
 	private final BooleanProperty threadStopped = new SimpleBooleanProperty(false);
-	
+
 	/**
-	 * This executor service is used in order the playerState events to be executed in an order
+	 * This executor service is used in order the playerState events to be executed
+	 * in an order
 	 */
-	private final ExecutorService executors = Executors.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix(threadName));
-	
+	private final ExecutorService executors = Executors
+			.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix(threadName));
+
 	/**
 	 * The ChromiumWebBrowser controller
 	 */
 	private final WebBrowserController webBrowserController;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -49,7 +51,7 @@ public class ChromiumUpdaterService {
 	public ChromiumUpdaterService(final WebBrowserController webBrowserController) {
 		this.webBrowserController = webBrowserController;
 	}
-	
+
 	/**
 	 * Start the Thread.
 	 *
@@ -58,43 +60,47 @@ public class ChromiumUpdaterService {
 		final Runnable runnable = () -> {
 			try {
 				Platform.runLater(() -> threadStopped.set(false));
-				
-				//Run forever , except if i interrupt it ;)
-				
+
+				// Run forever , except if i interrupt it ;)
+
 				for (;; Thread.sleep(1000)) {
-					
+
 					if (Main.topBar.getWindowMode() == WindowMode.WEBMODE) {
 						checkTabsSound();
-						//System.out.println(threadName + " entered if statement")
+						// System.out.println(threadName + " entered if statement")
 					}
-					
-					//DropboxAuthenticationBrowser
+
+					// DropboxAuthenticationBrowser
 					if (Main.dropBoxViewer.getAuthenticationBrowser().getWindow().isShowing()) {
-						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
-						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator().setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator()
+								.setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator()
+								.setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
 					}
-					
-					//----------------------------Check if volume is enabled ---------------------------
-					
-					//Main Mode
+
+					// ----------------------------Check if volume is enabled
+					// ---------------------------
+
+					// Main Mode
 					boolean muted = Main.xPlayersList.getXPlayerController(0).isMuteButtonSelected();
 					Main.sideBar.getMainModeStackedFont().getChildren().get(1).setVisible(!muted);
-					
-					//DJ Mode
-					muted = ( Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected() ) && ( Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected() );
+
+					// DJ Mode
+					muted = (Main.xPlayersList.getXPlayerController(1).isMuteButtonSelected())
+							&& (Main.xPlayersList.getXPlayerController(2).isMuteButtonSelected());
 					Main.sideBar.getDjModeStackedFont().getChildren().get(1).setVisible(!muted);
-					
-					//Browser Mode
+
+					// Browser Mode
 					final boolean notMuted = webBrowserController.getTabPane().getTabs().stream().filter(tab -> {
 						final WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
-						
-						//Is audio not muted?
+
+						// Is audio not muted?
 						return !tabController.getBrowser().isAudioMuted();
 					}).findFirst().isPresent();
 					Main.sideBar.getBrowserStackedFont().getChildren().get(1).setVisible(notMuted);
-					
+
 				}
-				
+
 			} catch (final Exception ex) {
 				Main.logger.log(Level.INFO, "", ex);
 			} finally {
@@ -103,25 +109,25 @@ public class ChromiumUpdaterService {
 			}
 		};
 		executors.execute(runnable);
-		
-		//---Add this listener in case something bad happens to the thread above
-		threadStopped.addListener((observable , oldValue , newValue) -> {
-			//Restart it if it has stopped
+
+		// ---Add this listener in case something bad happens to the thread above
+		threadStopped.addListener((observable, oldValue, newValue) -> {
+			// Restart it if it has stopped
 			if (newValue)
 				executors.execute(runnable);
 		});
 	}
-	
+
 	/**
 	 * Checks the Tabs if the are muted , unmuted etc
 	 */
 	public void checkTabsSound() {
 		webBrowserController.getTabPane().getTabs().forEach(tab -> {
 			final WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
-			
+
 			try {
-				
-				//Is Audio Playing?
+
+				// Is Audio Playing?
 				if (tabController.getBrowser().isAudioPlaying()) {
 					final int width = 32;
 					final int height = 25;
@@ -129,8 +135,8 @@ public class ChromiumUpdaterService {
 					tabController.getAudioButton().setPrefSize(width, height);
 					tabController.getAudioButton().setMaxSize(width, height);
 					tabController.getAudioButton().setVisible(true);
-					
-					//Is Audio Muted or unmuted?
+
+					// Is Audio Muted or unmuted?
 					if (tabController.getBrowser().isAudioMuted()) {
 						tabController.mutedImage.setVisible(true);
 						tabController.unmutedImage.setVisible(false);
@@ -145,8 +151,8 @@ public class ChromiumUpdaterService {
 					tabController.getAudioButton().setMaxSize(maxSize, maxSize);
 					tabController.getAudioButton().setVisible(false);
 				}
-				
-				//Site is Loading
+
+				// Site is Loading
 				tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().isLoading());
 				tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().isLoading());
 			} catch (final Exception ex) {
@@ -154,5 +160,5 @@ public class ChromiumUpdaterService {
 			}
 		});
 	}
-	
+
 }

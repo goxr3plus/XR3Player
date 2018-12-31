@@ -9,18 +9,18 @@ package main.java.com.goxr3plus.xr3player.application.enums;
  * @author GOXR3PLUS
  */
 public enum Genre {
-	
+
 	/** The librarysong. */
 	LIBRARYMEDIA,
-	
+
 	EMOTIONSMEDIA,
-	
+
 	SEARCHWINDOW,
-	//    /** The xplaylistsong. */
-	//    XPLAYLISTSONG,
-	//    /** The radiostation. */
-	//    RADIOSTATION,
+	// /** The xplaylistsong. */
+	// XPLAYLISTSONG,
+	// /** The radiostation. */
+	// RADIOSTATION,
 	/** The unknown. */
 	BUYBUTTON, UNKNOWN;
-	
+
 }

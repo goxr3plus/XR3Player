@@ -18,49 +18,49 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class DropboxDownloadedFile {
-	
+
 	/** The title. */
 	private SimpleStringProperty title;
-	
+
 	private SimpleStringProperty extension;
-	
+
 	private SimpleObjectProperty<StackPane> progressBox;
-	
-	//---------------------------------------------------------------------
-	
-	//----------------------------------------
-	
+
+	// ---------------------------------------------------------------------
+
+	// ----------------------------------------
+
 	/** Defines if this File is a Directory */
 	private boolean isDirectory;
-	
+
 	private final Button actionColumnButton = new Button("");
-	
+
 	private final DownloadService downloadService;
-	
+
 	/**
 	 * Constructor
 	 */
 	public DropboxDownloadedFile(DownloadService downloadService) {
 		this.downloadService = downloadService;
 		String value = InfoTool.getFileName(downloadService.getLocalFileAbsolutePath());
-		
-		//---------------------Init properties------------------------------------
+
+		// ---------------------Init properties------------------------------------
 		title = new SimpleStringProperty(value);
 		extension = new SimpleStringProperty(InfoTool.getFileExtension(value));
-		
-		//progressBox
+
+		// progressBox
 		DownloadsProgressBox progressBoxe = new DownloadsProgressBox(this);
 		progressBox = new SimpleObjectProperty<>(progressBoxe);
-		
-		//-------------------------------ETC---------------------------
-		
-		//Is this a directory?
+
+		// -------------------------------ETC---------------------------
+
+		// Is this a directory?
 		isDirectory = downloadService.getDropboxFile().getMetadata() instanceof FolderMetadata;
-		
+
 	}
-	
+
 	// --------Methods------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Checks if is directory.
 	 *
@@ -69,7 +69,7 @@ public class DropboxDownloadedFile {
 	public boolean isDirectory() {
 		return isDirectory;
 	}
-	
+
 	/**
 	 * Checks if is FILE.
 	 *
@@ -78,9 +78,9 @@ public class DropboxDownloadedFile {
 	public boolean isFile() {
 		return !isDirectory;
 	}
-	
+
 	// --------Properties------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Title property.
 	 *
@@ -89,18 +89,17 @@ public class DropboxDownloadedFile {
 	public SimpleStringProperty titleProperty() {
 		return title;
 	}
-	
+
 	public SimpleStringProperty extensionProperty() {
 		return extension;
 	}
 
-	
 	public SimpleObjectProperty<StackPane> progressBoxProperty() {
 		return progressBox;
 	}
-	
+
 	// --------GETTERS------------------------------------------------------------------------------------
-	
+
 	/**
 	 * Gets the title.
 	 *
@@ -109,19 +108,19 @@ public class DropboxDownloadedFile {
 	public String getTitle() {
 		return title.get();
 	}
-	
+
 	/**
 	 * @return the actionColumnButton
 	 */
 	public Button getActionColumnButton() {
 		return actionColumnButton;
 	}
-	
+
 	/**
 	 * @return the downloadService
 	 */
 	public DownloadService getDownloadService() {
 		return downloadService;
 	}
-	
+
 }

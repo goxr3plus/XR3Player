@@ -37,26 +37,26 @@ import javafx.stage.Screen;
  * @version 1.0
  */
 public class DragAdjustableLabel extends Label {
-	
+
 	/** The screen X. */
 	// Variables
 	private int screenX;
-	
+
 	/** The screen Y. */
 	private int screenY;
-	
+
 	/** The previous Y. */
 	private int previousY;
-	
+
 	/** The minimum value. */
 	private final int minimumValue;
-	
+
 	/** The maximum value. */
 	private final int maximumValue;
-	
+
 	/** The current value of the DragAdjustableLabel. */
 	private final IntegerProperty currentValue;
-	
+
 	/**
 	 * Constructor.
 	 *
@@ -65,17 +65,17 @@ public class DragAdjustableLabel extends Label {
 	 * @param maximumValue Maximum Value that the slider can have
 	 */
 	public DragAdjustableLabel(int currentValue, int minimumValue, int maximumValue) {
-		
+
 		this.currentValue = new SimpleIntegerProperty(currentValue);
 		this.minimumValue = minimumValue;
 		this.maximumValue = maximumValue;
-		
+
 		// Add a costume style class
 		this.getStyleClass().add("drag-adjustable-label");
 		setCursor(Cursor.OPEN_HAND);
-		
+
 		textProperty().bind(this.currentValue.asString());
-		
+
 		// when the mouse is pressed
 		setOnMousePressed(m -> {
 			screenX = (int) m.getScreenX();
@@ -83,13 +83,13 @@ public class DragAdjustableLabel extends Label {
 			setCursor(Cursor.NONE); // comment this line to make the cursor
 									// visible
 		});
-		
+
 		// when the mouse is dragged
 		setOnMouseDragged(m -> {
-			
+
 			// calculate the monitor height
 			double screenHeight = Screen.getPrimary().getBounds().getHeight();
-			
+
 			// !if the mouse has reached the the top of the monitor
 			// or
 			// ! if the mouse has reached the bottom of the monitor
@@ -97,22 +97,22 @@ public class DragAdjustableLabel extends Label {
 				resetMouse();
 				return;
 			}
-			
+
 			// Calculate the current value
-			setCurrentValue(getCurrentValue() + ( m.getScreenY() == previousY ? 0 : m.getScreenY() > previousY ? -1 : 1 ));
+			setCurrentValue(
+					getCurrentValue() + (m.getScreenY() == previousY ? 0 : m.getScreenY() > previousY ? -1 : 1));
 			previousY = (int) m.getScreenY();
 		});
-		
+
 		// when the mouse is released
 		setOnMouseReleased(m -> {
 			resetMouse();
 			setCursor(Cursor.OPEN_HAND);
 		});
 	}
-	
+
 	/**
-	 * Reset the mouse to the default position(which is the center of the
-	 * element).
+	 * Reset the mouse to the default position(which is the center of the element).
 	 */
 	private void resetMouse() {
 		try {
@@ -121,19 +121,19 @@ public class DragAdjustableLabel extends Label {
 			Logger.getLogger(getClass().getName()).log(Level.WARNING, "Error reseting the mouse position", ex);
 		}
 	}
-	
+
 	/**
 	 * Set the current value.
 	 *
 	 * @param value the new current value
 	 */
 	public void setCurrentValue(int value) {
-		
+
 		// if the value is between the limits
 		if (value >= minimumValue && value <= maximumValue)
 			currentValue.set(value);
 	}
-	
+
 	/**
 	 * Gets the current value.
 	 *
@@ -142,7 +142,7 @@ public class DragAdjustableLabel extends Label {
 	public int getCurrentValue() {
 		return currentValue.get();
 	}
-	
+
 	/**
 	 * Current value property.
 	 *
@@ -151,5 +151,5 @@ public class DragAdjustableLabel extends Label {
 	public IntegerProperty currentValueProperty() {
 		return currentValue;
 	}
-	
+
 }

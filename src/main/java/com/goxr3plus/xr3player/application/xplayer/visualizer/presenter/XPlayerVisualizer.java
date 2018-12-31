@@ -13,41 +13,41 @@ import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
  * @author GOXR3PLUS
  */
 public class XPlayerVisualizer extends Visualizer {
-	
+
 	/** The x player UI. */
 	private XPlayerController xPlayerUI;
-	
+
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerUI
-	 *            the x player UI
+	 * @param xPlayerUI the x player UI
 	 */
 	public XPlayerVisualizer(XPlayerController xPlayerUI, boolean addMouseListener) {
-		
+
 		this.xPlayerUI = xPlayerUI;
 		this.getAnimationService().passXPlayer(xPlayerUI);
-		
+
 		setScopeColor(xPlayerUI.getDisc().getArcColor());
 		if (addMouseListener)
 			addMouseListener();
 	}
-	
+
 	/**
-	 * Add a mouse listener so every time primary mouse button is clicked the visualizer is changing.
+	 * Add a mouse listener so every time primary mouse button is clicked the
+	 * visualizer is changing.
 	 */
 	protected void addMouseListener() {
-		
+
 		setCursor(Cursor.HAND);
 		setOnMouseReleased(m -> {
 			// PRIMARY
 			if (m.getButton() == MouseButton.PRIMARY) {
-				displayMode.set( ( displayMode.get() + 1 > DISPLAYMODE_MAXIMUM ) ? 0 : displayMode.get() + 1);
+				displayMode.set((displayMode.get() + 1 > DISPLAYMODE_MAXIMUM) ? 0 : displayMode.get() + 1);
 				// SECONDARY
 			} else if (m.getButton() == MouseButton.SECONDARY)
 				xPlayerUI.getVisualizerWindow().getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
 		});
-		
+
 	}
-	
+
 }

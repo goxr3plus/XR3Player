@@ -52,99 +52,98 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
  * @author GOXR3PLUS
  */
 public class VisualizerWindowController extends StackPane {
-	
-	//------------------
-	
+
+	// ------------------
+
 	@FXML
 	private BorderPane visualizerPane;
-	
+
 	@FXML
 	private StackPane centerStackPane;
-	
+
 	@FXML
 	private MediaView mediaView;
-	
+
 	@FXML
 	private BorderPane topBar;
-	
+
 	@FXML
 	private MenuButton menuPopButton;
-	
+
 	@FXML
 	private ContextMenu visualizerContextMenu;
-	
+
 	@FXML
 	private Menu spectrumMenu;
-	
+
 	@FXML
 	private ToggleGroup visualizerTypeGroup;
-	
+
 	@FXML
 	private MenuItem setBackground;
-	
+
 	@FXML
 	private MenuItem setDefaultBackground;
-	
+
 	@FXML
 	private MenuItem clearBackground;
-	
+
 	@FXML
 	private MenuItem setForeground;
-	
+
 	@FXML
 	private MenuItem setDefaultForeground;
-	
+
 	@FXML
 	private Slider transparencySlider;
-	
+
 	@FXML
 	private JFXCheckBox keepTopBarVisible;
-	
+
 	@FXML
 	private JFXButton maxOrNormalize;
-	
+
 	@FXML
 	private StackedFontIcon sizeStackedFontIcon;
-	
+
 	@FXML
 	private JFXButton close;
-	
+
 	@FXML
 	private Label visualizerLabel;
-	
+
 	@FXML
 	private FontIcon visualizerLabelFontIcon;
-	
+
 	@FXML
 	private Label progressLabel;
-	
+
 	@FXML
 	private ProgressBar progressBar;
-	
+
 	// ------------------------------------
-	
+
 	private BorderlessScene borderlessScene;
-	
+
 	/** The window. */
 	private Stage window;
-	
+
 	/** The x player UI. */
 	// Controller of an XPlayer
 	private XPlayerController xPlayerController;
-	
+
 	/** The pause transition. */
 	private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
-	
+
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerController
-	 *            xPlayerController
+	 * @param xPlayerController xPlayerController
 	 */
 	public VisualizerWindowController(XPlayerController xPlayerController) {
-		
+
 		this.xPlayerController = xPlayerController;
-		
+
 		window = new Stage();
 		window.setTitle("XR3Player Visualizer");
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
@@ -154,36 +153,39 @@ public class VisualizerWindowController extends StackPane {
 		window.setFullScreenExitHint("");
 		window.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		window.setOnCloseRequest(c -> removeVisualizer());
-		
+
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.VISUALIZERS_FXMLS + "VisualizerWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.VISUALIZERS_FXMLS + "VisualizerWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerWindowController FXML can't be loaded!", ex);
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "VisualizerWindowController FXML can't be loaded!",
+					ex);
 		}
-		
+
 	}
-	
-	//public MediaPlayer videoPlayer;
-	
+
+	// public MediaPlayer videoPlayer;
+
 	/**
 	 * Called as soon as .fxml has been loaded
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		// -- Scene
 		borderlessScene = new BorderlessScene(window, StageStyle.TRANSPARENT, this, 150, 150);
 		borderlessScene.setMoveControl(topBar);
 		borderlessScene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue()));
-		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		
+		borderlessScene.getStylesheets()
+				.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+
 		// width listener
-		window.widthProperty().addListener((observable , oldValue , newValue) -> {
+		window.widthProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue.intValue() <= 250 && visualizerLabel.isVisible()) {
 				visualizerLabel.setVisible(false);
 				visualizerLabel.setManaged(false);
@@ -192,10 +194,10 @@ public class VisualizerWindowController extends StackPane {
 				visualizerLabel.setManaged(true);
 			}
 		});
-		
+
 		// --- MouseListeners
 		addEventHandler(MouseEvent.MOUSE_MOVED, m -> restartPauseTransition());
-		
+
 		// -- KeyListeners
 		borderlessScene.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE) {
@@ -203,37 +205,38 @@ public class VisualizerWindowController extends StackPane {
 					removeVisualizer();
 				else
 					window.setFullScreen(false);
-				
+
 			}
 		});
-		
+
 		// ----------Drag && Drop Listeners
 		borderlessScene.setOnDragOver(dragOver -> dragOver.acceptTransferModes(TransferMode.LINK));
 		borderlessScene.setOnDragDropped(xPlayerController.audioDropEvent);
 		window.setScene(borderlessScene);
-		
+
 		// -------------Top Bar Elements---------------
-		
-		//visualizerLabel
+
+		// visualizerLabel
 		visualizerLabel.setText("Visualizer");
-		visualizerLabelFontIcon.setIconLiteral("gmi-filter-" + ( xPlayerController.getKey() + 1 ));
-		window.setTitle("Visualizer " + ( xPlayerController.getKey() + 1 ));
-		
-		//progressLabel
-		progressLabel.textProperty().bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("%.02f %%"));
-		
+		visualizerLabelFontIcon.setIconLiteral("gmi-filter-" + (xPlayerController.getKey() + 1));
+		window.setTitle("Visualizer " + (xPlayerController.getKey() + 1));
+
+		// progressLabel
+		progressLabel.textProperty()
+				.bind(Bindings.max(0, progressBar.progressProperty()).multiply(100.00).asString("%.02f %%"));
+
 		// menuPopButton
 		menuPopButton.setOnMouseReleased(a -> {
 			Bounds bounds = menuPopButton.localToScreen(menuPopButton.getBoundsInLocal());
 			visualizerContextMenu.show(menuPopButton, bounds.getMaxX(), bounds.getMaxY());
 		});
-		
+
 		// ----------------------------- Minimize
 		maxOrNormalize.setOnAction(a -> borderlessScene.maximizeStage());
 		close.setOnAction(action -> removeVisualizer());
-		
-		//stage
-		borderlessScene.maximizedProperty().addListener((observable , oldValue , newValue) -> {
+
+		// stage
+		borderlessScene.maximizedProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue) {
 				sizeStackedFontIcon.getChildren().get(0).setVisible(true);
 				sizeStackedFontIcon.getChildren().get(1).setVisible(false);
@@ -242,45 +245,47 @@ public class VisualizerWindowController extends StackPane {
 				sizeStackedFontIcon.getChildren().get(0).setVisible(false);
 			}
 		});
-		
+
 		// transparencySlider
-		//transparencySlider.disableProperty().bind(window.showingProperty().not());
-		transparencySlider.valueProperty().addListener(list -> borderlessScene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
-		
+		// transparencySlider.disableProperty().bind(window.showingProperty().not());
+		transparencySlider.valueProperty()
+				.addListener(list -> borderlessScene.setFill(Color.rgb(0, 0, 0, transparencySlider.getValue())));
+
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> {
-			if (!topBar.isHover() && window.isShowing() && !visualizerContextMenu.isShowing() && !keepTopBarVisible.isSelected()) {
+			if (!topBar.isHover() && window.isShowing() && !visualizerContextMenu.isShowing()
+					&& !keepTopBarVisible.isSelected()) {
 				topBar.setVisible(false);
 				setCursor(Cursor.NONE);
 				xPlayerController.getVisualizer().setCursor(Cursor.NONE);
 			}
-			//System.out.println("PauseTransition Finished")
+			// System.out.println("PauseTransition Finished")
 		});
-		
-		//--------------------------
-		
+
+		// --------------------------
+
 		// setBackground
 		setBackground.setOnAction(a -> setNewImage(Type.BACKGROUND));
-		
-		//setDefaultBackground
+
+		// setDefaultBackground
 		setDefaultBackground.setOnAction(a -> resetToDefaultImage(Type.BACKGROUND));
-		
+
 		// clearBackground
 		clearBackground.setOnAction(a -> clearImage(Type.BACKGROUND));
-		
+
 		// setForeground
 		setForeground.setOnAction(a -> setNewImage(Type.FOREGROUND));
-		
-		//setDefaultForeground
+
+		// setDefaultForeground
 		setDefaultForeground.setOnAction(a -> resetToDefaultImage(Type.FOREGROUND));
-		
+
 	}
-	
+
 	/**
 	 * The Enum Type.
 	 */
 	public enum Type {
-		
+
 		/** The background. */
 		BACKGROUND {
 			@Override
@@ -296,92 +301,99 @@ public class VisualizerWindowController extends StackPane {
 			}
 		};
 	}
-	
+
 	/**
 	 * Replaces the background image of visualizer.
 	 *
-	 * @param type
-	 *            the type
+	 * @param type the type
 	 */
 	public void setNewImage(Type type) {
-		
-		//Check the response
-		JavaFXTools.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
+
+		// Check the response
+		JavaFXTools
+				.selectAndSaveImage("XPlayer" + this.xPlayerController.getKey() + type,
+						InfoTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
 				.ifPresent(imageFile -> {
 					if (type == Type.BACKGROUND)
 						xPlayerController.getVisualizer().backgroundImage = new Image(imageFile.toURI() + "");
 					else if (type == Type.FOREGROUND)
 						xPlayerController.getVisualizer().foregroundImage = new Image(imageFile.toURI() + "");
-					
-					//Manage Settings
-					Main.dbManager.getPropertiesDb().deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
-					
+
+					// Manage Settings
+					Main.dbManager.getPropertiesDb().deleteProperty(
+							"XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
+
 				});
-		
+
 	}
-	
+
 	/**
 	 * Resets the default background or foreground Image
 	 *
-	 * @param type
-	 *            the type
+	 * @param type the type
 	 */
 	public void resetToDefaultImage(Type type) {
-		
-		//Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		
-		//Manage Settings
-		Main.dbManager.getPropertiesDb().deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
-		
-		//Reset to default image
+
+		// Delete the background image
+		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+
+		// Manage Settings
+		Main.dbManager.getPropertiesDb()
+				.deleteProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared");
+
+		// Reset to default image
 		findAppropriateImage(type);
 	}
-	
+
 	/**
-	 * Find the appropriate background or foreground Image , based on if any Images have been ever selected from the User
+	 * Find the appropriate background or foreground Image , based on if any Images
+	 * have been ever selected from the User
 	 *
-	 * @param type
-	 *            the type
+	 * @param type the type
 	 */
 	public void findAppropriateImage(Type type) {
-		
-		//Check if it returns null
-		Image image = JavaFXTools.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		
-		//System.out.println("image is null?" + type + " .... " + ( image == null ))
-		
-		//Replace the Image
+
+		// Check if it returns null
+		Image image = JavaFXTools.findAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+
+		// System.out.println("image is null?" + type + " .... " + ( image == null ))
+
+		// Replace the Image
 		if (type == Type.BACKGROUND)
-			xPlayerController.getVisualizer().backgroundImage = ( image != null ? image : VisualizerDrawer.DEFAULT_BACKGROUND_IMAGE );
+			xPlayerController.getVisualizer().backgroundImage = (image != null ? image
+					: VisualizerDrawer.DEFAULT_BACKGROUND_IMAGE);
 		else if (type == Type.FOREGROUND)
-			xPlayerController.getVisualizer().foregroundImage = ( image != null ? image : VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE );
+			xPlayerController.getVisualizer().foregroundImage = (image != null ? image
+					: VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE);
 	}
-	
+
 	/**
 	 * Resets the default background or foreground Image
 	 *
-	 * @param type
-	 *            the type
+	 * @param type the type
 	 */
 	public void clearImage(Type type) {
-		
-		//Delete the background image
-		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type, InfoTool.getXPlayersImageFolderAbsolutePathPlain());
-		
-		//Set the Image to null
+
+		// Delete the background image
+		JavaFXTools.deleteAnyImageWithTitle("XPlayer" + this.xPlayerController.getKey() + type,
+				InfoTool.getXPlayersImageFolderAbsolutePathPlain());
+
+		// Set the Image to null
 		if (type == Type.BACKGROUND)
 			xPlayerController.getVisualizer().backgroundImage = null;
 		else if (type == Type.FOREGROUND)
 			xPlayerController.getVisualizer().foregroundImage = null;
-		
-		//Manage Settings
-		Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared", "true");
-		
+
+		// Manage Settings
+		Main.dbManager.getPropertiesDb()
+				.updateProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared", "true");
+
 	}
-	
-	//Manage Settings
-	
+
+	// Manage Settings
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 
@@ -401,7 +413,7 @@ public class VisualizerWindowController extends StackPane {
 	 * 
 	 * -----------------------------------------------------------------------
 	 */
-	
+
 	/**
 	 * Gets the stage.
 	 *
@@ -410,7 +422,7 @@ public class VisualizerWindowController extends StackPane {
 	public Stage getStage() {
 		return window;
 	}
-	
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 
@@ -430,22 +442,22 @@ public class VisualizerWindowController extends StackPane {
 	 * 
 	 * -----------------------------------------------------------------------
 	 */
-	
+
 	/**
 	 * Adds a visualizer to the Window.
 	 */
 	public void displayVisualizer() {
-		
+
 		// Add the visualizer
 		centerStackPane.getChildren().add(1, xPlayerController.getVisualizerStackController());
-		
+
 		// show the window
 		window.show();
-		
-		//Restart the PauseTransition
+
+		// Restart the PauseTransition
 		restartPauseTransition();
 	}
-	
+
 	/**
 	 * Restarts the PauseTransition
 	 */
@@ -454,9 +466,9 @@ public class VisualizerWindowController extends StackPane {
 		topBar.setVisible(true);
 		setCursor(Cursor.HAND);
 		xPlayerController.getVisualizer().setCursor(Cursor.HAND);
-		//System.out.println("PauseTransition Restarted")
+		// System.out.println("PauseTransition Restarted")
 	}
-	
+
 	/**
 	 * Removes the visualizer from the Window.
 	 */
@@ -466,30 +478,30 @@ public class VisualizerWindowController extends StackPane {
 		xPlayerController.reAddVisualizer();
 		window.close();
 	}
-	
+
 	/**
 	 * @return the visualizerContextMenu
 	 */
 	public ContextMenu getVisualizerContextMenu() {
 		return visualizerContextMenu;
 	}
-	
+
 	/**
 	 * @return the visualizerTypeGroup
 	 */
 	public ToggleGroup getVisualizerTypeGroup() {
 		return visualizerTypeGroup;
 	}
-	
+
 	/**
 	 * @return the progressBar
 	 */
 	public ProgressBar getProgressBar() {
 		return progressBar;
 	}
-	
+
 	// -----------------Rubbish code.......------------------------------
-	
+
 	// topBar.setOnMousePressed(m -> {
 	// if (window.getWidth() < InfoTool.screenWidth && m.getButton() ==
 	// MouseButton.PRIMARY) {
@@ -509,5 +521,5 @@ public class VisualizerWindowController extends StackPane {
 	// });
 	//
 	// topBar.setOnMouseReleased(m -> topBar.setCursor(Cursor.DEFAULT));
-	
+
 }

@@ -41,95 +41,97 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
 
 /**
- * Mechanism of showing the opened libraries each opened library is represented by a Tab.
+ * Mechanism of showing the opened libraries each opened library is represented
+ * by a Tab.
  *
  * @author GOXR3PLUS STUDIO
  */
 public class OpenedLibrariesViewer extends StackPane {
-	
+
 	@FXML
 	private JFXTabPane tabPane;
-	
+
 	@FXML
 	private Button createFirstLibrary;
-	
+
 	// -----------------------------------------------------------------------
-	
+
 	/**
 	 * This class wraps an ObservableList
 	 */
 	private SimpleListProperty<Tab> itemsWrapperProperty;
-	
+
 	/**
 	 * Constructor.
 	 */
 	public OpenedLibrariesViewer() {
-		
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.LIBRARIES_FXMLS + "OpenedLibrariesViewer.fxml"));
+
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.LIBRARIES_FXMLS + "OpenedLibrariesViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			Main.logger.log(Level.WARNING, "", ex);
 		}
 	}
-	
+
 	/**
 	 * Called as soon as .fxml is initialized
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		tabPane.getTabs().clear();
-		//tabPane.setId("MultipleLibrariesTabPane")
-		
+		// tabPane.setId("MultipleLibrariesTabPane")
+
 		// createFirstLibrary
 		createFirstLibrary.setOnMouseReleased(m -> {
 			if (Main.libraryMode.viewer.getItemsObservableList().isEmpty())
 				Main.libraryMode.createNewLibrary(createFirstLibrary.getGraphic(), true, true);
 			else
-				( (Library) Main.libraryMode.viewer.getItemsObservableList().get(0) ).setLibraryStatus(LibraryStatus.OPENED, false);
+				((Library) Main.libraryMode.viewer.getItemsObservableList().get(0))
+						.setLibraryStatus(LibraryStatus.OPENED, false);
 		});
-		
-		//== emptyLabel
+
+		// == emptyLabel
 		itemsWrapperProperty = new SimpleListProperty<>(tabPane.getTabs());
 		createFirstLibrary.visibleProperty().bind(itemsWrapperProperty.emptyProperty());
-		
+
 	}
-	
-	//    /**
-	//     * Resets the cursor to the default one.
-	//     */
-	//    public void resetCursor() {
-	//	if (tabPane.getCursor() != hand)
-	//	    tabPane.setCursor(hand);
-	//    }
+
+	// /**
+	// * Resets the cursor to the default one.
+	// */
+	// public void resetCursor() {
+	// if (tabPane.getCursor() != hand)
+	// tabPane.setCursor(hand);
+	// }
 	//
-	//    /**
-	//     * Set the Cursor to control Cursor.
-	//     */
-	//    public void setControlCursor() {
-	//	if (tabPane.getCursor() != stylus)
-	//	    tabPane.setCursor(stylus);
-	//    }
-	
+	// /**
+	// * Set the Cursor to control Cursor.
+	// */
+	// public void setControlCursor() {
+	// if (tabPane.getCursor() != stylus)
+	// tabPane.setCursor(stylus);
+	// }
+
 	/**
 	 * Returns true if all the controllers are free.
 	 *
-	 * @param showMessage
-	 *            the show message
+	 * @param showMessage the show message
 	 * @return true, if is free
 	 */
 	public boolean isFree(boolean showMessage) {
 		for (Tab tab : tabPane.getTabs())
-			if (! ( (SmartController) tab.getContent() ).isFree(showMessage))
+			if (!((SmartController) tab.getContent()).isFree(showMessage))
 				return false;
-			
+
 		return true;
 	}
-	
+
 	/**
 	 * Selects the tab with the given name
 	 * 
@@ -142,26 +144,27 @@ public class OpenedLibrariesViewer extends StackPane {
 				break;
 			}
 	}
-	
+
 	private Library selectedLibrary;
-	
+
 	/**
 	 * Returns the selected library.
 	 *
 	 * @return The Selected Library if exists or <b> null </b> instead
 	 */
 	public Optional<Library> getSelectedLibrary() {
-		
+
 		// selection model is empty?
-		
+
 		if (tabPane.getSelectionModel().isEmpty())
 			selectedLibrary = null;
 		else
-			Main.libraryMode.getLibraryWithName(tabPane.getSelectionModel().getSelectedItem().getTooltip().getText()).ifPresent(library -> selectedLibrary = library);
-		
+			Main.libraryMode.getLibraryWithName(tabPane.getSelectionModel().getSelectedItem().getTooltip().getText())
+					.ifPresent(library -> selectedLibrary = library);
+
 		return Optional.ofNullable(selectedLibrary);
 	}
-	
+
 	/**
 	 * Returns the selected Tab or null instead
 	 * 
@@ -170,19 +173,19 @@ public class OpenedLibrariesViewer extends StackPane {
 	public Tab getSelectedTab() {
 		return tabPane.getSelectionModel().getSelectedItem();
 	}
-	
+
 	/**
 	 * Find a tab which contains that name.
 	 *
-	 * @param name
-	 *            the name
+	 * @param name the name
 	 * @return The tab with the given name
 	 */
 	public Tab getTab(String name) {
-		
-		return tabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst().orElse(null);
+
+		return tabPane.getTabs().stream().filter(tab -> tab.getTooltip().getText().equals(name)).findFirst()
+				.orElse(null);
 	}
-	
+
 	/**
 	 * Find a tab which is in that position in the tab pane
 	 * 
@@ -193,7 +196,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	public Tab getTab(int index) {
 		return tabPane.getTabs().get(index);
 	}
-	
+
 	/**
 	 * Returns a List of the TabPane Tabs
 	 * 
@@ -202,7 +205,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	public ObservableList<Tab> getTabs() {
 		return tabPane.getTabs();
 	}
-	
+
 	/**
 	 * Return the TabPane
 	 * 
@@ -211,44 +214,46 @@ public class OpenedLibrariesViewer extends StackPane {
 	public TabPane getTabPane() {
 		return tabPane;
 	}
-	
+
 	/**
 	 * Add a new Tab.
 	 *
-	 * @param library
-	 *            the library
+	 * @param library the library
 	 */
 	public void insertTab(Library library) {
-		
-		//Create the tab
+
+		// Create the tab
 		Tab tab = new Tab("", library.getSmartController());
 		tab.setTooltip(new Tooltip(library.getLibraryName()));
 		StackPane stack = new StackPane();
 		ProgressBar indicator = new ProgressBar();
 		indicator.progressProperty().bind(library.getSmartController().getIndicator().progressProperty());
 		indicator.setMaxSize(35, 15);
-		
+
 		Label label = new Label();
 		label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		label.setAlignment(Pos.CENTER);
-		label.setStyle("-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
+		label.setStyle(
+				"-fx-font-weight:bold; -fx-text-fill: white; -fx-font-size:10; -fx-background-color: rgb(0,0,0,0.3);");
 		label.textProperty().bind(Bindings.max(0, indicator.progressProperty()).multiply(100).asString("%.00f %%"));
 		Marquee marquee = new Marquee();
 		marquee.textProperty().bind(tab.getTooltip().textProperty());
-		//marquee.setStyle("-fx-background-radius:0 0 0 0; -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
-		//tab.textProperty().bind(marquee.textProperty())
-		marquee.checkAnimationValidity(Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected());
-		
+		// marquee.setStyle("-fx-background-radius:0 0 0 0;
+		// -fx-background-color:rgb(255,255,255,0.5); -fx-border-color:transparent;")
+		// tab.textProperty().bind(marquee.textProperty())
+		marquee.checkAnimationValidity(
+				Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected());
+
 		stack.getChildren().addAll(indicator, label);
 		stack.setManaged(false);
 		stack.setVisible(false);
-		
-		//ImageView
+
+		// ImageView
 		FontIcon fontIcon = JavaFXTools.getFontIcon("icm-radio-unchecked", Color.web("#d74418"), 20);
 		fontIcon.visibleProperty().bind(library.getSmartController().totalInDataBaseProperty().isEqualTo(0));
 		fontIcon.managedProperty().bind(fontIcon.visibleProperty());
-		
-		//X Button
+
+		// X Button
 		JFXButton closeButton = new JFXButton("X");
 		closeButton.setFocusTraversable(false);
 		int maxSize = 25;
@@ -257,8 +262,8 @@ public class OpenedLibrariesViewer extends StackPane {
 		closeButton.setMaxSize(maxSize, maxSize);
 		closeButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
 		closeButton.setOnAction(l -> removeTab(tab));
-		
-		//tabImage 
+
+		// tabImage
 		ImageView tabImage = new ImageView();
 		tabImage.setFitWidth(24);
 		tabImage.setFitHeight(24);
@@ -267,9 +272,9 @@ public class OpenedLibrariesViewer extends StackPane {
 			if (library.getImage() != null)
 				return library.getImage();
 			else
-				return null; //Media.NO_ARTWORK_IMAGE
+				return null; // Media.NO_ARTWORK_IMAGE
 		}, library.getImageView().imageProperty()));
-		
+
 		// HBOX
 		HBox hBox = new HBox();
 		hBox.setStyle("-fx-background-color:#101010;");
@@ -278,47 +283,48 @@ public class OpenedLibrariesViewer extends StackPane {
 			if (m.getButton() == MouseButton.MIDDLE)
 				removeTab(tab);
 		});
-		hBox.getChildren().addAll(tabImage,fontIcon, stack, marquee, closeButton);
-		
+		hBox.getChildren().addAll(tabImage, fontIcon, stack, marquee, closeButton);
+
 		// --Drag Events
 		PauseTransition pauseTransition = new PauseTransition(Duration.millis(150));
 		hBox.setOnDragExited(drag -> pauseTransition.stop());
 		hBox.setOnDragEntered(dragOver -> {
 			if (dragOver.getDragboard().hasFiles()) {
-				//&& dragOver.getGestureSource() != library.getSmartController().tableViewer) 
+				// && dragOver.getGestureSource() != library.getSmartController().tableViewer)
 				dragOver.acceptTransferModes(TransferMode.LINK);
 				pauseTransition.playFromStart();
 				pauseTransition.setOnFinished(f -> tabPane.getSelectionModel().select(tab));
 			}
 		});
-		
+
 		// --Drag Dropped
 		hBox.setOnDragDropped(drop ->
-		
+
 		{
 			// Has Files? + isFree()?
 			if (drop.getDragboard().hasFiles() && getSelectedLibrary().get().getSmartController().isFree(true)
 					&& drop.getGestureSource() != library.getSmartController().getNormalModeMediaTableViewer())
 				getSelectedLibrary().get().getSmartController().getInputService().start(drop.getDragboard().getFiles());
-			
+
 			drop.setDropCompleted(true);
 		});
-		
+
 		// stack
-		library.getSmartController().getIndicatorVBox().visibleProperty().addListener((observable , oldValue , newValue) -> {
-			if (newValue) { //if it is visible
-				stack.setManaged(true);
-				stack.setVisible(true);
-				// tab.setGraphic(hBox)
-			} else {
-				stack.setManaged(false);
-				stack.setVisible(false);
-				// tab.setGraphic(null)
-			}
-		});
-		//library.getLibraryProgressIndicator().progressProperty().bind(indicator.progressProperty())
-		//library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty())
-		
+		library.getSmartController().getIndicatorVBox().visibleProperty()
+				.addListener((observable, oldValue, newValue) -> {
+					if (newValue) { // if it is visible
+						stack.setManaged(true);
+						stack.setVisible(true);
+						// tab.setGraphic(hBox)
+					} else {
+						stack.setManaged(false);
+						stack.setVisible(false);
+						// tab.setGraphic(null)
+					}
+				});
+		// library.getLibraryProgressIndicator().progressProperty().bind(indicator.progressProperty())
+		// library.getLibraryProgressIndicator().visibleProperty().bind(stack.visibleProperty())
+
 		tab.setOnCloseRequest(c -> {
 			if (!library.getSmartController().isFree(true)) {
 				if (c != null)
@@ -326,58 +332,58 @@ public class OpenedLibrariesViewer extends StackPane {
 			} else
 				library.setLibraryStatus(LibraryStatus.CLOSED, false);
 		});
-		
+
 		tab.setGraphic(hBox);
 		tab.setContextMenu(new LibraryTabContextMenu(tab));
-		
-		//Add it
+
+		// Add it
 		tabPane.getTabs().add(tab);
 	}
-	
+
 	/**
 	 * Closes the tabs to the right of the given Tab
 	 * 
 	 * @param tab
 	 */
 	public void closeTabsToTheRight(Tab givenTab) {
-		//Return if size <= 1
+		// Return if size <= 1
 		if (tabPane.getTabs().size() <= 1)
 			return;
-		
-		//The start
+
+		// The start
 		int start = tabPane.getTabs().indexOf(givenTab);
-		
-		//Remove the appropriate items
+
+		// Remove the appropriate items
 		tabPane.getTabs().stream()
-				//filter
+				// filter
 				.filter(tab -> tabPane.getTabs().indexOf(tab) > start)
-				//Collect the all to a list
+				// Collect the all to a list
 				.collect(Collectors.toList()).forEach(tab -> tab.getOnCloseRequest().handle(null));
-		
+
 	}
-	
+
 	/**
 	 * Closes the tabs to the left of the given Tab
 	 * 
 	 * @param tab
 	 */
 	public void closeTabsToTheLeft(Tab givenTab) {
-		//Return if size <= 1
+		// Return if size <= 1
 		if (tabPane.getTabs().size() <= 1)
 			return;
-		
-		//The start
+
+		// The start
 		int start = tabPane.getTabs().indexOf(givenTab);
-		
-		//Remove the appropriate items
+
+		// Remove the appropriate items
 		tabPane.getTabs().stream()
-				//filter
+				// filter
 				.filter(tab -> tabPane.getTabs().indexOf(tab) < start)
-				//Collect the all to a list
+				// Collect the all to a list
 				.collect(Collectors.toList()).forEach(tab -> tab.getOnCloseRequest().handle(null));
-		
+
 	}
-	
+
 	/**
 	 * Removes this Tab from the TabPane
 	 * 
@@ -386,27 +392,24 @@ public class OpenedLibrariesViewer extends StackPane {
 	public void removeTab(Tab tab) {
 		tab.getOnCloseRequest().handle(null);
 	}
-	
+
 	/**
 	 * Remove tab with that name.
 	 *
-	 * @param tabName
-	 *            the tab name
+	 * @param tabName the tab name
 	 */
 	public void removeTab(String tabName) {
 		tabPane.getTabs().removeIf(tab -> tab.getTooltip().getText().equals(tabName));
 	}
-	
+
 	/**
 	 * Rename the tab with old name to a tab with a new name.
 	 *
-	 * @param oldName
-	 *            the old name
-	 * @param newName
-	 *            the new name
+	 * @param oldName the old name
+	 * @param newName the new name
 	 */
-	public void renameTab(String oldName , String newName) {
-		
+	public void renameTab(String oldName, String newName) {
+
 		tabPane.getTabs().stream().forEach(tab -> {
 			if (tab.getTooltip().getText().equals(oldName)) {
 				// tab.textProperty().unbind()
@@ -416,7 +419,7 @@ public class OpenedLibrariesViewer extends StackPane {
 			}
 		});
 	}
-	
+
 	/**
 	 * The label that indicates not libraries are opened or created
 	 * 
@@ -425,5 +428,5 @@ public class OpenedLibrariesViewer extends StackPane {
 	public Button getEmptyLabel() {
 		return createFirstLibrary;
 	}
-	
+
 }

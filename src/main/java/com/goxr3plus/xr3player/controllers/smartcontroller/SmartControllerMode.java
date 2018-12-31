@@ -7,6 +7,6 @@ package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
  *
  */
 public enum SmartControllerMode {
-	
+
 	MEDIA, ASSOCIATED_FOLDERS, FILTERS_MODE;
 }

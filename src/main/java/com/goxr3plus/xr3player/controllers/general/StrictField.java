@@ -6,7 +6,6 @@ package main.java.com.goxr3plus.xr3player.controllers.general;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 
-
 /**
  * This class represents a TextField which allows only some defined characters
  * and symbols.

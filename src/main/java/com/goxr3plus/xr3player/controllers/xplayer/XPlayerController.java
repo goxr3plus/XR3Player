@@ -103,7 +103,7 @@ import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
  * @author GOXR3PLUS
  */
 public class XPlayerController extends StackPane implements StreamPlayerListener {
-	
+
 	private final FontIcon playIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 24);
 	private final FontIcon smPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 32);
 	private final FontIcon microPlayIcon = JavaFXTools.getFontIcon("fa-play", Color.WHITE, 20);
@@ -111,650 +111,671 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private final FontIcon smPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 32);
 	private final FontIcon microPauseIcon = JavaFXTools.getFontIcon("fa-pause", Color.WHITE, 20);
 	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
-	
-	//-----------------------------------------------
-	
+
+	// -----------------------------------------------
+
 	@FXML
 	private StackPane xPlayerStackPane;
-	
+
 	@FXML
 	private BorderPane rootBorderPane;
-	
+
 	@FXML
 	private StackPane modesStackPane;
-	
+
 	@FXML
 	private BorderPane borderPane;
-	
+
 	@FXML
 	private SplitPane internalSplitPane;
-	
+
 	@FXML
 	private BorderPane discBorderPane;
-	
+
 	@FXML
 	private StackPane speedSliderStackPane;
-	
+
 	@FXML
 	private Label speedControlLabel;
-	
+
 	@FXML
 	private Slider speedSlider;
-	
+
 	@FXML
 	private JFXButton speedControlButton;
-	
+
 	@FXML
 	private StackPane diskStackPane;
-	
+
 	@FXML
 	private StackPane diskStackPane1;
-	
+
 	@FXML
 	private Button playPauseButton;
-	
+
 	@FXML
 	private Button stopButton;
-	
+
 	@FXML
 	private Button backwardButton;
-	
+
 	@FXML
 	private Button replayButton;
-	
+
 	@FXML
 	private Button forwardButton;
-	
+
 	@FXML
 	private StackPane waveStackPane;
-	
+
 	@FXML
 	private Label waveProgressLabel;
-	
+
 	@FXML
 	private ProgressBar waveProgressBar;
-	
+
 	@FXML
 	private JFXTabPane visualizerTabPane;
-	
+
 	@FXML
 	private StackPane visualizerStackTopParent;
-	
+
 	@FXML
 	private StackPane visualizerStackPane;
-	
+
 	@FXML
 	private Label visualizerLabel;
-	
+
 	@FXML
 	private Label playerStatusLabel;
-	
+
 	@FXML
 	private JFXButton visualizerVisibleLabel;
-	
+
 	@FXML
 	private FontIcon visualizerEyeIcon3;
-	
+
 	@FXML
 	private HBox visualizerSettingsHBox;
-	
+
 	@FXML
 	private JFXButton visualizerSettings;
-	
+
 	@FXML
 	private JFXButton showVisualizerButton;
-	
+
 	@FXML
 	private FontIcon visualizerEyeIcon;
-	
+
 	@FXML
 	private JFXButton maximizeVisualizer;
-	
+
 	@FXML
 	private VBox visualizerMaximizedBox;
-	
+
 	@FXML
 	private JFXButton visualizerMinimize;
-	
+
 	@FXML
 	private JFXButton visualizerRequestFocus;
-	
+
 	@FXML
 	private Label visualizationsDisabledLabel;
-	
+
 	@FXML
 	private Button enableHighGraphics;
-	
+
 	@FXML
 	private Tab equalizerTab;
-	
+
 	@FXML
 	private HBox mediaNameHBox;
-	
+
 	@FXML
 	private HBox timersBox;
-	
+
 	@FXML
 	private Label elapsedTimeLabel;
-	
+
 	@FXML
 	private Label remainingTimeLabel;
-	
+
 	@FXML
 	private Label totalTimeLabel;
-	
+
 	@FXML
 	private MenuButton copyButton;
-	
+
 	@FXML
 	private MenuItem copyFileTitle;
-	
+
 	@FXML
 	private MenuItem copyFileLocation;
-	
+
 	@FXML
 	private MenuItem copyFile;
-	
+
 	@FXML
 	private Button mediaTagImageButton;
-	
+
 	@FXML
 	private FontIcon albumImageFontIcon;
-	
+
 	@FXML
 	private ImageView mediaTagImageView;
-	
+
 	@FXML
 	private Label advModeVolumeLabel;
-	
+
 	@FXML
 	private BorderPane smBorderPane;
-	
+
 	@FXML
 	private StackPane smModeCenterStackPane;
-	
+
 	@FXML
 	private ImageView smImageView;
-	
+
 	@FXML
 	private FontIcon smAlbumFontIcon;
-	
+
 	@FXML
 	private Label smMediaTitle;
-	
+
 	@FXML
 	private Button smReplayButton;
-	
+
 	@FXML
 	private Button smBackwardButton;
-	
+
 	@FXML
 	private Button smPlayPauseButton;
-	
+
 	@FXML
 	private Button smStopButton;
-	
+
 	@FXML
 	private Button smForwardButton;
-	
+
 	@FXML
 	private ToggleButton showVisualizer;
-	
+
 	@FXML
 	private ProgressBar smTimeSliderProgress;
-	
+
 	@FXML
 	private Slider smTimeSlider;
-	
+
 	@FXML
 	private Label smTimeSliderLabel;
-	
+
 	@FXML
 	private Label smVolumeSliderLabel;
-	
+
 	@FXML
 	private VBox volumeBarBox;
-	
+
 	@FXML
 	private Button smMaximizeVolume;
-	
+
 	@FXML
 	private ProgressBar volumeSliderProgBar;
-	
+
 	@FXML
 	private Slider smVolumeSlider;
-	
+
 	@FXML
 	private Button smMinimizeVolume;
-	
+
 	@FXML
 	private VBox topVBox;
-	
+
 	@FXML
 	private HBox topHBox;
-	
+
 	@FXML
 	private HBox toolsHBox;
-	
+
 	@FXML
 	private ToggleButton muteButton;
-	
+
 	@FXML
 	private Button showMenu;
-	
+
 	@FXML
 	private Button openFile;
-	
+
 	@FXML
 	private Button settings;
-	
+
 	@FXML
 	private MenuButton transferMedia;
-	
+
 	@FXML
 	private Label topInfoLabel;
-	
+
 	@FXML
 	private Button emotionsButton;
-	
+
 	@FXML
 	private Button extendPlayer;
-	
+
 	@FXML
 	private StackedFontIcon sizeStackedFontIcon;
-	
+
 	@FXML
 	private ToggleButton modeToggle;
-	
+
 	@FXML
 	private ToggleButton historyToggle;
-	
+
 	@FXML
 	private StackPane microStackPane;
-	
+
 	@FXML
 	private BorderPane microBorderPane;
-	
+
 	@FXML
 	private StackPane diskStackPane11;
-	
+
 	@FXML
 	private Button microPlayPauseButton;
-	
+
 	@FXML
 	private Button microStopButton;
-	
+
 	@FXML
 	private Button microReplayButton;
-	
+
 	@FXML
 	private Label dragAndDropLabel;
-	
+
 	@FXML
 	private StackPane regionStackPane;
-	
+
 	@FXML
 	private Label playerLoadingLabel;
-	
+
 	@FXML
 	private ProgressBar progressBar;
-	
+
 	@FXML
 	private StackPane downloadStackPane;
-	
+
 	@FXML
 	private Label downloadingLabel;
-	
+
 	@FXML
 	private JFXButton restorePlayer;
-	
+
 	@FXML
 	private JFXButton focusXPlayerWindow;
-	
+
 	// -----------------------------------------------------------------------------
-	
+
 	/** A Fade Transition */
 	private FadeTransition fadeTransition;
-	
+
 	/**
-	 * This Variable Determines if the Player is extended or not ( which means it is being shown on an external window different from the main window
-	 * )
+	 * This Variable Determines if the Player is extended or not ( which means it is
+	 * being shown on an external window different from the main window )
 	 */
 	private boolean isPlayerExtended;
-	
+
 	public final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	// ------------------------- Images/ImageViews --------------------------
-	
-	private static final Image noSeek = InfoTool.getImageFromResourcesFolder("Private-" + ( ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64" ) + ".png");
-	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2, noSeek.getHeight() / 2);
-	
+
+	private static final Image noSeek = InfoTool.getImageFromResourcesFolder(
+			"Private-" + (ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64") + ".png");
+	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2,
+			noSeek.getHeight() / 2);
+
 	// ------------------------- Services --------------------------
-	
+
 	/** The seek service. */
 	private final XPlayerSeekService seekService = new XPlayerSeekService(this);
-	
+
 	/** The play service. */
 	private final XPlayerPlayService playService = new XPlayerPlayService(this);
-	
+
 	// ------------------------- Variables --------------------------
 	/** The key. */
 	private final int key;
-	
+
 	/** The disc is being mouse dragged */
 	public boolean discIsDragging;
-	
+
 	// -------------------------ETC --------------------------
-	
+
 	private XPlayerPlaylist xPlayerPlayList;
-	
+
 	private XPlayerWindow xPlayerWindow;
-	
+
 	/** The x player settings controller. */
 	private XPlayerHistory history;
-	
+
 	/** The x player model. */
 	private XPlayerModel xPlayerModel;
-	
+
 	/** The x player. */
 	private XPlayer xPlayer;
-	
+
 	/** The visualizer window. */
 	private VisualizerWindowController visualizerWindow;
-	
+
 	/**
-	 * This controller contains a Visualizer and a Label which describes every time (for some milliseconds) which type of visualizer is being
-	 * displayed (for example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
+	 * This controller contains a Visualizer and a Label which describes every time
+	 * (for some milliseconds) which type of visualizer is being displayed (for
+	 * example [ Oscilloscope , Rosette , Spectrum Bars etc...]);
 	 */
 	private final VisualizerStackController visualizerStackController = new VisualizerStackController();
-	
+
 	/** The visualizer. */
 	private XPlayerVisualizer visualizer;
 	private XPlayerVisualizer djVisualizer;
-	
+
 	/** The equalizer. */
 	private XPlayerEqualizer equalizer;
-	
+
 	private XPlayerPad xPlayerPad;
-	
+
 	/** The disc. */
 	private DJDisc disc;
-	
+
 	private final Marquee mediaFileMarquee = new Marquee();
-	
+
 	private final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
-	
+
 	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
-	
+
 	//
 	private WaveVisualization waveFormVisualization;
-	
-	//======= Events ===========
-	
+
+	// ======= Events ===========
+
 	public final EventHandler<? super MouseEvent> audioDragEvent = event -> {
 		final String absolutePath = xPlayerModel.songPathProperty().get();
 		if (absolutePath != null) {
-			
+
 			/* Allow copy transfer mode */
 			final Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-			
+
 			/* Put a String into the dragBoard */
 			final ClipboardContent content = new ClipboardContent();
 			content.putFiles(Arrays.asList(new File(absolutePath)));
 			db.setContent(content);
-			
+
 			/* Set the DragView */
 			new Audio(absolutePath, 0.0, 0, "", "", Genre.SEARCHWINDOW, -1).setDragView(db);
 		}
 		event.consume();
 	};
-	
+
 	public final EventHandler<? super DragEvent> audioDropEvent = event -> {
-		
-		//We don't want the player to start if the drop event is for the XPlayer PlayList
+
+		// We don't want the player to start if the drop event is for the XPlayer
+		// PlayList
 		if (!flipPane.isBackVisible()) {
 			final Dragboard dragBoard = event.getDragboard();
-			
+
 			// File?
 			if (dragBoard.hasFiles()) {
 				for (final File file : dragBoard.getFiles())
-					//No directories allowed
+					// No directories allowed
 					if (!file.isDirectory()) {
-						
-						//Get it
+
+						// Get it
 						final FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
-						
-						//Check if File exists
+
+						// Check if File exists
 						if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 							ActionTool.showNotification("File doesn't exist",
-									( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+									(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
+											: "Windows Shortcut") + " points to a file that doesn't exists anymore.",
 									Duration.millis(2000), NotificationType.INFORMATION);
 							return;
 						}
-						
-						//Check if XPlayer is already active
-						if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-							if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
-									visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+
+						// Check if XPlayer is already active
+						if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController()
+								.getAskSecurityQuestion().isSelected()) {
+							if (ActionTool.doQuestion("Abort Current Song",
+									"A song is already playing on this deck.\n Are you sure you want to replace it?",
+									visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing()
+											? visualizerWindow
+											: xPlayerStackPane,
+									Main.window))
 								playSong(ftaap.getFileAbsolutePath());
 						} else
 							playSong(ftaap.getFileAbsolutePath());
 						break;
-						
+
 					}
-				//String
+				// String
 			} else if (dragBoard.hasString()) {
 				final String stringo = dragBoard.getString();
-				
-				//Check if it is a direct drag and drop from dropbox
+
+				// Check if it is a direct drag and drop from dropbox
 				if (stringo.contains("#dropbox_item#")) {
-					
-					//Keep a reference to it
-					final DropboxDownloadedFile dropboxDownloadedFile = Main.dropBoxViewer
-							.downloadFile(Main.dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItem());
-					
-					//DownloadsProgressBox
+
+					// Keep a reference to it
+					final DropboxDownloadedFile dropboxDownloadedFile = Main.dropBoxViewer.downloadFile(
+							Main.dropBoxViewer.getDropboxFilesTableViewer().getSelectionModel().getSelectedItem());
+
+					// DownloadsProgressBox
 					final DownloadsProgressBox progressBox = new DownloadsProgressBox(dropboxDownloadedFile);
 					downloadingLabel.setText("Downloading file from Dropbox");
 					downloadingLabel.setGraphic(progressBox);
-					
-					//downloadStackPane
-					downloadStackPane.visibleProperty().bind(dropboxDownloadedFile.getDownloadService().runningProperty());
-					
-					//Play if finally the file has been successfully downloaded
+
+					// downloadStackPane
+					downloadStackPane.visibleProperty()
+							.bind(dropboxDownloadedFile.getDownloadService().runningProperty());
+
+					// Play if finally the file has been successfully downloaded
 					dropboxDownloadedFile.getDownloadService().setOnSucceeded(s -> {
 						if (new File(dropboxDownloadedFile.getDownloadService().getLocalFileAbsolutePath()).exists())
 							playSong(dropboxDownloadedFile.getDownloadService().getLocalFileAbsolutePath());
 					});
 				}
-				
+
 			}
-			
+
 			event.setDropCompleted(true);
 			event.consume();
 		}
 	};
-	
-	//============================================================================================
-	
+
+	// ============================================================================================
+
 	/**
 	 * Constructor.
 	 *
-	 * @param key
-	 *            The key that is identifying this player
+	 * @param key The key that is identifying this player
 	 */
 	public XPlayerController(final int key) {
 		this.key = key;
-		
+
 		// ----------------------------------- FXMLLoader
 		// -------------------------------------
-		final FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerController.fxml"));
+		final FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.PLAYERS_FXMLS + "XPlayerController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (final IOException ex) {
 			logger.log(Level.SEVERE, "XPlayerController FXML can't be loaded!", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * @return the xPlayerStackPane
 	 */
 	public StackPane getXPlayerStackPane() {
 		return xPlayerStackPane;
 	}
-	
+
 	/**
 	 * @return historyToggle
 	 */
 	public ToggleButton getHistoryToggle() {
 		return historyToggle;
 	}
-	
+
 	/**
-	 * Returns the XPlayerStackPane back to the XPlayerController if it is on XPlayer external Window
+	 * Returns the XPlayerStackPane back to the XPlayerController if it is on
+	 * XPlayer external Window
 	 */
 	public void restorePlayerStackPane() {
 		this.getChildren().add(getXPlayerStackPane());
 	}
-	
+
 	/** Called as soon as the .fxml has been loaded */
 	@FXML
 	private void initialize() {
-		
-		//root
-		xPlayerStackPane.heightProperty().addListener((observable , oldValue , newValue) -> {
+
+		// root
+		xPlayerStackPane.heightProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue.intValue() < 300) {
-				
-				//Get TopHBox
+
+				// Get TopHBox
 				if (!microBorderPane.getChildren().contains(topHBox)) {
 					topVBox.getChildren().remove(topHBox);
 					microBorderPane.setTop(topHBox);
 				}
-				
-				//DiscBorderPane
+
+				// DiscBorderPane
 				if (!microBorderPane.getChildren().contains(waveStackPane)) {
 					discBorderPane.getChildren().remove(waveStackPane);
 					microBorderPane.setCenter(waveStackPane);
 				}
-				
-				//Visibility
+
+				// Visibility
 				microStackPane.setVisible(true);
 				modesStackPane.setVisible(false);
 			} else {
-				
-				//Get TopHBox
+
+				// Get TopHBox
 				if (!topVBox.getChildren().contains(topHBox)) {
 					microBorderPane.getChildren().remove(topHBox);
 					topVBox.getChildren().add(0, topHBox);
 				}
-				
-				//DiscBorderPane
+
+				// DiscBorderPane
 				if (!discBorderPane.getChildren().contains(waveStackPane)) {
 					microBorderPane.getChildren().remove(waveStackPane);
 					discBorderPane.setTop(waveStackPane);
 				}
-				
-				//Visibility
+
+				// Visibility
 				modesStackPane.setVisible(true);
 				microStackPane.setVisible(false);
-				
+
 			}
 		});
-		
+
 		// -----XPlayer and XPlayerModel-------------
 		xPlayerModel = new XPlayerModel();
 		xPlayer = new XPlayer();
 		xPlayer.addStreamPlayerListener(this);
-		
+
 		// -----Important-------------
 		xPlayerWindow = new XPlayerWindow(this);
-		
-		//waveFormVisualization
+
+		// waveFormVisualization
 		waveFormVisualization = new WaveVisualization(this, 500, 20);
-		
-		//== RadialMenu
-		//radialMenu = new XPlayerRadialMenu(this);
-		//		radialMenu.mute.selectedProperty().addListener(l -> {
-		//			xPlayer.setMute(radialMenu.mute.isSelected());
-		//			muteButton.setSelected(radialMenu.mute.isSelected());
-		//			
-		//			//System.out.println("Entered Radial Menu");
-		//		});
+
+		// == RadialMenu
+		// radialMenu = new XPlayerRadialMenu(this);
+		// radialMenu.mute.selectedProperty().addListener(l -> {
+		// xPlayer.setMute(radialMenu.mute.isSelected());
+		// muteButton.setSelected(radialMenu.mute.isSelected());
+		//
+		// //System.out.println("Entered Radial Menu");
+		// });
 		muteButton.selectedProperty().addListener(l -> {
 			xPlayer.setMute(muteButton.isSelected());
-			//radialMenu.mute.setSelected(muteButton.isSelected());
-			
-			//System.out.println("Entered Menu Button");
-			
-			//Update PropertiesDB
-			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Muted", String.valueOf(muteButton.isSelected()));
-			
+			// radialMenu.mute.setSelected(muteButton.isSelected());
+
+			// System.out.println("Entered Menu Button");
+
+			// Update PropertiesDB
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Muted",
+					String.valueOf(muteButton.isSelected()));
+
 		});
-		
+
 		//
 		xPlayerPlayList = new XPlayerPlaylist(this);
 		visualizerWindow = new VisualizerWindowController(this);
 		history = new XPlayerHistory(this);
-		
-		//== microStackPane
+
+		// == microStackPane
 		microStackPane.setOnDragOver(event -> {
-			//System.out.println(event.getGestureSource())
-			
-			//Check if FlipPane is on the front side
-			//if (!flipPane.isBackVisible()) { //event.getGestureSource() != mediaFileMarquee) {
+			// System.out.println(event.getGestureSource())
+
+			// Check if FlipPane is on the front side
+			// if (!flipPane.isBackVisible()) { //event.getGestureSource() !=
+			// mediaFileMarquee) {
 			dragAndDropLabel.setVisible(true);
-			//}
-			
+			// }
+
 			event.consume();
 		});
-		
-		//== modesStackPane
+
+		// == modesStackPane
 		modesStackPane.setOnDragOver(event -> {
-			//System.out.println(event.getGestureSource())
-			
-			//Check if FlipPane is on the front side
-			if (!flipPane.isBackVisible()) { //event.getGestureSource() != mediaFileMarquee) {
+			// System.out.println(event.getGestureSource())
+
+			// Check if FlipPane is on the front side
+			if (!flipPane.isBackVisible()) { // event.getGestureSource() != mediaFileMarquee) {
 				dragAndDropLabel.setVisible(true);
 			}
-			
+
 			event.consume();
 		});
-		
-		//Key Listener
+
+		// Key Listener
 		modesStackPane.setOnKeyReleased(key -> {
-			
-			//Check if any file path is pasted
-			if ( ( key.isControlDown() || key.getCode() == KeyCode.COMMAND ) && key.getCode() == KeyCode.V) {
-				
-				//Get Native System ClipBoard
+
+			// Check if any file path is pasted
+			if ((key.isControlDown() || key.getCode() == KeyCode.COMMAND) && key.getCode() == KeyCode.V) {
+
+				// Get Native System ClipBoard
 				final Clipboard clipboard = Clipboard.getSystemClipboard();
-				
+
 				// Has Files? + isFree()?
 				if (clipboard.hasFiles())
 					// File?
 					for (final File file : clipboard.getFiles())
-						//No directories allowed
+						// No directories allowed
 						if (!file.isDirectory()) {
-							
-							//Get it
+
+							// Get it
 							final FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
-							
-							//Check if File exists
+
+							// Check if File exists
 							if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 								ActionTool.showNotification("File doesn't exist",
-										( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+										(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link"
+												: "Windows Shortcut")
+												+ " points to a file that doesn't exists anymore.",
 										Duration.millis(2000), NotificationType.INFORMATION);
 								return;
 							}
-							
-							//Check if XPlayer is already active
-							if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController().getAskSecurityQuestion().isSelected()) {
-								if (ActionTool.doQuestion("Abort Current Song", "A song is already playing on this deck.\n Are you sure you want to replace it?",
-										visualizerWindow.getStage().isShowing() && !xPlayerWindow.getWindow().isShowing() ? visualizerWindow : xPlayerStackPane, Main.window))
+
+							// Check if XPlayer is already active
+							if (xPlayer.isPausedOrPlaying() && Main.settingsWindow.getxPlayersSettingsController()
+									.getAskSecurityQuestion().isSelected()) {
+								if (ActionTool.doQuestion("Abort Current Song",
+										"A song is already playing on this deck.\n Are you sure you want to replace it?",
+										visualizerWindow.getStage().isShowing()
+												&& !xPlayerWindow.getWindow().isShowing() ? visualizerWindow
+														: xPlayerStackPane,
+										Main.window))
 									playSong(ftaap.getFileAbsolutePath());
 							} else
 								playSong(ftaap.getFileAbsolutePath());
@@ -762,14 +783,14 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						}
 			}
 		});
-		
-		//== dragAndDropLabel
+
+		// == dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		dragAndDropLabel.setOnDragOver(event -> {
-			//Check if FlipPane is on the front side
+			// Check if FlipPane is on the front side
 			if (!flipPane.isBackVisible())
 				event.acceptTransferModes(TransferMode.LINK);
-			
+
 			event.consume();
 		});
 		dragAndDropLabel.setOnDragExited(event -> {
@@ -777,11 +798,11 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			event.consume();
 		});
 		dragAndDropLabel.setOnDragDropped(audioDropEvent);
-		
-		//== regionStackPane
+
+		// == regionStackPane
 		regionStackPane.setVisible(false);
-		
-		// mediaFileStackPane	
+
+		// mediaFileStackPane
 		mediaFileMarquee.getLabel().setTooltip(new Tooltip(""));
 		mediaFileMarquee.getLabel().getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		mediaFileMarquee.setText("No media");
@@ -790,224 +811,239 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		mediaFileMarquee.setOnDragDetected(audioDragEvent);
 		mediaNameHBox.getChildren().add(1, mediaFileMarquee);
 		HBox.setHgrow(mediaFileMarquee, Priority.ALWAYS);
-		
-		//smMediaTitle
+
+		// smMediaTitle
 		smMediaTitle.textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		smMediaTitle.getTooltip().textProperty().bind(mediaFileMarquee.getLabel().textProperty());
 		smMediaTitle.setCursor(Cursor.HAND);
 		smMediaTitle.setOnMouseClicked(m -> openAudioInExplorer());
-		
+
 		// openMediaFileFolder
-		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(), TagTabCategory.ARTWORK, true));
+		mediaTagImageButton.setOnAction(action -> Main.tagWindow.openAudio(xPlayerModel.songPathProperty().get(),
+				TagTabCategory.ARTWORK, true));
 		mediaTagImageButton.setOnDragDetected(audioDragEvent);
-		
-		//albumImageFontIcon
-		
+
+		// albumImageFontIcon
+
 		// openFile
 		openFile.setOnAction(action -> openFileChooser());
-		
-		//copyFileTitle
+
+		// copyFileTitle
 		copyFileTitle.setOnAction(a -> {
-			
-			//If there is no Media
+
+			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+						NotificationType.INFORMATION);
 				return;
 			}
-			
-			//Get Native System ClipBoard
+
+			// Get Native System ClipBoard
 			final Clipboard clipboard = Clipboard.getSystemClipboard();
 			final ClipboardContent content = new ClipboardContent();
-			
+
 			// PutFiles
 			content.putString(mediaFileMarquee.getText());
-			
-			//Set the Content
+
+			// Set the Content
 			clipboard.setContent(content);
-			
-			//Check if it has Album Image
+
+			// Check if it has Album Image
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
-			
-			//Notification
+
+			// Notification
 			ActionTool.showNotification("Copied to Clipboard",
-					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
-					NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+					Duration.seconds(2), NotificationType.SIMPLE,
+					image != null ? JavaFXTools.getImageView(image, 60, 60)
+							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
-		
-		//copyFileLocation
+
+		// copyFileLocation
 		copyFileLocation.setOnAction(a -> {
-			
-			//If there is no Media
+
+			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+						NotificationType.INFORMATION);
 				return;
 			}
-			
-			//Get Native System ClipBoard
+
+			// Get Native System ClipBoard
 			final Clipboard clipboard = Clipboard.getSystemClipboard();
 			final ClipboardContent content = new ClipboardContent();
-			
+
 			// PutFiles
 			content.putString(xPlayerModel.getSongPath());
-			
-			//Set the Content
+
+			// Set the Content
 			clipboard.setContent(content);
-			
-			//Check if it has Album Image
+
+			// Check if it has Album Image
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
-			
-			//Notification
+
+			// Notification
 			ActionTool.showNotification("Copied to Clipboard",
 					"Media File Full Path copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
-					Duration.seconds(2), NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					Duration.seconds(2), NotificationType.SIMPLE,
+					image != null ? JavaFXTools.getImageView(image, 60, 60)
+							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
-		
-		//copyFile
+
+		// copyFile
 		copyFile.setOnAction(a -> {
-			
-			//If there is no Media
+
+			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+						NotificationType.INFORMATION);
 				return;
 			}
-			
-			//Get Native System ClipBoard
+
+			// Get Native System ClipBoard
 			final Clipboard clipboard = Clipboard.getSystemClipboard();
 			final ClipboardContent content = new ClipboardContent();
-			
+
 			// PutFiles
 			content.putFiles(Arrays.asList(new File(xPlayerModel.getSongPath())));
-			
-			//Set the Content
+
+			// Set the Content
 			clipboard.setContent(content);
-			
-			//Check if it has Album Image
+
+			// Check if it has Album Image
 			final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
-			
-			//Notification
+
+			// Notification
 			ActionTool.showNotification("Copied to Clipboard",
-					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]", Duration.seconds(2),
-					NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+					"Media name copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+					Duration.seconds(2), NotificationType.SIMPLE,
+					image != null ? JavaFXTools.getImageView(image, 60, 60)
+							: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 		});
-		
+
 		// showMenu
 		showMenu.setOnMouseReleased(m -> {
-			
-			//If there is no Media
+
+			// If there is no Media
 			if (xPlayerModel.getSongPath() == null) {
-				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("No Media", "No Media added on Player", Duration.seconds(2),
+						NotificationType.INFORMATION);
 				return;
-				//Check if Media exists
+				// Check if Media exists
 			} else if (!new File(xPlayerModel.getSongPath()).exists()) {
-				ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
+						Duration.seconds(2), NotificationType.INFORMATION);
 				return;
 			}
-			
-			XPlayerController.contextMenu.showContextMenu(this.xPlayerModel.getSongPath(), m.getScreenX(), m.getScreenY(), showMenu);
+
+			XPlayerController.contextMenu.showContextMenu(this.xPlayerModel.getSongPath(), m.getScreenX(),
+					m.getScreenY(), showMenu);
 		});
-		
+
 		// topInfoLabel
 		topInfoLabel.setText("Player ");
-		( (FontIcon) topInfoLabel.getGraphic() ).setIconLiteral("gmi-filter-" + ( getKey() + 1 ));
-		
-		//== forwardButton
+		((FontIcon) topInfoLabel.getGraphic()).setIconLiteral("gmi-filter-" + (getKey() + 1));
+
+		// == forwardButton
 		forwardButton.setOnAction(a -> seek(Integer.parseInt(forwardButton.getText())));
 		smForwardButton.setOnAction(forwardButton.getOnAction());
 		smForwardButton.textProperty().bind(forwardButton.textProperty());
-		
-		//== backwardButton
+
+		// == backwardButton
 		backwardButton.setOnAction(a -> seek(-Integer.parseInt(backwardButton.getText())));
 		smBackwardButton.setOnAction(backwardButton.getOnAction());
 		smBackwardButton.textProperty().bind(backwardButton.textProperty());
-		
-		//== playPauseButton
+
+		// == playPauseButton
 		playPauseButton.setOnAction(fire -> {
 			if (xPlayer.isPlaying())
 				pause();
 			else
 				playOrReplay();
-			
-			//Advanced Mode
+
+			// Advanced Mode
 			playPauseButton.setGraphic(xPlayer.isPlaying() ? pauseIcon : playIcon);
-			
-			//Simple Mode
+
+			// Simple Mode
 			smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
-			
-			//Micro Mode
+
+			// Micro Mode
 			microPlayPauseButton.setGraphic(xPlayer.isPlaying() ? microPauseIcon : microPlayIcon);
 		});
 		smPlayPauseButton.setOnAction(playPauseButton.getOnAction());
 		microPlayPauseButton.setOnAction(playPauseButton.getOnAction());
-		
-		//== replayButton
+
+		// == replayButton
 		replayButton.setOnAction(a -> replay());
 		smReplayButton.setOnAction(replayButton.getOnAction());
 		microReplayButton.setOnAction(replayButton.getOnAction());
-		
-		//== stopButton
+
+		// == stopButton
 		stopButton.setOnAction(a -> stop());
 		smStopButton.setOnAction(stopButton.getOnAction());
 		microStopButton.setOnAction(stopButton.getOnAction());
-		
-		//flipPane
+
+		// flipPane
 		flipPane.setFlipTime(150);
 		flipPane.getFront().getChildren().addAll(modesStackPane);
 		flipPane.getBack().getChildren().addAll(history);
-		
-		historyToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+
+		historyToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue) // true?
 				flipPane.flipToBack();
 			else
 				flipPane.flipToFront();
 		});
 		rootBorderPane.setCenter(flipPane);
-		
-		//modeToggle
-		modeToggle.selectedProperty().addListener((observable , oldValue , newValue) -> {
+
+		// modeToggle
+		modeToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
 			if (!newValue) {
 				smBorderPane.setVisible(true);
-				//modeToggleLabel.setText("Basic")
-				
-				//Fix the Visualizer
+				// modeToggleLabel.setText("Basic")
+
+				// Fix the Visualizer
 				simple_And_Advanced_Mode_Fix_Visualizer();
-				
+
 			} else {
 				smBorderPane.setVisible(false);
-				//modeToggleLabel.setText("Advanced")
-				
-				//Fix the Visualizer
+				// modeToggleLabel.setText("Advanced")
+
+				// Fix the Visualizer
 				simple_And_Advanced_Mode_Fix_Visualizer();
 			}
-			
-			//Go away from history
+
+			// Go away from history
 			historyToggle.setSelected(false);
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode", String.valueOf(modeToggle.isSelected()));
+
+			// Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Advanced-Mode",
+					String.valueOf(modeToggle.isSelected()));
 		});
-		
-		//showVisualizer
-		showVisualizer.selectedProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Fix the Visualizer
+
+		// showVisualizer
+		showVisualizer.selectedProperty().addListener((observable, oldValue, newValue) -> {
+
+			// Fix the Visualizer
 			simple_And_Advanced_Mode_Fix_Visualizer();
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Simple-Mode-Visualizers-Enabled", String.valueOf(showVisualizer.isSelected()));
+
+			// Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Simple-Mode-Visualizers-Enabled",
+					String.valueOf(showVisualizer.isSelected()));
 		});
-		
-		//RestorePlayerVBox
+
+		// RestorePlayerVBox
 		restorePlayer.getParent().visibleProperty().bind(xPlayerWindow.getWindow().showingProperty());
-		
-		//restorePlayer
+
+		// restorePlayer
 		restorePlayer.setOnAction(m -> xPlayerWindow.close());
-		
-		//focusXPlayerWindow
+
+		// focusXPlayerWindow
 		focusXPlayerWindow.setOnAction(m -> xPlayerWindow.getWindow().requestFocus());
-		
-		//extendPlayer
-		extendPlayer.getTooltip().textProperty()
-				.bind(Bindings.when(xPlayerWindow.getWindow().showingProperty()).then("Restore to parent window").otherwise("Open to external window"));
+
+		// extendPlayer
+		extendPlayer.getTooltip().textProperty().bind(Bindings.when(xPlayerWindow.getWindow().showingProperty())
+				.then("Restore to parent window").otherwise("Open to external window"));
 		extendPlayer.setOnAction(ac -> {
 			if (!xPlayerWindow.getWindow().isShowing()) {
 				xPlayerWindow.show();
@@ -1021,81 +1057,92 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				sizeStackedFontIcon.getChildren().get(0).setVisible(false);
 			}
 		});
-		
-		//transferMedia
-		IntStream.rangeClosed(0, 2).filter(item -> item != getKey()).forEach(item -> transferMedia.getItems().add(new MenuItem("->Player { " + ( item + 1 ) + " }")));
-		transferMedia.getItems().forEach(item -> item.setOnAction(a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue()).ifPresent(path -> {
-			
-			//Start the selected player
-			Main.xPlayersList.getXPlayerController(Integer.parseInt(item.getText().replace("->Player { ", "").replace(" }", "")) - 1)
-					.playSong(getxPlayerModel().songPathProperty().get(), getxPlayerModel().getCurrentTime());
-			
-			//Stop the Current Player
-			stop();
-			
-		})));
-		
-		//=emotionsButton
+
+		// transferMedia
+		IntStream.rangeClosed(0, 2).filter(item -> item != getKey())
+				.forEach(item -> transferMedia.getItems().add(new MenuItem("->Player { " + (item + 1) + " }")));
+		transferMedia.getItems()
+				.forEach(
+						item -> item
+								.setOnAction(
+										a -> Optional.ofNullable(getxPlayerModel().songPathProperty().getValue())
+												.ifPresent(path -> {
+
+													// Start the selected player
+													Main.xPlayersList
+															.getXPlayerController(Integer.parseInt(item.getText()
+																	.replace("->Player { ", "").replace(" }", "")) - 1)
+															.playSong(getxPlayerModel().songPathProperty().get(),
+																	getxPlayerModel().getCurrentTime());
+
+													// Stop the Current Player
+													stop();
+
+												})));
+
+		// =emotionsButton
 		emotionsButton.disableProperty().bind(xPlayerModel.songPathProperty().isNull());
 		emotionsButton.setOnAction(a -> updateEmotion(emotionsButton));
-		
-		//enableHighGraphics
+
+		// enableHighGraphics
 		enableHighGraphics.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.GENERERAL));
-		
-		//=settings
+
+		// =settings
 		settings.setOnAction(a -> Main.settingsWindow.showWindow(SettingsTab.XPLAYERS));
-		
-		//smMinimizeVolume
+
+		// smMinimizeVolume
 		smMinimizeVolume.setOnAction(a -> minimizeVolume());
-		//smMaximizeVolume
+		// smMaximizeVolume
 		smMaximizeVolume.setOnAction(a -> maximizeVolume());
-		
+
 		// fadeTranstion
 		fadeTransition = new FadeTransition(Duration.millis(1500), advModeVolumeLabel);
 		fadeTransition.setFromValue(1.0);
 		fadeTransition.setToValue(0.0);
 		advModeVolumeLabel.setOpacity(0);
-		
-		//smBorderPane
+
+		// smBorderPane
 		smBorderPane.setVisible(true);
-		
-		//extendPlayer
+
+		// extendPlayer
 		if (getKey() == 1 || getKey() == 2)
 			extendPlayer.setDisable(true);
-		
-		//----------------------------------SIMPLE MODE PLAYER------------------------------------------------
-		
-		//speedControlButton
+
+		// ----------------------------------SIMPLE MODE
+		// PLAYER------------------------------------------------
+
+		// speedControlButton
 		speedControlButton.setOnAction(a -> speedSlider.setValue(speedSlider.getMax() / 2));
-		
-		//speedSlider
+
+		// speedSlider
 		final double speedSliderHalf = (int) speedSlider.getMax() / 2.0;
-		//speedSlider.disableProperty().bind(seekService.runningProperty())
+		// speedSlider.disableProperty().bind(seekService.runningProperty())
 		speedSlider.valueProperty().addListener(l -> {
-			//int current_second = this.xPlayerModel.getCurrentTime()
+			// int current_second = this.xPlayerModel.getCurrentTime()
 			final double value = Math.round(speedSlider.getValue());
 			final int intValue = (int) value;
-			
-			//Normal by default
+
+			// Normal by default
 			double speedFactor = 1;
-			
-			//Make some transformations
+
+			// Make some transformations
 			if (intValue > speedSliderHalf) {
-				speedFactor = value / ( speedSliderHalf / 1 );
+				speedFactor = value / (speedSliderHalf / 1);
 			} else if (intValue < speedSliderHalf && intValue != 0) {
 				speedFactor = value / speedSliderHalf;
 			} else if (intValue == 0) {
 				speedFactor = 0.05;
 			}
-			
-			//speedControlButton
-			speedControlLabel.setText( ( speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-" ) + InfoTool.getMinString2(String.valueOf(speedFactor), 4));
-			
-			//Do it!
+
+			// speedControlButton
+			speedControlLabel.setText((speedFactor == 1 ? "" : speedFactor > 1 ? "+" : "-")
+					+ InfoTool.getMinString2(String.valueOf(speedFactor), 4));
+
+			// Do it!
 			if (xPlayer.getSpeedFactor() != speedFactor) {
 				xPlayer.setSpeedFactor(speedFactor);
-				
-				//If the player is paused or playing 
+
+				// If the player is paused or playing
 				if (xPlayer.isPausedOrPlaying()) {
 					speedIncreaseWorking = true;
 					seekService.cancel();
@@ -1103,76 +1150,79 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				}
 			}
 		});
-		speedSlider.setOnScroll(scroll -> speedSlider.setValue((int) Math.ceil(speedSlider.getValue() + ( scroll.getDeltaY() > 0 ? 1 : -1 ))));
-		
-		//progressBar
-		progressBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
-		
-		//downloadStackPane
+		speedSlider.setOnScroll(scroll -> speedSlider
+				.setValue((int) Math.ceil(speedSlider.getValue() + (scroll.getDeltaY() > 0 ? 1 : -1))));
+
+		// progressBar
+		progressBar.getStyleClass().add("transparent-volume-progress-bar" + (key + 1));
+
+		// downloadStackPane
 		downloadStackPane.setVisible(false);
 	}
-	
+
 	/**
-	 * Check's if disc rotation is allowed or not and based on player status it start's it or stops it
+	 * Check's if disc rotation is allowed or not and based on player status it
+	 * start's it or stops it
 	 */
 	public void checkDiscRotation() {
-		
-		//Is Player Playing?
+
+		// Is Player Playing?
 		if (!playService.isDiscImageNull() && xPlayer.isPlaying())
-			//Is discRotation allowed?
+			// Is discRotation allowed?
 			if (Main.settingsWindow.getxPlayersSettingsController().getAllowDiscRotation().isSelected())
 				disc.resumeRotation();
 			else
 				disc.stopRotation();
-			
+
 	}
-	
+
 	/**
 	 * Fixes the Visualizer StackPane when adding it on Simple Mode or Advanced Mode
 	 */
 	private void simple_And_Advanced_Mode_Fix_Visualizer() {
-		
-		//If we are on the simple Mode
+
+		// If we are on the simple Mode
 		if (!modeToggle.isSelected()) {
-			//If the ShowVisualizer on Simple Mode is Selected
+			// If the ShowVisualizer on Simple Mode is Selected
 			if (showVisualizer.isSelected()) {
 				visualizerStackTopParent.getChildren().remove(visualizerStackPane);
-				//Check for no duplicates
+				// Check for no duplicates
 				if (!smModeCenterStackPane.getChildren().contains(visualizerStackPane))
 					smModeCenterStackPane.getChildren().add(visualizerStackPane);
-				//If it isn't
+				// If it isn't
 			} else {
 				smModeCenterStackPane.getChildren().remove(visualizerStackPane);
-				//Check for no duplicates
+				// Check for no duplicates
 				if (!visualizerStackTopParent.getChildren().contains(visualizerStackPane))
 					visualizerStackTopParent.getChildren().add(visualizerStackPane);
 			}
-			//If we are on Advanced Mode
+			// If we are on Advanced Mode
 		} else {
 			smModeCenterStackPane.getChildren().remove(visualizerStackPane);
-			//Check for no duplicates
+			// Check for no duplicates
 			if (!visualizerStackTopParent.getChildren().contains(visualizerStackPane))
 				visualizerStackTopParent.getChildren().add(visualizerStackPane);
 		}
 	}
-	
+
 	/**
-	 * This method is called to change the Emotion Image of the Media based on the current Emotion
+	 * This method is called to change the Emotion Image of the Media based on the
+	 * current Emotion
 	 * 
 	 * @param emotion
 	 */
 	public void changeEmotionImage(final Emotion emotion) {
 		Main.emotionsWindow.giveEmotionImageToButton(emotionsButton, emotion, 24);
 	}
-	
+
 	/**
 	 * Update the emotion the user is feeling for this Media
 	 */
 	public void updateEmotion(final Node node) {
-		
+
 		// Show the Window
 		Main.emotionsWindow.show(InfoTool.getFileName(xPlayerModel.getSongPath()), node);
-		
+
 		// Listener
 		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
 			/**
@@ -1180,24 +1230,25 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			 */
 			@Override
 			public void invalidated(final Observable o) {
-				
+
 				// Remove the listener
 				Main.emotionsWindow.getWindow().showingProperty().removeListener(this);
-				
+
 				// !showing?
 				if (!Main.emotionsWindow.getWindow().isShowing() && Main.emotionsWindow.wasAccepted()) {
-					
-					//Add it the one of the emotions list
-					new Thread(() -> Main.emotionListsController.makeEmotionDecisition(xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion())).start();
-					
-					//System.out.println(Main.emotionsWindow.getEmotion())
-					
+
+					// Add it the one of the emotions list
+					new Thread(() -> Main.emotionListsController.makeEmotionDecisition(
+							xPlayerModel.songPathProperty().get(), Main.emotionsWindow.getEmotion())).start();
+
+					// System.out.println(Main.emotionsWindow.getEmotion())
+
 				}
 			}
 		});
-		
+
 	}
-	
+
 	/**
 	 * Opens the current Media File of the player to the default system explorer
 	 */
@@ -1205,7 +1256,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		if (xPlayerModel.songPathProperty().get() != null)
 			ActionTool.openFileInExplorer(xPlayerModel.songPathProperty().get());
 	}
-	
+
 	/**
 	 * Opens a FileChooser so the user can select a song File
 	 */
@@ -1214,7 +1265,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		if (file != null)
 			playSong(file.getAbsolutePath());
 	}
-	
+
 	/**
 	 * Returns the volume level of the player.
 	 *
@@ -1223,7 +1274,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public int getVolume() {
 		return disc.getCurrentVolume();
 	}
-	
+
 	/**
 	 * Returns the Disc Color.
 	 *
@@ -1232,42 +1283,41 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public Color getDiscArcColor() {
 		return disc.getArcColor();
 	}
-	
+
 	/**
 	 * Set the volume to this value.
 	 *
-	 * @param value
-	 *            the new volume
+	 * @param value the new volume
 	 */
 	public void setVolume(final int value) {
 		disc.setVolume(value);
-		
+
 	}
-	
+
 	/**
-	 * You can use this method to add or minus from the player volume For example you can call adjustVolume(+1) or adjustVolume(-1)
+	 * You can use this method to add or minus from the player volume For example
+	 * you can call adjustVolume(+1) or adjustVolume(-1)
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 */
 	public void adjustVolume(final int value) {
 		disc.setVolume(disc.getCurrentVolume() + value);
 	}
-	
+
 	/**
 	 * Adjust the volume to the maximum value.
 	 */
 	public void maximizeVolume() {
 		disc.setVolume(disc.getMaximumVolume());
 	}
-	
+
 	/**
 	 * Adjust the volume to the minimum value.
 	 */
 	public void minimizeVolume() {
 		disc.setVolume(0);
 	}
-	
+
 	/**
 	 * Set the speed of the player
 	 * 
@@ -1276,7 +1326,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public void setSpeed(final double speed) {
 		speedSlider.setValue(speed);
 	}
-	
+
 	/**
 	 * Get the speed of the player
 	 * 
@@ -1286,7 +1336,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public double getSpeed() {
 		return speedSlider.getValue();
 	}
-	
+
 	/**
 	 * Returns the key of the player.
 	 *
@@ -1295,278 +1345,295 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public int getKey() {
 		return key;
 	}
-	
+
 	public StackPane getRegionStackPane() {
 		return regionStackPane;
 	}
-	
+
 	public Label getFxLabel() {
 		return playerLoadingLabel;
 	}
-	
+
 	/**
 	 * Used by resume method.
 	 */
 	private void resumeCode() {
 		System.out.println("RESUME code....");
-		
+
 		// Stop the fade animation
 		disc.stopFade();
-		
+
 		// image !=null?
-		//	if (!playService.isDiscImageNull())
+		// if (!playService.isDiscImageNull())
 		checkDiscRotation();
-		
+
 		// Start the visualizer
 		visualizer.startVisualizer();
 		if (djVisualizer != null)
 			djVisualizer.startVisualizer();
-		
+
 		// Pause Image
 		// radialMenu.resumeOrPause.setGraphic(radialMenu.pauseImageView)
 	}
-	
+
 	/**
 	 * Used by pause method.
 	 */
 	private void pauseCode() {
 		System.out.println("PAUSE code....");
-		
+
 		// Play the fade animation
 		disc.playFade();
-		
+
 		// Pause the Rotation fo disc
 		disc.pauseRotation();
-		
+
 		// Stop the Visualizer
 		visualizer.stopVisualizer();
 		if (djVisualizer != null)
 			djVisualizer.stopVisualizer();
-		
+
 		// Play Image
 		// radialMenu.resumeOrPause.setGraphic(radialMenu.playImageView)
 	}
-	
+
 	/**
 	 * Controls the volume of the player.
 	 */
 	public void controlVolume() {
-		
+
 		try {
-			
-			//Crazy Code here.......
+
+			// Crazy Code here.......
 			if (key == 1 || key == 2) {
 				final double masterVolumeSlider = Main.djMode.getMixTabInterface().getMasterVolumeSlider().getValue();
 				if (Main.djMode.getMixTabInterface().getMasterVolumeSlider().getValue() < 125) { // <100
-					
-					Main.xPlayersList.getXPlayer(1).setGain( ( ( Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00 ) * ( masterVolumeSlider ) ) / 100.00);
-					Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
-					
+
+					Main.xPlayersList.getXPlayer(1).setGain(
+							((Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00) * (masterVolumeSlider))
+									/ 100.00);
+					Main.xPlayersList.getXPlayer(2)
+							.setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
+
 				} else if (masterVolumeSlider == 125) { // ==100
-					
-					Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
-					Main.xPlayersList.getXPlayer(2).setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
-					
+
+					Main.xPlayersList.getXPlayer(1)
+							.setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
+					Main.xPlayersList.getXPlayer(2)
+							.setGain(Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00);
+
 				} else if (masterVolumeSlider > 125) { // >100
-					
-					Main.xPlayersList.getXPlayer(1).setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
-					Main.xPlayersList.getXPlayer(2).setGain( ( ( Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00 ) * ( 250 - masterVolumeSlider ) ) / 100.00);
-					
+
+					Main.xPlayersList.getXPlayer(1)
+							.setGain(Main.xPlayersList.getXPlayerController(1).getVolume() / 100.00);
+					Main.xPlayersList.getXPlayer(2)
+							.setGain(((Main.xPlayersList.getXPlayerController(2).getVolume() / 100.00)
+									* (250 - masterVolumeSlider)) / 100.00);
+
 				}
 			} else if (key == 0) {
 				xPlayer.setGain(getVolume() / 100.00);
 			}
-			
-			//			//Update PropertiesDB
-			//			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Volume-Bar", String.valueOf(getVolume()));
-			
-			//VisualizerStackController Label
+
+			// //Update PropertiesDB
+			// Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() +
+			// "-Volume-Bar", String.valueOf(getVolume()));
+
+			// VisualizerStackController Label
 			Platform.runLater(() -> {
 				visualizerStackController.replayLabelEffect("Vol: " + getVolume() + " %");
-				
-				//Advanced Mode Volume Label
+
+				// Advanced Mode Volume Label
 				if (modeToggle.isSelected()) {
 					advModeVolumeLabel.setText(getVolume() + " %");
 					fadeTransition.playFromStart();
 				}
 			});
 		} catch (final Exception ex) {
-			
+
 			logger.log(Level.INFO, "\n", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * This method is Used by VisualizerWindow class.
 	 */
 	public void reAddVisualizer() {
 		visualizerStackPane.getChildren().add(0, visualizerStackController);
 	}
-	
+
 	/**
 	 * This method is making the visualizer of the player.
 	 *
-	 * @param side
-	 *            the side
+	 * @param side the side
 	 */
 	public void makeTheVisualizer() {
-		
+
 		// Visualizer
 		visualizer = new XPlayerVisualizer(this, true);
-		visualizer.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
-		
-		//DjVisualizer
+		visualizer
+				.setShowFPS(Main.settingsWindow.getxPlayersSettingsController().getShowFPS().selectedProperty().get());
+
+		// DjVisualizer
 		if (this.getKey() == 1 || this.getKey() == 2) {
 			djVisualizer = new XPlayerVisualizer(this, false);
 			djVisualizer.setDisplayMode(Integer.parseInt(VisualizerType.VERTICAL_VOLUME_METER.toString()));
 		}
-		
+
 		// Select the correct toggle
-		visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
-		
+		visualizerWindow.getVisualizerTypeGroup()
+				.selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(visualizer.displayMode.get()));
+
 		// When displayMode is being updated
-		visualizer.displayMode.addListener((observable , oldValue , newValue) -> {
-			
-			//Update the properties file
-			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Visualizer-DisplayMode", Integer.toString(newValue.intValue()));
-			
-			//----------
-			visualizerWindow.getVisualizerTypeGroup().selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(newValue.intValue()));
-			visualizerStackController.replayLabelEffect( ( (RadioMenuItem) visualizerWindow.getVisualizerTypeGroup().getSelectedToggle() ).getText());
+		visualizer.displayMode.addListener((observable, oldValue, newValue) -> {
+
+			// Update the properties file
+			Main.dbManager.getPropertiesDb().updateProperty("XPlayer" + getKey() + "-Visualizer-DisplayMode",
+					Integer.toString(newValue.intValue()));
+
+			// ----------
+			visualizerWindow.getVisualizerTypeGroup()
+					.selectToggle(visualizerWindow.getVisualizerTypeGroup().getToggles().get(newValue.intValue()));
+			visualizerStackController.replayLabelEffect(
+					((RadioMenuItem) visualizerWindow.getVisualizerTypeGroup().getSelectedToggle()).getText());
 		});
-		
+
 		// -----------visualizerTypeGroup
 		visualizerWindow.getVisualizerTypeGroup().getToggles()
-				.forEach(toggle -> ( (RadioMenuItem) toggle ).setOnAction(a -> visualizer.displayMode.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle))));
-		
+				.forEach(toggle -> ((RadioMenuItem) toggle).setOnAction(a -> visualizer.displayMode
+						.set(visualizerWindow.getVisualizerTypeGroup().getToggles().indexOf(toggle))));
+
 		// visualizerTabPane
 		visualizerTabPane.addEventFilter(KeyEvent.ANY, event -> {
 			if (event.getCode().isArrowKey()) {
-				//System.out.println("Is arrow key");
+				// System.out.println("Is arrow key");
 				event.consume();
 			}
 		});
-		
+
 		// VisualizerStackController
 		visualizerStackController.getChildren().add(0, visualizer);
 		visualizerStackController.visibleProperty().bind(visualizerVisibility);
 		visualizerStackController.addListenersToButtons(this);
-		
+
 		// Add VisualizerStackController to the VisualizerStackPane
 		visualizerStackPane.getChildren().add(0, visualizerStackController);
-		
+
 		// visualizerSettingsHBox
-		visualizerSettingsHBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty().not().and(visualizerStackPane.hoverProperty()));
-		
+		visualizerSettingsHBox.visibleProperty()
+				.bind(visualizerWindow.getStage().showingProperty().not().and(visualizerStackPane.hoverProperty()));
+
 		// visualizerSettings
 		visualizerSettings.setOnMouseReleased(m -> {
 			final Bounds bounds = visualizerSettings.localToScreen(visualizerSettings.getBoundsInLocal());
-			getVisualizerWindow().getVisualizerContextMenu().show(visualizerSettings, bounds.getMinX(), bounds.getMaxY());
+			getVisualizerWindow().getVisualizerContextMenu().show(visualizerSettings, bounds.getMinX(),
+					bounds.getMaxY());
 		});
-		
+
 		// maximizeVisualizer
 		maximizeVisualizer.disableProperty().bind(visualizerVisibility.not());
 		maximizeVisualizer.setOnAction(e -> visualizerWindow.displayVisualizer());
-		
+
 		// showVisualizerButton
 		showVisualizerButton.setOnAction(a -> visualizerVisibility.set(!visualizerVisibility.get()));
-		
-		//visualizerVisibility
-		visualizerVisibility.addListener((observable , oldValue , newValue) -> visualizerEyeIcon.setFill(newValue ? Color.web("#d4ff00") : Color.FIREBRICK));
-		
+
+		// visualizerVisibility
+		visualizerVisibility.addListener((observable, oldValue, newValue) -> visualizerEyeIcon
+				.setFill(newValue ? Color.web("#d4ff00") : Color.FIREBRICK));
+
 		// visualizerVisibleLabel
 		visualizerVisibleLabel.visibleProperty().bind(visualizerVisibility.not());
 		visualizerVisibleLabel.setOnAction(a -> visualizerVisibility.set(true));
-		
+
 		// visualizerMaximizedHBox
 		visualizerMaximizedBox.visibleProperty().bind(visualizerWindow.getStage().showingProperty());
-		
+
 		// visualizerMinimize
 		visualizerMinimize.setOnAction(m -> visualizerWindow.removeVisualizer());
-		
+
 		// visualizerRequestFocus
 		visualizerRequestFocus.setOnAction(m -> visualizerWindow.getStage().requestFocus());
-		
+
 		// playerStatusLabel
 		playerStatusLabel.visibleProperty().bind(visualizer.getAnimationService().runningProperty().not());
 		visualizerLabel.visibleProperty().bind(playerStatusLabel.visibleProperty());
-		
-		//Equalizer
+
+		// Equalizer
 		equalizer = new XPlayerEqualizer(this);
 		equalizerTab.setContent(equalizer);
-		
-		//Pad 8
-		//xPlayerPad = new XPlayerPad(this)
-		//padTab.setContent(xPlayerPad)
-		
+
+		// Pad 8
+		// xPlayerPad = new XPlayerPad(this)
+		// padTab.setContent(xPlayerPad)
+
 	}
-	
+
 	/**
 	 * This method is making the disc of the player.
 	 *
-	 * @param width
-	 *            the width
-	 * @param height
-	 *            the height
-	 * @param arcColor
-	 *            the color of the disc
-	 * @param volume
-	 *            the volume
-	 * @param side
-	 *            the side
+	 * @param width    the width
+	 * @param height   the height
+	 * @param arcColor the color of the disc
+	 * @param volume   the volume
+	 * @param side     the side
 	 */
-	public void makeTheDisc(final Color arcColor , final int volume , final int minimumVolume , final int maximumVolume , final Side side) {
-		
+	public void makeTheDisc(final Color arcColor, final int volume, final int minimumVolume, final int maximumVolume,
+			final Side side) {
+
 		// Create DJDisc
 		disc = new DJDisc(136, arcColor, volume, maximumVolume);
-		
-		//------------waveFormVisualization-----------------------
+
+		// ------------waveFormVisualization-----------------------
 		waveFormVisualization.setForeground(arcColor);
 		waveFormVisualization.setOnMouseReleased(m -> {
 			final double percentage = m.getX() / waveFormVisualization.getWidth();
-			seekTo((int) ( percentage * this.getxPlayerModel().getDuration() ));
+			seekTo((int) (percentage * this.getxPlayerModel().getDuration()));
 		});
 		waveFormVisualization.addEventHandler(MouseEvent.MOUSE_MOVED, m -> {
 			final double percentage = m.getX() / waveFormVisualization.getWidth();
-			final int timeNow = (int) ( percentage * this.getxPlayerModel().getDuration() );
-			
-			//== RemainingTimeLabel
+			final int timeNow = (int) (percentage * this.getxPlayerModel().getDuration());
+
+			// == RemainingTimeLabel
 			remainingTimeLabel.setText(InfoTool.getTimeEdited(xPlayerModel.getDuration() - timeNow));
-			
-			//== ElapsedTimeLabel
+
+			// == ElapsedTimeLabel
 			elapsedTimeLabel.setText(InfoTool.getTimeEdited(timeNow));
-			
+
 		});
-		
-		//waveProgressLabel
-		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty().or(waveFormVisualization.getAnimationService().runningProperty().not()));
-		
-		//waveProgressBar
-		waveProgressBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+
+		// waveProgressLabel
+		waveProgressLabel.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty()
+				.or(waveFormVisualization.getAnimationService().runningProperty().not()));
+
+		// waveProgressBar
+		waveProgressBar.getStyleClass().add("transparent-volume-progress-bar" + (key + 1));
 		waveProgressBar.visibleProperty().bind(waveFormVisualization.getWaveService().runningProperty());
-		
-		//Add it to waveStackPane
+
+		// Add it to waveStackPane
 		waveStackPane.getChildren().add(0, waveFormVisualization);
-		
-		//----------------------------------------------------------
-		
-		//smImageView
+
+		// ----------------------------------------------------------
+
+		// smImageView
 		smImageView.imageProperty().bind(disc.getImageView().imageProperty());
-		smImageView.fitWidthProperty().bind(
-				Bindings.when(smModeCenterStackPane.widthProperty().lessThan(smBorderPane.widthProperty())).then(smModeCenterStackPane.widthProperty().subtract(20)).otherwise(0));
-		smImageView.fitHeightProperty().bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
-				.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
-		smImageView.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(70).and(smImageView.imageProperty().isNotNull()));
+		smImageView.fitWidthProperty()
+				.bind(Bindings.when(smModeCenterStackPane.widthProperty().lessThan(smBorderPane.widthProperty()))
+						.then(smModeCenterStackPane.widthProperty().subtract(20)).otherwise(0));
+		smImageView.fitHeightProperty()
+				.bind(Bindings.when(smModeCenterStackPane.heightProperty().lessThan(smBorderPane.heightProperty()))
+						.then(smModeCenterStackPane.heightProperty().subtract(20)).otherwise(0));
+		smImageView.visibleProperty().bind(
+				smModeCenterStackPane.heightProperty().greaterThan(70).and(smImageView.imageProperty().isNotNull()));
 		smModeCenterStackPane.visibleProperty().bind(smModeCenterStackPane.heightProperty().greaterThan(60));
-		smModeCenterStackPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> {
-			//if (smAlbumFontIcon.isVisible())
-			smAlbumFontIcon.setIconSize((int) ( ( newValue.getHeight() + 1 ) / 1.4 + 1 ));
+		smModeCenterStackPane.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
+			// if (smAlbumFontIcon.isVisible())
+			smAlbumFontIcon.setIconSize((int) ((newValue.getHeight() + 1) / 1.4 + 1));
 		});
-		
-		//smAlbumFontIcon
+
+		// smAlbumFontIcon
 		smAlbumFontIcon.visibleProperty().bind(smImageView.visibleProperty().not());
-		
+
 		// Canvas Mouse Moving
 		disc.getCanvas().setOnMouseMoved(m -> {
 			// File is either corrupted or error or no File entered yet
@@ -1576,350 +1643,365 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			else if (!discIsDragging)
 				disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 		});
-		
+
 		// Canvas Mouse Released
 		disc.getCanvas().setOnMouseReleased(m -> {
-			
+
 			// PrimaryMouseButton
 			if (m.getButton() == MouseButton.PRIMARY) {
-				
+
 				// discIsDragging and MouseButton==Primary
 				// and duration!=0 and duration!=-1
 				if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
-					
+
 					// Try to seek
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
-					
+
 				}
-				
+
 			} else
 				discIsDragging = false;
-			
+
 		});
-		
+
 		// Canvas Mouse Dragging
 		disc.getCanvas().setOnMouseDragged(m -> {
-			
+
 			// MouseButton==Primary || Secondary
-			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
-				
+			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY
+					|| m.getButton() == MouseButton.MIDDLE)
+
 				// duration!=0 and duration!=-1
 				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
-					
-					//TotalTime and CurrentTime					
-					final int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
-					
+
+					// TotalTime and CurrentTime
+					final int totalTime = xPlayerModel.getDuration(), currentTime = xPlayerModel.getCurrentAngleTime();
+
 					// Set the cursor
 					disc.getCanvas().setCursor(Cursor.CLOSED_HAND);
-					
+
 					// Try to do the dragging
 					discIsDragging = true;
 					xPlayerModel.setCurrentAngleTime(disc.getValue(xPlayerModel.getDuration()));
 					disc.calculateAngleByMouse(m, currentTime, totalTime);
-					
-					//== RemainingTimeLabel
-					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime)); // + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ))
-					
-					//== ElapsedTimeLabel
+
+					// == RemainingTimeLabel
+					remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime)); // + "." + ( 9 -
+																									// Integer.parseInt(millisecondsFormatted.replace(".",
+																									// "")) ))
+
+					// == ElapsedTimeLabel
 					elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime)); // + millisecondsFormatted + "")
-					
+
 				}
 		});
-		disc.currentVolumeProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Update the Volume
+		disc.currentVolumeProperty().addListener((observable, oldValue, newValue) -> {
+
+			// Update the Volume
 			controlVolume();
-			
-			//Update the Label
+
+			// Update the Label
 			smVolumeSliderLabel.setText(disc.getCurrentVolume() + " %");
-			
-			//smVolumeSlider
+
+			// smVolumeSlider
 			smVolumeSlider.setValue(newValue.doubleValue());
-			
-			//volumeSliderProgBar
+
+			// volumeSliderProgBar
 			volumeSliderProgBar.setProgress(smVolumeSlider.getValue() / smVolumeSlider.getMax());
-			
+
 		});
-		
-		///smTimeSlider
+
+		/// smTimeSlider
 		smTimeSlider.setOnMouseMoved(m -> {
 			// File is either corrupted or error or no File entered yet
 			if (xPlayerModel.getDuration() == 0 || xPlayerModel.getDuration() == -1) {
 				smTimeSlider.setCursor(noSeekCursor);
-				//smTimeSlider.setDisable(true)
+				// smTimeSlider.setDisable(true)
 				// !discIsDragging
 			} else if (!discIsDragging) {
 				smTimeSlider.setCursor(Cursor.OPEN_HAND);
-				//smTimeSlider.setDisable(false)
+				// smTimeSlider.setDisable(false)
 			}
 		});
 		smTimeSlider.setOnMouseReleased(m -> {
-			//Security check
+			// Security check
 			if (!passTimerSecurityTest())
 				return;
-			
-			//Check if the slider is not allowed to move
+
+			// Check if the slider is not allowed to move
 			if (smTimeSlider.getCursor() == noSeekCursor)
 				smTimeSlider.setValue(0);
-			
+
 			// PrimaryMouseButton
 			if (m.getButton() == MouseButton.PRIMARY) {
-				
+
 				// discIsDragging and MouseButton==Primary
 				// and duration!=0 and duration!=-1
 				if (discIsDragging && xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
-					
+
 					// Try to seek
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
-					
+
 				} else if (!discIsDragging) {
-					
-					//TotalTime and CurrentTime					
-					final int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
-					
+
+					// TotalTime and CurrentTime
+					final int totalTime = xPlayerModel.getDuration(), currentTime = xPlayerModel.getCurrentAngleTime();
+
 					// Keep the disc refreshed based on time slider value
 					xPlayerModel.setCurrentAngleTime((int) smTimeSlider.getValue());
 					disc.calculateAngleByMouse(m, currentTime, totalTime);
-					
+
 					// Try to seek
 					seek(xPlayerModel.getCurrentAngleTime() - xPlayerModel.getCurrentTime());
-					
+
 				}
-				
-				//discIsDragging = false
-				
+
+				// discIsDragging = false
+
 			} else
 				discIsDragging = false;
-			
+
 		});
 		smTimeSlider.setOnMousePressed(m -> {
-			//Security check
+			// Security check
 			if (!passTimerSecurityTest())
 				return;
 		});
 		smTimeSlider.setOnMouseDragged(m -> {
-			//Security check
+			// Security check
 			if (!passTimerSecurityTest())
 				return;
-			
+
 			// MouseButton==Primary || Secondary
-			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY || m.getButton() == MouseButton.MIDDLE)
-				
+			if (m.getButton() == MouseButton.PRIMARY || m.getButton() == MouseButton.SECONDARY
+					|| m.getButton() == MouseButton.MIDDLE)
+
 				// duration!=0 and duration!=-1
 				if (xPlayerModel.getDuration() != 0 && xPlayerModel.getDuration() != -1) {
-					
-					//TotalTime and CurrentTime					
-					final int totalTime = xPlayerModel.getDuration() , currentTime = xPlayerModel.getCurrentAngleTime();
-					
+
+					// TotalTime and CurrentTime
+					final int totalTime = xPlayerModel.getDuration(), currentTime = xPlayerModel.getCurrentAngleTime();
+
 					// Set the cursor
 					smTimeSlider.setCursor(Cursor.CLOSED_HAND);
-					
+
 					// Try to do the dragging
 					discIsDragging = true;
 					xPlayerModel.setCurrentAngleTime((int) smTimeSlider.getValue());
 					disc.calculateAngleByMouse(m, currentTime, totalTime);
-					
-					//smTimeSliderLabel
-					smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "  / " + InfoTool.getTimeEdited(totalTime));
-					
-					//smTimeSliderProgress
+
+					// smTimeSliderLabel
+					smTimeSliderLabel
+							.setText(InfoTool.getTimeEdited(currentTime) + "  / " + InfoTool.getTimeEdited(totalTime));
+
+					// smTimeSliderProgress
 					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 				}
-			
+
 			System.out.println(discIsDragging);
 		});
-		
-		//smTimeSliderProgress
-		smTimeSliderProgress.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
-		
-		//smVolumeSlider
+
+		// smTimeSliderProgress
+		smTimeSliderProgress.getStyleClass().add("transparent-volume-progress-bar" + (key + 1));
+
+		// smVolumeSlider
 		smVolumeSlider.setMin(0);
 		smVolumeSlider.setMax(maximumVolume - 1.00);
 		smVolumeSlider.valueProperty().addListener(l -> disc.setVolume(smVolumeSlider.getValue()));
 		smVolumeSlider.setValue(volume);
 		smVolumeSlider.setOnScroll(scroll -> adjustVolume(scroll.getDeltaY() > 0 ? 2 : -2));
-		smVolumeSlider.heightProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//New Value
+		smVolumeSlider.heightProperty().addListener((observable, oldValue, newValue) -> {
+
+			// New Value
 			final double newValuee = newValue.doubleValue();
-			
-			//Set the Height
+
+			// Set the Height
 			volumeSliderProgBar.setPrefWidth(newValuee);
-			
-			//Fix the Positioning
-			//System.out.println("Player : " + this.getKey() + ": " + newValuee)
-			
-			//A cancerous bug is here , so cancerous that it makes me wanna brake the fucking laptop
-			//TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG
-			//MAKES THE UI DANCE LIKE A STRIPPER
-			//			if (newValuee == previousSliderHeight || newValuee == previousSliderHeight + 1 || newValuee == previousSliderHeight - 1) { //Damn bug
-			//				//				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
-			//				//				positions[0] += 0.03;
-			//				//				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
-			//				//				//Run Later
-			//				//				Platform.runLater(() -> {
-			//				//					System.out.println("FUCK!!!!!!");
-			//				//					double[] positions2 = Main.libraryMode.getTopSplitPane().getDividerPositions();
-			//				//					positions2[0] -= 0.03;
-			//				//					Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
-			//				//				});
-			//				//				System.out.println("Duplicate");
-			//			} else {
-			//				previousSliderHeight = newValuee;
-			//			}
-			
-			//Keep fixed the UI
+
+			// Fix the Positioning
+			// System.out.println("Player : " + this.getKey() + ": " + newValuee)
+
+			// A cancerous bug is here , so cancerous that it makes me wanna brake the
+			// fucking laptop
+			// TODO FIX THIS FUCKING BUG FUCKING FUCKING FUCKING BUG
+			// MAKES THE UI DANCE LIKE A STRIPPER
+			// if (newValuee == previousSliderHeight || newValuee == previousSliderHeight +
+			// 1 || newValuee == previousSliderHeight - 1) { //Damn bug
+			// // double[] positions =
+			// Main.libraryMode.getTopSplitPane().getDividerPositions();
+			// // positions[0] += 0.03;
+			// // Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+			// // //Run Later
+			// // Platform.runLater(() -> {
+			// // System.out.println("FUCK!!!!!!");
+			// // double[] positions2 =
+			// Main.libraryMode.getTopSplitPane().getDividerPositions();
+			// // positions2[0] -= 0.03;
+			// // Main.libraryMode.getTopSplitPane().setDividerPositions(positions2);
+			// // });
+			// // System.out.println("Duplicate");
+			// } else {
+			// previousSliderHeight = newValuee;
+			// }
+
+			// Keep fixed the UI
 			if (getKey() == 0) {
 				Main.xPlayersList.getXPlayerController(1).getVolumeSliderProgBar().setPrefWidth(newValuee);
 				Main.xPlayersList.getXPlayerController(2).getVolumeSliderProgBar().setPrefWidth(newValuee);
 			} else {
 				Main.xPlayersList.getXPlayerController(0).getVolumeSliderProgBar().setPrefWidth(newValuee);
 			}
-			
+
 		});
-		
-		//volumeSliderProgBar	
-		volumeSliderProgBar.getStyleClass().add("transparent-volume-progress-bar" + ( key + 1 ));
+
+		// volumeSliderProgBar
+		volumeSliderProgBar.getStyleClass().add("transparent-volume-progress-bar" + (key + 1));
 		volumeSliderProgBar.setProgress(smVolumeSlider.getValue() / smVolumeSlider.getMax());
-		
-		//DiscStackPane
+
+		// DiscStackPane
 		diskStackPane.setOnScroll(smVolumeSlider.getOnScroll());
-		
-		//Recalculate Volume Disc Size
-		discBorderPane.boundsInLocalProperty().addListener((observable , oldValue , newValue) -> reCalculateDiscStackPane());
-		
-		//Add disc and volume disc to StackPane
-		diskStackPane.getChildren().addAll(disc);//, volumeDisc)
-		
-		//---------------------SIDE------------------------------------------------
+
+		// Recalculate Volume Disc Size
+		discBorderPane.boundsInLocalProperty()
+				.addListener((observable, oldValue, newValue) -> reCalculateDiscStackPane());
+
+		// Add disc and volume disc to StackPane
+		diskStackPane.getChildren().addAll(disc);// , volumeDisc)
+
+		// ---------------------SIDE------------------------------------------------
 		changeSide(side);
 	}
-	
+
 	private final int previousSliderHeight = 0;
-	
+
 	/**
 	 * Just a small security check for the time slider
 	 */
 	private boolean passTimerSecurityTest() {
-		
-		//Security check
+
+		// Security check
 		if (xPlayerModel.getSongPath() == null) {
 			smTimeSlider.setValue(0.0);
 			return false;
 		}
-		
+
 		return true;
 	}
-	
-	/** Keep track on which side the Player Currently is . Give a fake value for the beginning */
+
+	/**
+	 * Keep track on which side the Player Currently is . Give a fake value for the
+	 * beginning
+	 */
 	Side discCurrentSide = Side.LEFT;
-	
+
 	/**
 	 * Change the Side of XPlayerController , either to right or left MA NIGAAAA!!!
 	 * 
 	 * @param newSide
 	 */
 	public void changeSide(final Side newSide) {
-		//Check if already is in the given side
+		// Check if already is in the given side
 		if (discCurrentSide == newSide)
 			return;
 		else
 			discCurrentSide = newSide;
-		
-		//DO YOUR JOB
+
+		// DO YOUR JOB
 		if (newSide == Side.LEFT) {
-			
+
 			internalSplitPane.getItems().remove(discBorderPane);
 			internalSplitPane.getItems().add(0, discBorderPane);
-			
-			//Volume Slider
+
+			// Volume Slider
 			rootBorderPane.getChildren().remove(volumeBarBox);
 			rootBorderPane.setLeft(volumeBarBox);
-			
+
 			mediaNameHBox.getChildren().clear();
 			mediaNameHBox.getChildren().addAll(timersBox, mediaFileMarquee, copyButton, mediaTagImageButton);
-			
-			//Speed Slider
+
+			// Speed Slider
 			discBorderPane.getChildren().remove(speedSliderStackPane);
 			discBorderPane.setLeft(speedSliderStackPane);
-			
-			//Modes HBox
+
+			// Modes HBox
 			final HBox modesHBox = (HBox) modeToggle.getParent();
 			modesHBox.getChildren().clear();
 			modesHBox.getChildren().addAll(modeToggle, historyToggle);
-			
-			//Top HBox
+
+			// Top HBox
 			final HBox topHBox = (HBox) topInfoLabel.getParent();
 			topHBox.getChildren().clear();
 			topHBox.getChildren().addAll(toolsHBox, topInfoLabel, emotionsButton, extendPlayer);
-			
-			//JFXTabPane
+
+			// JFXTabPane
 			equalizerTab.getTabPane().setSide(Side.RIGHT);
-			
-			//toolsHBox
+
+			// toolsHBox
 			toolsHBox.getChildren().clear();
 			toolsHBox.getChildren().addAll(muteButton, showMenu, openFile, settings, transferMedia);
-			
+
 		} else if (newSide == Side.RIGHT) {
-			
+
 			internalSplitPane.getItems().remove(discBorderPane);
 			internalSplitPane.getItems().add(1, discBorderPane);
-			
-			//Volume Slider
+
+			// Volume Slider
 			rootBorderPane.getChildren().remove(volumeBarBox);
 			rootBorderPane.setRight(volumeBarBox);
-			
+
 			mediaNameHBox.getChildren().clear();
 			mediaNameHBox.getChildren().addAll(mediaTagImageButton, copyButton, mediaFileMarquee, timersBox);
-			
-			//Speed Slider
+
+			// Speed Slider
 			discBorderPane.getChildren().remove(speedSliderStackPane);
 			discBorderPane.setRight(speedSliderStackPane);
-			
-			//Modes HBox
+
+			// Modes HBox
 			final HBox modesHBox = (HBox) modeToggle.getParent();
 			modesHBox.getChildren().clear();
 			modesHBox.getChildren().addAll(historyToggle, modeToggle);
-			
-			//Top HBox
+
+			// Top HBox
 			final HBox topHBox = (HBox) topInfoLabel.getParent();
 			topHBox.getChildren().clear();
 			topHBox.getChildren().addAll(extendPlayer, emotionsButton, topInfoLabel, toolsHBox);
-			
-			//JFXTabPane
+
+			// JFXTabPane
 			equalizerTab.getTabPane().setSide(Side.LEFT);
-			
-			//toolsHBox
+
+			// toolsHBox
 			toolsHBox.getChildren().clear();
 			toolsHBox.getChildren().addAll(transferMedia, settings, openFile, showMenu, muteButton);
-			
+
 		}
 	}
-	
+
 	/**
 	 * Recalculates the Canvas size to the preferred size
 	 */
 	private void reCalculateCanvasSize() {
-		//double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) / 1.1
+		// double size = Math.min(diskStackPane.getWidth(), diskStackPane.getHeight()) /
+		// 1.1
 		final double size = Math.min(discBorderPane.getWidth() - speedSliderStackPane.getWidth(),
 				discBorderPane.getHeight() - diskStackPane1.getHeight() - waveFormVisualization.getHeight());
-		
+
 		disc.resizeDisc(size);
-		//radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(), disc.getMinHeight())
-		//System.out.println("Redrawing canvas")
+		// radialMenu.getRadialMenuButton().setPrefSize(disc.getMinWidth(),
+		// disc.getMinHeight())
+		// System.out.println("Redrawing canvas")
 	}
-	
+
 	/**
 	 * Makes the DJDisc fit correctly into it's StackPane
 	 */
 	public void reCalculateDiscStackPane() {
-		
-		//Call it for the DJDisc
+
+		// Call it for the DJDisc
 		reCalculateCanvasSize();
-		
-		//System.out.println(disc.getPrefWidth())
-		
-		//Find the correct size for the VolumeDisc			
+
+		// System.out.println(disc.getPrefWidth())
+
+		// Find the correct size for the VolumeDisc
 		double size;
 		if (disc.getPrefWidth() < 80)
 			size = disc.getPrefWidth() / 1.55;
@@ -1927,32 +2009,33 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			size = disc.getPrefWidth() / 1.25;
 		else
 			size = disc.getPrefWidth() / 1.15;
-		
-		//volumeDisc.resizeDisc(size, size)
+
+		// volumeDisc.resizeDisc(size, size)
 	}
-	
+
 	/**
 	 * When the audio starts , fast configure it's settings
 	 * 
 	 * @param ignoreStartImmediately
 	 */
 	public void configureMediaSettings(final boolean ignoreStartImmediately) {
-		
+
 		// Start immediately?
-		if (!ignoreStartImmediately && !Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().isSelected())
+		if (!ignoreStartImmediately
+				&& !Main.settingsWindow.getxPlayersSettingsController().getStartImmediately().isSelected())
 			pause();
 		else {
 			play();
 			resume();
 		}
-		
+
 		// Mute?
 		xPlayer.setMute(muteButton.isSelected());
-		//System.out.println("Mute is Selected? " + muteButton.isSelected())
-		
+		// System.out.println("Mute is Selected? " + muteButton.isSelected())
+
 		// Volume
 		controlVolume();
-		
+
 		// Audio is MP3?
 		if (!"mp3".equals(xPlayerModel.songExtensionProperty().get()))
 			equalizer.setDisable(true);
@@ -1960,446 +2043,468 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			xPlayer.setEqualizer(xPlayerModel.getEqualizerArray(), 32);
 			equalizer.setDisable(false);
 		}
-		
+
 		// Sets Pan value. Line should be opened before calling this method.
 		// Linear scale : -1.0 <--> +1.0
 		xPlayer.setPan(equalizer.getPanFilter().getValueTransformed());
-		//System.out.println("Eq Pan value :" + equalizer.getPanFilter().getValueTransformed());
-		
+		// System.out.println("Eq Pan value :" +
+		// equalizer.getPanFilter().getValueTransformed());
+
 		// Represents a control for the relative balance of a stereo signal
 		// between two stereo speakers. The valid range of values is -1.0 (left
 		// channel only) to 1.0 (right channel only). The default is 0.0
 		// (centered).
-		//xPlayer.setBalance((float) equalizer.getBalanceFilter().getValueTransformed());
-		
+		// xPlayer.setBalance((float)
+		// equalizer.getBalanceFilter().getValueTransformed());
+
 	}
-	
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
-	public void opened(final Object dataSource , final Map<String,Object> map) {
+	public void opened(final Object dataSource, final Map<String, Object> map) {
 		// some code here
 	}
-	
+
 	float progress;
-	
+
 	@Override
-	public void progress(final int nEncodedBytes , final long microSecondsPosition , final byte[] pcmdata , final Map<String,Object> properties) {
-		
-		//Return immediately
+	public void progress(final int nEncodedBytes, final long microSecondsPosition, final byte[] pcmdata,
+			final Map<String, Object> properties) {
+
+		// Return immediately
 		if (historyToggle.isSelected())
 			return;
-		
-		//System.out.println("Entered Progress...")
-		
-		//Allow DSP ?
-		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected() && visualizerVisibility.get()) {
+
+		// System.out.println("Entered Progress...")
+
+		// Allow DSP ?
+		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected()
+				&& visualizerVisibility.get()) {
 			visualizer.writeDSP(pcmdata);
 		}
-		
-		//DjVisualizer
+
+		// DjVisualizer
 		if (djVisualizer != null)
 			djVisualizer.writeDSP(pcmdata);
-		
-		//Disc is being draggged?
+
+		// Disc is being draggged?
 		if (!discIsDragging) {
-			
+
 			// previousTime = xPlayerUI.xPlayer.currentTime
-			
+
 			// .MP3 OR .WAV
 			final String extension = xPlayerModel.songExtensionProperty().get();
 			if ("mp3".equals(extension) || "wav".equals(extension)) {
-				
+
 				// Calculate the progress until now
-				progress = ( nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0 ) ? ( nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f ) : -1.0f;
+				progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
+						? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
+						: -1.0f;
 				// System.out.println(progress*100+"%")
 				if (visualizerWindow.isVisible())
 					Platform.runLater(() -> visualizerWindow.getProgressBar().setProgress(progress));
-				
+
 				// find the current time in seconds
-				xPlayerModel.setCurrentTime((int) ( xPlayerModel.getDuration() * progress ));
+				xPlayerModel.setCurrentTime((int) (xPlayerModel.getDuration() * progress));
 				// System.out.println((double) xPlayerModel.getDuration() *
 				// progress)
-				
+
 				// .WHATEVER MUSIC FILE*
 			} else
-				xPlayerModel.setCurrentTime((int) ( microSecondsPosition / 1000000 ));
-			
+				xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
+
 			final String millisecondsFormatted = InfoTool.millisecondsToTime(microSecondsPosition / 1000);
 			// System.out.println(milliFormat)
-			
-			//Paint the Modes
+
+			// Paint the Modes
 			if (!xPlayer.isStopped() && !waveFormVisualization.isHover()) {
-				
-				//TotalTime and CurrentTime
+
+				// TotalTime and CurrentTime
 				final int totalTime = xPlayerModel.getDuration();
 				final int currentTime = xPlayerModel.getCurrentTime();
-				
-				if (!modeToggle.isSelected())  //Simple Mode for most of Users
-					
-					//Run on JavaFX Thread
+
+				if (!modeToggle.isSelected()) // Simple Mode for most of Users
+
+					// Run on JavaFX Thread
 					Platform.runLater(() -> {
-						
-						//Simple Mode
+
+						// Simple Mode
 						smTimeSlider.setMin(0);
 						smTimeSlider.setMax(totalTime);
 						smTimeSlider.setValue(currentTime);
-						
-						//smTimeSliderLabel
-						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ) + "  / "
+
+						// smTimeSliderLabel
+						smTimeSliderLabel.setText(InfoTool.getTimeEdited(currentTime) + "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))) + "  / "
 								+ InfoTool.getTimeEdited(totalTime));
-						
-						//smTimeSliderProgress
+
+						// smTimeSliderProgress
 						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
 					});
-				
-				else { //Advanced DJ Disc Mode
-					
+
+				else { // Advanced DJ Disc Mode
+
 					// Update the disc Angle
 					disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
-					
+
 					// Update the disc time
-					disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), millisecondsFormatted);
-					
-					//Run on JavaFX Thread
+					disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(),
+							millisecondsFormatted);
+
+					// Run on JavaFX Thread
 					Platform.runLater(() -> {
-						
-						//== RemainingTimeLabel
-						remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "." + ( 9 - Integer.parseInt(millisecondsFormatted.replace(".", "")) ));
-						
-						//== ElapsedTimeLabel
+
+						// == RemainingTimeLabel
+						remainingTimeLabel.setText(InfoTool.getTimeEdited(totalTime - currentTime) + "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
+
+						// == ElapsedTimeLabel
 						elapsedTimeLabel.setText(InfoTool.getTimeEdited(currentTime) + millisecondsFormatted);
-						
-						//== Repaint the Disc
+
+						// == Repaint the Disc
 						disc.repaint();
-						
+
 					});
 				}
-				
+
 			}
-			
+
 		}
 	}
-	
+
 	@Override
 	public void statusUpdated(final StreamPlayerEvent streamPlayerEvent) {
-		
-		//Player status
+
+		// Player status
 		final Status status = streamPlayerEvent.getPlayerStatus();
-		
+
 		// Status.OPENED
 		if (status == Status.OPENED && xPlayer.getSourceDataLine() != null) {
-			
-			//Visualizer
+
+			// Visualizer
 			visualizer.setupDSP(xPlayer.getSourceDataLine());
 			visualizer.startDSP(xPlayer.getSourceDataLine());
-			
-			//DjVisualizer
+
+			// DjVisualizer
 			if (djVisualizer != null) {
 				djVisualizer.setupDSP(xPlayer.getSourceDataLine());
 				djVisualizer.startDSP(xPlayer.getSourceDataLine());
 			}
-			
+
 			Platform.runLater(() -> {
-				
-				//WaveForm
-				//if (!seekService.isRunning())
-				//waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
-				
-				//Marquee Text
+
+				// WaveForm
+				// if (!seekService.isRunning())
+				// waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(),
+				// WaveFormJob.AMPLITUDES_AND_WAVEFORM);
+
+				// Marquee Text
 				mediaFileMarquee.setText(InfoTool.getFileName(xPlayerModel.songPathProperty().get()));
-				
-				//Notification
+
+				// Notification
 				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
-					
-					//Check if it has Album Image
+
+					// Check if it has Album Image
 					final Image image = InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
-					
-					//Show Notification
+
+					// Show Notification
 					if (!discIsDragging)
-						ActionTool.showNotification("Playing on deck " + ( getKey() + 1 ), InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60) : JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
+						ActionTool.showNotification("Playing on deck " + (getKey() + 1),
+								InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+								NotificationType.SIMPLE, image != null ? JavaFXTools.getImageView(image, 60, 60)
+										: JavaFXTools.getFontIcon("gmi-album", Color.WHITE, 60));
 				}
 			});
-			
-			//STATUS OPENING
+
+			// STATUS OPENING
 		} else if (status == Status.OPENING) {
-			
-			//Run on JavaFX Thread
+
+			// Run on JavaFX Thread
 			Platform.runLater(() -> {
-				
-				//Wave Form Service
+
+				// Wave Form Service
 				if (!seekService.isRunning())
-					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(), WaveFormJob.AMPLITUDES_AND_WAVEFORM);
-				
+					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(),
+							WaveFormJob.AMPLITUDES_AND_WAVEFORM);
+
 			});
-			
-			// Status.RESUMED			
+
+			// Status.RESUMED
 		} else if (status == Status.RESUMED) {
-			
+
 			Platform.runLater(() -> {
-				//playerStatusLabel.setText("Resuming");
+				// playerStatusLabel.setText("Resuming");
 				resumeCode();
-				
-				//WaveForm
+
+				// WaveForm
 				if (!waveFormVisualization.getWaveService().isRunning())
 					waveFormVisualization.startPainterService();
-				
-				//Notification
-				//ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
-				//		NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+
+				// Notification
+				// ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming",
+				// InfoTool.getFileName(xPlayerModel.songPathProperty().get()),
+				// Duration.seconds(2),
+				// NotificationType.SIMPLE,
+				// InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
-			
+
 			// Status.PLAYING
 		} else if (status == Status.PLAYING) {
-			
+
 			Platform.runLater(() -> {
 				resumeCode();
-				
-				//WaveForm
+
+				// WaveForm
 				waveFormVisualization.startPainterService();
 			});
-			
+
 			// Status.PAUSED
 		} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
-			
+
 			Platform.runLater(() -> {
 				playerStatusLabel.setText("Status : " + " Paused");
 				pauseCode();
-				
-				//WaveForm
+
+				// WaveForm
 				waveFormVisualization.stopPainterService();
-				
-				//Notification
-				//	ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused", InfoTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(2),
-				//			NotificationType.SIMPLE, InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
+
+				// Notification
+				// ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused",
+				// InfoTool.getFileName(xPlayerModel.songPathProperty().get()),
+				// Duration.seconds(2),
+				// NotificationType.SIMPLE,
+				// InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
 			});
-			
+
 			// Status.STOPPED
 		} else if (status == Status.STOPPED) {
-			
-			//Visualizer
+
+			// Visualizer
 			visualizer.stopDSP();
-			
-			//DJVisualizer
+
+			// DJVisualizer
 			if (djVisualizer != null)
 				djVisualizer.stopDSP();
-			
+
 			Platform.runLater(() -> {
-				
+
 				// SeekService running?
 				if (seekService.isRunning()) {
-					
-					// oh yeah	
+
+					// oh yeah
 				} else {
-					
+
 					// Change Marquee text
-					//mediaFileMarquee.setText("Player is Stopped");
+					// mediaFileMarquee.setText("Player is Stopped");
 					playerStatusLabel.setText("Status : " + " Stopped");
-					
+
 					// Set time to 0 to not have problems with SeekService
 					xPlayerModel.setCurrentTime(0);
-					
+
 					// disk
 					disc.stopRotation();
 					disc.stopFade();
-					
+
 					// Visualizer
 					visualizer.stopVisualizer();
-					
-					//DJVisualizer
+
+					// DJVisualizer
 					if (djVisualizer != null)
 						djVisualizer.stopVisualizer();
-					
-					//Recalculate disc
+
+					// Recalculate disc
 					disc.calculateAngleByValue(0, 0, true);
 					disc.repaint();
-					
-					//Reset
+
+					// Reset
 					fixPlayerStop();
-					
-					//smTimeSliderProgress
+
+					// smTimeSliderProgress
 					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
-					
-					//WaveForm
+
+					// WaveForm
 					waveFormVisualization.stopPainterService();
 				}
-				
+
 			});
-			
+
 			// Status.SEEKING
 		} else if (status == Status.SEEKING) {
-			
-			//Platform.runLater(() -> playerStatusLabel.setText("Status : "+" Seeking"));
-			
+
+			// Platform.runLater(() -> playerStatusLabel.setText("Status : "+" Seeking"));
+
 			// Status.SEEKED
 		} else if (status == Status.SEEKED) {
-			//TODO i need to add code here
+			// TODO i need to add code here
 		}
-		
-		//Fix the images
+
+		// Fix the images
 		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING || status == Status.PAUSED)
 			Platform.runLater(() -> {
-				//Advanced Mode
+				// Advanced Mode
 				playPauseButton.setGraphic(xPlayer.isPlaying() ? pauseIcon : playIcon);
-				
-				//Simple Mode
+
+				// Simple Mode
 				smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
-				
-				//Micro Mode
+
+				// Micro Mode
 				microPlayPauseButton.setGraphic(xPlayer.isPlaying() ? microPauseIcon : microPlayIcon);
 			});
 	}
-	
+
 	/**
 	 * Resets player labels etc to zero
 	 */
 	public void fixPlayerStop() {
-		//System.out.println("Entered fixPlayerStop()");
-		
-		//== RemainingTimeLabel
+		// System.out.println("Entered fixPlayerStop()");
+
+		// == RemainingTimeLabel
 		remainingTimeLabel.setText("00:00");
-		
-		//== ElapsedTimeLabel
+
+		// == ElapsedTimeLabel
 		elapsedTimeLabel.setText("00:00");
-		
-		//== Visualizer Window 
+
+		// == Visualizer Window
 		visualizerWindow.getProgressBar().setProgress(0);
-		
-		//smTimeSlider
+
+		// smTimeSlider
 		smTimeSlider.setValue(0);
-		
-		//smTimeSliderLabel
-		smTimeSliderLabel.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
+
+		// smTimeSliderLabel
+		smTimeSliderLabel
+				.setText(InfoTool.getTimeEdited(0) + "  / " + InfoTool.getTimeEdited(xPlayerModel.getDuration()));
 	}
-	
-	//	@Override
-	//	public void volumeChanged(int volume) {
-	//		controlVolume();
-	//	}
-	
+
+	// @Override
+	// public void volumeChanged(int volume) {
+	// controlVolume();
+	// }
+
 	/**
 	 * Replay the current song
 	 */
 	public void replay() {
-		
+
 		if (xPlayerModel.songExtensionProperty().get() != null)
 			playService.startPlayService(xPlayerModel.songPathProperty().get(), 0);
 		else
-			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.", Duration.millis(1500), NotificationType.INFORMATION);
-		
+			ActionTool.showNotification("No Previous File", "Drag and Drop or Add a File or URL on this player.",
+					Duration.millis(1500), NotificationType.INFORMATION);
+
 		// if (thisSong instanceof URL)
 		// return playSong(((URL) thisSong).toString(), totalTime);
 		// else if (thisSong instanceof File)
 		// return playSong(((File) thisSong).getAbsolutePath(), totalTime);
-		
+
 	}
-	
+
 	/**
 	 * Play the current song.
 	 *
-	 * @param absolutePath
-	 *            The absolute path of the file
+	 * @param absolutePath The absolute path of the file
 	 */
 	public void playSong(final String absolutePath) {
-		
+
 		playService.startPlayService(absolutePath, 0);
-		
+
 	}
-	
+
 	/**
 	 * Play the current song.
 	 *
-	 * @param absolutePath
-	 *            The absolute path of the file
-	 * @param startingSecond
-	 *            From which second to start the audio , this will not be exactly accurate
+	 * @param absolutePath   The absolute path of the file
+	 * @param startingSecond From which second to start the audio , this will not be
+	 *                       exactly accurate
 	 */
-	public void playSong(final String absolutePath , final int startingSecond) {
-		
+	public void playSong(final String absolutePath, final int startingSecond) {
+
 		playService.startPlayService(absolutePath, startingSecond);
-		
+
 	}
-	
-	//---------------------------------------------------Player Actions------------------------------------------------------------------
-	
+
+	// ---------------------------------------------------Player
+	// Actions------------------------------------------------------------------
+
 	public boolean speedIncreaseWorking = false;
-	
+
 	/**
 	 * Tries to skip forward or backward
 	 * 
-	 * @param seconds
-	 *            Seconds to seek
+	 * @param seconds Seconds to seek
 	 */
 	public void seek(final int seconds) {
 		boolean securityPass = false;
-		
-		//If second==0
+
+		// If second==0
 		if (seconds == 0) {
 			securityPass = true;
 		}
-		
+
 		//
-		
-		if (seconds < 0 && ( seconds + xPlayerModel.getCurrentTime() >= 0 )) { //negative seek
-			
+
+		if (seconds < 0 && (seconds + xPlayerModel.getCurrentTime() >= 0)) { // negative seek
+
 			System.out.println("Skipping backwards ...[" + seconds + "] seconds");
-			
+
 			securityPass = true;
-		} else if (seconds > 0 && ( seconds + xPlayerModel.getCurrentTime() <= xPlayerModel.getDuration() )) { //positive seek
-			
+		} else if (seconds > 0 && (seconds + xPlayerModel.getCurrentTime() <= xPlayerModel.getDuration())) { // positive
+																												// seek
+
 			System.out.println("Skipping forward ...[" + seconds + "] seconds");
-			
+
 			securityPass = true;
 		}
-		
-		//Ok/?
+
+		// Ok/?
 		if (securityPass) {
-			
+
 			// Add or Remove
 			xPlayerModel.setCurrentAngleTime(xPlayerModel.getCurrentTime() + seconds);
-			
-			//	    //Seek
-			//	    System.out.println("Original: "
-			//		    + (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration())
-			//		    + " With double:" + (long) (((float) xPlayerModel.getCurrentAngleTime())
-			//			    * (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())))
-			
-			//Start the Service
-			seekService.startSeekService((long) ( ( xPlayerModel.getCurrentAngleTime() ) * ( xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration() ) ), false);
+
+			// //Seek
+			// System.out.println("Original: "
+			// + (xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() /
+			// xPlayerModel.getDuration())
+			// + " With double:" + (long) (((float) xPlayerModel.getCurrentAngleTime())
+			// * (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())))
+
+			// Start the Service
+			seekService.startSeekService((long) ((xPlayerModel.getCurrentAngleTime())
+					* (xPlayer.getTotalBytes() / (float) xPlayerModel.getDuration())), false);
 		}
-		
+
 	}
-	
+
 	/**
 	 * This method is used to seek to a specific time of the audio
 	 * 
 	 * @param seconds
 	 */
 	public void seekTo(final int seconds) {
-		
+
 		if (seconds < 0 || seconds >= xPlayerModel.getDuration())
 			return;
-		
+
 		// Set
 		xPlayerModel.setCurrentAngleTime(seconds);
-		
-		//Seek To
-		seekService.startSeekService( ( xPlayerModel.getCurrentAngleTime() ) * ( xPlayer.getTotalBytes() / xPlayerModel.getDuration() ), true);
-		
+
+		// Seek To
+		seekService.startSeekService(
+				(xPlayerModel.getCurrentAngleTime()) * (xPlayer.getTotalBytes() / xPlayerModel.getDuration()), true);
+
 	}
-	
+
 	/**
 	 * Set the mute of the Line. Note that mute status does not affect gain.
 	 *
-	 * @param mute
-	 *            True to mute the audio of False to unmute it
+	 * @param mute True to mute the audio of False to unmute it
 	 */
 	public void setMute(final boolean value) {
 		muteButton.setSelected(value);
 		xPlayer.setMute(value);
-		
+
 	}
-	
+
 	/**
 	 * Starts the player
 	 */
@@ -2410,28 +2515,28 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			ex.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Resume the player.
 	 */
 	public void resume() {
 		xPlayer.resume();
 	}
-	
+
 	/**
 	 * Pause the player.
 	 */
 	public void pause() {
 		xPlayer.pause();
 	}
-	
+
 	/**
 	 * Stop the player.
 	 */
 	public void stop() {
 		xPlayer.stop();
 	}
-	
+
 	/**
 	 * Reverse Play with Pause or the opposite.
 	 */
@@ -2442,11 +2547,12 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 			resume();
 		else if (xPlayer.isStopped() || xPlayer.isUnknown())
 			replay();
-		
+
 	}
-	
+
 	/**
-	 * If the player is paused it resume it else if it is stopped it replays the Media
+	 * If the player is paused it resume it else if it is stopped it replays the
+	 * Media
 	 */
 	public void playOrReplay() {
 		if (xPlayer.isPaused()) // paused?
@@ -2454,301 +2560,300 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		else if (xPlayer.isStopped() || xPlayer.isUnknown())
 			replay();
 	}
-	
+
 	/**
 	 * @return the xPlayerWindow
 	 */
 	public XPlayerWindow getxPlayerWindow() {
 		return xPlayerWindow;
 	}
-	
+
 	/**
 	 * @return the playerExtraSettings
 	 */
 	public XPlayerHistory getPlayerExtraSettings() {
 		return history;
 	}
-	
+
 	/**
 	 * @return the xPlayerModel
 	 */
 	public XPlayerModel getxPlayerModel() {
 		return xPlayerModel;
 	}
-	
+
 	/**
 	 * @return the xPlayer
 	 */
 	public XPlayer getxPlayer() {
 		return xPlayer;
 	}
-	
-	//	/**
-	//	 * @return the radialMenu
-	//	 */
-	//	public XPlayerRadialMenu getRadialMenu() {
-	//		return radialMenu;
-	//	}
-	
+
+	// /**
+	// * @return the radialMenu
+	// */
+	// public XPlayerRadialMenu getRadialMenu() {
+	// return radialMenu;
+	// }
+
 	/**
 	 * @return the visualizerWindow
 	 */
 	public VisualizerWindowController getVisualizerWindow() {
 		return visualizerWindow;
 	}
-	
+
 	/**
 	 * @return the visualizerStackController
 	 */
 	public VisualizerStackController getVisualizerStackController() {
 		return visualizerStackController;
 	}
-	
+
 	/**
 	 * @return the visualizer
 	 */
 	public XPlayerVisualizer getVisualizer() {
 		return visualizer;
 	}
-	
+
 	/**
 	 * @return the equalizer
 	 */
 	public XPlayerEqualizer getEqualizer() {
 		return equalizer;
 	}
-	
+
 	/**
 	 * @return the disc
 	 */
 	public DJDisc getDisc() {
 		return disc;
 	}
-	
+
 	/**
 	 * @return the xPlayerPlayList
 	 */
 	public XPlayerPlaylist getxPlayerPlayList() {
 		return xPlayerPlayList;
 	}
-	
+
 	/**
 	 * @return the mediaTagImageButton
 	 */
 	public Button getMediaTagImageButton() {
 		return mediaTagImageButton;
 	}
-	
+
 	/**
 	 * @return the backwardButton
 	 */
 	public Button getBackwardButton() {
 		return backwardButton;
 	}
-	
+
 	/**
 	 * @return the forwardButton
 	 */
 	public Button getForwardButton() {
 		return forwardButton;
 	}
-	
+
 	/**
 	 * @return the totalTimeLabel
 	 */
 	public Label getTotalTimeLabel() {
 		return totalTimeLabel;
 	}
-	
+
 	/**
-	 * @param totalTimeLabel
-	 *            the totalTimeLabel to set
+	 * @param totalTimeLabel the totalTimeLabel to set
 	 */
 	public void setTotalTimeLabel(final Label totalTimeLabel) {
 		this.totalTimeLabel = totalTimeLabel;
 	}
-	
+
 	/**
 	 * @return the playPauseButton
 	 */
 	public Button getPlayPauseButton() {
 		return playPauseButton;
 	}
-	
+
 	/**
 	 * @return the emotionsButton
 	 */
 	public Button getEmotionsButton() {
 		return emotionsButton;
 	}
-	
+
 	/**
 	 * @return the playService
 	 */
 	public XPlayerPlayService getPlayService() {
 		return playService;
 	}
-	
-	//	@Override
-	//	public void valueChanged(double value) {
-	//		//controlVolume();
-	//		//volumeDiscLabel.setText(String.valueOf((int) value))
-	//		smVolumeSlider.setValue(value);
-	//		//disc.setVolume((int) ( value * 100 ));
-	//	}
-	
+
+	// @Override
+	// public void valueChanged(double value) {
+	// //controlVolume();
+	// //volumeDiscLabel.setText(String.valueOf((int) value))
+	// smVolumeSlider.setValue(value);
+	// //disc.setVolume((int) ( value * 100 ));
+	// }
+
 	/**
 	 * @return the mediaFileMarquee
 	 */
 	public Marquee getMediaFileMarquee() {
 		return mediaFileMarquee;
 	}
-	
+
 	/**
 	 * @return the diskStackPane
 	 */
 	public StackPane getDiskStackPane() {
 		return diskStackPane;
 	}
-	
+
 	/**
 	 * @return the visualizationsDisabledLabel
 	 */
 	public Label getVisualizationsDisabledLabel() {
 		return visualizationsDisabledLabel;
 	}
-	
+
 	/**
 	 * @return the smPlayPauseButton
 	 */
 	public Button getSmPlayPauseButton() {
 		return smPlayPauseButton;
 	}
-	
+
 	/**
 	 * @return the modeToggle
 	 */
 	public ToggleButton getModeToggle() {
 		return modeToggle;
-		
+
 	}
-	
+
 	public ProgressIndicator getProgressIndicator() {
 		return progressBar;
 	}
-	
+
 	/**
 	 * @return the isExtended
 	 */
 	public boolean isExtended() {
 		return isPlayerExtended;
 	}
-	
+
 	/**
 	 * @return the showVisualizer
 	 */
 	public ToggleButton getShowVisualizer() {
 		return showVisualizer;
 	}
-	
+
 	/**
 	 * @return the remainingTimeLabel
 	 */
 	public Label getRemainingTimeLabel() {
 		return remainingTimeLabel;
 	}
-	
+
 	/**
 	 * @return the elapsedTimeLabel
 	 */
 	public Label getElapsedTimeLabel() {
 		return elapsedTimeLabel;
 	}
-	
+
 	/**
 	 * @return the smTimeSliderLabel
 	 */
 	public Label getSmTimeSliderLabel() {
 		return smTimeSliderLabel;
 	}
-	
+
 	/**
 	 * @return the playerLoadingLabel
 	 */
 	public Label getPlayerLoadingLabel() {
 		return playerLoadingLabel;
 	}
-	
+
 	/**
 	 * @return the mediaTagImageView
 	 */
 	public ImageView getMediaTagImageView() {
 		return mediaTagImageView;
 	}
-	
+
 	/**
 	 * @return the muteButton
 	 */
 	public ToggleButton getMuteButton() {
 		return muteButton;
 	}
-	
+
 	/**
 	 * @return Is the muteButton Selected?
 	 */
 	public boolean isMuteButtonSelected() {
 		return muteButton.isSelected();
 	}
-	
+
 	/**
 	 * muteButton.setSelected(!muteButton.isSelected());
 	 */
 	public void revertMuteButton() {
 		muteButton.setSelected(!muteButton.isSelected());
 	}
-	
+
 	/**
 	 * @return the volumeSliderProgBar
 	 */
 	public ProgressBar getVolumeSliderProgBar() {
 		return volumeSliderProgBar;
 	}
-	
+
 	/**
 	 * @return the volumeBarBox
 	 */
 	public VBox getVolumeBarBox() {
 		return volumeBarBox;
 	}
-	
+
 	/**
 	 * @return the rootBorderPane
 	 */
 	public BorderPane getRootBorderPane() {
 		return rootBorderPane;
 	}
-	
+
 	/**
 	 * @return the djVisualizer
 	 */
 	public XPlayerVisualizer getDjVisualizer() {
 		return djVisualizer;
 	}
-	
+
 	public WaveVisualization getWaveFormVisualization() {
 		return waveFormVisualization;
 	}
-	
+
 	public Label getWaveProgressLabel() {
 		return waveProgressLabel;
 	}
-	
+
 	public StackPane getModesStackPane() {
 		return modesStackPane;
 	}
-	
+
 	public ProgressBar getWaveProgressBar() {
 		return waveProgressBar;
 	}
-	
+
 }

@@ -13,44 +13,46 @@ import javafx.scene.layout.Priority;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class ExportWindowFolderHBox extends HBox {
-	
-	//--------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------
+
 	@FXML
 	private Button deleteBoxButton;
-	
+
 	@FXML
 	private Button pickFolderButton;
-	
+
 	// -------------------------------------------------------------
-	
+
 	private final TextField textField = TextFields.createClearableTextField();
-	
+
 	/**
 	 * Constructor.
 	 */
 	public ExportWindowFolderHBox() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowFolderHBox.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowFolderHBox.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as fxml is initialized
 	 */
 	@FXML
 	private void initialize() {
-		
-		//TextField
+
+		// TextField
 		textField.getStyleClass().add("dark-text-field-rectangle");
 		textField.setPromptText("pick folder to export...");
 		textField.setFocusTraversable(false);
@@ -60,25 +62,24 @@ public class ExportWindowFolderHBox extends HBox {
 		textField.setMaxHeight(0);
 		HBox.setHgrow(textField, Priority.ALWAYS);
 		textField.setMaxWidth(Integer.MAX_VALUE);
-		
+
 		getChildren().add(0, textField);
 	}
-	
+
 	/**
 	 * @return the pickFolderButton
 	 */
 	public Button getPickFolderButton() {
 		return pickFolderButton;
 	}
-	
+
 	/**
-	 * @param pickFolderButton
-	 *            the pickFolderButton to set
+	 * @param pickFolderButton the pickFolderButton to set
 	 */
 	public void setPickFolderButton(Button pickFolderButton) {
 		this.pickFolderButton = pickFolderButton;
 	}
-	
+
 	/**
 	 * @return the textField
 	 */
@@ -92,5 +93,5 @@ public class ExportWindowFolderHBox extends HBox {
 	public Button getDeleteBoxButton() {
 		return deleteBoxButton;
 	}
-	
+
 }

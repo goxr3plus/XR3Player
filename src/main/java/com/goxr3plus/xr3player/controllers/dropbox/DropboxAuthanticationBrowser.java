@@ -39,50 +39,52 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  *
  */
 public class DropboxAuthanticationBrowser extends StackPane {
-	
+
 	@FXML
 	private BorderPane borderPane;
-	
+
 	@FXML
 	private ProgressIndicator loadingIndicator;
-	
-	//----------------------------------------------------------------
-	
+
+	// ----------------------------------------------------------------
+
 	private Browser browser;
-	
+
 	/**
 	 * AccessToken Property
 	 */
 	private final StringProperty accessToken = new SimpleStringProperty("");
-	
+
 	/**
 	 * The window
 	 */
 	private final Stage window = new Stage();
-	
-	//Identifying information about XR3Player		 
+
+	// Identifying information about XR3Player
 	private DbxAppInfo appInfo = new DbxAppInfo("5dx1fba89qsx2l6", "z2avrmbnnrmwvqa");
 	DbxRequestConfig requestConfig = new DbxRequestConfig("XR3Player");
 	DbxWebAuth webAuth;
 	DbxWebAuth.Request webAuthRequest;
-	
+
 	/**
 	 * Constructor
 	 */
 	public DropboxAuthanticationBrowser() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxAuthanticationBrowser.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxAuthanticationBrowser.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
-		//Create the Window	
+
+		// Create the Window
 		window.setTitle("Dropbox Sign In");
 		ObservableList<Image> i1;
 		i1 = window.getIcons();
@@ -94,16 +96,16 @@ public class DropboxAuthanticationBrowser extends StackPane {
 		s1 = new Scene(this);
 		window.setScene(s1);
 	}
-	
+
 	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
 	@FXML
 	private void initialize() {
-		
-		//Browser
+
+		// Browser
 		browser = new Browser();
-		
+
 		borderPane.setCenter(new BrowserView(browser));
 		browser.addLoadListener(new LoadAdapter() {
 			/**
@@ -117,7 +119,8 @@ public class DropboxAuthanticationBrowser extends StackPane {
 						String html = event.getBrowser().getHTML();
 						new Thread(() -> {
 							try {
-								String code = Jsoup.parse(html).body().getElementById("auth-code").getElementsByTag("input").first().attr("data-token");
+								String code = Jsoup.parse(html).body().getElementById("auth-code")
+										.getElementsByTag("input").first().attr("data-token");
 								Platform.runLater(() -> produceAccessToken(code));
 							} catch (Exception ex) {
 								ex.printStackTrace();
@@ -127,89 +130,91 @@ public class DropboxAuthanticationBrowser extends StackPane {
 				}
 			}
 		});
-		
+
 	}
-	
+
 	/**
 	 * Shows the window
 	 */
 	public void showAuthenticationWindow() {
-		
+
 		browser.getCacheStorage().clearCache();
 		browser.getCookieStorage().deleteAll();
-		
-		//Load it
+
+		// Load it
 		browser.loadURL(getAuthonticationRequestURL());
-		
-		//Show the Window
+
+		// Show the Window
 		window.show();
 	}
-	
+
 	/**
-	 * Starts authorization and returns a "authorization URL" on the Dropbox website that gives the lets the user grant your app access to their Dropbox
-	 * account.
+	 * Starts authorization and returns a "authorization URL" on the Dropbox website
+	 * that gives the lets the user grant your app access to their Dropbox account.
 	 * 
-	 * @return The "authorization URL" on the Dropbox website that gives the lets the user grant your app access to their Dropbox account.
+	 * @return The "authorization URL" on the Dropbox website that gives the lets
+	 *         the user grant your app access to their Dropbox account.
 	 */
 	public String getAuthonticationRequestURL() {
-		
-		// Run through Dropbox API authorization process	
+
+		// Run through Dropbox API authorization process
 		webAuth = new DbxWebAuth(requestConfig, appInfo);
 		webAuthRequest = DbxWebAuth.newRequestBuilder().withNoRedirect().build();
-		
+
 		return webAuth.authorize(webAuthRequest);
 	}
-	
+
 	/**
-	 * Given the Authorization Code it produces the AccessToken needed to access DropBox Account
+	 * Given the Authorization Code it produces the AccessToken needed to access
+	 * DropBox Account
 	 * 
-	 * @param code
-	 *            The OAuth2 DropBox AuthorizationCode
+	 * @param code The OAuth2 DropBox AuthorizationCode
 	 */
 	public void produceAccessToken(String code) {
 		try {
 			// Run through Dropbox API authorization process
 			DbxAuthFinish authFinish = webAuth.finishFromCode(code);
-			
-			//Set the access token
+
+			// Set the access token
 			accessToken.set(authFinish.getAccessToken());
-			
-			//System.out.println("Browser -> [" + accessToken.get() + "]")
-			
-			//Close the window
+
+			// System.out.println("Browser -> [" + accessToken.get() + "]")
+
+			// Close the window
 			window.close();
 		} catch (DbxException ex) {
 			ex.printStackTrace();
-			ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)", Duration.millis(2000), NotificationType.ERROR);
+			ActionTool.showNotification("Error", "Error during DropBox Authentication \n please try again :)",
+					Duration.millis(2000), NotificationType.ERROR);
 		}
 	}
-	
+
 	/**
 	 * @return the accessToken
 	 */
 	public StringProperty accessTokenProperty() {
 		return accessToken;
 	}
-	
+
 	/**
 	 * @return the window
 	 */
 	public Stage getWindow() {
 		return window;
 	}
-	
+
 	/**
 	 * @return the loadingIndicator
 	 */
 	public ProgressIndicator getLoadingIndicator() {
 		return loadingIndicator;
 	}
-	
+
 	/**
 	 * @return the browser
 	 */
 	public Browser getBrowser() {
 		return browser;
 	}
-	
+
 }

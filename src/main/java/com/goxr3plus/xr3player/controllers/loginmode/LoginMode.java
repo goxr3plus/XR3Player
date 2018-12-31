@@ -54,361 +54,372 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
  *
  */
 public class LoginMode extends StackPane {
-	
-	//-------------------------------------
-	
+
+	// -------------------------------------
+
 	@FXML
 	private ImageView backgroundImageView;
-	
+
 	@FXML
 	private Hyperlink youtubeTutorialsHyperLink;
-	
+
 	@FXML
 	private Hyperlink visitCreatorHyperLink;
-	
+
 	@FXML
 	private VBox downloadsVBox;
-	
+
 	@FXML
 	private Label sourceForgeDownloadsLabel1;
-	
+
 	@FXML
 	private Label sourceForgeDownloadsLabel;
-	
+
 	@FXML
 	private Label gitHubDownloadsLabel;
-	
+
 	@FXML
 	private BorderPane topBorderPane;
-	
+
 	@FXML
 	private Label xr3PlayerLabel;
-	
+
 	@FXML
 	private StackPane centerStackPane;
-	
+
 	@FXML
 	private BorderPane borderPane;
-	
+
 	@FXML
 	private StackPane usersStackView;
-	
+
 	@FXML
 	private ScrollBar horizontalScrollBar;
-	
+
 	@FXML
 	private Label quickSearchTextField;
-	
+
 	@FXML
 	private GridPane topGrid;
-	
+
 	@FXML
 	private JFXToggleButton selectionModeToggle;
-	
+
 	@FXML
 	private HBox toolBarHBox;
-	
+
 	@FXML
 	private Button deleteUser;
-	
+
 	@FXML
 	private Button renameUser;
-	
+
 	@FXML
 	private Button loginButton;
-	
+
 	@FXML
 	private JFXButton previous;
-	
+
 	@FXML
 	private JFXButton createUser;
-	
+
 	@FXML
 	private JFXButton next;
-	
+
 	@FXML
 	private Button openUserContextMenu;
-	
+
 	@FXML
 	private ColorPicker colorPicker;
-	
+
 	@FXML
 	private HBox botttomHBox;
-	
+
 	@FXML
 	private Label usersInfoLabel;
-	
+
 	@FXML
 	private ToggleGroup sortByGroup;
-	
+
 	@FXML
 	private Button createFirstUser;
-	
+
 	@FXML
 	private Button importDatabase;
-	
+
 	@FXML
 	private Button exportDatabase;
-	
+
 	@FXML
 	private Button deleteDatabase;
-	
+
 	// --------------------------------------------
-	
-	//private final CategoryAxis xAxis = new CategoryAxis();
-	//private final NumberAxis yAxis = new NumberAxis();
-	//defining a series
-	//XYChart.Series<String,Number> series = new XYChart.Series<>();
-	//private final ObservableList<PieChart.Data> librariesPieChartData = FXCollections.observableArrayList()	
-	
-	//---
-	
+
+	// private final CategoryAxis xAxis = new CategoryAxis();
+	// private final NumberAxis yAxis = new NumberAxis();
+	// defining a series
+	// XYChart.Series<String,Number> series = new XYChart.Series<>();
+	// private final ObservableList<PieChart.Data> librariesPieChartData =
+	// FXCollections.observableArrayList()
+
+	// ---
+
 	/** The logger for this class */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	/**
 	 * Allows to see the users in a beautiful way
 	 */
 	public Viewer viewer;
-	
+
 	/**
 	 * The Search Box of the LoginMode
 	 */
 	public SearchBox userSearchBox = new SearchBox(SearchBoxType.USERSSEARCHBOX);
-	
+
 	/** The context menu of the users */
 	public UserContextMenu userContextMenu = new UserContextMenu();
-	
+
 	public final UserInformation userInformation = new UserInformation(UserCategory.NO_LOGGED_IN);
-	
+
 	/**
 	 * Loads all the information about each user
 	 */
 	public UsersLoaderService usersLoaderService = new UsersLoaderService();
-	
+
 	public final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
-	
-	//---------------------------------------
-	
+
+	// ---------------------------------------
+
 	/** This InvalidationListener is used during the creation of a new user. */
 	private final InvalidationListener userCreationInvalidator = new InvalidationListener() {
 		@Override
 		public void invalidated(Observable observable) {
-			
+
 			// Remove the Listener
 			Main.renameWindow.showingProperty().removeListener(this);
-			
+
 			// !Showing && !XPressed
 			if (!Main.renameWindow.isShowing() && Main.renameWindow.wasAccepted()) {
-				
+
 				Main.window.requestFocus();
-				
+
 				// Check if this name already exists
 				String newName = Main.renameWindow.getUserInput();
-				
+
 				// if can pass
-				if (!viewer.getItemsObservableList().stream().anyMatch(user -> ( (User) user ).getName().equalsIgnoreCase(newName))) {
-					
+				if (!viewer.getItemsObservableList().stream()
+						.anyMatch(user -> ((User) user).getName().equalsIgnoreCase(newName))) {
+
 					if (new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + newName).mkdir()) {
-						
-						//Create the new user and add it 
+
+						// Create the new user and add it
 						User user = new User(newName, viewer.getItemsObservableList().size(), LoginMode.this);
 						viewer.addItem(user, true);
-						
-						//Add to PieChart
-						//						librariesPieChartData.add(new PieChart.Data(newName, 0));
-						//series.getData().add(new XYChart.Data<String,Number>(newName, 0));
-						
-						//Very well create the UsersInformationDb because it doesn't exist so on the next load it will exist
-						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + user.getName() + File.separator + "settings"),
-								FileType.DIRECTORY);
-						ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()), FileType.FILE);
-						
+
+						// Add to PieChart
+						// librariesPieChartData.add(new PieChart.Data(newName, 0));
+						// series.getData().add(new XYChart.Data<String,Number>(newName, 0));
+
+						// Very well create the UsersInformationDb because it doesn't exist so on the
+						// next load it will exist
+						ActionTool.createFileOrFolder(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+								+ user.getName() + File.separator + "settings"), FileType.DIRECTORY);
+						ActionTool.createFileOrFolder(new File(user.getUserInformationDb().getFileAbsolutePath()),
+								FileType.FILE);
+
 					} else
-						ActionTool.showNotification("Error", "An error occured trying to create a new user", Duration.seconds(2), NotificationType.ERROR);
-					
+						ActionTool.showNotification("Error", "An error occured trying to create a new user",
+								Duration.seconds(2), NotificationType.ERROR);
+
 					// update the positions
-					//updateUsersPosition()
+					// updateUsersPosition()
 				} else
-					ActionTool.showNotification("Dublicate User", "Name->" + newName + " is already used from another User...", Duration.millis(2000),
+					ActionTool.showNotification("Dublicate User",
+							"Name->" + newName + " is already used from another User...", Duration.millis(2000),
 							NotificationType.INFORMATION);
-				
+
 			}
 		}
 	};
-	
+
 	/**
 	 * Constructor
 	 */
 	public LoginMode() {
-		
+
 		// ----------------------------------FXMLLoader-------------------------------------
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.USER_FXMLS + "LoginMode.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		// -------------Load the FXML-------------------------------
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.WARNING, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as FXML file has been loaded
 	 */
 	@FXML
 	private void initialize() {
-		
-		//flipPane
+
+		// flipPane
 		flipPane.setFlipTime(150);
 		flipPane.getFront().getChildren().addAll(centerStackPane.getChildren());
 		flipPane.getBack().getChildren().addAll(userInformation);
-		
-		//centerStackPane
+
+		// centerStackPane
 		centerStackPane.getChildren().add(flipPane);
-		
-		//Initialize
+
+		// Initialize
 		viewer = new Viewer(this, horizontalScrollBar);
 		quickSearchTextField.visibleProperty().bind(viewer.searchWordProperty().isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(viewer.searchWordProperty()));
-		
+
 		// -- botttomHBox
 		botttomHBox.getChildren().add(userSearchBox);
-		
+
 		// createUser
 		createUser.setOnAction(a -> createNewUser(createUser));
-		
-		//newUser
+
+		// newUser
 		createFirstUser.setOnAction(a -> createNewUser(createFirstUser.getGraphic(), true));
 		createFirstUser.visibleProperty().bind(Bindings.size(viewer.getItemsObservableList()).isEqualTo(0));
-		
-		//loginButton
+
+		// loginButton
 		loginButton.setOnAction(a -> Main.startAppWithUser((User) viewer.getSelectedItem()));
-		
-		//openUserContextMenu
+
+		// openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {
 			User user = (User) viewer.getSelectedItem();
 			Bounds bounds = user.localToScreen(user.getBoundsInLocal());
-			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3, bounds.getMinY() + bounds.getHeight() / 4, user);
+			userContextMenu.show(Main.window, bounds.getMinX() + bounds.getWidth() / 3,
+					bounds.getMinY() + bounds.getHeight() / 4, user);
 		});
-		
-		//renameUser
-		//renameUser.disableProperty().bind(deleteUser.disabledProperty())
-		renameUser.setOnAction(a -> ( (User) viewer.getSelectedItem() ).renameUser(renameUser));
-		
-		//deleteUser
-		//deleteUser.disableProperty().bind(newUser.visibleProperty())
-		deleteUser.setOnAction(a -> ( (User) Main.loginMode.viewer.getSelectedItem() ).deleteUser(deleteUser));
-		
-		//topBorderPane
+
+		// renameUser
+		// renameUser.disableProperty().bind(deleteUser.disabledProperty())
+		renameUser.setOnAction(a -> ((User) viewer.getSelectedItem()).renameUser(renameUser));
+
+		// deleteUser
+		// deleteUser.disableProperty().bind(newUser.visibleProperty())
+		deleteUser.setOnAction(a -> ((User) Main.loginMode.viewer.getSelectedItem()).deleteUser(deleteUser));
+
+		// topBorderPane
 		topBorderPane.setRight(new CloseAppBox());
-		
+
 		// previous
 		previous.setOnAction(a -> viewer.previous());
-		
+
 		// next
 		next.setOnAction(a -> viewer.next());
-		
-		//Continue
+
+		// Continue
 		usersStackView.getChildren().add(viewer);
 		viewer.toBack();
-		
-		//visitCreatorHyperLink
+
+		// visitCreatorHyperLink
 		visitCreatorHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.WEBSITE_URL));
-		
-		//youtubeTutorialsHyperLink
+
+		// youtubeTutorialsHyperLink
 		youtubeTutorialsHyperLink.setOnAction(a -> ActionTool.openWebSite(InfoTool.TUTORIALS));
-		
-		//----usersInfoLabel
+
+		// ----usersInfoLabel
 		usersInfoLabel.textProperty()
 				.bind(Bindings.createStringBinding(
-						() -> "[ " + viewer.itemsWrapperProperty().sizeProperty().get() + " ] " + English.plural("User", viewer.itemsWrapperProperty().sizeProperty().get()),
+						() -> "[ " + viewer.itemsWrapperProperty().sizeProperty().get() + " ] "
+								+ English.plural("User", viewer.itemsWrapperProperty().sizeProperty().get()),
 						viewer.itemsWrapperProperty().sizeProperty()));
-		
-		//== exportDatabase
+
+		// == exportDatabase
 		exportDatabase.setOnAction(a -> Main.sideBar.exportDatabase());
-		
-		//== importDatabase
+
+		// == importDatabase
 		importDatabase.setOnAction(a -> Main.sideBar.importDatabase());
-		
-		//== deleteDatabase
+
+		// == deleteDatabase
 		deleteDatabase.setOnAction(a -> Main.sideBar.deleteDatabase());
-		
-		//== color picker
+
+		// == color picker
 		String defaultWebColor = "#ef4949";
 		colorPicker.setValue(Color.web(defaultWebColor));
-		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + defaultWebColor + " 87%);");
-		colorPicker.setOnAction(a -> Main.applicationProperties.updateProperty("Users-Background-Color", JavaFXTools.colorToWebColor(colorPicker.getValue())));
-		colorPicker.valueProperty().addListener((observable , oldColor , newColor) -> {
-			
-			//Format to WebColor
+		viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
+				+ defaultWebColor + " 87%);");
+		colorPicker.setOnAction(a -> Main.applicationProperties.updateProperty("Users-Background-Color",
+				JavaFXTools.colorToWebColor(colorPicker.getValue())));
+		colorPicker.valueProperty().addListener((observable, oldColor, newColor) -> {
+
+			// Format to WebColor
 			String webColor = JavaFXTools.colorToWebColor(newColor);
-			
-			//Set the style
-			this.viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, " + webColor + "  87%);");
+
+			// Set the style
+			this.viewer.setStyle("-fx-background-color: linear-gradient(to bottom,transparent 60,#141414 60.2%, "
+					+ webColor + "  87%);");
 		});
-		//sortByGroup
-		sortByGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
+		// sortByGroup
+		sortByGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue == null)
 				return;
-			
-			//Create a custom comparator
+
+			// Create a custom comparator
 			viewer.sortByComparator(getSortComparator());
 		});
 	}
-	
+
 	/**
 	 * Return the text of the selected sort toggle
 	 * 
 	 * @return
 	 */
 	public String getSelectedSortToggleText() {
-		return ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
+		return ((RadioMenuItem) sortByGroup.getSelectedToggle()).getText();
 	}
-	
+
 	/**
 	 * Get the sort comparator
 	 * 
 	 * @return
 	 */
 	public Comparator<Node> getSortComparator() {
-		String text = ( (RadioMenuItem) sortByGroup.getSelectedToggle() ).getText();
-		
+		String text = ((RadioMenuItem) sortByGroup.getSelectedToggle()).getText();
+
 		if (text.equalsIgnoreCase("Name Ascendant")) {
-			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) a ).getName(), ( (User) b ).getName());
+			return (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(((User) a).getName(), ((User) b).getName());
 		} else if (text.equalsIgnoreCase("Name Descendant")) {
-			return (a , b) -> String.CASE_INSENSITIVE_ORDER.compare( ( (User) b ).getName(), ( (User) a ).getName());
+			return (a, b) -> String.CASE_INSENSITIVE_ORDER.compare(((User) b).getName(), ((User) a).getName());
 		} else if (text.equalsIgnoreCase("Libraries  Ascendant")) {
-			return (a , b) -> Double.compare( ( (User) b ).getTotalLibraries(), ( (User) a ).getTotalLibraries());
+			return (a, b) -> Double.compare(((User) b).getTotalLibraries(), ((User) a).getTotalLibraries());
 		} else if (text.equalsIgnoreCase("Libraries  Descendant")) {
-			return (a , b) -> Double.compare( ( (User) a ).getTotalLibraries(), ( (User) b ).getTotalLibraries());
+			return (a, b) -> Double.compare(((User) a).getTotalLibraries(), ((User) b).getTotalLibraries());
 		} else if (text.equalsIgnoreCase("Dropbox Accounts  Ascendant")) {
-			return (a , b) -> Double.compare( ( (User) b ).getTotalDropboxAccounts(), ( (User) a ).getTotalDropboxAccounts());
+			return (a, b) -> Double.compare(((User) b).getTotalDropboxAccounts(), ((User) a).getTotalDropboxAccounts());
 		} else if (text.equalsIgnoreCase("Dropbox Accounts  Descendant")) {
-			return (a , b) -> Double.compare( ( (User) a ).getTotalDropboxAccounts(), ( (User) b ).getTotalDropboxAccounts());
+			return (a, b) -> Double.compare(((User) a).getTotalDropboxAccounts(), ((User) b).getTotalDropboxAccounts());
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * Used to create a new User
 	 * 
 	 * @param owner
 	 */
-	public void createNewUser(Node owner , boolean... exactPositioning) {
-		
+	public void createNewUser(Node owner, boolean... exactPositioning) {
+
 		// Open rename window
 		Main.renameWindow.show("", owner, "Creating new User", FileCategory.DIRECTORY, exactPositioning);
-		
+
 		// Add the showing listener
 		Main.renameWindow.showingProperty().addListener(userCreationInvalidator);
-		
+
 	}
-	
+
 	/**
 	 * Gets the previous.
 	 *
@@ -417,7 +428,7 @@ public class LoginMode extends StackPane {
 	public Button getPrevious() {
 		return previous;
 	}
-	
+
 	/**
 	 * Gets the next.
 	 *
@@ -426,61 +437,61 @@ public class LoginMode extends StackPane {
 	public Button getNext() {
 		return next;
 	}
-	
+
 	/**
 	 * @return the xr3PlayerLabel
 	 */
 	public Label getXr3PlayerLabel() {
 		return xr3PlayerLabel;
 	}
-	
+
 	/**
 	 * @return the colorPicker
 	 */
 	public ColorPicker getColorPicker() {
 		return colorPicker;
 	}
-	
+
 	/**
 	 * @return the centerStackPane
 	 */
 	public StackPane getCenterStackPane() {
 		return centerStackPane;
 	}
-	
+
 	/**
 	 * @return the series
 	 */
-	//	public XYChart.Series<String,Number> getSeries() {
-	//		return series;
-	//	}
-	
+	// public XYChart.Series<String,Number> getSeries() {
+	// return series;
+	// }
+
 	/**
 	 * @return the downloadsVBox
 	 */
 	public VBox getDownloadsVBox() {
 		return downloadsVBox;
 	}
-	
+
 	/**
 	 * @return the sourceForgeDownloadsLabel
 	 */
 	public Label getSourceForgeDownloadsLabel() {
 		return sourceForgeDownloadsLabel;
 	}
-	
+
 	/**
 	 * @return the gitHubDownloadsLabel
 	 */
 	public Label getGitHubDownloadsLabel() {
 		return gitHubDownloadsLabel;
 	}
-	
+
 	/**
 	 * @return the backgroundImageView
 	 */
 	public ImageView getBackgroundImageView() {
 		return backgroundImageView;
 	}
-	
+
 }

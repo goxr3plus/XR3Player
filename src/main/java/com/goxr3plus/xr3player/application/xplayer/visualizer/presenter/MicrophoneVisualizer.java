@@ -7,8 +7,8 @@ package main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.present
  *
  */
 public class MicrophoneVisualizer extends Visualizer {
-	
+
 	public MicrophoneVisualizer() {
 	}
-	
+
 }

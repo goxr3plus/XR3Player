@@ -46,188 +46,190 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
  * @author GOXR3PLUS
  */
 public class DropboxDownloadsTableViewer extends StackPane {
-	
+
 	@FXML
 	private TableView<DropboxDownloadedFile> tableView;
-	
+
 	@FXML
-	private TableColumn<DropboxDownloadedFile,String> fileThumbnail;
-	
+	private TableColumn<DropboxDownloadedFile, String> fileThumbnail;
+
 	@FXML
-	private TableColumn<DropboxDownloadedFile,StackPane> progressBox;
-	
+	private TableColumn<DropboxDownloadedFile, StackPane> progressBox;
+
 	@FXML
-	private TableColumn<DropboxDownloadedFile,String> title;
-	
+	private TableColumn<DropboxDownloadedFile, String> title;
+
 	@FXML
 	private InlineCssTextArea detailCssTextArea;
-	
+
 	@FXML
 	private Label quickSearchTextField;
-	
-	//-------------------------------------------------
+
+	// -------------------------------------------------
 	private int previousSelectedCount = 0;
-	
+
 	/** The pause transition. */
 	private final PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 	private final StringProperty searchWord = new SimpleStringProperty("");
-	
+
 	private final ObservableList<DropboxDownloadedFile> observableList = FXCollections.observableArrayList();
-	
+
 	/** The image. */
 	private WritableImage image = new WritableImage(100, 100);
-	
+
 	/** The canvas. */
 	private Canvas canvas = new Canvas();
-	
+
 	/**
 	 * Constructor.
 	 */
 	public DropboxDownloadsTableViewer() {
-		
-		//Canvas
+
+		// Canvas
 		canvas.setWidth(100);
 		canvas.setHeight(100);
-		
+
 		// FXMLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxDownloadsTableViewer.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.DROPBOX_FXMLS + "DropboxDownloadsTableViewer.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			Main.logger.log(Level.WARNING, "DropboxFilesTableViewer falied to initialize fxml..", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .fxml has been initialized [[SuppressWarningsSpartan]]
 	 */
 	@FXML
 	private void initialize() {
-		
-		//------------------------------TableViewer---------------------------
-		
-		//Set Items
+
+		// ------------------------------TableViewer---------------------------
+
+		// Set Items
 		tableView.setItems(observableList);
-		
-		//--Allow Multiple Selection
+
+		// --Allow Multiple Selection
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
+
 		tableView.getSelectionModel().getSelectedIndices().addListener((ListChangeListener<? super Integer>) l -> {
-			
-			//Hold the Current Selected Count
+
+			// Hold the Current Selected Count
 			int currentSelectedCount = getSelectedCount();
-			
-			//Update the Label only if the current selected count != previousSelectedCount
+
+			// Update the Label only if the current selected count != previousSelectedCount
 			if (previousSelectedCount != currentSelectedCount) {
 				previousSelectedCount = currentSelectedCount;
 				updateLabel();
 			}
-			
-			//Show/hide the action button 
+
+			// Show/hide the action button
 			if (currentSelectedCount > 1)
 				tableView.getItems().forEach(item -> item.getActionColumnButton().setVisible(false));
 			else
 				tableView.getItems().forEach(item -> item.getActionColumnButton().setVisible(true));
-			
+
 		});
-		
-		//Update the Media Information when Selected Item changes
-		tableView.getSelectionModel().selectedItemProperty().addListener((observable , oldValue , newValue) -> {
+
+		// Update the Media Information when Selected Item changes
+		tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null)
 				Main.dropBoxViewer.getOpenFolder().setDisable(!newValue.isDirectory());
 			else
 				Main.dropBoxViewer.getOpenFolder().setDisable(true);
 		});
-		
+
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> searchWord.set(""));
-		
+
 		// QuickSearchTextField
 		quickSearchTextField.visibleProperty().bind(searchWord.isEmpty().not());
 		quickSearchTextField.textProperty().bind(Bindings.concat("Search :> ").concat(searchWord));
-		
-		//--------------------------Other-----------------------------------
+
+		// --------------------------Other-----------------------------------
 		String center = "-fx-alignment:CENTER-LEFT;";
-		
+
 		// title
 		title.setStyle(center);
 		title.setCellValueFactory(new PropertyValueFactory<>("title"));
-		
+
 		// fileType
 		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("extension"));
-		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxDownloadedFile,String>() {
-			//Icon FontIcon
+		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxDownloadedFile, String>() {
+			// Icon FontIcon
 			FontIcon icon = new FontIcon();
-			
+
 			{
 				icon.setIconSize(24);
 			}
-			
+
 			@Override
-			protected void updateItem(String item , boolean empty) {
+			protected void updateItem(String item, boolean empty) {
 				super.updateItem(item, empty);
-				
+
 				if (empty) {
 					setText(null);
 					setGraphic(null);
 				} else {
-					// set the image according to the play status		
+					// set the image according to the play status
 					if (item != null && super.getTableRow().getItem() != null) {
-						
+
 						setText(null);
 						setGraphic(icon);
-						
-						//It is directory?	
-						if ( ( (DropboxDownloadedFile) super.getTableRow().getItem() ).isDirectory()) { //DIRECTORY
+
+						// It is directory?
+						if (((DropboxDownloadedFile) super.getTableRow().getItem()).isDirectory()) { // DIRECTORY
 							JavaFXTools.setFontIcon(this, icon, "fas-folder", FileTreeItem.folderColor);
 						} else {
-							//Is it a music file?
-							if (InfoTool.isAudioCheckExtension(item)) {           //AUDIO
+							// Is it a music file?
+							if (InfoTool.isAudioCheckExtension(item)) { // AUDIO
 								JavaFXTools.setFontIcon(this, icon, "fas-file-audio", FileTreeItem.audioColor);
-							} else if (InfoTool.isVideoCheckExtension(item)) {    //VIDEO
+							} else if (InfoTool.isVideoCheckExtension(item)) { // VIDEO
 								JavaFXTools.setFontIcon(this, icon, "fas-file-video", Color.WHITE);
-							} else if (InfoTool.isImageCheckExtension(item)) {    //PICTURE
+							} else if (InfoTool.isImageCheckExtension(item)) { // PICTURE
 								JavaFXTools.setFontIcon(this, icon, "fas-file-image", Color.WHITE);
-							} else if (InfoTool.isPdfCheckExtension(item)) {      //PDF
+							} else if (InfoTool.isPdfCheckExtension(item)) { // PDF
 								JavaFXTools.setFontIcon(this, icon, "fas-file-pdf", FileTreeItem.pdfColor);
-							} else if (InfoTool.isZipCheckExtension(item)) {      //ZIP
+							} else if (InfoTool.isZipCheckExtension(item)) { // ZIP
 								JavaFXTools.setFontIcon(this, icon, "fas-file-archive", Color.WHITE);
-							} else {                                              //FILE
+							} else { // FILE
 								JavaFXTools.setFontIcon(this, icon, "fas-file", Color.WHITE);
 							}
 						}
 					}
 				}
 			}
-			
+
 		});
-		
+
 		// download
 		progressBox.setCellValueFactory(new PropertyValueFactory<>("progressBox"));
-		
-		//------------------------------------------------------------
-		
-		//--KeyListener
+
+		// ------------------------------------------------------------
+
+		// --KeyListener
 		tableView.setOnKeyReleased(key -> {
-			
-			//Find it
+
+			// Find it
 			if (key.getCode() == KeyCode.BACK_SPACE)
 				searchWord.set("");
-			
-			//Local Search 
-			if (!key.isControlDown() && ( key.getCode().isDigitKey() || key.getCode().isKeypadKey() || key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE )) {
+
+			// Local Search
+			if (!key.isControlDown() && (key.getCode().isDigitKey() || key.getCode().isKeypadKey()
+					|| key.getCode().isLetterKey() || key.getCode() == KeyCode.SPACE)) {
 				String keySmall = key.getText().toLowerCase();
 				searchWord.set(searchWord.get() + keySmall);
 				pauseTransition.playFromStart();
-				
-				//Check if searchWord is empty
+
+				// Check if searchWord is empty
 				if (!searchWord.get().isEmpty()) {
 					boolean[] found = { false };
-					//Find the first matching item
+					// Find the first matching item
 					tableView.getItems().forEach(media -> {
 						if (media.getTitle().toLowerCase().contains(searchWord.get()) && !found[0]) {
 							getSelectionModel().clearSelection();
@@ -238,57 +240,61 @@ public class DropboxDownloadsTableViewer extends StackPane {
 					});
 				}
 			}
-			
+
 		});
-		
+
 		// --Drag Detected
 		tableView.setOnDragDetected(event -> {
-			if (getSelectedCount() != 0 && event.getScreenY() > tableView.localToScreen(tableView.getBoundsInLocal()).getMinY() + 30) {
-				
+			if (getSelectedCount() != 0
+					&& event.getScreenY() > tableView.localToScreen(tableView.getBoundsInLocal()).getMinY() + 30) {
+
 				/* allow copy transfer mode */
 				Dragboard db = tableView.startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-				
+
 				/* put a string on drag board */
 				ClipboardContent content = new ClipboardContent();
-				
+
 				// PutFiles
-				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream().map(s -> new File(s.getDownloadService().getLocalFileAbsolutePath()))
+				content.putFiles(tableView.getSelectionModel().getSelectedItems().stream()
+						.map(s -> new File(s.getDownloadService().getLocalFileAbsolutePath()))
 						.collect(Collectors.toList()));
-				
-				//Set Drag View
+
+				// Set Drag View
 				JavaFXTools.setPlainTextDragView(db,
-						content.getFiles().size() == 1 ? tableView.getSelectionModel().getSelectedItem().getTitle() : "(" + content.getFiles().size() + ")Items");
-				
+						content.getFiles().size() == 1 ? tableView.getSelectionModel().getSelectedItem().getTitle()
+								: "(" + content.getFiles().size() + ")Items");
+
 				db.setContent(content);
 			}
 			event.consume();
 		});
-		
+
 	}
-	
+
 	/**
 	 * Updates the label of the smart controller. [[SuppressWarningsSpartan]]
 	 */
 	public void updateLabel() {
-		
-		//Clear the cssTextArea
+
+		// Clear the cssTextArea
 		getDetailCssTextArea().clear();
-		
-		//Go madafucker ruuuuuuuuuuun n!!
+
+		// Go madafucker ruuuuuuuuuuun n!!
 		String total = "Total : ";
 		String _total = InfoTool.getNumberWithDots(tableView.getItems().size());
-		
+
 		String selected = "Selected : ";
 		String _selected = String.valueOf(getSelectedCount());
-		
-		//Now set the Text
+
+		// Now set the Text
 		appendToDetails(getDetailCssTextArea(), total, _total, true, SmartController.style4);
 		appendToDetails(getDetailCssTextArea(), selected, _selected, false, SmartController.style1);
-		
+
 	}
-	
+
 	/**
-	 * This method is used from updateLabel() method to append Text to detailsCssTextArea
+	 * This method is used from updateLabel() method to append Text to
+	 * detailsCssTextArea
 	 * 
 	 * @param inlineCssTextArea
 	 * @param text1
@@ -296,15 +302,18 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	 * @param appendComma
 	 * @param style1
 	 */
-	private void appendToDetails(InlineCssTextArea inlineCssTextArea , String text1 , String text2 , boolean appendComma , String style1) {
-		
+	private void appendToDetails(InlineCssTextArea inlineCssTextArea, String text1, String text2, boolean appendComma,
+			String style1) {
+
 		inlineCssTextArea.appendText(text1);
-		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text1.length(), inlineCssTextArea.getLength() - 1, style1);
-		
-		inlineCssTextArea.appendText(text2 + " " + ( !appendComma ? "" : ", " ));
-		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text2.length() - ( appendComma ? 3 : 1 ), inlineCssTextArea.getLength() - 1, SmartController.style2);
+		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text1.length(), inlineCssTextArea.getLength() - 1,
+				style1);
+
+		inlineCssTextArea.appendText(text2 + " " + (!appendComma ? "" : ", "));
+		inlineCssTextArea.setStyle(inlineCssTextArea.getLength() - text2.length() - (appendComma ? 3 : 1),
+				inlineCssTextArea.getLength() - 1, SmartController.style2);
 	}
-	
+
 	/**
 	 * Sorts the Table
 	 */
@@ -312,7 +321,7 @@ public class DropboxDownloadsTableViewer extends StackPane {
 		if (!tableView.getSortOrder().isEmpty())
 			tableView.sort();
 	}
-	
+
 	/**
 	 * Calculates the selected items in the table.
 	 *
@@ -321,30 +330,30 @@ public class DropboxDownloadsTableViewer extends StackPane {
 	public int getSelectedCount() {
 		return tableView.getSelectionModel().getSelectedItems().size();
 	}
-	
+
 	/**
 	 * @return the tableView
 	 */
 	public TableView<DropboxDownloadedFile> getTableView() {
 		return tableView;
 	}
-	
+
 	public TableViewSelectionModel<DropboxDownloadedFile> getSelectionModel() {
 		return tableView.getSelectionModel();
 	}
-	
+
 	/**
 	 * @return the detailCssTextArea
 	 */
 	public InlineCssTextArea getDetailCssTextArea() {
 		return detailCssTextArea;
 	}
-	
+
 	/**
 	 * @return the observableList
 	 */
 	public ObservableList<DropboxDownloadedFile> getObservableList() {
 		return observableList;
 	}
-	
+
 }

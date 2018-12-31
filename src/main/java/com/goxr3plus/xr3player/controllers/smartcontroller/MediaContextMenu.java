@@ -39,137 +39,134 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class MediaContextMenu extends ContextMenu {
-	
-	//--------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------
+
 	@FXML
 	private Menu getInfoBuy;
-	
+
 	@FXML
 	private Menu findLyrics;
-	
+
 	@FXML
 	private MenuItem lyricFinderOrg;
-	
+
 	@FXML
 	private MenuItem lyricsCom;
-	
+
 	@FXML
 	private MenuItem stars;
-	
+
 	@FXML
 	private MenuItem exportFiles;
-	
+
 	@FXML
 	private MenuItem markAsPlayed;
-	
+
 	@FXML
 	private MenuItem rename;
-	
+
 	@FXML
 	private MenuItem copy;
-	
+
 	@FXML
 	private MenuItem paste;
-	
+
 	@FXML
 	private MenuItem removeMedia;
-	
+
 	@FXML
 	private MenuItem showFile;
-	
+
 	@FXML
 	private MenuItem editFileInfo;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	/**
 	 * The node based on which the Rename or Star Window will be position
 	 */
 	private Node node;
-	
+
 	/** The media. */
 	private Media media;
-	
+
 	/** The controller. */
 	private SmartController controller;
-	
+
 	/** The previous genre. */
 	Genre previousGenre = Genre.UNKNOWN;
-	
+
 	private final String encoding = "UTF-8";
-	
+
 	/** ShopContextMenu */
 	private final ShopContextMenu shopContextMenu = new ShopContextMenu();
-	
+
 	/** PlayContextMenu */
 	private final PlayContextMenu playContextMenu = new PlayContextMenu();
-	
+
 	/**
 	 * Constructor.
 	 */
 	public MediaContextMenu() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaContextMenu.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaContextMenu.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
 	@FXML
 	private void initialize() {
-		
-		//Get Info Buy
+
+		// Get Info Buy
 		getInfoBuy.getItems().addAll(shopContextMenu.getItems());
-		
-		//PlayContextMenu
+
+		// PlayContextMenu
 		getItems().addAll(0, playContextMenu.getItems());
-		
+
 	}
-	
+
 	/**
 	 * Adding the song to deck and starting it.
 	 *
-	 * @param deck
-	 *            the deck
+	 * @param deck the deck
 	 */
 	public void playOnDeck(int deck) {
 		Main.xPlayersList.getXPlayerController(deck).playSong(media.getFilePath());
 	}
-	
+
 	/**
 	 * Shows the context menu based on the variables below.
 	 *
-	 * @param media
-	 *            Given media file
-	 * @param genre
-	 *            the genre
-	 * @param x
-	 *            Horizontal mouse position on the screen
-	 * @param y
-	 *            Vertical mouse position on the screen
-	 * @param smartController
-	 *            The SmartController that is calling this method
+	 * @param media           Given media file
+	 * @param genre           the genre
+	 * @param x               Horizontal mouse position on the screen
+	 * @param y               Vertical mouse position on the screen
+	 * @param smartController The SmartController that is calling this method
 	 * @param node
 	 */
-	public void showContextMenu(Media media , Genre genre , double x , double y , SmartController smartController , Node node) {
-		
+	public void showContextMenu(Media media, Genre genre, double x, double y, SmartController smartController,
+			Node node) {
+
 		// Don't waste resources
 		if (previousGenre != genre)
-			if (genre == Genre.BUYBUTTON) { //Smart trick
+			if (genre == Genre.BUYBUTTON) { // Smart trick
 				getItems().forEach(item -> item.setVisible(false));
 				getInfoBuy.setVisible(true);
 			} else if (media.getSmartControllerGenre() == Genre.LIBRARYMEDIA) {
@@ -179,58 +176,62 @@ public class MediaContextMenu extends ContextMenu {
 				removeMedia.setVisible(false);
 			} else
 				getItems().forEach(item -> item.setVisible(true));
-			
-		//Update ShopContextMenu
+
+		// Update ShopContextMenu
 		shopContextMenu.setMediaTitle(media.getTitle());
-		
-		//Update PlayContextMenu
+
+		// Update PlayContextMenu
 		playContextMenu.setAbsoluteMediaPath(media.getFilePath());
 		playContextMenu.updateItemsImages();
-		
-		//Mark Played or Not Played
-		this.markAsPlayed.setText("Mark as " + ( !Main.playedSongs.containsFile(media.getFilePath()) ? "Played" : "Not Played" ) + " (CTRL+U)");
-		
+
+		// Mark Played or Not Played
+		this.markAsPlayed.setText("Mark as "
+				+ (!Main.playedSongs.containsFile(media.getFilePath()) ? "Played" : "Not Played") + " (CTRL+U)");
+
 		this.node = node;
 		this.media = media;
 		this.controller = smartController;
-		
-		//Fix first time show problem
+
+		// Fix first time show problem
 		if (super.getWidth() == 0) {
 			show(Main.window);
 			hide();
 		}
-		
+
 		// Show it
-		show( ( Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused() ) ? Main.mediaSearchWindow.getWindow() : Main.window,
-				x - super.getWidth(), y - 1);
+		show((Main.mediaSearchWindow.getWindow().isShowing() && Main.mediaSearchWindow.getWindow().isFocused())
+				? Main.mediaSearchWindow.getWindow()
+				: Main.window, x - super.getWidth(), y - 1);
 		previousGenre = genre;
-		
-		//------------Animation------------------
-		
-		//Y axis
+
+		// ------------Animation------------------
+
+		// Y axis
 		double yIni = y - 50;
 		double yEnd = y;
 		super.setY(yIni);
-		
-		//X axis
-		//	double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
-		//	double xEnd = screenX - super.getWidth() + super.getWidth() * 14 / 100;
-		//	super.setX(xIni);
-		//	final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
-		//	xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
-		
-		//Create  Double Property
+
+		// X axis
+		// double xIni = screenX - super.getWidth() + super.getWidth() * 14 / 100 + 30;
+		// double xEnd = screenX - super.getWidth() + super.getWidth() * 14 / 100;
+		// super.setX(xIni);
+		// final DoubleProperty xProperty = new SimpleDoubleProperty(xIni);
+		// xProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+		// Create Double Property
 		final DoubleProperty yProperty = new SimpleDoubleProperty(yIni);
-		yProperty.addListener((ob , n , n1) -> super.setY(n1.doubleValue()));
-		
-		//Create Time Line
-		Timeline timeIn = new Timeline(new KeyFrame(Duration.seconds(0.30), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
-		//new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd, Interpolator.EASE_BOTH)))
+		yProperty.addListener((ob, n, n1) -> super.setY(n1.doubleValue()));
+
+		// Create Time Line
+		Timeline timeIn = new Timeline(
+				new KeyFrame(Duration.seconds(0.30), new KeyValue(yProperty, yEnd, Interpolator.EASE_BOTH)));
+		// new KeyFrame(Duration.seconds(0.5), new KeyValue(xProperty, xEnd,
+		// Interpolator.EASE_BOTH)))
 		timeIn.play();
-		//------------ END of Animation------------------
-		
+		// ------------ END of Animation------------------
+
 	}
-	
+
 	/**
 	 * Open the given website on the build in Chromium
 	 * 
@@ -240,15 +241,15 @@ public class MediaContextMenu extends ContextMenu {
 		Main.webBrowser.createTabAndSelect(url);
 		Main.topBar.goMode(WindowMode.WEBMODE);
 	}
-	
+
 	/**
 	 * @param e
 	 */
 	@FXML
 	public void action(ActionEvent e) {
 		Object source = e.getSource();
-		
-		//markAsPlayed
+
+		// markAsPlayed
 		if (source == markAsPlayed) {
 			if (!Main.playedSongs.containsFile(media.getFilePath())) {
 				Main.playedSongs.add(media.getFilePath(), true);
@@ -258,11 +259,11 @@ public class MediaContextMenu extends ContextMenu {
 					media.timesPlayedProperty().set(0);
 			}
 		}
-		
+
 		// remove media
 		else if (source == removeMedia)
 			controller.prepareDelete(false);
-		
+
 		// rename
 		else if (source == rename)
 			media.rename(node);
@@ -275,31 +276,34 @@ public class MediaContextMenu extends ContextMenu {
 		else if (source == showFile) // File path
 			ActionTool.openFileInExplorer(media.getFilePath());
 		else if (source == editFileInfo) {
-			//More than 1 selected?
+			// More than 1 selected?
 			if (controller.getNormalModeMediaTableViewer().getSelectedCount() > 1)
 				Main.tagWindow.openMultipleAudioFiles(
-						controller.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems().stream().map(Media::getFilePath)
+						controller.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems().stream()
+								.map(Media::getFilePath)
 								.collect(Collectors.toCollection(FXCollections::observableArrayList)),
 						controller.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItem().getFilePath());
-			//Only one file selected
+			// Only one file selected
 			else
 				Main.tagWindow.openAudio(media.getFilePath(), TagTabCategory.BASICINFO, true);
 		} else if (source == exportFiles) { // copyTo
 			Main.exportWindow.show(controller);
 		} else {
 			try {
-				
-				//-----------------------FIND LYRICS------------------------------------------------
+
+				// -----------------------FIND
+				// LYRICS------------------------------------------------
 				if (source == lyricFinderOrg)
-					openWebSite("http://search.lyricfinder.org/?query=" + URLEncoder.encode(media.getTitle(), encoding));
+					openWebSite(
+							"http://search.lyricfinder.org/?query=" + URLEncoder.encode(media.getTitle(), encoding));
 				else if (source == lyricsCom)
 					openWebSite("http://www.lyrics.com/lyrics/" + URLEncoder.encode(media.getTitle(), encoding));
-				
+
 			} catch (UnsupportedEncodingException ex) {
 				ex.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 }

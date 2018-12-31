@@ -26,7 +26,7 @@ import ws.schild.jave.MultimediaObject;
  *
  */
 public class ConverterService extends Service<Boolean> {
-	
+
 	/**
 	 * The full path of audio file
 	 */
@@ -35,186 +35,190 @@ public class ConverterService extends Service<Boolean> {
 	private ConvertProgressListener listener = new ConvertProgressListener();
 	private final SimpleDoubleProperty convertProgress = new SimpleDoubleProperty();
 	private Encoder encoder;
-	
+
 	/**
 	 * The XPlayerController
 	 */
 	private final XPlayerController xPlayerController;
-	
+
 	/**
 	 * Constructor
 	 */
 	public ConverterService(XPlayerController xPlayerController) {
 		this.xPlayerController = xPlayerController;
-		
+
 		this.setOnSucceeded(s -> done());
 		this.setOnCancelled(c -> done());
 		this.setOnFailed(c -> done());
 	}
-	
+
 	/**
 	 * Start the Service for the given file
 	 * 
-	 * @param <convertProgress>
+	 * @param                  <convertProgress>
 	 * 
 	 * @param fileAbsolutePath
 	 */
 	public void convert(String fileAbsolutePath) {
-		
-		//Set the full fileAbsolutePath
+
+		// Set the full fileAbsolutePath
 		this.fileAbsolutePath = fileAbsolutePath;
-		
-		//Try to abort
+
+		// Try to abort
 		if (encoder != null)
 			encoder.abortEncoding();
-		
-		//Set Progress to 0
+
+		// Set Progress to 0
 		convertProgress.set(-1.0);
-		
+
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
 		xPlayerController.getRegionStackPane().visibleProperty().bind(runningProperty());
 		xPlayerController.getProgressIndicator().progressProperty().bind(convertProgress);
-		
-		//Restart the Service
+
+		// Restart the Service
 		restart();
 	}
-	
+
 	/**
 	 * When the Service is done
 	 */
 	private void done() {
-		
-		//		// Remove the unidirectional binding
-		//		xPlayerController.getFxLabel().textProperty().unbind();
-		//		xPlayerController.getRegionStackPane().visibleProperty().unbind();
-		//		xPlayerController.getRegionStackPane().setVisible(false);
-		
+
+		// // Remove the unidirectional binding
+		// xPlayerController.getFxLabel().textProperty().unbind();
+		// xPlayerController.getRegionStackPane().visibleProperty().unbind();
+		// xPlayerController.getRegionStackPane().setVisible(false);
+
 	}
-	
+
 	@Override
 	protected Task<Boolean> createTask() {
 		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
 				boolean succeeded = true;
-				
+
 				try {
-					
+
 					// Stop the previous audio
 					updateMessage("Stop previous...");
 					xPlayerController.getxPlayer().stop();
-					
+
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
-				
-				//Set Message
+
+				// Set Message
 				updateMessage("Converting ( " + InfoTool.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
-				
-				//Create the media folder if not existing
+
+				// Create the media folder if not existing
 				String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
 				if (!ActionTool.createFileOrFolder(folderName, FileType.DIRECTORY)) {
-					ActionTool.showNotification("Internal Error", "Can't create Media Folder for converted files", Duration.seconds(4), NotificationType.WARNING);
+					ActionTool.showNotification("Internal Error", "Can't create Media Folder for converted files",
+							Duration.seconds(4), NotificationType.WARNING);
 					succeeded = false;
 				}
-				
-				//Check if it is already .mp3
+
+				// Check if it is already .mp3
 				if (!"mp3".equals(InfoTool.getFileExtension(fileAbsolutePath))) {
-					newFileAsbolutePath = folderName + File.separator + InfoTool.getFileTitle(fileAbsolutePath) + ".mp3";
-					
-					//Convert any audio format to .mp3
+					newFileAsbolutePath = folderName + File.separator + InfoTool.getFileTitle(fileAbsolutePath)
+							+ ".mp3";
+
+					// Convert any audio format to .mp3
 					try {
-						
-						//Files
+
+						// Files
 						File source = new File(fileAbsolutePath);
 						File target = new File(newFileAsbolutePath);
-						
-						//Audio Attributes
+
+						// Audio Attributes
 						AudioAttributes audio = new AudioAttributes();
 						audio.setCodec("libmp3lame");
 						audio.setBitRate(128000);
 						audio.setChannels(2);
 						audio.setSamplingRate(44100);
-						
-						//Encoding attributes
+
+						// Encoding attributes
 						EncodingAttributes attrs = new EncodingAttributes();
 						attrs.setFormat("mp3");
 						attrs.setAudioAttributes(audio);
-						
-						//Encode          
+
+						// Encode
 						if (encoder != null)
 							encoder.abortEncoding();
 						encoder = encoder != null ? encoder : new Encoder();
 						encoder.encode(new MultimediaObject(source), target, attrs, listener);
-						
+
 					} catch (Exception ex) {
 						ex.printStackTrace();
 						succeeded = false;
 					}
 				} else
 					newFileAsbolutePath = fileAbsolutePath;
-				
-				//Set Message
+
+				// Set Message
 				super.updateMessage("Convert finished...");
-				
-				//System.out.println("After the error")
-				
-				//Check if succeeded
+
+				// System.out.println("After the error")
+
+				// Check if succeeded
 				if (succeeded)
 					Platform.runLater(() -> xPlayerController.playSong(newFileAsbolutePath));
 				else
-					ActionTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ", Duration.seconds(4), NotificationType.WARNING);
-				
+					ActionTool.showNotification("Convert failed", "Couldn't convert given media to .mp3 ",
+							Duration.seconds(4), NotificationType.WARNING);
+
 				return true;
 			}
 		};
 	}
-	
+
 	public class ConvertProgressListener implements EncoderProgressListener {
 		int current = 1;
-		
+
 		public ConvertProgressListener() {
 		}
-		
+
 		public void message(String m) {
-			//      if ((ConverterFrame.this.inputfiles.length > 1) && 
-			//        (this.current < ConverterFrame.this.inputfiles.length)) {
-			//        ConverterFrame.this.encodingMessageLabel.setText(this.current + "/" + ConverterFrame.this.inputfiles.length);
-			//      }
+			// if ((ConverterFrame.this.inputfiles.length > 1) &&
+			// (this.current < ConverterFrame.this.inputfiles.length)) {
+			// ConverterFrame.this.encodingMessageLabel.setText(this.current + "/" +
+			// ConverterFrame.this.inputfiles.length);
+			// }
 		}
-		
+
 		public void progress(int p) {
-			
+
 			double progress = p / 1000.00;
-			//System.out.println(progress);
-			
+			// System.out.println(progress);
+
 			Platform.runLater(() -> convertProgress.set(progress));
-			//      ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
-			//      if (p >= 1000) {
-			//        if (ConverterFrame.this.inputfiles.length > 1)
-			//        {
-			//          this.current += 1;
-			//          if (this.current > ConverterFrame.this.inputfiles.length)
-			//          {
-			//            ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
-			//            ConverterFrame.this.convertButton.setEnabled(true);
-			//          }
-			//        }
-			//        else if (p == 1001)
-			//        {
-			//          ConverterFrame.this.encodingMessageLabel.setText("Encoding Failed!");
-			//          ConverterFrame.this.convertButton.setEnabled(true);
-			//        }
-			//        else
-			//        {
-			//          ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
-			//          ConverterFrame.this.convertButton.setEnabled(true);
-			//        }
+			// ConverterFrame.this.encodingProgressLabel.setText(progress + "%");
+			// if (p >= 1000) {
+			// if (ConverterFrame.this.inputfiles.length > 1)
+			// {
+			// this.current += 1;
+			// if (this.current > ConverterFrame.this.inputfiles.length)
+			// {
+			// ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
+			// ConverterFrame.this.convertButton.setEnabled(true);
+			// }
+			// }
+			// else if (p == 1001)
+			// {
+			// ConverterFrame.this.encodingMessageLabel.setText("Encoding Failed!");
+			// ConverterFrame.this.convertButton.setEnabled(true);
+			// }
+			// else
+			// {
+			// ConverterFrame.this.encodingMessageLabel.setText("Encoding Complete!");
+			// ConverterFrame.this.convertButton.setEnabled(true);
+			// }
 		}
-		
+
 		public void sourceInfo(MultimediaInfo m) {
 		}
 	}
-	
+
 }

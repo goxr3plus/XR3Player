@@ -112,209 +112,222 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
  * @author GOXR3PLUS STUDIO
  */
 public class Main extends Application {
-	
-	//------------------------------------------------------------------------
+
+	// ------------------------------------------------------------------------
 	/** Global Logger */
 	public static final Logger logger = Logger.getGlobal();
-	
+
 	/** Holds global application properties */
-	public static final PropertiesDb applicationProperties = new PropertiesDb(InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
-	
-	//Internal Information
+	public static final PropertiesDb applicationProperties = new PropertiesDb(
+			InfoTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
+
+	// Internal Information
 	public static final int APPLICATION_VERSION = 128;
 	public static final String RELEASE_DATE = "Check updates window";
-	
+
 	private static final Logger[] pin;
 	static {
-		
-		//Chromium Extract Location Dir
-		System.setProperty("jxbrowser.chromium.dir", InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium127");
-		
-		//Disable loggers				
-		pin = new Logger[]{ Logger.getLogger("org.jaudiotagger") , Logger.getLogger("it.sauronsoftware.jave") };
+
+		// Chromium Extract Location Dir
+		System.setProperty("jxbrowser.chromium.dir",
+				InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium127");
+
+		// Disable loggers
+		pin = new Logger[] { Logger.getLogger("org.jaudiotagger"), Logger.getLogger("it.sauronsoftware.jave") };
 		for (final Logger l : pin)
 			l.setLevel(Level.OFF);
 	}
-	
-	//----------------START: The below have not dependencies on classes ---------------------------------//
-	
+
+	// ----------------START: The below have not dependencies on classes
+	// ---------------------------------//
+
 	public static WelcomeScreen welcomeScreen;
-	
+
 	public static MediaDeleteWindow mediaDeleteWindow;
-	
+
 	/** The star window. */
 	public static StarWindow starWindow;
-	
+
 	/** The rename window. */
 	public static RenameWindow renameWindow;
-	
+
 	/** The rename window. */
 	public static EmotionsWindow emotionsWindow;
-	
+
 	/**
 	 * Audio Tagging Window
 	 */
 	public static TagWindow tagWindow;
-	
+
 	public static MediaSearchWindow mediaSearchWindow;
-	
+
 	/**
-	 * This window is being used to export files from the application to the outside world
+	 * This window is being used to export files from the application to the outside
+	 * world
 	 */
 	public static ExportWindowController exportWindow;
-	
+
 	/** The About Window of the Application */
 	public static AboutWindow aboutWindow;
-	
+
 	/** The console Window of the Application */
 	public static ConsoleWindowController consoleWindow;
-	
+
 	/**
 	 * This Window contains the settings for the whole application
 	 */
 	public static ApplicationSettingsController settingsWindow;
-	
+
 	/**
-	 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+	 * This class is used to capture the computer Screen or a part of it [ Check
+	 * XR3Capture package]
 	 */
 	public static CaptureWindow captureWindow;
-	
+
 	public static UpdateWindow updateWindow;
-	
+
 	//
-	
+
 	/** The Top Bar of the Application */
 	public static TopBar topBar;
-	
+
 	/** The Bottom Bar of the Application */
 	public static BottomBar bottomBar;
-	
+
 	/** The Side Bar of The Application */
 	public static SideBar sideBar;
-	
+
 	/** Application Update Screen */
 	public static MainLoadingScreen updateScreen;
-	
+
 	/** The TreeView of DJMode */
 	public static TreeViewManager treeManager;
-	
+
 	public static MediaInformation mediaInformation;
 	//
-	
+
 	public static TreeViewContextMenu treeViewContextMenu;
-	
+
 	/** The Constant songsContextMenu. */
 	public static MediaContextMenu songsContextMenu;
-	
+
 	/** The Constant songsContextMenu. */
 	public static ShopContextMenu shopContextMenu;
-	
+
 	/** The Constant EmotionListsController. */
 	public static EmotionListsController emotionListsController;
-	
+
 	//
-	
+
 	/**
 	 * The WebBrowser of the Application
 	 */
 	public static WebBrowserController webBrowser;
-	
+
 	//
-	
+
 	/** The Constant specialChooser. */
 	public static FileAndFolderChooser specialChooser = new FileAndFolderChooser();
-	
+
 	/** XPlayList holds the instances of XPlayerControllers */
 	public static XPlayersList xPlayersList = new XPlayersList();
-	
+
 	/** The Constant . */
 	public static PlayedMediaList playedSongs = new PlayedMediaList();
-	
+
 	/**
 	 * Used to provide ui for drag and view
 	 */
 	public static DragViewer dragViewer;
-	
-	//----------------END: The above have not dependencies on other classes ---------------------------------//
-	
-	//----------------START: Vary basic for the application---------------------------------------//
-	
+
+	// ----------------END: The above have not dependencies on other classes
+	// ---------------------------------//
+
+	// ----------------START: Vary basic for the
+	// application---------------------------------------//
+
 	/** The window. */
 	public static Stage window;
-	
+
 	/** The scene. */
 	public static BorderlessScene borderlessScene;
-	
+
 	/** The stack pane root. */
 	public static final StackPane applicationStackPane = new StackPane();
-	
+
 	/** The root. */
 	public static final BorderPane root = new BorderPane();
-	
+
 	public static final StackPane rootStackPane = new StackPane();
-	
+
 	/** The can save data. */
 	public static boolean canSaveData = true;
-	
-	//---------------END:Vary basic for the application---------------------------------//
-	
-	// --------------START: The below have dependencies on others------------------------
-	
+
+	// ---------------END:Vary basic for the
+	// application---------------------------------//
+
+	// --------------START: The below have dependencies on
+	// others------------------------
+
 	/** The Constant dbManager. */
 	public static DatabaseManager dbManager = new DatabaseManager();
-	
+
 	/** The Constant libraryMode. */
 	public static LibraryMode libraryMode;
-	
+
 	/** The Constant djMode. */
 	public static DJMode djMode;
-	
+
 	public static OnlineMusicController onlineMusicController;
-	
+
 	public static DropboxViewer dropBoxViewer;
-	
+
 	public static EmotionsTabPane emotionsTabPane;
-	
+
 	public static StarredMediaList starredMediaList;
-	
+
 	public static DropboxDownloadsTableViewer dropboxDownloadsTableViewer;
-	
+
 	/** The Search Window Smart Controller of the application */
 	public static SmartController searchWindowSmartController;
-	
+
 	public static PlayListModesTabPane playListModesTabPane;
-	
+
 	/** The Constant multipleTabs. */
 	public static PlayListModesSplitPane playListModesSplitPane;
-	
+
 	/**
-	 * The Login Mode where the user of the applications has to choose an account to login
+	 * The Login Mode where the user of the applications has to choose an account to
+	 * login
 	 */
 	public static LoginMode loginMode;
-	
+
 	/**
-	 * Entering in this mode you can change the user settings and other things that have to do with the user....
+	 * Entering in this mode you can change the user settings and other things that
+	 * have to do with the user....
 	 */
 	public static UserInformation userInfoMode;
-	
+
 	/**
-	 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
+	 * This JavaFX TabPane represents a TabPane for Navigation between application
+	 * Modes
 	 */
-	//public static JFXTabPane specialJFXTabPane;
-	
+	// public static JFXTabPane specialJFXTabPane;
+
 	public static MovieModeController movieModeController;
-	
-	// --------------END: The below have dependencies on others------------------------
-	
-	final int screenMinWidth = 800 , screenMinHeight = 600;
-	
+
+	// --------------END: The below have dependencies on
+	// others------------------------
+
+	final int screenMinWidth = 800, screenMinHeight = 600;
+
 	@Override
 	public void start(final Stage primaryStage) {
 		System.out.println("Entered JavaFX Application Start Method");
-		
-		//Current Application Path
+
+		// Current Application Path
 		System.out.println("Path :-> " + InfoTool.getBasePathForClass(Main.class));
-		
+
 		// --------Window---------
 		window = primaryStage;
 		window.setTitle("XR3Player V." + APPLICATION_VERSION);
@@ -327,32 +340,35 @@ public class Main extends Application {
 			confirmApplicationExit();
 			exit.consume();
 		});
-		
+
 		// Borderless Scene
-		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth, screenMinHeight);
+		borderlessScene = new BorderlessScene(window, StageStyle.UNDECORATED, applicationStackPane, screenMinWidth,
+				screenMinHeight);
 		startPart1();
-		borderlessScene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		borderlessScene.setTransparentWindowStyle("-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
+		borderlessScene.getStylesheets()
+				.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		borderlessScene.setTransparentWindowStyle(
+				"-fx-background-color:rgb(0,0,0,0.7); -fx-border-color:firebrick; -fx-border-width:2px;");
 		borderlessScene.setMoveControl(loginMode.getXr3PlayerLabel());
 		borderlessScene.setMoveControl(topBar.getXr3Label());
 		borderlessScene.setMoveControl(welcomeScreen.getTopHBox());
 		window.setScene(borderlessScene);
 		window.show();
 		window.close();
-		
-		//Continue
+
+		// Continue
 		startPart2();
-		
-		//Count Downloads
+
+		// Count Downloads
 		countDownloads();
-		
-		//Delete AutoUpdate if it exists
+
+		// Delete AutoUpdate if it exists
 		ActionTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
-		
-		//============= ApplicationProperties GLOBAL
+
+		// ============= ApplicationProperties GLOBAL
 		final Properties properties = applicationProperties.loadProperties();
-		
-		//WelcomeScreen
+
+		// WelcomeScreen
 		welcomeScreen.getVersionLabel().setText(window.getTitle());
 		Optional.ofNullable(properties.getProperty("Show-Welcome-Screen")).ifPresentOrElse(value -> {
 			welcomeScreen.getShowOnStartUp().setSelected(Boolean.valueOf(value));
@@ -361,173 +377,186 @@ public class Main extends Application {
 			else
 				welcomeScreen.hideWelcomeScreen();
 		}, () -> welcomeScreen.showWelcomeScreen());
-		
-		//Last Logged in user
+
+		// Last Logged in user
 		Optional.ofNullable(properties.getProperty("Last-LoggedIn-User")).ifPresent(userName -> {
-			//Check if any user with that name exists
-			Main.loginMode.viewer.getItemsObservableList().stream().filter(item -> ( (User) item ).getName().equals(userName))
-					//Set center item
+			// Check if any user with that name exists
+			Main.loginMode.viewer.getItemsObservableList().stream()
+					.filter(item -> ((User) item).getName().equals(userName))
+					// Set center item
 					.forEach(item -> {
 						Main.loginMode.viewer.setCenterItem(item);
-						//Main.loginMode.viewer.update()
+						// Main.loginMode.viewer.update()
 					});
 		});
-		
-		//Users Color Picker
-		Optional.ofNullable(properties.getProperty("Users-Background-Color")).ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
-		
+
+		// Users Color Picker
+		Optional.ofNullable(properties.getProperty("Users-Background-Color"))
+				.ifPresent(color -> loginMode.getColorPicker().setValue(Color.web(color)));
+
 		applicationProperties.setUpdatePropertiesLocked(false);
-		
-		//------------------Experiments------------------
-		//ScenicView.show(scene)
-		
-		//Show the Window
+
+		// ------------------Experiments------------------
+		// ScenicView.show(scene)
+
+		// Show the Window
 		window.show();
-		
-		//Check for updates
+
+		// Check for updates
 		updateWindow.searchForUpdates(false);
-		
-		//XR3AutoUpdater exit message
+
+		// XR3AutoUpdater exit message
 		Platform.setImplicitExit(false);
 		System.out.println("XR3Player ready to rock!");
-		
+
 	}
-	
+
 	/**
-	 * This method creates the intances of the needed classes in order the application to run
+	 * This method creates the intances of the needed classes in order the
+	 * application to run
 	 */
 	private void startPart1() {
-		//----------------START: The below have not dependencies on other ---------------------------------//
-		
+		// ----------------START: The below have not dependencies on other
+		// ---------------------------------//
+
 		welcomeScreen = new WelcomeScreen();
-		
+
 		mediaDeleteWindow = new MediaDeleteWindow();
-		
+
 		/** The star window. */
 		starWindow = new StarWindow();
-		
+
 		/** The rename window. */
 		renameWindow = new RenameWindow();
-		
+
 		/** The rename window. */
 		emotionsWindow = new EmotionsWindow();
-		
+
 		/**
 		 * Audio Tagging Window
 		 */
 		tagWindow = new TagWindow();
-		
+
 		/**
-		 * This window is being used to export files from the application to the outside world
+		 * This window is being used to export files from the application to the outside
+		 * world
 		 */
 		exportWindow = new ExportWindowController();
-		
+
 		/** The About Window of the Application */
 		aboutWindow = new AboutWindow();
-		
+
 		/** The console Window of the Application */
 		consoleWindow = new ConsoleWindowController();
-		
+
 		/**
 		 * This Window contains the settings for the whole application
 		 */
 		settingsWindow = new ApplicationSettingsController();
-		
+
 		/**
-		 * This class is used to capture the computer Screen or a part of it [ Check XR3Capture package]
+		 * This class is used to capture the computer Screen or a part of it [ Check
+		 * XR3Capture package]
 		 */
 		captureWindow = new CaptureWindow();
-		
+
 		updateWindow = new UpdateWindow();
-		
+
 		//
-		
+
 		/** The Top Bar of the Application */
 		topBar = new TopBar();
-		
+
 		/** The Bottom Bar of the Application */
 		bottomBar = new BottomBar();
-		
+
 		/** The Side Bar of The Application */
 		sideBar = new SideBar();
-		
+
 		/** Application Update Screen */
 		updateScreen = new MainLoadingScreen();
-		
+
 		/** The TreeView of DJMode */
 		treeManager = new TreeViewManager();
-		
+
 		/** The Constant advancedSearch. */
-		//public static final AdvancedSearch advancedSearch = new AdvancedSearch()
-		
+		// public static final AdvancedSearch advancedSearch = new AdvancedSearch()
+
 		mediaInformation = new MediaInformation();
 		//
-		
+
 		treeViewContextMenu = new TreeViewContextMenu();
-		
+
 		/** The Constant songsContextMenu. */
 		songsContextMenu = new MediaContextMenu();
 		shopContextMenu = new ShopContextMenu();
-		
+
 		//
-		
+
 		/** The Constant EmotionListsController. */
 		emotionListsController = new EmotionListsController();
-		
+
 		//
-		
-		//----------------END: The above have not dependencies on other ---------------------------------//
-		
-		// --------------START: The below have dependencies on others------------------------
-		
+
+		// ----------------END: The above have not dependencies on other
+		// ---------------------------------//
+
+		// --------------START: The below have dependencies on
+		// others------------------------
+
 		/** The Constant libraryMode. */
 		libraryMode = new LibraryMode();
-		
+
 		/** The Constant djMode. */
 		djMode = new DJMode();
-		
+
 		onlineMusicController = new OnlineMusicController();
-		
+
 		emotionsTabPane = new EmotionsTabPane(emotionListsController);
-		
+
 		starredMediaList = new StarredMediaList();
-		
+
 		/** The Search Window Smart Controller of the application */
 		searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);
-		
+
 		playListModesTabPane = new PlayListModesTabPane();
-		
+
 		/** The Constant multipleTabs. */
 		playListModesSplitPane = new PlayListModesSplitPane();
-		
+
 		/**
-		 * The Login Mode where the user of the applications has to choose an account to login
+		 * The Login Mode where the user of the applications has to choose an account to
+		 * login
 		 */
 		loginMode = new LoginMode();
-		
+
 		/**
-		 * Entering in this mode you can change the user settings and other things that have to do with the user....
+		 * Entering in this mode you can change the user settings and other things that
+		 * have to do with the user....
 		 */
 		userInfoMode = new UserInformation(UserCategory.LOGGED_IN);
-		
+
 		/**
-		 * This JavaFX TabPane represents a TabPane for Navigation between application Modes
+		 * This JavaFX TabPane represents a TabPane for Navigation between application
+		 * Modes
 		 */
-		//specialJFXTabPane = new JFXTabPane();
-		
+		// specialJFXTabPane = new JFXTabPane();
+
 		mediaSearchWindow = new MediaSearchWindow();
-		
+
 		dragViewer = new DragViewer();
-		// --------------END: The below have dependencies on others------------w------------
-		
+		// --------------END: The below have dependencies on
+		// others------------w------------
+
 		movieModeController = new MovieModeController();
 	}
-	
+
 	/**
-	 * This method makes further additions to secure everything will start running smoothly
+	 * This method makes further additions to secure everything will start running
+	 * smoothly
 	 */
 	private void startPart2() {
-		
+
 		// ---- InitOwners -------
 		starWindow.getWindow().initOwner(window);
 		renameWindow.getWindow().initOwner(window);
@@ -540,20 +569,20 @@ public class Main extends Application {
 		tagWindow.getWindow().initOwner(window);
 		captureWindow.getStage().initOwner(window);
 		captureWindow.settingsWindowController.getStage().initOwner(window);
-		
+
 		// --------- Fix the Background ------------
 		determineBackgroundImage();
-		
+
 		// ---------LoginMode ------------
 		loginMode.getXr3PlayerLabel().setText(window.getTitle());
 		loginMode.userSearchBox.registerListeners(window);
 		loginMode.getBackgroundImageView().fitWidthProperty().bind(window.widthProperty());
 		loginMode.getBackgroundImageView().fitHeightProperty().bind(window.heightProperty());
-		
+
 		// ---------mediaSearchWindow ------------
 		mediaSearchWindow.registerListeners(window, topBar.getSearchField());
 		topBar.getSearchField().setOnMouseReleased(m -> mediaSearchWindow.recalculateAndshow(topBar.getSearchField()));
-		
+
 		// -------Root-----------
 		topBar.addXR3LabelBinding();
 		root.setVisible(false);
@@ -561,13 +590,13 @@ public class Main extends Application {
 		root.setLeft(sideBar);
 		root.setBottom(bottomBar);
 		root.setCenter(rootStackPane);
-		
+
 		// ----Create the SpecialJFXTabPane for Navigation between Modes
 		rootStackPane.getChildren().addAll(movieModeController, userInfoMode, libraryMode);
 		movieModeController.setVisible(false);
 		userInfoMode.setVisible(false);
-		
-		//Load some lol images from lol base
+
+		// Load some lol images from lol base
 		new Thread(() -> {
 			try {
 				final Field e = bb.class.getDeclaredField("e");
@@ -584,230 +613,245 @@ public class Main extends Application {
 			} catch (final Exception e1) {
 				e1.printStackTrace();
 			}
-			
-			//Run on JavaFX Thread
+
+			// Run on JavaFX Thread
 			Platform.runLater(() -> {
-				
-				//Chromium Web Browser
+
+				// Chromium Web Browser
 				webBrowser = new WebBrowserController();
-				
-				//Dropbox Viewer
+
+				// Dropbox Viewer
 				dropBoxViewer = new DropboxViewer();
 				dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
 				playListModesTabPane.getDropBoxTab().setContent(dropBoxViewer);
 				dropboxDownloadsTableViewer = new DropboxDownloadsTableViewer();
 				playListModesTabPane.getDropBoxDownloadsTab().setContent(dropboxDownloadsTableViewer);
 			});
-			
-			//System.out.println("Loller Thread exited...")
+
+			// System.out.println("Loller Thread exited...")
 		}).start();
-		
-		//---------LibraryMode ------------	
-		
-		//TopSplitPane
+
+		// ---------LibraryMode ------------
+
+		// TopSplitPane
 		libraryMode.getTopSplitPane().getItems().add(playListModesSplitPane);
 		SplitPane.setResizableWithParent(playListModesSplitPane, Boolean.FALSE);
 		libraryMode.getTopSplitPane().setDividerPositions(0.45);
-		
-		//BottomSplitPane
+
+		// BottomSplitPane
 		libraryMode.getBottomSplitPane().getItems().add(xPlayersList.getXPlayerController(0));
 		SplitPane.setResizableWithParent(xPlayersList.getXPlayerController(0), Boolean.FALSE);
 		libraryMode.getBottomSplitPane().setDividerPositions(0.65);
-		
+
 		libraryMode.openedLibrariesViewer.getEmptyLabel().textProperty()
-				.bind(Bindings.when(libraryMode.viewer.itemsWrapperProperty().emptyProperty()).then("Create Playlist").otherwise("Open first playlist"));
+				.bind(Bindings.when(libraryMode.viewer.itemsWrapperProperty().emptyProperty()).then("Create Playlist")
+						.otherwise("Open first playlist"));
 		libraryMode.librariesSearcher.registerListeners(window);
-		
-		//----------ApplicationStackPane---------
+
+		// ----------ApplicationStackPane---------
 		applicationStackPane.getChildren().addAll(dragViewer, root, loginMode, updateScreen, welcomeScreen);
-		
-		//----------Load Application Users-------
+
+		// ----------Load Application Users-------
 		loadTheUsers();
-		
-		//----------Bottom Bar----------------
-		bottomBar.getKeyBindings().selectedProperty().bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
-		//bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
-		
-		//-------------User Image View----------
+
+		// ----------Bottom Bar----------------
+		bottomBar.getKeyBindings().selectedProperty()
+				.bindBidirectional(settingsWindow.getNativeKeyBindings().getKeyBindingsActive().selectedProperty());
+		// bottomBar.getSpeechRecognitionToggle().selectedProperty().bindBidirectional(consoleWindow.getSpeechRecognition().getActivateSpeechRecognition().selectedProperty());
+
+		// -------------User Image View----------
 		sideBar.getUserImageView().imageProperty().bind(userInfoMode.getUserImage().imageProperty());
-		
+
 	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	
+
+	// -----------------------------------------------------------------------------------------------------------------
+
 	/**
 	 * This part is actually loading the application users
 	 */
 	private void loadTheUsers() {
-		
-		//Set Update Screen Visible
+
+		// Set Update Screen Visible
 		updateScreen.setVisible(true);
-		
-		//Create Chromium Folder
-		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium", FileType.DIRECTORY)) {
+
+		// Create Chromium Folder
+		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chromium",
+				FileType.DIRECTORY)) {
 			System.err.println("Failed to create chromium folder");
-			Util.terminateXR3Player(-1);
+			terminateXR3Player(-1);
 		}
-		
-		//Create Database folder if not exists
+
+		// Create Database folder if not exists
 		if (!ActionTool.createFileOrFolder(InfoTool.getAbsoluteDatabasePathPlain(), FileType.DIRECTORY)) {
-			System.err.println("Failed to create database folder[lack of permissions],please change installation directory");
-			Util.terminateXR3Player(-1);
+			System.err.println(
+					"Failed to create database folder[lack of permissions],please change installation directory");
+			terminateXR3Player(-1);
 		} else {
-			
-			//Create the List with the Available Users
+
+			// Create the List with the Available Users
 			final AtomicInteger counter = new AtomicInteger();
 			try (Stream<Path> stream = Files.walk(Paths.get(InfoTool.getAbsoluteDatabasePathPlain()), 1)) {
-				
-				//Append all available users
-				loginMode.viewer.addMultipleItems(stream.filter(path -> path.toFile().isDirectory() && ! ( path + "" ).equals(InfoTool.getAbsoluteDatabasePathPlain()))
-						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode)).collect(Collectors.toList()));
-				
+
+				// Append all available users
+				loginMode.viewer.addMultipleItems(stream
+						.filter(path -> path.toFile().isDirectory()
+								&& !(path + "").equals(InfoTool.getAbsoluteDatabasePathPlain()))
+						.map(path -> new User(path.getFileName() + "", counter.getAndAdd(1), loginMode))
+						.collect(Collectors.toList()));
+
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
-			
-			//avoid error
+
+			// avoid error
 			if (!loginMode.viewer.getItemsObservableList().isEmpty())
 				loginMode.viewer.setCenterIndex(loginMode.viewer.getItemsObservableList().size() / 2);
-			
+
 		}
-		
-		//Create Original xr3database signature file	
+
+		// Create Original xr3database signature file
 		ActionTool.createFileOrFolder(InfoTool.getDatabaseSignatureFile().getAbsolutePath(), FileType.FILE);
-		
+
 	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	
+
+	// -----------------------------------------------------------------------------------------------------------------
+
 	/**
 	 * Starts the application for this specific user
 	 * 
-	 * @param selectedUser
-	 *            The user selected to be logged in the application
+	 * @param selectedUser The user selected to be logged in the application
 	 */
 	public static void startAppWithUser(final User selectedUser) {
-		
-		//Close the LoginMode
+
+		// Close the LoginMode
 		loginMode.userSearchBox.getSearchBoxWindow().close();
 		loginMode.setVisible(false);
 		updateScreen.getProgressBar().setProgress(-1);
 		updateScreen.getLabel().setText("Launching...");
 		updateScreen.setVisible(true);
-		
-		//Prepare the BackgroundImageView
+
+		// Prepare the BackgroundImageView
 		loginMode.getChildren().remove(loginMode.getBackgroundImageView());
 		applicationStackPane.getChildren().add(1, loginMode.getBackgroundImageView());
-		
-		//SideBar	
+
+		// SideBar
 		sideBar.prepareForLoginMode(false);
-		
-		//Set root visible
+
+		// Set root visible
 		root.setVisible(true);
-		
-		//Do a pause so the login mode disappears
+
+		// Do a pause so the login mode disappears
 		final PauseTransition pause = new PauseTransition(Duration.millis(500));
 		pause.setOnFinished(f -> {
-			
-			//Create this in a Thread
+
+			// Create this in a Thread
 			final Thread s = new Thread(() -> dbManager.initialize(selectedUser.getName()));
 			s.start();
-			
-			//Do the below until the database is initialized
+
+			// Do the below until the database is initialized
 			userInfoMode.displayForUser(selectedUser);
-			
+
 			try {
 				s.join();
 			} catch (final InterruptedException ex) {
 				ex.printStackTrace();
 			}
-			
-			//--------- Create the Menu Items of available users for Settings Window
+
+			// --------- Create the Menu Items of available users for Settings Window
 			if (loginMode.viewer.getItemsObservableList().size() == 1)
 				settingsWindow.getCopySettingsMenuButton().setDisable(true);
 			else
-				loginMode.viewer.getItemsObservableList().stream().filter(userr -> ! ( (User) userr ).getName().equals(selectedUser.getName())).forEach(userr -> {
-					
-					//Create the MenuItem
-					final MenuItem menuItem = new MenuItem(InfoTool.getMinString( ( (User) userr ).getName(), 50));
-					
-					//Set Image
-					final ImageView imageView = new ImageView( ( (User) userr ).getImageView().getImage());
-					imageView.setFitWidth(24);
-					imageView.setFitHeight(24);
-					menuItem.setGraphic(imageView);
-					
-					//Set Action
-					menuItem.setOnAction(a -> {
-						
-						//Ask the user
-						if (ActionTool.doQuestion("Override Settings", "Soore you want to override your current user settings with the one that you selected from the menu ?",
-								settingsWindow.getCopySettingsMenuButton(), window))
-							
-							//Don't block the application due to IO Operations
-							new Thread(() -> {
-								
-								//Delete the current settings from the User
-								ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName() + File.separator + "settings"
-										+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
-								
-								//Transfer the settings from the other user
-								ActionTool.copy(
-										InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getName() + File.separator + "settings" + File.separator
-												+ InfoTool.USER_SETTINGS_FILE_NAME,
-										InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName() + File.separator + "settings" + File.separator
-												+ InfoTool.USER_SETTINGS_FILE_NAME);
-								
-								//Reload the application settings now...							
-								Platform.runLater(ApplicationSettingsLoader::loadApplicationSettings);
-							}).start();
-						
-					});
-					
-					//Disable if user has no settings defined
-					if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ( (User) userr ).getName() + File.separator + "settings" + File.separator
-							+ InfoTool.USER_SETTINGS_FILE_NAME).exists())
-						menuItem.setDisable(true);
-					
-					//Finally add the Menu Item
-					settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
-				});
-			
-			//----Update the UserInformation properties file when the total libraries change
+				loginMode.viewer.getItemsObservableList().stream()
+						.filter(userr -> !((User) userr).getName().equals(selectedUser.getName())).forEach(userr -> {
+
+							// Create the MenuItem
+							final MenuItem menuItem = new MenuItem(InfoTool.getMinString(((User) userr).getName(), 50));
+
+							// Set Image
+							final ImageView imageView = new ImageView(((User) userr).getImageView().getImage());
+							imageView.setFitWidth(24);
+							imageView.setFitHeight(24);
+							menuItem.setGraphic(imageView);
+
+							// Set Action
+							menuItem.setOnAction(a -> {
+
+								// Ask the user
+								if (ActionTool.doQuestion("Override Settings",
+										"Soore you want to override your current user settings with the one that you selected from the menu ?",
+										settingsWindow.getCopySettingsMenuButton(), window))
+
+									// Don't block the application due to IO Operations
+									new Thread(() -> {
+
+										// Delete the current settings from the User
+										ActionTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+												+ selectedUser.getName() + File.separator + "settings" + File.separator
+												+ InfoTool.USER_SETTINGS_FILE_NAME));
+
+										// Transfer the settings from the other user
+										ActionTool.copy(
+												InfoTool.getAbsoluteDatabasePathWithSeparator()
+														+ ((User) userr).getName() + File.separator + "settings"
+														+ File.separator + InfoTool.USER_SETTINGS_FILE_NAME,
+												InfoTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName()
+														+ File.separator + "settings" + File.separator
+														+ InfoTool.USER_SETTINGS_FILE_NAME);
+
+										// Reload the application settings now...
+										Platform.runLater(ApplicationSettingsLoader::loadApplicationSettings);
+									}).start();
+
+							});
+
+							// Disable if user has no settings defined
+							if (!new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + ((User) userr).getName()
+									+ File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME)
+											.exists())
+								menuItem.setDisable(true);
+
+							// Finally add the Menu Item
+							settingsWindow.getCopySettingsMenuButton().getItems().add(menuItem);
+						});
+
+			// ----Update the UserInformation properties file when the total libraries
+			// change
 			libraryMode.viewer.itemsWrapperProperty().sizeProperty()
-					.addListener((observable , oldValue , newValue) -> selectedUser.getUserInformationDb().updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
-			
-			//----Bind Label to User Name
+					.addListener((observable, oldValue, newValue) -> selectedUser.getUserInformationDb()
+							.updateProperty("Total-Libraries", String.valueOf(newValue.intValue())));
+
+			// ----Bind Label to User Name
 			sideBar.getNameLabel().setText(userInfoMode.getUserName().getText());
-			
-			//---Store this user as last logged in user
+
+			// ---Store this user as last logged in user
 			Main.applicationProperties.updateProperty("Last-LoggedIn-User", selectedUser.getName());
-			
-			//---------------END:Important Work-----------------------------------------------------------
-			
-			//================Load the DataBase - After the DBManager has been initialized of course ;)============================
+
+			// ---------------END:Important
+			// Work-----------------------------------------------------------
+
+			// ================Load the DataBase - After the DBManager has been initialized
+			// of course ;)============================
 			dbManager.loadApplicationDataBase();
-			
+
 		});
 		pause.playFromStart();
 	}
-	
-	//-----------------------------------------------------------------------------------------------------------------
-	
+
+	// -----------------------------------------------------------------------------------------------------------------
+
 	/**
 	 * Terminate the application.
 	 *
-	 * @param vacuum
-	 *            the vacuum
+	 * @param vacuum the vacuum
 	 */
 	private static void terminate(final boolean vacuum) {
-		
-		//I need to check it in case no user is logged in 
+
+		// I need to check it in case no user is logged in
 		if (dbManager == null)
-			Util.terminateXR3Player(0);
+			terminateXR3Player(0);
 		else if (libraryMode.openedLibrariesViewer.isFree(true)) {
 			if (!vacuum)
-				Util.terminateXR3Player(0);
+				terminateXR3Player(0);
 			else {
 				final VacuumProgressService vService = new VacuumProgressService();
 				updateScreen.getLabel().textProperty().bind(vService.messageProperty());
@@ -819,112 +863,151 @@ public class Main extends Application {
 				dbManager.commitAndVacuum();
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * This method is used to exit the application
 	 */
 	public static void confirmApplicationExit() {
-		final Alert alert = JavaFXTools.createAlert("Exit XR3Player?", "Vacuum is clearing junks from database\n(In future updates it will be automatical)",
-				"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n", AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
-		
-		//Create Custom Buttons
+		final Alert alert = JavaFXTools.createAlert("Exit XR3Player?",
+				"Vacuum is clearing junks from database\n(In future updates it will be automatical)",
+				"Pros:\nThe database file may be shrinked \n\nCons:\nIt may take some seconds to be done\n",
+				AlertType.CONFIRMATION, StageStyle.UTILITY, window, null);
+
+		// Create Custom Buttons
 		final ButtonType exit = new ButtonType("Exit", ButtonData.OK_DONE);
 		final ButtonType vacuum = new ButtonType("Vacuum + Exit", ButtonData.OK_DONE);
 		final ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
-		( (Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL) ).setDefaultButton(true);
+		((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setDefaultButton(true);
 		alert.getButtonTypes().setAll(exit, vacuum, cancel);
-		
-		//Pick the answer
+
+		// Pick the answer
 		alert.showAndWait().ifPresent(answer -> {
 			if (answer == exit)
 				terminate(false);
 			else if (answer == vacuum)
 				terminate(true);
-			
+
 		});
 	}
-	
+
+	/**
+	 * Use this code to terminate XR3Player
+	 * 
+	 * @param code
+	 */
+	public static void terminateXR3Player(final int code) {
+
+		System.out.println("Dis All->" + Util.getOS());
+		switch (Util.getOS()) {
+		case WINDOWS:
+			new Thread(() -> {
+				// Disposing all Browsers...
+				Main.webBrowser.disposeAllBrowsers();
+				System.exit(code);
+			}).start();
+			break;
+		case LINUX:
+		case MAC:
+			Platform.runLater(() -> {
+				// Disposing all Browsers...
+				Main.webBrowser.disposeAllBrowsers();
+				System.exit(code);
+			});
+			break;
+		default:
+			System.out.println("Can't dispose browser instance!!!");
+			break;
+		}
+
+	}
+
 	/**
 	 * Calling this method restarts the application
 	 * 
-	 * @param askUser
-	 *            Ask the User if he/she wants to restart the application
+	 * @param askUser Ask the User if he/she wants to restart the application
 	 */
 	public static void restartTheApplication(final boolean askUser) {
-		
+
 		// Restart XR3Player
 		new Thread(() -> {
 			final String path = InfoTool.getBasePathForClass(Main.class);
 			final String[] applicationPath = { new File(path + "XR3Player.exe").getAbsolutePath() };
-			
-			//Check if the file exists
+
+			// Check if the file exists
 			if (!new File(applicationPath[0]).exists()) {
-				//Show message that application is restarting
-				Platform.runLater(() -> ActionTool.showNotification("Application File can't be found", "XR3Player can't be restarted due to unexpected problem ",
-						Duration.seconds(2), NotificationType.ERROR));
-				
+				// Show message that application is restarting
+				Platform.runLater(() -> ActionTool.showNotification("Application File can't be found",
+						"XR3Player can't be restarted due to unexpected problem ", Duration.seconds(2),
+						NotificationType.ERROR));
+
 				if (!askUser)
 					terminate(false);
 				else
 					return;
 			}
-			
+
 			try {
 				System.out.println("XR3PlayerPath is : " + applicationPath[0]);
-				
-				//ProcessBuilder builder = new ProcessBuilder("java", "-jar", applicationPath[0])
-				//builder.redirectErrorStream(true)
-				//Process process = builder.start()
+
+				// ProcessBuilder builder = new ProcessBuilder("java", "-jar",
+				// applicationPath[0])
+				// builder.redirectErrorStream(true)
+				// Process process = builder.start()
 				final Process process = Runtime.getRuntime().exec("cmd.exe /c \"" + applicationPath[0] + "\"");
-				final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-				
-				//Show message that application is restarting
-				Platform.runLater(() -> ActionTool.showNotification("Restarting Application",
-						"If restart takes a lot of time exit application and restart it manually.\n[ " + applicationPath[0] + " ]", Duration.seconds(20),
-						NotificationType.INFORMATION));
-				
-				//startExitPauseTransition
+				final BufferedReader bufferedReader = new BufferedReader(
+						new InputStreamReader(process.getInputStream()));
+
+				// Show message that application is restarting
+				Platform.runLater(
+						() -> ActionTool.showNotification("Restarting Application",
+								"If restart takes a lot of time exit application and restart it manually.\n[ "
+										+ applicationPath[0] + " ]",
+								Duration.seconds(20), NotificationType.INFORMATION));
+
+				// startExitPauseTransition
 				startExitPauseTransition(20, askUser);
-				
+
 				// Continuously Read Output
 				String line;
 				while (process.isAlive())
-					while ( ( line = bufferedReader.readLine() ) != null) {
+					while ((line = bufferedReader.readLine()) != null) {
 						if (line.isEmpty())
 							break;
 						if (line.contains("Outside of Application Start Method"))
 							terminate(false);
 					}
-				
+
 			} catch (final Exception ex) {
 				Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 				Platform.runLater(() -> {
 					updateScreen.setVisible(false);
-					
+
 					// Show failed message
-					Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed", "Wait some more seconds before trying to restart/exit XR3Player manually",
+					Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed",
+							"Wait some more seconds before trying to restart/exit XR3Player manually",
 							Duration.seconds(20), NotificationType.ERROR));
-					
-					//startExitPauseTransition
+
+					// startExitPauseTransition
 					startExitPauseTransition(0, askUser);
 				});
 			}
 		}, "Restart Application Thread").start();
 	}
-	
-	private static void startExitPauseTransition(final int seconds , final boolean askUser) {
+
+	private static void startExitPauseTransition(final int seconds, final boolean askUser) {
 		// Wait 20 seconds
 		final PauseTransition pause = new PauseTransition(Duration.seconds(seconds));
 		pause.setOnFinished(f -> {
 			updateScreen.setVisible(false);
-			
+
 			// Show failed message
 			if (seconds != 0 && askUser)
-				Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed", "Wait some more seconds before trying to restart/exit XR3Player manually",
-						Duration.seconds(20), NotificationType.ERROR));
-			
+				Platform.runLater(() -> ActionTool.showNotification("Restart seems to failed",
+						"Wait some more seconds before trying to restart/exit XR3Player manually", Duration.seconds(20),
+						NotificationType.ERROR));
+
 			// Ask the user
 			if (askUser)
 				Platform.runLater(() -> {
@@ -937,70 +1020,73 @@ public class Main extends Application {
 				forceTerminate.setOnFinished(fn -> terminate(false));
 				forceTerminate.play();
 			}
-			
+
 		});
 		pause.play();
 	}
-	
-	//------------------------------------- Methods not used very often--------------------------------------------------
-	
+
+	// ------------------------------------- Methods not used very
+	// often--------------------------------------------------
+
 	/**
 	 * The user has the ability to change the Library Image
 	 * 
 	 */
 	public static void changeBackgroundImage() {
-		
-		//Check the response
+
+		// Check the response
 		JavaFXTools.selectAndSaveImage("background", InfoTool.getAbsoluteDatabasePathPlain(), specialChooser, window)
 				.ifPresent(imageFile -> loginMode.getBackgroundImageView().setImage(new Image(imageFile.toURI() + "")));
-		
+
 	}
-	
+
 	static boolean backgroundFound;
-	
+
 	/**
-	 * Determines the background image of the application based on if a custom image exists inside the database .If not then the default image is
-	 * being added :)
+	 * Determines the background image of the application based on if a custom image
+	 * exists inside the database .If not then the default image is being added :)
 	 * 
 	 */
 	private static void determineBackgroundImage() {
-		
-		//Set the background image to the ImageView
+
+		// Set the background image to the ImageView
 		Optional.ofNullable(JavaFXTools.findAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain())).
-		//If the image exists
+		// If the image exists
 				ifPresentOrElse(image -> loginMode.getBackgroundImageView().setImage(image),
-						//If it doesn't set the default
-						() -> loginMode.getBackgroundImageView().setImage(InfoTool.getImageFromResourcesFolder("application_background.jpg")));
+						// If it doesn't set the default
+						() -> loginMode.getBackgroundImageView()
+								.setImage(InfoTool.getImageFromResourcesFolder("application_background.jpg")));
 	}
-	
+
 	/**
 	 * Resets the application background image to the default one
 	 * 
 	 */
 	public static void resetBackgroundImage() {
-		
-		//Delete the background image
+
+		// Delete the background image
 		JavaFXTools.deleteAnyImageWithTitle("background", InfoTool.getAbsoluteDatabasePathPlain());
-		
-		//Set the default one
+
+		// Set the default one
 		determineBackgroundImage();
 	}
-	
+
 	/**
 	 * Count application downloads from Github and SourceForge
 	 */
 	private void countDownloads() {
-		//---- Update Downloads Labels
+		// ---- Update Downloads Labels
 		new Thread(() -> {
 			try {
-				
-				//---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------				
-				final String text2 = "GitHub: [ "
-						+ Arrays.stream(IOUtils.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8").split("\"download_count\":")).skip(1)
-								.mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum()
-						+ " ]";
+
+				// ---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------
+				final String text2 = "GitHub: [ " + Arrays
+						.stream(IOUtils
+								.toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8")
+								.split("\"download_count\":"))
+						.skip(1).mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum() + " ]";
 				Platform.runLater(() -> loginMode.getGitHubDownloadsLabel().setText(text2));
-				
+
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
@@ -1008,30 +1094,33 @@ public class Main extends Application {
 					loginMode.getDownloadsVBox().setManaged(false);
 					loginMode.getDownloadsVBox().setVisible(false);
 				});
-				
+
 			}
-			
+
 			try {
-				//---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS ----------------------
-				final HttpURLConnection httpcon = (HttpURLConnection) new URL("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
-						.openConnection();
+				// ---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS
+				// ----------------------
+				final HttpURLConnection httpcon = (HttpURLConnection) new URL(
+						"https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
+								.openConnection();
 				httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
 				httpcon.setConnectTimeout(60000);
 				final BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
-				
-				//Read line by line
+
+				// Read line by line
 				final String response = in.lines().collect(Collectors.joining());
 				in.close();
-				
-				//Parse JSON
+
+				// Parse JSON
 				final JSONArray oses = new JSONObject(response).getJSONArray("oses");
-				
-				//Count total downloads
+
+				// Count total downloads
 				final int[] counter = { 0 };
-				oses.forEach(os -> counter[0] += Integer.parseInt( ( (JSONArray) os ).get(1).toString()));
-				
-				Platform.runLater(() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
-				
+				oses.forEach(os -> counter[0] += Integer.parseInt(((JSONArray) os).get(1).toString()));
+
+				Platform.runLater(
+						() -> loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
+
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 				Platform.runLater(() -> {
@@ -1039,21 +1128,20 @@ public class Main extends Application {
 					loginMode.getDownloadsVBox().setManaged(false);
 					loginMode.getDownloadsVBox().setVisible(false);
 				});
-				
+
 			}
 		}).start();
-		
+
 	}
-	
+
 	/**
 	 * Main Method.
 	 *
-	 * @param args
-	 *            the arguments
+	 * @param args the arguments
 	 */
 	public static void main(final String[] args) {
-		
-		//Launch JavaFX Application
+
+		// Launch JavaFX Application
 		launch(args);
 	}
 }

@@ -5,6 +5,6 @@ package main.java.com.goxr3plus.xr3player.application.enums;
  *
  */
 public enum FileType {
-	
-	SYMBOLIC_LINK, HARD_LINK, SHORTCUT, ORIGINAL_FILE,UNKNOWN;
+
+	SYMBOLIC_LINK, HARD_LINK, SHORTCUT, ORIGINAL_FILE, UNKNOWN;
 }

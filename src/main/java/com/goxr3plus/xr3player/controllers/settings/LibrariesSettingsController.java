@@ -19,59 +19,62 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class LibrariesSettingsController extends BorderPane {
-	
+
 	/** -----------------------------------------------------. */
-	
+
 	@FXML
 	private JFXCheckBox showWidgets;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	/**
 	 * Constructor.
 	 */
 	public LibrariesSettingsController() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SETTINGS_FXMLS + "LibrariesSettingsController.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.SETTINGS_FXMLS + "LibrariesSettingsController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .fxml is initialized
 	 */
 	@FXML
 	private void initialize() {
-		
-		//showWidgets
-		showWidgets.selectedProperty().addListener(l -> Main.dbManager.getPropertiesDb().updateProperty("Libraries-ShowWidgets", String.valueOf(showWidgets.isSelected())));
+
+		// showWidgets
+		showWidgets.selectedProperty().addListener(l -> Main.dbManager.getPropertiesDb()
+				.updateProperty("Libraries-ShowWidgets", String.valueOf(showWidgets.isSelected())));
 	}
-	
+
 	/**
 	 * Restores all the settings that have to do with the category of the class
 	 */
 	public void restoreSettings() {
-		
-		//showWidgets
+
+		// showWidgets
 		showWidgets.setSelected(true);
 	}
-	
+
 	/**
 	 * @return the showWidgets
 	 */
 	public JFXCheckBox getShowWidgets() {
 		return showWidgets;
 	}
-	
+
 }

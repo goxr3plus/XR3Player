@@ -41,219 +41,233 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
  *
  */
 public class ExportWindowController extends BorderPane {
-	
+
 	// --------------------------------------------
-	
+
 	@FXML
 	private VBox containerVBox;
-	
+
 	@FXML
 	private ToggleGroup whatFilesToExportGroup;
-	
+
 	@FXML
 	private ToggleGroup exportAsGroup;
-	
+
 	@FXML
 	private VBox exportFoldersVBox;
-	
+
 	@FXML
 	private JFXButton addFolder;
-	
+
 	@FXML
 	private JFXButton okButton;
-	
+
 	@FXML
 	private JFXButton cancelButton;
-	
+
 	// ----------------------------------
-	
+
 	/**
 	 * The Window of the ExportWindowController
 	 */
 	private Stage window = new Stage();
-	
+
 	private SmartController oldSmartController;
-	
+
 	/**
 	 * The needed smartController
 	 */
 	private SmartController smartController;
-	
+
 	private FilesMode filesToExport;
-	
+
 	/**
 	 * This class wraps an ObservableList
 	 */
 	private final SimpleListProperty<Media> itemsWrapperProperty = new SimpleListProperty<>();
-	
+
 	/**
 	 * Constructor
 	 */
 	public ExportWindowController() {
-		
+
 		// -----------------------------------------FXMLLoader
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowController.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.WINDOW_FXMLS + "ExportWindowController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		
+
 		// Window
 		window.setResizable(false);
 		window.initStyle(StageStyle.UTILITY);
 		window.setScene(new Scene(this));
-		window.getScene().getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
+		window.getScene().getStylesheets()
+				.add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
 		window.getScene().setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.ESCAPE)
 				window.close();
 		});
 	}
-	
+
 	/**
 	 * Called when FXML has been initialized
 	 */
 	@FXML
 	private void initialize() {
-		
-		// okButton		
+
+		// okButton
 		okButton.setOnAction(a -> {
-			List<File> foldersList = exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField().getText()).filter(text -> !text.isEmpty())
+			List<File> foldersList = exportFoldersVBox.getChildren().stream()
+					.map(box -> ((ExportWindowFolderHBox) box).getTextField().getText()).filter(text -> !text.isEmpty())
 					.map(File::new).collect(Collectors.toList());
-			
-			//Check if folders List is empty
+
+			// Check if folders List is empty
 			if (foldersList.isEmpty()) {
-				ActionTool.showNotification("Message", "You must select at least one folder to export the files", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("Message", "You must select at least one folder to export the files",
+						Duration.seconds(2), NotificationType.INFORMATION);
 				return;
 			}
-			
-			//Define the Operation
+
+			// Define the Operation
 			Operation operation = Operation.COPY;
-			
-			//Nailed it!
+
+			// Nailed it!
 			smartController.getFilesExportService().startOperation(foldersList, operation, filesToExport,
-					( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder") ? FileType.DIRECTORY : FileType.ZIP);
-			
+					((Labeled) exportAsGroup.getSelectedToggle()).getText().equals("Folder") ? FileType.DIRECTORY
+							: FileType.ZIP);
+
 			window.close();
 		});
-		
+
 		// cancelButton
 		cancelButton.setOnAction(a -> window.close());
-		
-		//addFolder
+
+		// addFolder
 		addFolder.setOnAction(a -> createFolderPickerBox());
-		
-		//exportAsGroup
-		exportAsGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Null is not allowed!
+
+		// exportAsGroup
+		exportAsGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+
+			// Null is not allowed!
 			if (newValue == null) {
 				exportAsGroup.selectToggle(oldValue);
 				return;
 			}
-			
-			//Check if the Folder Option is selected
-			if ( ( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder")) {
-				//Fix the value for each TextField
-				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(textField -> !textField.getText().isEmpty())
+
+			// Check if the Folder Option is selected
+			if (((Labeled) exportAsGroup.getSelectedToggle()).getText().equals("Folder")) {
+				// Fix the value for each TextField
+				exportFoldersVBox.getChildren().stream().map(box -> ((ExportWindowFolderHBox) box).getTextField())
+						.filter(textField -> !textField.getText().isEmpty())
 						.forEach(textField -> textField.setText(textField.getText().replaceAll(".zip", "")));
 			} else {
-				//Fix the value for each TextField
-				exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField())
-						.filter(textField -> !textField.getText().isEmpty() && !textField.getText().contains(".zip")).forEach(textField -> textField.appendText(".zip"));
+				// Fix the value for each TextField
+				exportFoldersVBox.getChildren().stream().map(box -> ((ExportWindowFolderHBox) box).getTextField())
+						.filter(textField -> !textField.getText().isEmpty() && !textField.getText().contains(".zip"))
+						.forEach(textField -> textField.appendText(".zip"));
 			}
 		});
-		
-		//exportAsGroup
-		whatFilesToExportGroup.selectedToggleProperty().addListener((observable , oldValue , newValue) -> {
-			
-			//Null is not allowed!
+
+		// exportAsGroup
+		whatFilesToExportGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+
+			// Null is not allowed!
 			if (newValue == null) {
 				whatFilesToExportGroup.selectToggle(oldValue);
 				return;
 			}
-			
-			//Define
+
+			// Define
 			defineFilesToExport();
 		});
-		
-		//Create one Folder Picker at least
+
+		// Create one Folder Picker at least
 		createFolderPickerBox();
 	}
-	
+
 	/**
 	 * Creates a new Box that allows user to pick another folder too
 	 */
 	private void createFolderPickerBox() {
 		ExportWindowFolderHBox box = new ExportWindowFolderHBox();
-		
-		//Button
+
+		// Button
 		box.getPickFolderButton().setOnAction(a -> pickFolder(box.getTextField()));
-		
-		//OKButton
+
+		// OKButton
 		okButton.disableProperty().unbind();
-		
-		//Delete
+
+		// Delete
 		box.getDeleteBoxButton().setOnAction(a -> exportFoldersVBox.getChildren().remove(box));
-		
-		//exportFoldersVBox
+
+		// exportFoldersVBox
 		exportFoldersVBox.getChildren().add(box);
 	}
-	
+
 	/**
-	 * This is used by export buttons to pick an appropriate folder their export text field
+	 * This is used by export buttons to pick an appropriate folder their export
+	 * text field
 	 * 
 	 * @param exportField
 	 */
 	private void pickFolder(TextField exportField) {
 		File file = Main.specialChooser.showSaveDialog(smartController.getName(),
-				( (Labeled) exportAsGroup.getSelectedToggle() ).getText().equals("Folder") ? FileType.DIRECTORY : FileType.ZIP);
-		
-		//Selected any folder?
+				((Labeled) exportAsGroup.getSelectedToggle()).getText().equals("Folder") ? FileType.DIRECTORY
+						: FileType.ZIP);
+
+		// Selected any folder?
 		if (file != null) {
-			//We don't want the same folder to be selected 2 times or more
-			if (exportFoldersVBox.getChildren().stream().map(box -> ( (ExportWindowFolderHBox) box ).getTextField()).filter(field -> exportField != field)
+			// We don't want the same folder to be selected 2 times or more
+			if (exportFoldersVBox.getChildren().stream().map(box -> ((ExportWindowFolderHBox) box).getTextField())
+					.filter(field -> exportField != field)
 					.filter(field -> field.getText().equals(file.getAbsolutePath())).findAny().isPresent())
-				ActionTool.showNotification("Duplicate Selection", "This folder has already been selected", Duration.seconds(2), NotificationType.INFORMATION);
+				ActionTool.showNotification("Duplicate Selection", "This folder has already been selected",
+						Duration.seconds(2), NotificationType.INFORMATION);
 			else
 				exportField.setText(file.getAbsolutePath());
 		}
 	}
-	
+
 	/**
 	 * Defines the FilesToExport variable , along with window title
 	 */
 	private void defineFilesToExport() {
 		if (smartController == null)
 			return;
-		
-		//Window Title Property
+
+		// Window Title Property
 		window.titleProperty().unbind();
 		String common = "PlayList -> [ " + smartController.getName() + " ] , Total Media to export -> [ ";
-		
-		//define the variable using this switch statement
-		switch ( ( (Labeled) whatFilesToExportGroup.getSelectedToggle() ).getText()) {
-			case "Selected Items":
-				itemsWrapperProperty.setValue(smartController.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems());
-				window.titleProperty().bind(Bindings.createStringBinding(() -> common + itemsWrapperProperty.sizeProperty().get() + " ]", itemsWrapperProperty.sizeProperty()));
-				filesToExport = FilesMode.SELECTED_MEDIA;
-				break;
-			case "Current Page":
-				window.setTitle(common + smartController.getItemsObservableList().size() + " ]");
-				filesToExport = FilesMode.CURRENT_PAGE;
-				break;
-			case "Everything on Playlist":
-				window.setTitle(common + smartController.getTotalInDataBase() + " ]");
-				filesToExport = FilesMode.EVERYTHING_ON_PLAYLIST;
-				break;
-			default:
-				filesToExport = FilesMode.CURRENT_PAGE;
+
+		// define the variable using this switch statement
+		switch (((Labeled) whatFilesToExportGroup.getSelectedToggle()).getText()) {
+		case "Selected Items":
+			itemsWrapperProperty
+					.setValue(smartController.getNormalModeMediaTableViewer().getSelectionModel().getSelectedItems());
+			window.titleProperty()
+					.bind(Bindings.createStringBinding(() -> common + itemsWrapperProperty.sizeProperty().get() + " ]",
+							itemsWrapperProperty.sizeProperty()));
+			filesToExport = FilesMode.SELECTED_MEDIA;
+			break;
+		case "Current Page":
+			window.setTitle(common + smartController.getItemsObservableList().size() + " ]");
+			filesToExport = FilesMode.CURRENT_PAGE;
+			break;
+		case "Everything on Playlist":
+			window.setTitle(common + smartController.getTotalInDataBase() + " ]");
+			filesToExport = FilesMode.EVERYTHING_ON_PLAYLIST;
+			break;
+		default:
+			filesToExport = FilesMode.CURRENT_PAGE;
 		}
 	}
-	
+
 	/**
 	 * Opens the Export Window
 	 * 
@@ -261,36 +275,36 @@ public class ExportWindowController extends BorderPane {
 	 */
 	public void show(SmartController smartController) {
 		this.smartController = smartController;
-		
-		//Super
+
+		// Super
 		super.disableProperty().unbind();
 		super.disableProperty().bind(smartController.getFilesExportService().runningProperty());
-		
-		//Check which SmartController is calling
+
+		// Check which SmartController is calling
 		if (oldSmartController != smartController)
-			exportFoldersVBox.getChildren().forEach(box -> ( (ExportWindowFolderHBox) box ).getTextField().clear());
-		
-		//OldSmartController
+			exportFoldersVBox.getChildren().forEach(box -> ((ExportWindowFolderHBox) box).getTextField().clear());
+
+		// OldSmartController
 		oldSmartController = smartController;
-		
-		//Disable or enable buttons
+
+		// Disable or enable buttons
 		if (smartController.getFiltersModeTab().isSelected()) {
-			( (Node) whatFilesToExportGroup.getToggles().get(2) ).setDisable(true);
+			((Node) whatFilesToExportGroup.getToggles().get(2)).setDisable(true);
 			JavaFXTools.selectToggleOnIndex(whatFilesToExportGroup, 1);
 		} else {
-			( (Node) whatFilesToExportGroup.getToggles().get(2) ).setDisable(false);
+			((Node) whatFilesToExportGroup.getToggles().get(2)).setDisable(false);
 		}
-		
-		//Show the Window
+
+		// Show the Window
 		defineFilesToExport();
 		window.show();
 	}
-	
+
 	/**
 	 * @return the window
 	 */
 	public Stage getWindow() {
 		return window;
 	}
-	
+
 }

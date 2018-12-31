@@ -7,12 +7,12 @@ package main.java.com.goxr3plus.xr3player.models.lists;
  *
  */
 public class LovedSongsList extends DatabaseList {
-	
+
 	/**
 	 * The name of the database table
 	 */
 	private static final String dataBaseTableName = "LovedMediaListOriginal";
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -21,5 +21,5 @@ public class LovedSongsList extends DatabaseList {
 	public LovedSongsList() {
 		super(dataBaseTableName);
 	}
-	
+
 }

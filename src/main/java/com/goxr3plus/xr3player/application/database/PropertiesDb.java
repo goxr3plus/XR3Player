@@ -23,22 +23,22 @@ import main.java.com.goxr3plus.xr3player.utils.general.ActionTool.FileType;
  *
  */
 public class PropertiesDb {
-	
+
 	private final Properties properties;
-	
+
 	/** This executor does the commit job. */
 	private static final ExecutorService updateExecutorService = Executors.newSingleThreadExecutor();
-	
+
 	/**
 	 * Using this variable when i want to prevent update of properties happen
 	 */
 	private boolean updatePropertiesLocked;
-	
+
 	/**
 	 * The absolute path of the properties file
 	 */
 	private String fileAbsolutePath;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -49,104 +49,106 @@ public class PropertiesDb {
 		this.updatePropertiesLocked = updatePropertiesLocked;
 		properties = new Properties();
 	}
-	
+
 	/**
-	 * Updates or Creates the given key , warning also updateProperty can be locked , if you want to unlock it or check if locked check the method is
+	 * Updates or Creates the given key , warning also updateProperty can be locked
+	 * , if you want to unlock it or check if locked check the method is
 	 * `isUpdatePropertyLocked()`
 	 * 
 	 * @param key
 	 * @param value
 	 */
-	public void updateProperty(String key , String value) {
+	public void updateProperty(String key, String value) {
 		if (updatePropertiesLocked)
 			return;
-		
-		///System.out.println("Updating Property!")
-		
-		//Submit it to the executors Service
+
+		/// System.out.println("Updating Property!")
+
+		// Submit it to the executors Service
 		updateExecutorService.submit(() -> {
-			//Check if exists [ Create if Not ] 
+			// Check if exists [ Create if Not ]
 			ActionTool.createFileOrFolder(fileAbsolutePath, FileType.FILE);
-			
-			try (InputStream inStream = new FileInputStream(fileAbsolutePath); OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
-				
-				//load  properties
+
+			try (InputStream inStream = new FileInputStream(fileAbsolutePath);
+					OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
+
+				// load properties
 				properties.load(inStream);
-				
+
 				// set the properties value
 				properties.setProperty(key, value);
-				
-				// save properties 
+
+				// save properties
 				properties.store(outStream, null);
-				
+
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
 		});
 	}
-	
+
 	/**
 	 * Remove that property from the Properties file
 	 * 
 	 * @param key
 	 */
 	public void deleteProperty(String key) {
-		//Check if exists 
+		// Check if exists
 		if (new File(fileAbsolutePath).exists())
-			
-			//Submit it to the executors Service
+
+			// Submit it to the executors Service
 			updateExecutorService.submit(() -> {
-				try (InputStream inStream = new FileInputStream(fileAbsolutePath); OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
-					
-					//load  properties
+				try (InputStream inStream = new FileInputStream(fileAbsolutePath);
+						OutputStream outStream = new FileOutputStream(fileAbsolutePath)) {
+
+					// load properties
 					properties.load(inStream);
-					
+
 					// remove that property
 					properties.remove(key);
-					
-					// save properties 
+
+					// save properties
 					properties.store(outStream, null);
-					
+
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
 			});
-		
+
 	}
-	
+
 	/**
 	 * Loads the Properties
 	 */
 	public Properties loadProperties() {
-		
-		//Check if exists 
+
+		// Check if exists
 		if (new File(fileAbsolutePath).exists())
-			
-			//Load the properties file
+
+			// Load the properties file
 			try (InputStream inStream = new FileInputStream(fileAbsolutePath)) {
-				
-				//load  properties
-				//properties.clear();
+
+				// load properties
+				// properties.clear();
 				properties.load(inStream);
-				
+
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
-		
+
 		return properties;
 	}
-	
+
 	/**
 	 * Returns the property with that key
 	 * 
-	 * @param key
-	 *            The property key
+	 * @param key The property key
 	 * @return Returns the property with that key
 	 */
 	public String getProperty(String key) {
 		return properties.getProperty(key);
 	}
-	
+
 	/**
 	 * Get the properties instance of this class
 	 * 
@@ -155,7 +157,7 @@ public class PropertiesDb {
 	public Properties getProperties() {
 		return properties;
 	}
-	
+
 	/**
 	 * Check if properties update is locked
 	 * 
@@ -164,30 +166,28 @@ public class PropertiesDb {
 	public boolean isUpdatePropertiesLocked() {
 		return updatePropertiesLocked;
 	}
-	
+
 	/**
 	 * Lock or unlock the update of properties
 	 * 
-	 * @param canUpdateProperty
-	 *            the canUpdateProperty to set
+	 * @param canUpdateProperty the canUpdateProperty to set
 	 */
 	public void setUpdatePropertiesLocked(boolean updatePropertiesLocked) {
 		this.updatePropertiesLocked = updatePropertiesLocked;
 	}
-	
+
 	/**
-	 * @param fileAbsolutePath
-	 *            The new absolute path of the properties file
+	 * @param fileAbsolutePath The new absolute path of the properties file
 	 */
 	public void setFileAbsolutePath(String fileAbsolutePath) {
 		this.fileAbsolutePath = fileAbsolutePath;
 	}
-	
+
 	/**
 	 * @return the propertiesAbsolutePath
 	 */
 	public String getFileAbsolutePath() {
 		return fileAbsolutePath;
 	}
-	
+
 }

@@ -22,91 +22,93 @@ import javafx.scene.paint.Color;
  * 
  * @author Jörn Hameister
  * 
- * http://www.hameister.org
+ *         http://www.hameister.org
  * 
  */
 public class MandelbrotBean {
 
-    public enum ColorSchema {
+	public enum ColorSchema {
 
-        GREEN, RED, YELLOW, BLUE, CYAN, MAGENTA
-    }
-    // Paint and calulation sizes
-    private double reMin;
-    private double reMax;
-    private double imMin;
-    private double imMax;
-    // z + zi for Julia set
-    private double z;
-    private double zi;
-    private int convergenceSteps;
-    private Color convergenceColor = Color.WHITE;
-    private ColorSchema colorSchema = ColorSchema.GREEN;
+		GREEN, RED, YELLOW, BLUE, CYAN, MAGENTA
+	}
 
-    public boolean isIsMandelbrot() {
-        // if z is 0 then it is a Mandelbrot set
-        return (getZ() == 0 && getZi() == 0) ? true : false;
-    }
+	// Paint and calulation sizes
+	private double reMin;
+	private double reMax;
+	private double imMin;
+	private double imMax;
+	// z + zi for Julia set
+	private double z;
+	private double zi;
+	private int convergenceSteps;
+	private Color convergenceColor = Color.WHITE;
+	private ColorSchema colorSchema = ColorSchema.GREEN;
 
-    public MandelbrotBean(int convergenceSteps, double reMin, double reMax, double imMin, double imMax, double z, double zi) {
-        this.convergenceSteps = convergenceSteps;
-        this.reMin = reMin;
-        this.reMax = reMax;
-        this.imMin = imMin;
-        this.imMax = imMax;
-        this.z = z;
-        this.zi = zi;
-    }
+	public boolean isIsMandelbrot() {
+		// if z is 0 then it is a Mandelbrot set
+		return (getZ() == 0 && getZi() == 0) ? true : false;
+	}
 
-    public int getConvergenceSteps() {
-        return convergenceSteps;
-    }
+	public MandelbrotBean(int convergenceSteps, double reMin, double reMax, double imMin, double imMax, double z,
+			double zi) {
+		this.convergenceSteps = convergenceSteps;
+		this.reMin = reMin;
+		this.reMax = reMax;
+		this.imMin = imMin;
+		this.imMax = imMax;
+		this.z = z;
+		this.zi = zi;
+	}
 
-    public double getReMin() {
-        return reMin;
-    }
+	public int getConvergenceSteps() {
+		return convergenceSteps;
+	}
 
-    public double getReMax() {
-        return reMax;
-    }
+	public double getReMin() {
+		return reMin;
+	}
 
-    public double getImMin() {
-        return imMin;
-    }
+	public double getReMax() {
+		return reMax;
+	}
 
-    public double getImMax() {
-        return imMax;
-    }
+	public double getImMin() {
+		return imMin;
+	}
 
-    public double getZ() {
-        return z;
-    }
+	public double getImMax() {
+		return imMax;
+	}
 
-    public double getZi() {
-        return zi;
-    }
+	public double getZ() {
+		return z;
+	}
 
-    public void setZ(double z) {
-        this.z = z;
-    }
+	public double getZi() {
+		return zi;
+	}
 
-    public void setZi(double zi) {
-        this.zi = zi;
-    }
+	public void setZ(double z) {
+		this.z = z;
+	}
 
-    public Color getConvergenceColor() {
-        return convergenceColor;
-    }
+	public void setZi(double zi) {
+		this.zi = zi;
+	}
 
-    public void setConvergenceColor(Color convergenceColor) {
-        this.convergenceColor = convergenceColor;
-    }
+	public Color getConvergenceColor() {
+		return convergenceColor;
+	}
 
-    public ColorSchema getColorSchema() {
-        return colorSchema;
-    }
+	public void setConvergenceColor(Color convergenceColor) {
+		this.convergenceColor = convergenceColor;
+	}
 
-    public void setColorSchema(ColorSchema colorSchema) {
-        this.colorSchema = colorSchema;
-    }
+	public ColorSchema getColorSchema() {
+		return colorSchema;
+	}
+
+	public void setColorSchema(ColorSchema colorSchema) {
+		this.colorSchema = colorSchema;
+	}
 }

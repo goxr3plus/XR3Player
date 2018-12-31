@@ -34,42 +34,41 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
  * @author GOXR3PLUS
  */
 public class ChromiumFullScreenController extends StackPane {
-	
-	//-------------------------------------
-	
+
+	// -------------------------------------
+
 	@FXML
 	private StackPane browserPane;
-	
+
 	@FXML
 	private HBox topBox;
-	
+
 	@FXML
 	private Button exitFullScreen;
-	
+
 	// ------------------------------------
-	
+
 	private Scene scene;
-	
+
 	/** The window. */
 	private Stage window;
-	
+
 	private BrowserView browserView;
-	
+
 	private WebBrowserTabController webBrowserTabController;
-	
+
 	/** The pause transition. */
 	private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
-	
+
 	private final EventHandler<MouseEvent> mouseMovingEvent = m -> restartPauseTransition();
-	
+
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerController
-	 *            xPlayerController
+	 * @param xPlayerController xPlayerController
 	 */
 	public ChromiumFullScreenController() {
-		
+
 		window = new Stage();
 		window.setTitle("Chromium Full Screen");
 		window.getIcons().add(InfoTool.getImageFromResourcesFolder("icon.png"));
@@ -77,102 +76,105 @@ public class ChromiumFullScreenController extends StackPane {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setAlwaysOnTop(false);
 		window.setFullScreenExitHint("Press F11 to exit full screen");
-		//window.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.F11))
+		// window.setFullScreenExitKeyCombination(new KeyCodeCombination(KeyCode.F11))
 		window.setOnCloseRequest(c -> removeBrowserView());
-		
+
 		// FXMLLOADER
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserFullScreenController.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserFullScreenController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "ChromiumFullScreenController FXML can't be loaded!", ex);
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
+					"ChromiumFullScreenController FXML can't be loaded!", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .fxml has been loaded
 	 */
 	@FXML
 	private void initialize() {
-		
+
 		// -- Scene
 		scene = new Scene(this);
 		scene.setFill(Color.rgb(0, 0, 0));
 		scene.getStylesheets().add(getClass().getResource(InfoTool.STYLES + InfoTool.APPLICATIONCSS).toExternalForm());
-		
+
 		// -- KeyListeners
 		scene.setOnKeyReleased(key -> {
 			if (key.getCode() == KeyCode.F11)
 				removeBrowserView();
 		});
-		
+
 		// PauseTransition
 		pauseTransition.setOnFinished(f -> {
-			//if (!topBar.isHover() && window.isShowing())
-			//		topBar.setVisible(false);
+			// if (!topBar.isHover() && window.isShowing())
+			// topBar.setVisible(false);
 		});
-		
+
 		// ----------Drag && Drop Listeners
 		window.setScene(scene);
-		
+
 	}
-	
+
 	/**
 	 * Restarts the PauseTransition
 	 */
 	private void restartPauseTransition() {
 		pauseTransition.playFromStart();
 		topBox.setVisible(true);
-		
+
 		System.out.println("Restarted pause transition");
 	}
-	
+
 	/**
 	 * Pass a browserView instance and from which controller it came
 	 * 
 	 * @param browserView
 	 */
-	public void goFullScreenMode(BrowserView browserView , WebBrowserTabController webBrowserTabController) {
+	public void goFullScreenMode(BrowserView browserView, WebBrowserTabController webBrowserTabController) {
 		this.browserView = browserView;
 		this.webBrowserTabController = webBrowserTabController;
-		
-		//Add Event Handler
-		//browserView.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
-		
-		//Set the browserView
+
+		// Add Event Handler
+		// browserView.addEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
+
+		// Set the browserView
 		webBrowserTabController.getBorderPane().setCenter(null);
 		browserPane.getChildren().add(browserView);
 		browserView.toBack();
 		browserPane.toBack();
-		
-		//Show the window on full screen
+
+		// Show the window on full screen
 		window.setFullScreen(true);
 		window.show();
-		
-		ActionTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2), NotificationType.INFORMATION);
+
+		ActionTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2),
+				NotificationType.INFORMATION);
 	}
-	
+
 	/**
 	 * Restore the BrowserView back to it's original tab controller
 	 */
 	private void removeBrowserView() {
-		
-		//Remove Event Handler
-		//this.browserView.removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
-		
-		//Restore the browserView
+
+		// Remove Event Handler
+		// this.browserView.removeEventHandler(MouseEvent.MOUSE_MOVED, mouseMovingEvent)
+
+		// Restore the browserView
 		browserPane.getChildren().remove(null);
 		webBrowserTabController.getBorderPane().setCenter(browserView);
-		
-		//Hide Window
+
+		// Hide Window
 		window.hide();
-		
+
 	}
-	
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 
@@ -192,7 +194,7 @@ public class ChromiumFullScreenController extends StackPane {
 	 * 
 	 * -----------------------------------------------------------------------
 	 */
-	
+
 	/**
 	 * Gets the stage.
 	 *
@@ -201,7 +203,7 @@ public class ChromiumFullScreenController extends StackPane {
 	public Stage getStage() {
 		return window;
 	}
-	
+
 	/*-----------------------------------------------------------------------
 	 * 
 	 * 
@@ -221,5 +223,5 @@ public class ChromiumFullScreenController extends StackPane {
 	 * 
 	 * -----------------------------------------------------------------------
 	 */
-	
+
 }

@@ -43,122 +43,125 @@ import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 
 /**
- * Allows you to view informations about the selected song like the album image,to search for it on the web,to buy this song on iTunes,Amazon.
+ * Allows you to view informations about the selected song like the album
+ * image,to search for it on the web,to buy this song on iTunes,Amazon.
  *
  * @author GOXR3PLUS STUDIO
  */
 public class MediaInformation extends StackPane {
-	
-	//--------------------------------------------------------------
-	
+
+	// --------------------------------------------------------------
+
 	@FXML
 	private Button mediaImageButton;
-	
+
 	@FXML
 	private ImageView imageView;
-	
+
 	@FXML
 	private Label title;
-	
+
 	@FXML
 	private Label drive;
-	
+
 	@FXML
 	private Label stars;
-	
+
 	@FXML
 	private Label duration;
-	
+
 	@FXML
 	private Label type;
-	
+
 	@FXML
 	private Label size;
-	
+
 	@FXML
 	private Label bitRate;
-	
+
 	@FXML
 	private Label sampleRate;
-	
+
 	@FXML
 	private Label encoder;
-	
+
 	@FXML
 	private Label channel;
-	
+
 	@FXML
 	private Label format;
-	
+
 	@FXML
 	private Label isPrivate;
-	
+
 	@FXML
 	private Label isProtected;
-	
+
 	@FXML
 	private Label isPadding;
-	
+
 	@FXML
 	private Label isCopyrighted;
-	
+
 	@FXML
 	private Label isOriginal;
-	
+
 	@FXML
 	private Label isVariableBitRate;
-	
+
 	@FXML
 	private Label empasis;
-	
+
 	@FXML
 	private Label mp3StartByte;
-	
+
 	@FXML
 	private Label totalFrames;
-	
+
 	@FXML
 	private Label noOfSamples;
-	
+
 	@FXML
 	private Label mpegLayer;
-	
+
 	@FXML
 	private Label mpegVersion;
-	
+
 	@FXML
 	private Button showMore;
-	
+
 	@FXML
 	private Label dragAndDropLabel;
-	
+
 	// -------------------------------------------------------------
-	
+
 	/** The logger. */
 	private final Logger logger = Logger.getLogger(getClass().getName());
-	
+
 	private Media media;
-	
+
 	private final UpdateInformationService service = new UpdateInformationService();
-	
+
 	/**
 	 * Constructor.
 	 */
 	public MediaInformation() {
-		
-		// ------------------------------------FXMLLOADER ----------------------------------------
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaInformation.fxml"));
+
+		// ------------------------------------FXMLLOADER
+		// ----------------------------------------
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource(InfoTool.SMARTCONTROLLER_FXMLS + "MediaInformation.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
-		
+
 		try {
 			loader.load();
 		} catch (IOException ex) {
 			logger.log(Level.SEVERE, "", ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Called as soon as .FXML is loaded from FXML Loader
 	 */
@@ -166,18 +169,18 @@ public class MediaInformation extends StackPane {
 	private void initialize() {
 		setOnDragDetected(drag -> {
 			if (media != null) {
-				
+
 				/* Allow copy transfer mode */
 				Dragboard db = startDragAndDrop(TransferMode.COPY, TransferMode.LINK);
-				
+
 				/* Put a String into the dragBoard */
 				ClipboardContent content = new ClipboardContent();
 				content.putFiles(Arrays.asList(new File(media.getFilePath())));
 				db.setContent(content);
-				
+
 				/* Set the DragView */
 				media.setDragView(db);
-				
+
 			}
 			drag.consume();
 		});
@@ -187,78 +190,81 @@ public class MediaInformation extends StackPane {
 			if (event.getGestureSource() != this)
 				dragAndDropLabel.setVisible(true);
 		});
-		
-		//dragAndDropLabel
+
+		// dragAndDropLabel
 		dragAndDropLabel.setVisible(false);
 		dragAndDropLabel.setOnDragOver(event -> event.acceptTransferModes(TransferMode.LINK));
 		dragAndDropLabel.setOnDragDropped(event -> {
 			// File?
 			for (File file : event.getDragboard().getFiles()) {
-				
-				//No directories allowed
+
+				// No directories allowed
 				if (!file.isDirectory()) {
-					
-					//Get it
+
+					// Get it
 					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
-					
-					//Check if File exists
+
+					// Check if File exists
 					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
 						ActionTool.showNotification("File doesn't exist",
-								( ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut" ) + " points to a file that doesn't exists anymore.",
+								(ftaap.getFileType() == FileType.SYMBOLIC_LINK ? "Symbolic link" : "Windows Shortcut")
+										+ " points to a file that doesn't exists anymore.",
 								Duration.millis(2000), NotificationType.INFORMATION);
 						return;
 					}
-					
+
 					updateInformation(new Audio(ftaap.getFileAbsolutePath(), 0.0, 0, "", "", Genre.SEARCHWINDOW, -1));
-					
-					//break
+
+					// break
 					break;
 				}
 			}
-			
+
 			event.consume();
 		});
 		dragAndDropLabel.setOnDragExited(event -> {
 			dragAndDropLabel.setVisible(false);
 			event.consume();
 		});
-		
-		//imageView
-		//imageView.setOnDragDetected(getOnDragDetected())
+
+		// imageView
+		// imageView.setOnDragDetected(getOnDragDetected())
 		imageView.visibleProperty().bind(imageView.imageProperty().isNotNull());
-		
+
 		// mediaImageButton
-		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(), TagTabCategory.ARTWORK, true));
-		
-		//showMore
-		showMore.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(), TagTabCategory.BASICINFO, true));
-		
+		mediaImageButton.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(),
+				TagTabCategory.ARTWORK, true));
+
+		// showMore
+		showMore.setOnAction(m -> Main.tagWindow.openAudio(media == null ? null : media.getFilePath(),
+				TagTabCategory.BASICINFO, true));
+
 	}
-	
+
 	/**
 	 * Updates the image shown.
 	 * 
-	 * @param media
-	 *            the media [[SuppressWarningsSpartan]]
+	 * @param media the media [[SuppressWarningsSpartan]]
 	 */
 	public void updateInformation(Media mediar) {
 		service.updateInformation(mediar);
 	}
-	
+
 	/**
-	 * Using this Service as an external Thread which updates the Information based on the selected Media
+	 * Using this Service as an external Thread which updates the Information based
+	 * on the selected Media
 	 * 
 	 * @author GOXR3PLUS
 	 *
 	 */
 	public class UpdateInformationService extends Service<Void> {
-		
+
 		private String _sampleRate;
 		private String _bitRate;
 		private String _encoder;
 		private String _Channel;
 		private String _format;
-		
+
 		private String _mpegVersion;
 		private String _mpegLayer;
 		private String _totalFrames;
@@ -272,77 +278,76 @@ public class MediaInformation extends StackPane {
 		private String _isProtected;
 		private String _isPrivate;
 		private Image image;
-		
+
 		/**
 		 * Updates the image shown.
 		 * 
-		 * @param media
-		 *            the media [[SuppressWarningsSpartan]]
+		 * @param media the media [[SuppressWarningsSpartan]]
 		 */
 		public void updateInformation(Media mediar) {
 			media = mediar;
-			
-			//We don't want thugs here
+
+			// We don't want thugs here
 			if (media == null)
 				return;
-			
-			//Restart the Service
+
+			// Restart the Service
 			this.restart();
-			
+
 		}
-		
+
 		@Override
 		protected Task<Void> createTask() {
 			return new Task<Void>() {
-				
+
 				@Override
 				protected Void call() throws Exception {
-					
-					//== image
+
+					// == image
 					image = null;
 					try {
 						image = media.getAlbumImage();
 					} catch (Exception ex) {
-						//ex.printStackTrace()
+						// ex.printStackTrace()
 					}
-					
+
 					Platform.runLater(() -> {
 						imageView.setImage(image);
-						
-						//== title
+
+						// == title
 						title.textProperty().bind(media.titleProperty());
-						
-						//== duration
+
+						// == duration
 						duration.setText(media.durationEditedProperty().get());
-						
-						//== stars
+
+						// == stars
 						stars.textProperty().bind(media.starsProperty().asString());
-						
-						//== drive
+
+						// == drive
 						drive.setText(media.getDrive());
-						
-						//== type
+
+						// == type
 						type.setText(media.getFileType());
-						
-						//== size
+
+						// == size
 						size.setText(media.fileSizeProperty().get());
-						
+
 					});
-					
-					//Try to get other information
+
+					// Try to get other information
 					try {
 						File file = new File(media.getFilePath());
-						
-						//---------------------MP3--------------------------------------
+
+						// ---------------------MP3--------------------------------------
 						if ("mp3".equals(media.fileTypeProperty().get()) && file.exists() && file.length() != 0) {
 							MP3AudioHeader mp3Header = new MP3File(file).getMP3AudioHeader();
-							
+
 							_sampleRate = mp3Header.getSampleRate();
 							_bitRate = Long.toString(mp3Header.getBitRateAsNumber());
 							_encoder = mp3Header.getEncoder();
 							_Channel = mp3Header.getChannels();
 							_format = mp3Header.getFormat();
-							
+
 							_mpegVersion = mp3Header.getMpegVersion();
 							_mpegLayer = mp3Header.getMpegLayer();
 							_totalFrames = Long.toString(mp3Header.getNumberOfFrames());
@@ -355,15 +360,15 @@ public class MediaInformation extends StackPane {
 							_isPadding = mp3Header.isPadding() ? "yes" : "no";
 							_isProtected = mp3Header.isProtected() ? "yes" : "no";
 							_isPrivate = mp3Header.isPrivate() ? "yes" : "no";
-							
-							//Run it on JavaFX Thread
+
+							// Run it on JavaFX Thread
 							Platform.runLater(() -> {
 								sampleRate.setText(_sampleRate);
 								bitRate.setText(_bitRate);
 								encoder.setText(_encoder);
 								channel.setText(_Channel);
 								format.setText(_format);
-								
+
 								mpegVersion.setText(_mpegVersion);
 								mpegLayer.setText(_mpegLayer);
 								totalFrames.setText(_totalFrames);
@@ -377,18 +382,18 @@ public class MediaInformation extends StackPane {
 								isProtected.setText(_isProtected);
 								isPrivate.setText(_isPrivate);
 							});
-							
-							//------------------------OTHER FORMAT-------------------------
+
+							// ------------------------OTHER FORMAT-------------------------
 						} else {
-							
-							//Run it on JavaFX Thread
+
+							// Run it on JavaFX Thread
 							Platform.runLater(() -> {
 								sampleRate.setText("-");
 								bitRate.setText("-");
 								encoder.setText("-");
 								channel.setText("-");
 								format.setText("-");
-								
+
 								mpegVersion.setText("-");
 								mpegLayer.setText("-");
 								totalFrames.setText("-");
@@ -403,15 +408,16 @@ public class MediaInformation extends StackPane {
 								isPrivate.setText("-");
 							});
 						}
-					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException ex) {
-						//ex.printStackTrace();
+					} catch (IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException
+							| CannotReadException ex) {
+						// ex.printStackTrace();
 					}
-					
+
 					return null;
 				}
 			};
 		}
-		
+
 	}
-	
+
 }
