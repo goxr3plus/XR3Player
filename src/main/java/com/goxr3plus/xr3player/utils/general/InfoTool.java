@@ -1,7 +1,6 @@
 package main.java.com.goxr3plus.xr3player.utils.general;
 
 import java.util.Locale;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
@@ -13,9 +12,6 @@ import javafx.scene.image.ImageView;
  * @author GOXR3PLUS
  */
 public final class InfoTool {
-
-	/** The random. */
-	public static final Random random = new Random();
 
 	/** Logger */
 	public static final Logger logger = Logger.getLogger(InfoTool.class.getName());

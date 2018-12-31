@@ -24,6 +24,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
+import main.java.com.goxr3plus.xr3player.utils.general.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -85,7 +86,7 @@ public class ArtWorkController extends StackPane {
 		// Save
 		save.setOnAction(a -> {
 			Optional.ofNullable(Main.specialChooser
-					.prepareToExportImage(Main.window, "cover" + InfoTool.random.nextInt(50000) + ".png"))
+					.prepareToExportImage(Main.window, "cover" + DatabaseTool.random.nextInt(50000) + ".png"))
 					.ifPresent(file -> {
 						// System.out.println(file.getAbsolutePath())
 

@@ -1,15 +1,19 @@
 package main.java.com.goxr3plus.xr3player.utils.general;
 
 import java.io.File;
+import java.util.Random;
 
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class DatabaseTool {
 
+	public static final Random random = new Random();
+
 	/** Database folder name <b>with out</b> separator [example:XR3DataBase] */
-	public static final String DATABASE_FOLDER_NAME = "XR3DataBase";
+	private static final String DATABASE_FOLDER_NAME = "XR3DataBase";
+
 	/** The name of the application user [example:Alexander] */
-	public static String USERNAME;
+	private static String USERNAME;
 	public static final String USER_SETTINGS_FILE_NAME = "config.properties";
 	public static final String USER_INFORMATION_FILE_NAME = "userInformation.properties";
 
@@ -136,7 +140,7 @@ public final class DatabaseTool {
 	 * @return A random integer
 	 */
 	public static int returnRandom(final int max) {
-		return InfoTool.random.nextInt(max);
+		return random.nextInt(max);
 	}
 
 	// ----
