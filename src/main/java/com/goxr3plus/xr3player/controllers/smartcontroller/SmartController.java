@@ -50,6 +50,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.Genre;
+import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
@@ -59,7 +60,6 @@ import main.java.com.goxr3plus.xr3player.services.smartcontroller.LoadService;
 import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaViewerService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism

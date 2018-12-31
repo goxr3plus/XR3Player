@@ -153,7 +153,7 @@ public final class InfoTool {
 	}
 	
 	/** The name of the application user [example:Alexander] */
-	public static void setUserName(String uSERNAME) {
+	public static void setUserName(final String uSERNAME) {
 		USERNAME = uSERNAME;
 	}
 	
@@ -204,7 +204,7 @@ public final class InfoTool {
 	 * @return The current absolute path to the database <b>PARENT</b> folder without separator[example:C:/Users]
 	 */
 	public static String getAbsoluteDatabaseParentFolderPathPlain() {
-		String parentName = getAbsoluteDatabaseParentFolderPathWithSeparator();
+		final String parentName = getAbsoluteDatabaseParentFolderPathWithSeparator();
 		return parentName.substring(0, parentName.length() - 1);
 	}
 	
@@ -296,7 +296,7 @@ public final class InfoTool {
 	 *            * @return The absolute path of the current directory in which the class file is. <b>[it ends with File.Separator!!]</b>
 	 * @author GOXR3PLUS[StackOverFlow user] + bachden [StackOverFlow user]
 	 */
-	public static final String getBasePathForClass(Class<?> classs) {
+	public static final String getBasePathForClass(final Class<?> classs) {
 		
 		// Local variables
 		File file;
@@ -308,7 +308,7 @@ public final class InfoTool {
 			file = new File(classs.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 			
 			basePath = ( file.isFile() || file.getPath().endsWith(".jar") || file.getPath().endsWith(".zip") ) ? file.getParent() : file.getPath();
-		} catch (URISyntaxException ex) {
+		} catch (final URISyntaxException ex) {
 			failed = true;
 			Logger.getLogger(classs.getName()).log(Level.WARNING, "Cannot firgue out base path for class with way (1): ", ex);
 		}
@@ -323,7 +323,7 @@ public final class InfoTool {
 				// starts with File.separator?
 				// String l = local.replaceFirst("[" + File.separator +
 				// "/\\\\]", "")
-			} catch (URISyntaxException ex) {
+			} catch (final URISyntaxException ex) {
 				Logger.getLogger(classs.getName()).log(Level.WARNING, "Cannot firgue out base path for class with way (2): ", ex);
 			}
 		
@@ -350,11 +350,11 @@ public final class InfoTool {
 	 *            the host
 	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
 	 */
-	public static boolean isReachableByPing(String host) {
+	public static boolean isReachableByPing(final String host) {
 		try {
 			
 			// Start a new Process
-			Process process = Runtime.getRuntime().exec("ping -" + ( System.getProperty("os.name").toLowerCase().startsWith("windows") ? "n" : "c" ) + " 1 " + host);
+			final Process process = Runtime.getRuntime().exec("ping -" + ( System.getProperty("os.name").toLowerCase().startsWith("windows") ? "n" : "c" ) + " 1 " + host);
 			
 			//Wait for it to finish
 			process.waitFor();
@@ -362,7 +362,7 @@ public final class InfoTool {
 			//Check the return value
 			return process.exitValue() == 0;
 			
-		} catch (Exception ex) {
+		} catch (final Exception ex) {
 			Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 			return false;
 		}
@@ -381,14 +381,14 @@ public final class InfoTool {
 	 * @return <b> true </b> if Connected on Internet,<b> false </b> if not.
 	 */
 	@Deprecated
-	public static boolean isReachableUsingSocket(String host , int port) {
-		InetSocketAddress addr = new InetSocketAddress(host, port);
+	public static boolean isReachableUsingSocket(final String host , final int port) {
+		final InetSocketAddress addr = new InetSocketAddress(host, port);
 		
 		//Check if it can be connected
 		try (Socket sock = new Socket()) {
 			sock.connect(addr, 2000);
 			return true;
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			Logger.getLogger(Main.class.getName()).log(Level.INFO, null, ex);
 			return false;
 		}
@@ -423,8 +423,8 @@ public final class InfoTool {
 	 *            the height
 	 * @return an Image
 	 */
-	public static Image getAudioAlbumImage(String absolutePath , int width , int height) {
-		ByteArrayInputStream arrayInputStream = getAudioAlbumImageRaw(absolutePath, width, height);
+	public static Image getAudioAlbumImage(final String absolutePath , final int width , final int height) {
+		final ByteArrayInputStream arrayInputStream = getAudioAlbumImageRaw(absolutePath, width, height);
 		
 		//Does it contain an image
 		if (arrayInputStream != null)
@@ -444,20 +444,20 @@ public final class InfoTool {
 	 *            the height
 	 * @return ByteArrayInputStream containing the image as binary data
 	 */
-	public static ByteArrayInputStream getAudioAlbumImageRaw(String absolutePath , int width , int height) {
+	public static ByteArrayInputStream getAudioAlbumImageRaw(final String absolutePath , final int width , final int height) {
 		//Is it mp3?
 		if ("mp3".equals(getFileExtension(absolutePath)))
 			try {
-				Mp3File song = new Mp3File(absolutePath);
+				final Mp3File song = new Mp3File(absolutePath);
 				
 				if (song.hasId3v2Tag()) { // has id3v2 tag?
 					
-					ID3v2 id3v2Tag = song.getId3v2Tag();
+					final ID3v2 id3v2Tag = song.getId3v2Tag();
 					
 					if (id3v2Tag.getAlbumImage() != null) // image?
 						return new ByteArrayInputStream(id3v2Tag.getAlbumImage());
 				}
-			} catch (Exception ex) {
+			} catch (final Exception ex) {
 				//logger.log(Level.WARNING, "Can't get Album Image", ex);
 			}
 		
@@ -476,8 +476,8 @@ public final class InfoTool {
 	 *            The File absolute path
 	 * @return The File Creation Date in String Format
 	 */
-	public static String getFileCreationDate(String absolutePath) {
-		File file = new File(absolutePath);
+	public static String getFileCreationDate(final String absolutePath) {
+		final File file = new File(absolutePath);
 		//exists?
 		if (!file.exists())
 			return "file missing";
@@ -485,7 +485,7 @@ public final class InfoTool {
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
@@ -503,8 +503,8 @@ public final class InfoTool {
 	 *            The File absolute path
 	 * @return The File Creation Date in String Format
 	 */
-	public static String getFileLastModifiedDate(String absolutePath) {
-		File file = new File(absolutePath);
+	public static String getFileLastModifiedDate(final String absolutePath) {
+		final File file = new File(absolutePath);
 		//exists?
 		if (!file.exists())
 			return "file missing";
@@ -512,7 +512,7 @@ public final class InfoTool {
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-		} catch (IOException ex) {
+		} catch (final IOException ex) {
 			logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
@@ -526,7 +526,7 @@ public final class InfoTool {
 	 *            The File absolute path
 	 * @return the File title
 	 */
-	public static String getFileTitle(String absolutePath) {
+	public static String getFileTitle(final String absolutePath) {
 		return FilenameUtils.getBaseName(absolutePath);
 	}
 	
@@ -537,7 +537,7 @@ public final class InfoTool {
 	 *            the path
 	 * @return the File title+extension
 	 */
-	public static String getFileName(String absolutePath) {
+	public static String getFileName(final String absolutePath) {
 		return FilenameUtils.getName(absolutePath);
 		
 	}
@@ -549,7 +549,7 @@ public final class InfoTool {
 	 *            The File absolute path
 	 * @return the File extension
 	 */
-	public static String getFileExtension(String absolutePath) {
+	public static String getFileExtension(final String absolutePath) {
 		return FilenameUtils.getExtension(absolutePath).toLowerCase();
 		
 		// int i = path.lastIndexOf('.'); // characters contained before (.)
@@ -571,8 +571,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the type is supported or else False
 	 */
-	public static boolean isAudioSupported(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isAudioSupported(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
 	}
 	
@@ -584,8 +584,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the type is supported or else False
 	 */
-	public static boolean isVideoSupported(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isVideoSupported(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
 	}
 	
@@ -597,8 +597,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the type is supported or else False
 	 */
-	public static boolean isImageSupported(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isImageSupported(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
 	}
 	
@@ -612,8 +612,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the file is an Audio else false
 	 */
-	public static boolean isAudio(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isAudio(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 	
@@ -625,7 +625,7 @@ public final class InfoTool {
 	 *            File extension
 	 * @return True if the file is an Audio else false
 	 */
-	public static boolean isAudioCheckExtension(String extension) {
+	public static boolean isAudioCheckExtension(final String extension) {
 		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 	
@@ -637,8 +637,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the file is an Video else false
 	 */
-	public static boolean isVideo(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isVideo(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
 	}
 	
@@ -650,7 +650,7 @@ public final class InfoTool {
 	 *            File extension
 	 * @return True if the file is an Video else false
 	 */
-	public static boolean isVideoCheckExtension(String extension) {
+	public static boolean isVideoCheckExtension(final String extension) {
 		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
 	}
 	
@@ -661,8 +661,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the file is an Image else false
 	 */
-	public static boolean isImage(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isImage(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 	
@@ -673,7 +673,7 @@ public final class InfoTool {
 	 *            File extension
 	 * @return True if the file is an Image else false
 	 */
-	public static boolean isImageCheckExtension(String extension) {
+	public static boolean isImageCheckExtension(final String extension) {
 		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 	
@@ -684,8 +684,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the file is an PDF else false
 	 */
-	public static boolean isPdf(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isPdf(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && "pdf".equals(extension);
 	}
 	
@@ -696,7 +696,7 @@ public final class InfoTool {
 	 *            File extension
 	 * @return True if the file is an PDF else false
 	 */
-	public static boolean isPdfCheckExtension(String extension) {
+	public static boolean isPdfCheckExtension(final String extension) {
 		return extension != null && "pdf".equals(extension);
 	}
 	
@@ -707,8 +707,8 @@ public final class InfoTool {
 	 *            The File Name
 	 * @return True if the file is an ZIP else false
 	 */
-	public static boolean isZip(String fileName) {
-		String extension = getFileExtension(fileName);
+	public static boolean isZip(final String fileName) {
+		final String extension = getFileExtension(fileName);
 		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 	
@@ -719,7 +719,7 @@ public final class InfoTool {
 	 *            File extension
 	 * @return True if the file is an ZIP else false
 	 */
-	public static boolean isZipCheckExtension(String extension) {
+	public static boolean isZipCheckExtension(final String extension) {
 		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 	
@@ -732,7 +732,7 @@ public final class InfoTool {
 	 *            the image name
 	 * @return Returns an image which is already into the resources folder of the application
 	 */
-	public static Image getImageFromResourcesFolder(String imageName) {
+	public static Image getImageFromResourcesFolder(final String imageName) {
 		return new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName));
 	}
 	
@@ -754,7 +754,7 @@ public final class InfoTool {
 	 *            the image name
 	 * @return Returns an ImageView using method getImageFromResourcesFolder(String imageName);
 	 */
-	public static ImageView getImageViewFromResourcesFolder(String imageName) {
+	public static ImageView getImageViewFromResourcesFolder(final String imageName) {
 		return new ImageView(getImageFromResourcesFolder(imageName));
 	}
 	
@@ -786,7 +786,7 @@ public final class InfoTool {
 	 *            the letters
 	 * @return A substring(or the current given string) based on the letters that have to be cut plus "..."
 	 */
-	public static String getMinString(String s , int letters) {
+	public static String getMinString(final String s , final int letters) {
 		return s.length() < letters ? s : s.substring(0, letters) + "...";
 	}
 	
@@ -799,7 +799,7 @@ public final class InfoTool {
 	 *            the letters
 	 * @return A substring(or the current given string) based on the letters that have to be cut without adding "..." to the end of string
 	 */
-	public static String getMinString2(String s , int letters) {
+	public static String getMinString2(final String s , final int letters) {
 		return s.length() < letters ? s : s.substring(0, letters);
 	}
 	
@@ -812,7 +812,7 @@ public final class InfoTool {
 	 *            URL, FILE, INPUTSTREAM, UNKOWN;
 	 * @return Returns the duration of URL/FILE/INPUTSTREAM in milliseconds
 	 */
-	public static long durationInMilliseconds(String input , AudioType audioType) {
+	public static long durationInMilliseconds(final String input , final AudioType audioType) {
 		return audioType == AudioType.FILE ? durationInMilliseconds_Part2(new File(input))
 				: ( audioType == AudioType.URL || audioType == AudioType.INPUTSTREAM || audioType == AudioType.UNKNOWN ) ? -1 : -1;
 	}
@@ -824,14 +824,14 @@ public final class InfoTool {
 	 *            the file
 	 * @return the int
 	 */
-	private static long durationInMilliseconds_Part2(File file) {
+	private static long durationInMilliseconds_Part2(final File file) {
 		long milliseconds = -1;
 		
 		// exists?
 		if (file.exists() && file.length() != 0) {
 			
 			// extension?
-			String extension = InfoTool.getFileExtension(file.getName());
+			final String extension = InfoTool.getFileExtension(file.getName());
 			
 			// MP3?
 			if ("mp3".equals(extension)) {
@@ -846,7 +846,7 @@ public final class InfoTool {
 					//			milliseconds = tryWithMp3Agic(file);
 					//		    }
 					
-				} catch (Exception ex) {
+				} catch (final Exception ex) {
 					System.err.println("Problem getting the time of-> " + file.getAbsolutePath());
 				}
 				//}
@@ -854,7 +854,7 @@ public final class InfoTool {
 			// WAVE || OGG?
 			else if ("ogg".equals(extension) || "wav".equals(extension)) {
 				try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file)) {
-					AudioFormat format = audioInputStream.getFormat();
+					final AudioFormat format = audioInputStream.getFormat();
 					milliseconds = (int) ( file.length() / ( format.getFrameSize() * (int) format.getFrameRate() ) ) * 1000;
 				} catch (IOException | UnsupportedAudioFileException ex) {
 					System.err.println("Problem getting the time of-> " + file.getAbsolutePath());
@@ -878,9 +878,9 @@ public final class InfoTool {
 	 *            3->INPUTSTREAM
 	 * @return time in milliseconds
 	 */
-	public static int durationInSeconds(String name , AudioType type) {
+	public static int durationInSeconds(final String name , final AudioType type) {
 		
-		long time = durationInMilliseconds(name, type);
+		final long time = durationInMilliseconds(name, type);
 		
 		return (int) ( ( time == 0 || time == -1 ) ? time : time / 1000 );
 		
@@ -898,8 +898,8 @@ public final class InfoTool {
 	 * @return The Time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d.
 	 * 
 	 */
-	public static String millisecondsToTime(long ms) {
-		int millis = (int) ( ( ms % 1000 ) / 100 );
+	public static String millisecondsToTime(final long ms) {
+		final int millis = (int) ( ( ms % 1000 ) / 100 );
 		//	int seconds = (int) ((ms / 1000) % 60);
 		//	int minutes = (int) ((ms / (1000 * 60)) % 60);
 		//	int hours = (int) ((ms / (1000 * 60 * 60)) % 24);
@@ -920,7 +920,7 @@ public final class InfoTool {
 	 *            the seconds
 	 * @return the time edited in format <b> %02d:%02d:%02d if( minutes >60 )</b> or %02d:%02d. [[SuppressWarningsSpartan]]
 	 */
-	public static String getTimeEdited(int seconds) {
+	public static String getTimeEdited(final int seconds) {
 		if (seconds < 60) // duration < 1 minute
 			return String.format("%02ds", seconds % 60);
 		else if ( ( seconds / 60 ) / 60 <= 0) // duration < 1 hour
@@ -936,7 +936,7 @@ public final class InfoTool {
 	 *            the seconds
 	 * @return the time edited on hours
 	 */
-	public static String getTimeEditedOnHours(int seconds) {
+	public static String getTimeEditedOnHours(final int seconds) {
 		
 		return String.format("%02d:%02d", seconds / 60, seconds % 60);
 		
@@ -949,15 +949,15 @@ public final class InfoTool {
 	 *            The File to be given
 	 * @return the Date the File Created in Format `dd/mm/yyyy`
 	 */
-	public static String getFileCreationDate(File file) {
-		Path path = Paths.get(file.getAbsolutePath());
+	public static String getFileCreationDate(final File file) {
+		final Path path = Paths.get(file.getAbsolutePath());
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(path, BasicFileAttributes.class);
 			
 			return new SimpleDateFormat("dd/MM/yyyy").format(attr.creationTime().toMillis());
 			
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 			return "oops error! ";
 		}
@@ -970,15 +970,15 @@ public final class InfoTool {
 	 *            The File to be given
 	 * @return the Time the File Created in Format `HH:mm:ss`
 	 */
-	public static String getFileCreationTime(File file) {
-		Path path = Paths.get(file.getAbsolutePath());
+	public static String getFileCreationTime(final File file) {
+		final Path path = Paths.get(file.getAbsolutePath());
 		BasicFileAttributes attr;
 		try {
 			attr = Files.readAttributes(path, BasicFileAttributes.class);
 			
 			return new SimpleDateFormat("h:mm a").format(attr.creationTime().toMillis());
 			
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 			return "oops error! ";
 		}
@@ -991,7 +991,7 @@ public final class InfoTool {
 	 *            the file
 	 * @return <b> a String representing the file size in MB and kB </b>
 	 */
-	public static String getFileSizeEdited(File file) {
+	public static String getFileSizeEdited(final File file) {
 		return !file.exists() ? "file missing" : getFileSizeEdited(file.length());
 	}
 	
@@ -1002,10 +1002,10 @@ public final class InfoTool {
 	 *            File size in bytes
 	 * @return <b> a String representing the file size in MB and kB </b>
 	 */
-	public static String getFileSizeEdited(long bytes) {
+	public static String getFileSizeEdited(final long bytes) {
 		
 		//Find it	
-		int kilobytes = (int) ( bytes / 1024 ) , megabytes = kilobytes / 1024;
+		final int kilobytes = (int) ( bytes / 1024 ) , megabytes = kilobytes / 1024;
 		if (kilobytes < 1024)
 			return kilobytes + " KiB";
 		else if (kilobytes > 1024)
@@ -1021,7 +1021,7 @@ public final class InfoTool {
 	 * @param number
 	 * @return A number with more than 3 digits [ Example 1000 as 1.000] with dots every 3 digits
 	 */
-	public static String getNumberWithDots(int number) {
+	public static String getNumberWithDots(final int number) {
 		return String.format(Locale.US, "%,d", number).replace(",", ".");
 	}
 	

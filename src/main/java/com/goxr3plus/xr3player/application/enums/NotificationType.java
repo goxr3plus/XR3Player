@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.utils.javafx;
+package main.java.com.goxr3plus.xr3player.application.enums;
 
 /**
  * The type of the notification to be shown.

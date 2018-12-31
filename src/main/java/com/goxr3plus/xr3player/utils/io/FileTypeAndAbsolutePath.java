@@ -1,4 +1,7 @@
 package main.java.com.goxr3plus.xr3player.utils.io;
+
+import main.java.com.goxr3plus.xr3player.application.enums.FileType;
+
 /**
 	 * Holds FileType and AbsolutePath
 	 * 

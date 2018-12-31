@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
 import main.java.com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
@@ -36,7 +37,6 @@ import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService
 import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
 
 public class SideBar extends StackPane {
 	

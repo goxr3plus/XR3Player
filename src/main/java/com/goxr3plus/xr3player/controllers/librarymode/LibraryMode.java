@@ -45,6 +45,7 @@ import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
+import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
 import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
 import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
@@ -53,7 +54,6 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.utils.general.ActionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
 
 /**
  * This class contains everything needed going on LibraryMode.

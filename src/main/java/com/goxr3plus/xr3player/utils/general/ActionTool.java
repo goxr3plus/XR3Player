@@ -34,9 +34,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.settings.GeneralSettingsController;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTools;
-import main.java.com.goxr3plus.xr3player.utils.javafx.NotificationType;
 
 /**
  * A class which has a lot of useful methods.

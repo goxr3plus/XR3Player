@@ -5,23 +5,19 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 
 public class Util {
 	
-	public enum OS {
-		WINDOWS, LINUX, MAC, SOLARIS
-	}// Operating systems.
-	
-	private static OS os = null;
+	private static OperatingSystem os = null;
 	private static final String OPERATING_SYSTEM = System.getProperty("os.name").toLowerCase();
 	
-	public static OS getOS() {
+	public static OperatingSystem getOS() {
 		if (os == null) {
 			if (OPERATING_SYSTEM.contains("win"))
-				os = OS.WINDOWS;
+				os = OperatingSystem.WINDOWS;
 			else if (OPERATING_SYSTEM.contains("nix") || OPERATING_SYSTEM.contains("nux") || OPERATING_SYSTEM.contains("aix")) {
-				os = OS.LINUX;
+				os = OperatingSystem.LINUX;
 			} else if (OPERATING_SYSTEM.contains("mac")) {
-				os = OS.MAC;
+				os = OperatingSystem.MAC;
 			}else if (OPERATING_SYSTEM.contains("sunos")) {
-				os = OS.SOLARIS;
+				os = OperatingSystem.SOLARIS;
 			}
 		}
 		return os;
@@ -48,7 +44,7 @@ public class Util {
 	 * 
 	 * @param code
 	 */
-	public static void terminateXR3Player(int code) {
+	public static void terminateXR3Player(final int code) {
 		
 		System.out.println("Dis All->" + Util.getOS());
 		switch (Util.getOS()) {
