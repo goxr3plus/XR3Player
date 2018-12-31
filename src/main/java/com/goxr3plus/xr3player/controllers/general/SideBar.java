@@ -38,7 +38,6 @@ import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class SideBar extends StackPane {
@@ -522,7 +521,7 @@ public class SideBar extends StackPane {
 				Main.dbManager.manageConnection(Operation.CLOSE);
 
 			// Clear the Previous database manager
-			IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+			IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 			// Show Update Screen
 			Main.updateScreen.setVisible(true);

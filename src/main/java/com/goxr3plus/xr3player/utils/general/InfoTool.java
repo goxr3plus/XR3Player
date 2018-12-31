@@ -16,7 +16,7 @@ import com.mpatric.mp3agic.Mp3File;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * Provides useful methods for retrieving informations.
@@ -280,25 +280,6 @@ public final class InfoTool {
 		return basePath;
 	}
 
-	// public Image getDragViewImage(Image image,int width,int height) {
-	// if(image!=null) {
-	// return image;
-	// }else {
-	//
-	// WritableImage image = new WritableImage(100, 100);
-	// Canvas canvas = new Canvas();
-	// canvas.setWidth(100);
-	// canvas.setHeight(100);
-	// ActionTool.paintCanvas(canvas.getGraphicsContext2D(), getFileName(), 100,
-	// 100);
-	// SnapshotParameters params = new SnapshotParameters();
-	// params.setFill(Color.TRANSPARENT);
-	// return
-	// canvas.snapshot(params, image), 50, 0);
-	//
-	// }
-	// }
-
 	/**
 	 * Return the imageView of mp3File in requested Width and Height.
 	 *
@@ -329,7 +310,7 @@ public final class InfoTool {
 	public static ByteArrayInputStream getAudioAlbumImageRaw(final String absolutePath, final int width,
 			final int height) {
 		// Is it mp3?
-		if ("mp3".equals(IOTool.getFileExtension(absolutePath)))
+		if ("mp3".equals(IOInfo.getFileExtension(absolutePath)))
 			try {
 				final Mp3File song = new Mp3File(absolutePath);
 
@@ -361,19 +342,6 @@ public final class InfoTool {
 	public static Image getImageFromResourcesFolder(final String imageName) {
 		return new Image(InfoTool.class.getResourceAsStream(IMAGES + imageName));
 	}
-
-	/**
-	 * Use this method to retrieve an image from the resources of the application.
-	 *
-	 * @param imageName the image name
-	 * @return Returns an image which is already into the resources folder of the
-	 *         application
-	 */
-	// public static Image getImageFromCurrentFolder(String folderName , String
-	// imageName) {
-	// return new Image(InfoTool.class.getResourceAsStream("/" + folderName + "/" +
-	// imageName));
-	// }
 
 	/**
 	 * Use this method to retrieve an ImageView from the resources of the
@@ -409,12 +377,12 @@ public final class InfoTool {
 	/**
 	 * Returns a String with a fixed number of letters.
 	 *
-	 * @param s       the string
-	 * @param letters the letters
-	 * @param appender 
+	 * @param s        the string
+	 * @param letters  the letters
+	 * @param appender
 	 * @return Substring the current word and append a new given string at the end
 	 */
-	public static String getMinString(final String s, final int letters,final String appender) {
+	public static String getMinString(final String s, final int letters, final String appender) {
 		return s.length() < letters ? s : s.substring(0, letters) + appender;
 	}
 

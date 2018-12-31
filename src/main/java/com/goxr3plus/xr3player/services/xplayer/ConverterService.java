@@ -12,7 +12,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
@@ -112,7 +112,7 @@ public class ConverterService extends Service<Boolean> {
 				}
 
 				// Set Message
-				updateMessage("Converting ( " + IOTool.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
+				updateMessage("Converting ( " + IOInfo.getFileExtension(fileAbsolutePath) + " ) to ( mp3 )");
 
 				// Create the media folder if not existing
 				final String folderName = InfoTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Media";
@@ -123,8 +123,8 @@ public class ConverterService extends Service<Boolean> {
 				}
 
 				// Check if it is already .mp3
-				if (!"mp3".equals(IOTool.getFileExtension(fileAbsolutePath))) {
-					newFileAsbolutePath = folderName + File.separator + IOTool.getFileTitle(fileAbsolutePath) + ".mp3";
+				if (!"mp3".equals(IOInfo.getFileExtension(fileAbsolutePath))) {
+					newFileAsbolutePath = folderName + File.separator + IOInfo.getFileTitle(fileAbsolutePath) + ".mp3";
 
 					// Convert any audio format to .mp3
 					try {

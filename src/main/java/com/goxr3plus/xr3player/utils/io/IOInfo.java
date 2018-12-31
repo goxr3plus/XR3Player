@@ -11,16 +11,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
-import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
-import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
-public class IOTool {
+public class IOInfo {
 
 	/**
 	 * Returns the real Path of the given File , either it is symbolic link or hard
@@ -50,7 +46,7 @@ public class IOTool {
 		else
 			try {
 				// If yes returns the real file name
-				if ("lnk".equals(IOTool.getFileExtension(absoluteFilePath))
+				if ("lnk".equals(IOInfo.getFileExtension(absoluteFilePath))
 						&& WindowsShortcut.isPotentialValidLink(file))
 					absoluteFilePath = new WindowsShortcut(file).getRealFilename();
 				return new FileTypeAndAbsolutePath(FileLinkType.SHORTCUT, absoluteFilePath);
@@ -72,7 +68,7 @@ public class IOTool {
 			return Files.readAttributes(Paths.get(path), BasicFileAttributes.class).creationTime();
 		} catch (final IOException ex) {
 			ex.printStackTrace();
-			//ActionTool.logger.log(Level.INFO, "", ex);
+			// ActionTool.logger.log(Level.INFO, "", ex);
 		}
 
 		return null;
@@ -274,31 +270,5 @@ public class IOTool {
 	public static String getFileSizeEdited(final File file) {
 		return !file.exists() ? "file missing" : getFileSizeEdited(file.length());
 	}
-
-	/**
-	 * Deletes Directory of File.
-	 *
-	 * @param source The File to be deleted | either if it is directory or File
-	 * @return true, if successful
-	 */
-	public static boolean deleteFile(final File source) {
-	
-		if (source.isDirectory()) // Directory
-			try {
-				FileUtils.deleteDirectory(source);
-			} catch (final IOException ex) {
-				ex.printStackTrace();
-				//ActionTool.logger.log(Level.INFO, "", ex);
-			}
-		else if (source.isFile() && !source.delete()) { // File
-			AlertTool.showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.",
-					Duration.millis(2000), NotificationType.WARNING);
-			return false;
-		}
-	
-		return true;
-	}
-
-
 
 }

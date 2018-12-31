@@ -7,7 +7,7 @@ import java.io.File;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * Get the progress of Vacuum Operation.
@@ -46,8 +46,8 @@ public class VacuumProgressService extends Service<Void> {
 
 				long bfL = basicFile.length(), jfL;
 				// Update Message
-				updateMessage("Before:" + IOTool.getFileSizeEdited(basicFile) + "  After:"
-						+ IOTool.getFileSizeEdited(journalFile));
+				updateMessage("Before:" + IOInfo.getFileSizeEdited(basicFile) + "  After:"
+						+ IOInfo.getFileSizeEdited(journalFile));
 
 				// Wait until it is created
 				while (!journalFile.exists())
@@ -57,8 +57,8 @@ public class VacuumProgressService extends Service<Void> {
 				while ((jfL = journalFile.length()) < bfL) {
 
 					// Update Message
-					updateMessage("Before:" + IOTool.getFileSizeEdited(basicFile) + "  After:"
-							+ IOTool.getFileSizeEdited(journalFile));
+					updateMessage("Before:" + IOInfo.getFileSizeEdited(basicFile) + "  After:"
+							+ IOInfo.getFileSizeEdited(journalFile));
 
 					// Update Progress
 					updateProgress(jfL, bfL);

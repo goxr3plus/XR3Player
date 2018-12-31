@@ -104,7 +104,6 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -366,7 +365,7 @@ public class Main extends Application {
 		countDownloads();
 
 		// Delete AutoUpdate if it exists
-		IOTool.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
+		IOAction.deleteFile(new File(InfoTool.getBasePathForClass(Main.class) + "XR3PlayerUpdater.jar"));
 
 		// ============= ApplicationProperties GLOBAL
 		final Properties properties = applicationProperties.loadProperties();
@@ -789,7 +788,7 @@ public class Main extends Application {
 									new Thread(() -> {
 
 										// Delete the current settings from the User
-										IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
+										IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator()
 												+ selectedUser.getName() + File.separator + "settings" + File.separator
 												+ InfoTool.USER_SETTINGS_FILE_NAME));
 

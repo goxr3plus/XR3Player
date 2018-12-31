@@ -6,53 +6,53 @@ import java.util.Collections;
 import java.util.Map;
 
 /**
- * Modify Enviromental variables
+ * Modify Computer Environment variables
  * 
  * @author GOXR3PLUSSTUDIO
  *
  */
 public class EnvVarsTool {
 
-	public static void setEnv(Map<String, String> newenv)
+	public static void setEnv(final Map<String, String> newenv)
 			throws ClassNotFoundException, IllegalAccessException, NoSuchFieldException {
 		try {
-			Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
+			final Class<?> processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment");
 
 			// Field 1
-			Field theEnvironmentField = processEnvironmentClass.getDeclaredField("theEnvironment");
+			final Field theEnvironmentField = processEnvironmentClass.getDeclaredField("theEnvironment");
 			theEnvironmentField.setAccessible(true);
 
 			// env
 			@SuppressWarnings("unchecked")
-			Map<String, String> env = (Map<String, String>) theEnvironmentField.get(null);
+			final Map<String, String> env = (Map<String, String>) theEnvironmentField.get(null);
 			env.putAll(newenv);
 
 			// Field2
-			Field theCaseInsensitiveEnvironmentField = processEnvironmentClass
+			final Field theCaseInsensitiveEnvironmentField = processEnvironmentClass
 					.getDeclaredField("theCaseInsensitiveEnvironment");
 			theCaseInsensitiveEnvironmentField.setAccessible(true);
 
 			// cienv
 			@SuppressWarnings("unchecked")
-			Map<String, String> cienv = (Map<String, String>) theCaseInsensitiveEnvironmentField.get(null);
+			final Map<String, String> cienv = (Map<String, String>) theCaseInsensitiveEnvironmentField.get(null);
 			cienv.putAll(newenv);
 
-		} catch (NoSuchFieldException e) {
+		} catch (final NoSuchFieldException e) {
 
 			// Env
-			Map<String, String> env = System.getenv();
+			final Map<String, String> env = System.getenv();
 
 			// Foe each
 			Arrays.asList(Collections.class.getDeclaredClasses()).forEach(cl -> {
 				if ("java.util.Collections$UnmodifiableMap".equals(cl.getName())) {
 					try {
-						Field field = cl.getDeclaredField("m");
+						final Field field = cl.getDeclaredField("m");
 						field.setAccessible(true);
 						@SuppressWarnings("unchecked")
-						Map<String, String> map = (Map<String, String>) field.get(env);
+						final Map<String, String> map = (Map<String, String>) field.get(env);
 						map.clear();
 						map.putAll(newenv);
-					} catch (Exception e1) {
+					} catch (final Exception e1) {
 						e1.printStackTrace();
 					}
 

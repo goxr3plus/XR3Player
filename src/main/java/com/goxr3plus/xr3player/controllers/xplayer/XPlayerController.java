@@ -91,7 +91,7 @@ import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import main.java.goxr3plus.javastreamplayer.stream.Status;
@@ -528,7 +528,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					if (!file.isDirectory()) {
 
 						// Get it
-						final FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+						final FileTypeAndAbsolutePath ftaap = IOInfo.getRealPathFromFile(file.getAbsolutePath());
 
 						// Check if File exists
 						if (!new File(ftaap.getFileAbsolutePath()).exists()) {
@@ -757,7 +757,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 						if (!file.isDirectory()) {
 
 							// Get it
-							final FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+							final FileTypeAndAbsolutePath ftaap = IOInfo.getRealPathFromFile(file.getAbsolutePath());
 
 							// Check if File exists
 							if (!new File(ftaap.getFileAbsolutePath()).exists()) {
@@ -1223,7 +1223,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	public void updateEmotion(final Node node) {
 
 		// Show the Window
-		Main.emotionsWindow.show(IOTool.getFileName(xPlayerModel.getSongPath()), node);
+		Main.emotionsWindow.show(IOInfo.getFileName(xPlayerModel.getSongPath()), node);
 
 		// Listener
 		Main.emotionsWindow.getWindow().showingProperty().addListener(new InvalidationListener() {
@@ -2201,7 +2201,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 				// WaveFormJob.AMPLITUDES_AND_WAVEFORM);
 
 				// Marquee Text
-				mediaFileMarquee.setText(IOTool.getFileName(xPlayerModel.songPathProperty().get()));
+				mediaFileMarquee.setText(IOInfo.getFileName(xPlayerModel.songPathProperty().get()));
 
 				// Notification
 				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
@@ -2212,7 +2212,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 					// Show Notification
 					if (!discIsDragging)
 						AlertTool.showNotification("Playing on deck " + (getKey() + 1),
-								IOTool.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
+								IOInfo.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
 								NotificationType.SIMPLE, image != null ? JavaFXTool.getImageView(image, 60, 60)
 										: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
 				}

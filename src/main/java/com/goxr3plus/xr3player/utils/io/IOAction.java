@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
 
+import org.apache.commons.io.FileUtils;
+
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
@@ -97,7 +99,7 @@ public final class IOAction {
 	
 		// Open the Default Browser
 		if (System.getProperty("os.name").toLowerCase().contains("win")) {
-			AlertTool.showNotification("Message", "Opening in File Explorer:\n" + IOTool.getFileName(path),
+			AlertTool.showNotification("Message", "Opening in File Explorer:\n" + IOInfo.getFileName(path),
 					Duration.millis(1500), NotificationType.INFORMATION);
 	
 			// START: --NEEDS TO BE FIXED!!!!!!----------------NOT WORKING WELL-----
@@ -191,6 +193,30 @@ public final class IOAction {
 			//ActionTool.logger.log(Level.INFO, "", ex);
 			return false;
 		}
+		return true;
+	}
+
+	/**
+	 * Deletes Directory of File.
+	 *
+	 * @param source The File to be deleted | either if it is directory or File
+	 * @return true, if successful
+	 */
+	public static boolean deleteFile(final File source) {
+	
+		if (source.isDirectory()) // Directory
+			try {
+				FileUtils.deleteDirectory(source);
+			} catch (final IOException ex) {
+				ex.printStackTrace();
+				//ActionTool.logger.log(Level.INFO, "", ex);
+			}
+		else if (source.isFile() && !source.delete()) { // File
+			AlertTool.showNotification("Message", "Can't delete file:\n(" + source.getName() + ") cause is in use by a program.",
+					Duration.millis(2000), NotificationType.WARNING);
+			return false;
+		}
+	
 		return true;
 	}
 

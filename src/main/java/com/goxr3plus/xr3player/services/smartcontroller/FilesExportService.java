@@ -25,7 +25,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -128,7 +128,7 @@ public class FilesExportService extends Service<Boolean> {
 
 					// Update SmartController Description Label
 					Platform.runLater(() -> smartController.getDescriptionLabel()
-							.setText("Producing : " + IOTool.getFileName(targetDirectory.getAbsolutePath())));
+							.setText("Producing : " + IOInfo.getFileName(targetDirectory.getAbsolutePath())));
 
 					try {
 
@@ -262,7 +262,7 @@ public class FilesExportService extends Service<Boolean> {
 						if (ex.getMessage().contains(
 								"(The process cannot access the file because it is being used by another process)"))
 							AlertTool.showNotification("Error Message", "[ "
-									+ IOTool.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
+									+ IOInfo.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
 									+ "The process cannot access the file because it is being used by another process",
 									Duration.seconds(4), NotificationType.ERROR);
 						ex.printStackTrace();
@@ -280,7 +280,7 @@ public class FilesExportService extends Service<Boolean> {
 					return;
 
 				// Useful
-				final String fileName = IOTool.getFileName(sourceFilePath);
+				final String fileName = IOInfo.getFileName(sourceFilePath);
 				final String destination = destinationFolder + File.separator + fileName;
 
 				// Go

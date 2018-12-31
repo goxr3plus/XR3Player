@@ -29,7 +29,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.FileCategory;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -345,7 +345,7 @@ public class User extends StackPane {
 				+ ((User) Main.loginMode.viewer.getSelectedItem()).getName() + " ]", owner, Main.window)) {
 
 			// Try to delete it
-			if (IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
+			if (IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + this.getName()))) {
 
 				// Delete from the Model Viewer
 				Main.loginMode.viewer.deleteItem(this);
@@ -482,14 +482,14 @@ public class User extends StackPane {
 	 * Returns the date this user created based on the folder creation date
 	 */
 	public String getDateCreated() {
-		return IOTool.getFileCreationDate(new File(userInformationDb.getFileAbsolutePath()));
+		return IOInfo.getFileCreationDate(new File(userInformationDb.getFileAbsolutePath()));
 	}
 
 	/**
 	 * Returns the Time this user created based on the folder creation date
 	 */
 	public String getTimeCreated() {
-		return IOTool.getFileCreationTime(new File(userInformationDb.getFileAbsolutePath()));
+		return IOInfo.getFileCreationTime(new File(userInformationDb.getFileAbsolutePath()));
 	}
 
 	/**

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class ExtensionTool {
 
@@ -38,7 +38,7 @@ public final class ExtensionTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isAudioSupported(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
 	}
 
@@ -50,7 +50,7 @@ public final class ExtensionTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isVideoSupported(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
 	}
 
@@ -62,7 +62,7 @@ public final class ExtensionTool {
 	 * @return True if the type is supported or else False
 	 */
 	public static boolean isImageSupported(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && ExtensionTool.ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
 	}
 
@@ -76,7 +76,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an Audio else false
 	 */
 	public static boolean isAudio(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 
@@ -99,7 +99,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an Video else false
 	 */
 	public static boolean isVideo(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
 	}
 
@@ -121,7 +121,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an Image else false
 	 */
 	public static boolean isImage(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 
@@ -142,7 +142,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an PDF else false
 	 */
 	public static boolean isPdf(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && "pdf".equals(extension);
 	}
 
@@ -163,7 +163,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an ZIP else false
 	 */
 	public static boolean isZip(final String fileName) {
-		final String extension = IOTool.getFileExtension(fileName);
+		final String extension = IOInfo.getFileExtension(fileName);
 		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 

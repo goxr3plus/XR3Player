@@ -43,7 +43,8 @@ import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emot
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -270,11 +271,11 @@ public abstract class Media {
 		this.emotion = new SimpleIntegerProperty(0);
 		this.mediaType = new SimpleIntegerProperty(1);
 		this.playStatus = new SimpleIntegerProperty(-2);
-		this.title = new SimpleStringProperty(IOTool.getFileTitle(path));
+		this.title = new SimpleStringProperty(IOInfo.getFileTitle(path));
 		this.drive = new SimpleStringProperty(Paths.get(path).getRoot() + "");
 		this.filePath = new SimpleStringProperty(path);
-		this.fileName = new SimpleStringProperty(IOTool.getFileName(path));
-		this.fileType = new SimpleStringProperty(IOTool.getFileExtension(path));
+		this.fileName = new SimpleStringProperty(IOInfo.getFileName(path));
+		this.fileType = new SimpleStringProperty(IOInfo.getFileExtension(path));
 		this.fileSize = new SimpleStringProperty();
 		this.artist = new SimpleStringProperty();
 		this.mood = new SimpleStringProperty();
@@ -353,13 +354,13 @@ public abstract class Media {
 		// I need to add code for video files etc
 
 		// Check the fileSize
-		this.fileSize.set(IOTool.getFileSizeEdited(new File(filePath.get())));
+		this.fileSize.set(IOInfo.getFileSizeEdited(new File(filePath.get())));
 
 		// dateFileCreated
-		dateFileCreated.set(IOTool.getFileCreationDate(filePath.get()));
+		dateFileCreated.set(IOInfo.getFileCreationDate(filePath.get()));
 
 		// dateFileModified
-		dateFileModified.set(IOTool.getFileLastModifiedDate(filePath.get()));
+		dateFileModified.set(IOInfo.getFileLastModifiedDate(filePath.get()));
 
 		// It is Audio?
 		if (!ExtensionTool.isAudioSupported(filePath.get()))
@@ -741,7 +742,7 @@ public abstract class Media {
 	private boolean removeItem(final boolean permanent, final SmartController controller) {
 
 		// Delete from storage medium?
-		if (permanent && !IOTool.deleteFile(new File(getFilePath())))
+		if (permanent && !IOAction.deleteFile(new File(getFilePath())))
 			return false;
 
 		// --totalInDataBase
@@ -776,7 +777,7 @@ public abstract class Media {
 		// controller.renameWorking = true;
 
 		// Open Window
-		final String extension = "." + IOTool.getFileExtension(getFilePath());
+		final String extension = "." + IOInfo.getFileExtension(getFilePath());
 		Main.renameWindow.show(getTitle(), node, "Media Renaming", FileCategory.FILE);
 		final String oldFilePath = getFilePath();
 
@@ -866,7 +867,7 @@ public abstract class Media {
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(IOTool.getFileName(newFilePath));
+									xPlayerController.getMediaFileMarquee().setText(IOInfo.getFileName(newFilePath));
 
 								}
 							});
@@ -897,8 +898,8 @@ public abstract class Media {
 
 							// Show message to user
 							AlertTool.showNotification("Success Message",
-									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
-											+ IOTool.getFileName(newFilePath),
+									"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
+											+ IOInfo.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred
@@ -1246,11 +1247,11 @@ public abstract class Media {
 	 * @param path the new file path
 	 */
 	public void setFilePath(final String path) {
-		this.title.set(IOTool.getFileTitle(path));
+		this.title.set(IOInfo.getFileTitle(path));
 		this.drive.set(path.substring(0, 1));
 		this.filePath.set(path);
-		this.fileName.set(IOTool.getFileName(path));
-		this.fileType.set(IOTool.getFileExtension(path));
+		this.fileName.set(IOInfo.getFileName(path));
+		this.fileType.set(IOInfo.getFileExtension(path));
 
 	}
 

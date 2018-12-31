@@ -21,7 +21,7 @@ import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -194,7 +194,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 					// extension
 					xPlayerController.getxPlayerModel().songExtensionProperty()
-							.set(IOTool.getFileExtension(audioFullPath));
+							.set(IOInfo.getFileExtension(audioFullPath));
 
 					// == TotalTimeLabel
 					Platform.runLater(() -> xPlayerController.getTotalTimeLabel()

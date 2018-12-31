@@ -21,7 +21,7 @@ import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -113,8 +113,8 @@ public class FileTreeItem extends TreeItem<String> {
 	public void rename(Node node) {
 
 		// Open Window
-		String extension = "." + IOTool.getFileExtension(getAbsoluteFilePath());
-		Main.renameWindow.show(IOTool.getFileTitle(getAbsoluteFilePath()), node, "Media Renaming", FileCategory.FILE);
+		String extension = "." + IOInfo.getFileExtension(getAbsoluteFilePath());
+		Main.renameWindow.show(IOInfo.getFileTitle(getAbsoluteFilePath()), node, "Media Renaming", FileCategory.FILE);
 		String oldFilePath = getAbsoluteFilePath();
 
 		// Bind
@@ -202,7 +202,7 @@ public class FileTreeItem extends TreeItem<String> {
 									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(IOTool.getFileName(newFilePath));
+									xPlayerController.getMediaFileMarquee().setText(IOInfo.getFileName(newFilePath));
 
 								}
 							});
@@ -233,8 +233,8 @@ public class FileTreeItem extends TreeItem<String> {
 
 							// Show message to user
 							AlertTool.showNotification("Success Message",
-									"Successfully rename from :\n" + IOTool.getFileName(oldFilePath) + " \nto\n"
-											+ IOTool.getFileName(newFilePath),
+									"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
+											+ IOInfo.getFileName(newFilePath),
 									Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * An implementation which combines FileChooser and DirectoryChooser.
@@ -120,9 +120,9 @@ public class FileAndFolderChooser {
 	public File prepareToExportImage(final Stage window, final String imagePath) {
 		imageFileChooser.getExtensionFilters().clear();
 		imageFileChooser.setTitle("Type a File Name and press save");
-		imageFileChooser.setInitialFileName(IOTool.getFileTitle(imagePath));
+		imageFileChooser.setInitialFileName(IOInfo.getFileTitle(imagePath));
 		imageFileChooser.getExtensionFilters()
-				.add(new FileChooser.ExtensionFilter("Extension", "*." + IOTool.getFileExtension(imagePath)));
+				.add(new FileChooser.ExtensionFilter("Extension", "*." + IOInfo.getFileExtension(imagePath)));
 		final File file = imageFileChooser.showSaveDialog(window);
 		if (file != null) {
 			// Set the property to the directory of the chosenFile so the

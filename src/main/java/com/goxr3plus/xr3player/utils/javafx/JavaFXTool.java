@@ -39,7 +39,7 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * This class has some functions that are not there by default in JavaFX 8
@@ -106,7 +106,7 @@ public final class JavaFXTool {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			absolutePath = paths.filter(path -> {
 				final File file = path.toFile();
-				return !file.isDirectory() && title.equals(IOTool.getFileTitle(file.getAbsolutePath()))
+				return !file.isDirectory() && title.equals(IOInfo.getFileTitle(file.getAbsolutePath()))
 						&& ExtensionTool.isImageSupported(file.getAbsolutePath());
 			}).findFirst().map(path -> path.toAbsolutePath().toString()).orElse(null);
 		} catch (final IOException ex) {
@@ -148,7 +148,7 @@ public final class JavaFXTool {
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			paths.forEach(path -> {
 				final File file = path.toFile();
-				if (!file.isDirectory() && IOTool.getFileTitle(file.getAbsolutePath()).equals(title)
+				if (!file.isDirectory() && IOInfo.getFileTitle(file.getAbsolutePath()).equals(title)
 						&& ExtensionTool.isImageSupported(file.getAbsolutePath()))
 					file.delete(); // -> to be fixed
 			});
@@ -208,7 +208,7 @@ public final class JavaFXTool {
 			deleteAnyImageWithTitle(title, folderForSaving);
 
 			if (!IOAction.copy(imageFile.getAbsolutePath(), folderForSaving + File.separator + title + "."
-					+ IOTool.getFileExtension(imageFile.getAbsolutePath())))
+					+ IOInfo.getFileExtension(imageFile.getAbsolutePath())))
 				Platform.runLater(() -> AlertTool.showNotification("Failed saving image",
 						"Failed to change the image...", Duration.millis(2500), NotificationType.SIMPLE));
 

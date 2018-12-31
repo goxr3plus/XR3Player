@@ -46,7 +46,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
@@ -220,7 +220,7 @@ public class Library extends StackPane {
 							// Rename the image of library
 							if (imageName != null)
 								updateImagePathInDB(InfoTool.getImagesFolderAbsolutePathWithSeparator() + newName + "."
-										+ IOTool.getFileExtension(getAbsoluteImagePath()), true, false);
+										+ IOInfo.getFileExtension(getAbsoluteImagePath()), true, false);
 
 							// Update the UserInformation properties file
 							if (isOpened())
@@ -662,7 +662,7 @@ public class Library extends StackPane {
 				success = new File(getAbsoluteImagePath()).renameTo(new File(absoluteFilePath));
 
 				// Change the image name
-				imageName = IOTool.getFileName(absoluteFilePath);
+				imageName = IOInfo.getFileName(absoluteFilePath);
 
 			} else { // Create new Image
 
@@ -673,10 +673,10 @@ public class Library extends StackPane {
 				//
 				// Create the new image
 				final String newImageName = InfoTool.getImagesFolderAbsolutePathWithSeparator() + getLibraryName() + "."
-						+ IOTool.getFileExtension(absoluteFilePath);
+						+ IOInfo.getFileExtension(absoluteFilePath);
 
 				// Change the image name
-				imageName = IOTool.getFileName(newImageName);
+				imageName = IOInfo.getFileName(newImageName);
 
 				// // Do the copy procedure
 				// if (!ActionTool.copy(absolutePath, newImageName))
@@ -904,7 +904,7 @@ public class Library extends StackPane {
 						.executeUpdate("DELETE FROM LIBRARIES WHERE NAME='" + getLibraryName() + "' ");
 
 				// Delete the folder with library name in database
-				IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + getLibraryName()));
+				IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + getLibraryName()));
 
 				// delete library image
 				if (imageName != null && !new File(getAbsoluteImagePath()).delete())

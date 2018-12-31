@@ -39,7 +39,7 @@ import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -202,7 +202,7 @@ public class MediaInformation extends StackPane {
 				if (!file.isDirectory()) {
 
 					// Get it
-					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+					FileTypeAndAbsolutePath ftaap = IOInfo.getRealPathFromFile(file.getAbsolutePath());
 
 					// Check if File exists
 					if (!new File(ftaap.getFileAbsolutePath()).exists()) {

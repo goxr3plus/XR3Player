@@ -36,7 +36,7 @@ import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -141,7 +141,7 @@ public class TagWindow extends StackPane {
 				if (!file.isDirectory()) {
 
 					// Get it
-					FileTypeAndAbsolutePath ftaap = IOTool.getRealPathFromFile(file.getAbsolutePath());
+					FileTypeAndAbsolutePath ftaap = IOInfo.getRealPathFromFile(file.getAbsolutePath());
 
 					// Check if File exists
 					if (!new File(ftaap.getFileAbsolutePath()).exists()) {
@@ -192,7 +192,7 @@ public class TagWindow extends StackPane {
 				if (empty) {
 					setText(null);
 				} else {
-					setText(IOTool.getFileName(item));
+					setText(IOInfo.getFileName(item));
 					setTooltip(new Tooltip(item));
 				}
 			}
@@ -319,7 +319,7 @@ public class TagWindow extends StackPane {
 		if (absolutePath != null) {
 
 			// Find file extension
-			String extension = IOTool.getFileExtension(absolutePath);
+			String extension = IOInfo.getFileExtension(absolutePath);
 
 			// Current Tab
 			int currentTabSelected = tabPane.getSelectionModel().getSelectedIndex();

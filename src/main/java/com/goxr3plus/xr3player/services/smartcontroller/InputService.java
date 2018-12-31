@@ -26,7 +26,7 @@ import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartContro
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * Manages the input operations of the SmartController.
@@ -83,7 +83,7 @@ public class InputService extends Service<Void> {
 		// We need only directories or media files
 		this.list = filesList.stream()
 				// Find real path for symbolic links etc
-				.map(file -> new File(IOTool.getRealPathFromFile(file.getAbsolutePath()).getFileAbsolutePath()))
+				.map(file -> new File(IOInfo.getRealPathFromFile(file.getAbsolutePath()).getFileAbsolutePath()))
 				// Filter only the files we want
 				.filter(file -> file.isDirectory()
 						|| (file.isFile() && ExtensionTool.isAudioSupported(file.getAbsolutePath())))

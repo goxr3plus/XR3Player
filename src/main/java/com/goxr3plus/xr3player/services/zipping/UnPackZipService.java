@@ -20,7 +20,7 @@ import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.application.enums.Operation;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -141,7 +141,7 @@ public class UnPackZipService extends Service<Boolean> {
 					Main.dbManager.manageConnection(Operation.CLOSE);
 
 				// Delete the previous database
-				IOTool.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
+				IOAction.deleteFile(new File(InfoTool.getAbsoluteDatabasePathPlain()));
 
 				// ---------------------Move on Importing the
 				// Database-----------------------------------------------

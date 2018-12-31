@@ -12,7 +12,7 @@ import org.jaudiotagger.audio.mp3.MP3File;
 
 import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
 import main.java.com.goxr3plus.xr3player.application.enums.FileType;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class TimeTool {
 
@@ -123,7 +123,7 @@ public final class TimeTool {
 		if (file.exists() && file.length() != 0) {
 
 			// extension?
-			final String extension = IOTool.getFileExtension(file.getName());
+			final String extension = IOInfo.getFileExtension(file.getName());
 
 			// MP3?
 			if ("mp3".equals(extension)) {

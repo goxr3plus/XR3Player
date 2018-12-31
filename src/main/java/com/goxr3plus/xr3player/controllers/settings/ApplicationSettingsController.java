@@ -21,7 +21,7 @@ import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
 import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOTool;
+import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
@@ -198,7 +198,7 @@ public class ApplicationSettingsController extends BorderPane {
 				restoreAll();
 
 				// Delete the current settings from the User
-				IOTool.deleteFile(
+				IOAction.deleteFile(
 						new File(InfoTool.getAbsoluteDatabasePathWithSeparator() + Main.userInfoMode.getUser().getName()
 								+ File.separator + "settings" + File.separator + InfoTool.USER_SETTINGS_FILE_NAME));
 
