@@ -46,7 +46,7 @@ Started as a media player .... it will finish as an AI ....
    - [XR3Capture](https://github.com/goxr3plus/XR3Capture) ( For capturing the computer screen )
    - [Stream Player](https://github.com/goxr3plus/java-stream-player) ( Audio Library 100% Java )
    -  //TODO JVisualizations ( Advanced Java Audio Visualizations Library )
-   -  //TODO  [JAmplitudeVisuals](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API) ( Advnaced Java Library for representing Audio Amplitude Visualizations ) 
+   -  //TODO  [JAmplitudeVisuals](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API) ( Advanced Java Library for representing Audio Amplitude Visualizations ) 
   
   
    
@@ -73,7 +73,7 @@ Started as a media player .... it will finish as an AI ....
   - Speech Recongition 
   - Smart AI Assistant
   - Online Subscription website
-  - Andorid and IOS applications
+  - Android and IOS applications
 
 ## Java Audio Tutorials and API's by GOXR3PLUS STUDIO
  - **Spectrum Analyzers**
