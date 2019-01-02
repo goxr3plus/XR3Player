@@ -40,6 +40,18 @@ Started as a media player .... it will finish as an AI ....
 
 -------------------------------------------------------------------------------------
 
+## Modular
+ - **As XR3Player codebase keeps growing i decided to make it modular so it's main components are the below :**
+   - [XR3Player Core](https://github.com/goxr3plus/XR3Player) ( The main code of XR3Player )
+   - [XR3Capture](https://github.com/goxr3plus/XR3Capture) ( For capturing the computer screen )
+   - [Stream Player](https://github.com/goxr3plus/java-stream-player) ( Audio Library 100% Java )
+   -  //TODO JVisualizations ( Advanced Java Audio Visualizations Library )
+   -  //TODO  [JAmplitudeVisuals](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API) ( Advnaced Java Library for representing Audio Amplitude Visualizations ) 
+  
+  
+   
+  
+
 ## Features
 - **App**
   - Support almost all audio formats through smart converting to .mp3
