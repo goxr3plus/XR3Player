@@ -60,7 +60,7 @@ public class ChromiumFullScreenController extends StackPane {
 	/** The pause transition. */
 	private PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
 
-	private final EventHandler<MouseEvent> mouseMovingEvent = m -> restartPauseTransition();
+	//private final EventHandler<MouseEvent> mouseMovingEvent = m -> restartPauseTransition();
 
 	/**
 	 * Constructor.

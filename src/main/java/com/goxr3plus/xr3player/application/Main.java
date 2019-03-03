@@ -147,8 +147,7 @@ public class Main extends Application {
 			l.setLevel(Level.OFF);
 	}
 
-	// ----------------START: The below have not dependencies on classes
-	// ---------------------------------//
+	// ------ START: The below have not dependencies on classes ------//
 
 	public static WelcomeScreen welcomeScreen;
 
@@ -163,9 +162,7 @@ public class Main extends Application {
 	/** The rename window. */
 	public static EmotionsWindow emotionsWindow;
 
-	/**
-	 * Audio Tagging Window
-	 */
+	/** Audio Tagging Window */
 	public static TagWindow tagWindow;
 
 	public static MediaSearchWindow mediaSearchWindow;
@@ -182,9 +179,7 @@ public class Main extends Application {
 	/** The console Window of the Application */
 	public static ConsoleWindowController consoleWindow;
 
-	/**
-	 * This Window contains the settings for the whole application
-	 */
+	/** This Window contains the settings for the whole application */
 	public static ApplicationSettingsController settingsWindow;
 
 	/**
@@ -249,11 +244,9 @@ public class Main extends Application {
 	 */
 	public static DragViewer dragViewer;
 
-	// ----------------END: The above have not dependencies on other classes
-	// ---------------------------------//
+	// ------ END: The above have not dependencies on other classes ------
 
-	// ----------------START: Vary basic for the
-	// application---------------------------------------//
+	// ------ START: Vary basic for the application ------
 
 	/** The window. */
 	public static Stage window;
@@ -272,11 +265,9 @@ public class Main extends Application {
 	/** The can save data. */
 	public static boolean canSaveData = true;
 
-	// ---------------END:Vary basic for the
-	// application---------------------------------//
+	// ----- END:Vary basic for the application -----//
 
-	// --------------START: The below have dependencies on
-	// others------------------------
+	// ----- START: The below have dependencies on others -----
 
 	/** The Constant dbManager. */
 	public static DatabaseManager dbManager = new DatabaseManager();
@@ -325,8 +316,7 @@ public class Main extends Application {
 
 	public static MovieModeController movieModeController;
 
-	// --------------END: The below have dependencies on
-	// others------------------------
+	// ----- END: The below have dependencies on  others -----
 
 	final int screenMinWidth = 800, screenMinHeight = 600;
 
