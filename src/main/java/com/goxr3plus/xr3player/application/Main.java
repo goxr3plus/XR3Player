@@ -116,6 +116,12 @@ import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
  */
 public class Main extends Application {
 
+	public static void main(final String[] args) {
+
+		// Launch JavaFX Application
+		launch(args);
+	}
+
 	// ------------------------------------------------------------------------
 	/** Global Logger */
 	public static final Logger logger = Logger.getGlobal();
@@ -798,9 +804,9 @@ public class Main extends Application {
 												DatabaseTool.getAbsoluteDatabasePathWithSeparator()
 														+ ((User) userr).getName() + File.separator + "settings"
 														+ File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME,
-												DatabaseTool.getAbsoluteDatabasePathWithSeparator() + selectedUser.getName()
-														+ File.separator + "settings" + File.separator
-														+ DatabaseTool.USER_SETTINGS_FILE_NAME);
+												DatabaseTool.getAbsoluteDatabasePathWithSeparator()
+														+ selectedUser.getName() + File.separator + "settings"
+														+ File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME);
 
 										// Reload the application settings now...
 										Platform.runLater(ApplicationSettingsLoader::loadApplicationSettings);
@@ -810,8 +816,8 @@ public class Main extends Application {
 
 							// Disable if user has no settings defined
 							if (!new File(DatabaseTool.getAbsoluteDatabasePathWithSeparator() + ((User) userr).getName()
-									+ File.separator + "settings" + File.separator + DatabaseTool.USER_SETTINGS_FILE_NAME)
-											.exists())
+									+ File.separator + "settings" + File.separator
+									+ DatabaseTool.USER_SETTINGS_FILE_NAME).exists())
 								menuItem.setDisable(true);
 
 							// Finally add the Menu Item
@@ -1054,8 +1060,9 @@ public class Main extends Application {
 	private static void determineBackgroundImage() {
 
 		// Set the background image to the ImageView
-		Optional.ofNullable(JavaFXTool.findAnyImageWithTitle("background", DatabaseTool.getAbsoluteDatabasePathPlain())).
-		// If the image exists
+		Optional.ofNullable(JavaFXTool.findAnyImageWithTitle("background", DatabaseTool.getAbsoluteDatabasePathPlain()))
+				.
+				// If the image exists
 				ifPresentOrElse(image -> loginMode.getBackgroundImageView().setImage(image),
 						// If it doesn't set the default
 						() -> loginMode.getBackgroundImageView()
@@ -1138,14 +1145,4 @@ public class Main extends Application {
 
 	}
 
-	/**
-	 * Main Method.
-	 *
-	 * @param args the arguments
-	 */
-	public static void main(final String[] args) {
-
-		// Launch JavaFX Application
-		launch(args);
-	}
 }
