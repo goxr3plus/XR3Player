@@ -49,7 +49,7 @@ public class DropboxService extends Service<Boolean> {
 	private String searchWord;
 	private final SearchCacheService searchCacheService;
 
-	//
+	// 
 	private DropboxFile dropboxFile;
 	private String newPath;
 
