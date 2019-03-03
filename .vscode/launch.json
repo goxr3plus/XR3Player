@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "mainClass": "main.java.com.goxr3plus.xr3player.application.Main",
+            "projectName": "XR3Player"
+        }
+    ]
+}
