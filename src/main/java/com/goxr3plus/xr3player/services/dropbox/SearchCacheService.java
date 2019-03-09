@@ -15,7 +15,7 @@ import com.dropbox.core.v2.files.Metadata;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.application.enums.DropBoxOperation;
+import main.java.com.goxr3plus.xr3player.enums.DropBoxOperation;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 
 /**

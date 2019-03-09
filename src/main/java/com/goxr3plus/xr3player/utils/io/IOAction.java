@@ -12,8 +12,8 @@ import java.util.LinkedList;
 import org.apache.commons.io.FileUtils;
 
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.enums.FileType;
-import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.enums.FileType;
+import main.java.com.goxr3plus.xr3player.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public final class IOAction {

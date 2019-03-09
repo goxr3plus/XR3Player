@@ -29,7 +29,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.windows.FileAndFolderChooser;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;

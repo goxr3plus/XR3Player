@@ -8,7 +8,7 @@ import java.io.File;
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.Genre;
+import main.java.com.goxr3plus.xr3player.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;

@@ -10,7 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.jaudiotagger.audio.mp3.MP3File;
 
-import main.java.com.goxr3plus.xr3player.application.enums.AudioType;
+import main.java.com.goxr3plus.xr3player.enums.AudioType;
 import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class TimeTool {

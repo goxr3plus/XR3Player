@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.UserCategory;
+import main.java.com.goxr3plus.xr3player.enums.UserCategory;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**

@@ -15,7 +15,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.enums.NotificationType;
+import main.java.com.goxr3plus.xr3player.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import main.java.com.goxr3plus.xr3player.controllers.dropbox.ProgressOutputStream;

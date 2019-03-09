@@ -35,7 +35,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
+import main.java.com.goxr3plus.xr3player.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.services.systemtree.TreeViewService;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;

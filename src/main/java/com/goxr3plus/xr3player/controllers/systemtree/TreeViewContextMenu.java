@@ -21,7 +21,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.TagTabCategory;
+import main.java.com.goxr3plus.xr3player.enums.TagTabCategory;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
 import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;

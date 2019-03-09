@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 import org.apache.commons.io.FilenameUtils;
 
-import main.java.com.goxr3plus.xr3player.application.enums.FileLinkType;
+import main.java.com.goxr3plus.xr3player.enums.FileLinkType;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class IOInfo {

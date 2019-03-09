@@ -29,7 +29,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.xplayer.visualizer.geometry.ResizableCanvas;
+import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
 import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 

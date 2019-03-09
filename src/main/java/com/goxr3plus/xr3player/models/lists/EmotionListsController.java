@@ -5,7 +5,7 @@ import java.util.concurrent.Executors;
 
 import javafx.application.Platform;
 import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.enums.Genre;
+import main.java.com.goxr3plus.xr3player.enums.Genre;
 import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
