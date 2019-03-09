@@ -2,6 +2,7 @@ package main.java.com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 
+import main.java.com.goxr3plus.xr3player.application.MainExit;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
@@ -77,7 +78,7 @@ public class CloseAppBox extends StackPane {
 		restartButton.setOnAction(a -> {
 			if (AlertTool.doQuestion("Restart", "Sure you want to restart the application?", restartButton,
 					Main.window))
-				Main.restartTheApplication(true);
+				MainExit.restartTheApplication(true);
 		});
 
 		// minimize
@@ -87,7 +88,7 @@ public class CloseAppBox extends StackPane {
 		maxOrNormalize.setOnAction(ac -> Main.borderlessScene.maximizeStage());
 
 		// close
-		exitApplication.setOnAction(ac -> Main.confirmApplicationExit());
+		exitApplication.setOnAction(ac -> MainExit.confirmApplicationExit());
 
 		// donate
 		donate.setOnAction(a -> NetworkingTool.openWebSite("https://www.paypal.me/GOXR3PLUSCOMPANY"));

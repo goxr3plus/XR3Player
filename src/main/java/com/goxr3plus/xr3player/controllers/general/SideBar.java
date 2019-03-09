@@ -3,6 +3,7 @@ package main.java.com.goxr3plus.xr3player.controllers.general;
 import java.io.File;
 import java.io.IOException;
 
+import main.java.com.goxr3plus.xr3player.application.MainExit;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
@@ -533,7 +534,7 @@ public class SideBar extends StackPane {
 
 			// Exit the application
 			Main.canSaveData = false;
-			Main.restartTheApplication(false);
+			MainExit.restartTheApplication(false);
 
 		}
 	}

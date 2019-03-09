@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import main.java.com.goxr3plus.xr3player.application.MainExit;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.json.JSONObject;
@@ -613,7 +614,7 @@ public class UpdateWindow extends StackPane {
 						if (line.isEmpty())
 							break;
 						if (line.contains(applicationName + " Application Started"))
-							Main.terminateXR3Player(0);
+							MainExit.terminateXR3Player(0);
 					}
 
 			} catch (IOException | InterruptedException ex) {

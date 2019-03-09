@@ -25,6 +25,7 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.MainExit;
 import main.java.com.goxr3plus.xr3player.enums.FileType;
 import main.java.com.goxr3plus.xr3player.enums.NotificationType;
 import main.java.com.goxr3plus.xr3player.enums.Operation;
@@ -100,12 +101,12 @@ public class DatabaseManager {
 				manageConnection(Operation.CLOSE);
 			}
 			// exit
-			Main.terminateXR3Player(0);
+			MainExit.terminateXR3Player(0);
 		} catch (final SQLException ex) {
 			Main.logger.log(Level.WARNING, ex.getMessage(), ex);
-			Main.terminateXR3Player(-1);
+			MainExit.terminateXR3Player(-1);
 		} finally {
-			Main.terminateXR3Player(0);
+			MainExit.terminateXR3Player(0);
 		}
 
 	};
@@ -347,7 +348,7 @@ public class DatabaseManager {
 				AlertTool.showNotification("Fatal Error!",
 						"DataLoader failed during loading dataBase!!Application will exit...", Duration.millis(1500),
 						NotificationType.ERROR);
-				Main.terminateXR3Player(0);
+				MainExit.terminateXR3Player(0);
 			});
 		}
 
