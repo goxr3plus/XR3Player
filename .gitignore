@@ -77,3 +77,4 @@ spartanizer.xml
 New Release.html
 .idea/*
 *.iml
+.travis.yml
