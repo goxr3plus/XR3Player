@@ -82,9 +82,9 @@ public class MainExit {
     /**
      * Use this code to terminate XR3Player
      *
-     * @param code
+     * @param exitCode The exit code of System.exit();
      */
-    public static void terminateXR3Player(final int code) {
+    public static void terminateXR3Player(final int exitCode) {
 
         System.out.println("Dis All->" + OSTool.getOS());
         switch (OSTool.getOS()) {
@@ -92,7 +92,7 @@ public class MainExit {
                 new Thread(() -> {
                     // Disposing all Browsers...
                     Main.webBrowser.disposeAllBrowsers();
-                    System.exit(code);
+                    System.exit(exitCode);
                 }).start();
                 break;
             case LINUX:
@@ -100,7 +100,7 @@ public class MainExit {
                 Platform.runLater(() -> {
                     // Disposing all Browsers...
                     Main.webBrowser.disposeAllBrowsers();
-                    System.exit(code);
+                    System.exit(exitCode);
                 });
                 break;
             default:

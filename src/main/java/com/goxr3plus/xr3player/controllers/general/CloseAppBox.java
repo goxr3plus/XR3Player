@@ -3,6 +3,7 @@ package main.java.com.goxr3plus.xr3player.controllers.general;
 import java.io.IOException;
 
 import main.java.com.goxr3plus.xr3player.application.MainExit;
+import main.java.com.goxr3plus.xr3player.application.MainTools;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
@@ -97,10 +98,10 @@ public class CloseAppBox extends StackPane {
 		about.setOnAction(a -> Main.aboutWindow.show());
 
 		// chooseBackground
-		chooseBackground.setOnAction(a -> Main.changeBackgroundImage());
+		chooseBackground.setOnAction(a -> MainTools.changeBackgroundImage());
 
 		// resetBackground
-		resetBackground.setOnAction(a -> Main.resetBackgroundImage());
+		resetBackground.setOnAction(a -> MainTools.resetBackgroundImage());
 
 		// sizeStackedFontIcon
 		Main.borderlessScene.maximizedProperty().addListener((observable, oldValue, newValue) -> {

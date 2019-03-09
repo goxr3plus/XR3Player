@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import main.java.com.goxr3plus.xr3player.application.MainLoadUser;
 import org.atteo.evo.inflector.English;
 
 import com.jfoenix.controls.JFXButton;
@@ -295,7 +296,7 @@ public class LoginMode extends StackPane {
 		createFirstUser.visibleProperty().bind(Bindings.size(viewer.getItemsObservableList()).isEqualTo(0));
 
 		// loginButton
-		loginButton.setOnAction(a -> Main.startAppWithUser((User) viewer.getSelectedItem()));
+		loginButton.setOnAction(a -> MainLoadUser.startAppWithUser((User) viewer.getSelectedItem()));
 
 		// openUserContextMenu
 		openUserContextMenu.setOnAction(a -> {

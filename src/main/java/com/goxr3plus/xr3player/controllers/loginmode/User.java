@@ -24,6 +24,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.MainLoadUser;
 import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
 import main.java.com.goxr3plus.xr3player.database.PropertiesDb;
 import main.java.com.goxr3plus.xr3player.enums.FileCategory;
@@ -386,7 +387,7 @@ public class User extends StackPane {
 			else if (code == KeyCode.E)
 				exportImage();
 		} else if (key.getCode() == KeyCode.ENTER) {
-			Main.startAppWithUser(this);
+			MainLoadUser.startAppWithUser(this);
 		} else if (key.getCode() == KeyCode.DELETE) {
 			deleteUser(this);
 		}

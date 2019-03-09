@@ -15,6 +15,7 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
 import main.java.com.goxr3plus.xr3player.application.Main;
+import main.java.com.goxr3plus.xr3player.application.MainLoadUser;
 import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
@@ -78,7 +79,7 @@ public class UserContextMenu extends ContextMenu {
 	@FXML
 	private void initialize() {
 
-		login.setOnAction(a -> Main.startAppWithUser(user));
+		login.setOnAction(a -> MainLoadUser.startAppWithUser(user));
 
 		rename.setOnAction(ac -> user.renameUser(user));
 
