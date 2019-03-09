@@ -75,3 +75,5 @@ XR3Player New Release Files/XR3Player.exe
 .classpath
 spartanizer.xml
 New Release.html
+.idea/*
+*.iml
