@@ -338,6 +338,7 @@ public class OpenedLibrariesViewer extends StackPane {
 
 		// Add it
 		tabPane.getTabs().add(tab);
+
 	}
 
 	/**

@@ -107,6 +107,7 @@ public class TreeViewManager extends StackPane {
 		// ------------------------- TreeView ----------------------------------
 		treeView.setRoot(getRoot());
 		treeView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		treeView.setShowRoot(false);
 
 		// Mouse Released Event
 		treeView.setOnMouseClicked(this::treeViewMouseClicked);
@@ -284,6 +285,7 @@ public class TreeViewManager extends StackPane {
 					// for
 					// changes this would be the place to do it
 				}
+
 
 				source.setExpanded(true);
 			}

@@ -513,11 +513,11 @@ public class LibraryMode extends BorderPane {
         } else if (text.equalsIgnoreCase("Stars  Ascendant")) {
             return (a, b) -> Double.compare(((Library) b).getStars(), ((Library) a).getStars());
         } else if (text.equalsIgnoreCase("Stars  Descendant")) {
-            return (a, b) -> Double.compare(((Library) a).getStars(), ((Library) b).getStars());
+            return Comparator.comparingDouble(a -> ((Library) a).getStars());
         } else if (text.equalsIgnoreCase("Total Media  Ascendant")) {
             return (a, b) -> Integer.compare(((Library) b).getTotalEntries(), ((Library) a).getTotalEntries());
         } else if (text.equalsIgnoreCase("Total Media  Descendant")) {
-            return (a, b) -> Integer.compare(((Library) a).getTotalEntries(), ((Library) b).getTotalEntries());
+            return Comparator.comparingInt(a -> ((Library) a).getTotalEntries());
         }
 
         return null;
@@ -796,95 +796,6 @@ public class LibraryMode extends BorderPane {
         return horizontalScrollBar;
     }
 
-    // // Variables
-    // private double[] topSplitPaneDivider = { 0.45 , 0.55 };
-    //
-    // // Variables
-    // private double[] bottomSplitPaneDivider = { 0.6 , 0.4 };
-
-    // /**
-    // * Updates the values of array that holds DividerPositions of splitPane
-    // */
-    // public void updateTopSplitPaneDividerArray(double[] array) {
-    // topSplitPaneDivider[0] = array[0];
-    // topSplitPaneDivider[1] = array[1];
-    // }
-    //
-    // /**
-    // * Updates the values of array that holds DividerPositions of splitPane
-    // */
-    // public void updateBottomSplitPaneDividerArray(double[] array) {
-    // bottomSplitPaneDivider[0] = array[0];
-    // bottomSplitPaneDivider[1] = array[1];
-    // }
-
-    // ----------------------------
-
-    // /**
-    // * Updates the SplitPane DividerPositions based on the saved array
-    // */
-    // public void updateTopSplitPaneDivider() {
-    // topSplitPane.setDividerPositions(topSplitPaneDivider);
-    // }
-    //
-    // /**
-    // * Updates the SplitPane DividerPositions based on the saved array
-    // */
-    // public void updateBottomSplitPaneDivider() {
-    // bottomSplitPane.setDividerPositions(bottomSplitPaneDivider);
-    // }
-    //
-    // //----------------------------
-    //
-    // /**
-    // * Saves current divider positions of SplitPane into an array
-    // */
-    // public void saveTopSplitPaneDivider() {
-    // topSplitPaneDivider = topSplitPane.getDividerPositions();
-    // }
-    //
-    // /**
-    // * Saves current divider positions of SplitPane into an array
-    // */
-    // public void saveBottomSplitPaneDivider() {
-    // bottomSplitPaneDivider = bottomSplitPane.getDividerPositions();
-    // }
-    //
-    // /**
-    // * Turns the Library Mode Upside Down or opposite
-    // *
-    // * @param turnDown
-    // */
-    // public void turnUpsideDownSplitPane(boolean turnDown) {
-    //
-    // //Check if it can enter based on the library border pane position
-    // if ( ( turnDown &&
-    // !topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) )
-    // || ( !turnDown &&
-    // topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane) ))
-    // return;
-    //
-    // //this.saveTopSplitPaneDivider()
-    // double temp = topSplitPaneDivider[0];
-    // topSplitPaneDivider[0] = topSplitPaneDivider[1];
-    // topSplitPaneDivider[1] = temp;
-    //
-    // boolean libraryIsOnTop =
-    // topSplitPane.getItems().get(0).equals(Main.playListModesSplitPane);
-    // topSplitPane.getItems().clear();
-    // if (libraryIsOnTop) {
-    // //System.out.println("Entered first if!")
-    // topSplitPane.getItems().addAll(bottomSplitPane, Main.playListModesSplitPane);
-    // } else {
-    // //System.out.println("Entered second if!")
-    // topSplitPane.getItems().addAll(Main.playListModesSplitPane, bottomSplitPane);
-    // }
-    //
-    // this.updateTopSplitPaneDivider();
-    //
-    // }
-
-    // ----------------------------
 
     /**
      * @return the topSplitPane
