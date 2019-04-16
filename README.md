@@ -15,7 +15,12 @@ Started as a media player .... it will finish as an AI ....
 
 | Installer | Windows x64 | MacOS x64| Linux x64 |
 | ------- | :-----: | :-: | :-----: |
-| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (coming soon) | X (coming soon) |
+| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (help wanted) | X (help wanted) |
+
+| Installer | Android | IOS|
+| ------- | :-----: | :-----: |
+| Download | X (planning) | X (planning) |
+
 
 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
