@@ -58,7 +58,7 @@ public class Main extends Application {
             DatabaseTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 
     // Internal Information
-    public static final int APPLICATION_VERSION = 128;
+    public static final int APPLICATION_VERSION = 129;
     public static final String RELEASE_DATE = "Check updates window";
 
     private static final Logger[] pin;
@@ -67,7 +67,7 @@ public class Main extends Application {
 
         // Chromium Extract Location Dir
         System.setProperty("jxbrowser.chromium.dir",
-                DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome128");
+                DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome"+APPLICATION_VERSION);
 
         // Disable loggers
         pin = new Logger[]{Logger.getLogger("org.jaudiotagger"), Logger.getLogger("it.sauronsoftware.jave")};
