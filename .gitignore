@@ -78,3 +78,6 @@ New Release.html
 .idea/*
 *.iml
 .travis.yml
+
+.idea/*
+*.iml
