@@ -430,7 +430,19 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	// ------------------------- Images/ImageViews --------------------------
 
 	private static final Image noSeek = InfoTool.getImageFromResourcesFolder(
-			"Private-" + (ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64") + ".png");
+			getImageName());
+
+	private static String getImageName() {
+		try {
+			return "Private-" + (ImageCursor.getBestSize(64, 64).getWidth() < 64.00 ? "32" : "64") + ".png";
+		} catch (NullPointerException e) {
+			// TODO: Remove this hard-coded value when it's no longer needed. It's needed with JDK 10.0.2 on Mac.
+			System.out.println("Using a hard-coded value for ImageCursor, to circumvent a bug on JDK 10.0.2 on Mac. Stacktrace follows.");
+			e.printStackTrace();
+			return "Private-32.png";
+		}
+	}
+
 	private static final ImageCursor noSeekCursor = new ImageCursor(noSeek, noSeek.getWidth() / 2,
 			noSeek.getHeight() / 2);
 
