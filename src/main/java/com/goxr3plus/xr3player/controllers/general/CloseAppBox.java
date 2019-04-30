@@ -1,9 +1,9 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 
-import main.java.com.goxr3plus.xr3player.application.MainExit;
-import main.java.com.goxr3plus.xr3player.application.MainTools;
+import com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.application.MainTools;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.jfoenix.controls.JFXButton;
@@ -12,10 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class CloseAppBox extends StackPane {
 

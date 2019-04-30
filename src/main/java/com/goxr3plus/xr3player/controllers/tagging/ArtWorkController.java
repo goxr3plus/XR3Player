@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.tagging;
+package com.goxr3plus.xr3player.controllers.tagging;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,13 +21,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.AudioImageTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * 

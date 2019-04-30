@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
 import java.util.Locale;
 import java.util.logging.Logger;

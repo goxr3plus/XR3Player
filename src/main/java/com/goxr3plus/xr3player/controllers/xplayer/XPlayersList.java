@@ -1,12 +1,12 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.xplayer;
+package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.goxr3plus.xr3player.models.xplayer.XPlayer;
+import com.goxr3plus.xr3player.models.xplayer.XPlayer;
 
 /**
  * The Class XPlayersList.

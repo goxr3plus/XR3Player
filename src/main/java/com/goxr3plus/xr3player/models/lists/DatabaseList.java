@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.models.lists;
+package com.goxr3plus.xr3player.models.lists;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,8 +8,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
 
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.DateTimeTool;
 
 /**
  * A special kind of list which is used to save the list to the database and

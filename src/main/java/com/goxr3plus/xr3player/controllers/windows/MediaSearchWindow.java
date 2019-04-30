@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.windows;
+package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.IOException;
 
@@ -17,9 +17,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class LibrariesSearchWindow.

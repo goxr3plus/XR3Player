@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.tagging;
+package com.goxr3plus.xr3player.controllers.tagging;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class MP3BasicInfo extends StackPane {
 

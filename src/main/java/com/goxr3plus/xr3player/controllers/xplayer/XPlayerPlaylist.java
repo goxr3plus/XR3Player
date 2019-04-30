@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.xplayer;
+package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -14,10 +14,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * Represents the PlayList of a Specific Player.

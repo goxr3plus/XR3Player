@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

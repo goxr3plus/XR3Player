@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.custom;
+package com.goxr3plus.xr3player.controllers.custom;
 
 /**
  * The listener interface for receiving DJDisc events. The class that is

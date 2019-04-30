@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.loginmode;
+package com.goxr3plus.xr3player.controllers.loginmode;
 
 import java.io.IOException;
 
@@ -14,9 +14,9 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.MainLoadUser;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.MainLoadUser;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode

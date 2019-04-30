@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.dropbox;
+package com.goxr3plus.xr3player.controllers.dropbox;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -30,13 +30,13 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing the data of SmartController.

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.javafx;
+package com.goxr3plus.xr3player.utils.javafx;
 
 import org.controlsfx.control.Notifications;
 
@@ -14,8 +14,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.controllers.settings.GeneralSettingsController;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.controllers.settings.GeneralSettingsController;
 
 public final class AlertTool {
 

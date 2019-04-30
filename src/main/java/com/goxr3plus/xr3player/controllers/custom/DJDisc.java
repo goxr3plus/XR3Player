@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.custom;
+package com.goxr3plus.xr3player.controllers.custom;
 
 import java.util.ArrayList;
 
@@ -29,9 +29,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Represents a disc controller.

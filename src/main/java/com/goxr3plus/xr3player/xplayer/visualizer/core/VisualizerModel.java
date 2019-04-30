@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.core;
+package com.goxr3plus.xr3player.xplayer.visualizer.core;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,10 +10,10 @@ import javax.sound.sampled.DataLine;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.xplayer.dsp.KJDSPAudioDataConsumer;
-import main.java.com.goxr3plus.xr3player.xplayer.dsp.KJDigitalSignalProcessor;
-import main.java.com.goxr3plus.xr3player.xplayer.dsp.KJFFT;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
+import com.goxr3plus.xr3player.xplayer.dsp.KJDSPAudioDataConsumer;
+import com.goxr3plus.xr3player.xplayer.dsp.KJDigitalSignalProcessor;
+import com.goxr3plus.xr3player.xplayer.dsp.KJFFT;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * This SuperClass represents the model of the Visualizer.

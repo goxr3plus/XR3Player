@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.windows;
+package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,8 +17,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class is an class FXML Prototype

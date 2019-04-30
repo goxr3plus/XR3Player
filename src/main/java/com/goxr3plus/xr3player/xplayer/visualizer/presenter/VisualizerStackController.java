@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
+package com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,9 +18,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
-import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * 

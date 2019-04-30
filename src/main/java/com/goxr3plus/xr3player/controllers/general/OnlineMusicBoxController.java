@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,10 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class OnlineMusicBoxController extends StackPane {
 

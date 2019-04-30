@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.windows;
+package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.File;
 import java.util.List;
@@ -10,10 +10,10 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * An implementation which combines FileChooser and DirectoryChooser.

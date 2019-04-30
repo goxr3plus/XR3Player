@@ -1,9 +1,9 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.File;
 import java.io.IOException;
 
-import main.java.com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.application.MainExit;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
@@ -26,22 +26,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.enums.Operation;
-import main.java.com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
-import main.java.com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
-import main.java.com.goxr3plus.xr3player.controllers.custom.SystemMonitor.Monitor;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.services.database.DatabaseExportService;
-import main.java.com.goxr3plus.xr3player.services.database.DatabaseImportService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.Operation;
+import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
+import com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
+import com.goxr3plus.xr3player.controllers.custom.SystemMonitor.Monitor;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.services.database.DatabaseExportService;
+import com.goxr3plus.xr3player.services.database.DatabaseImportService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class SideBar extends StackPane {
 

@@ -1,12 +1,12 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.waveform;
+package com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
-import main.java.com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
-import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * The Class Visualizer.

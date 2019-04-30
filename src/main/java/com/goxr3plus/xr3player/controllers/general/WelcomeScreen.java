@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,9 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.MainExit;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * @author GOXR3PLUS

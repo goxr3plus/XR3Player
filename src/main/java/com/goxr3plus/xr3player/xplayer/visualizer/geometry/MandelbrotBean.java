@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry;
+package com.goxr3plus.xr3player.xplayer.visualizer.geometry;
 
 import javafx.scene.paint.Color;
 

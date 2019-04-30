@@ -1,11 +1,11 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry;
+package com.goxr3plus.xr3player.xplayer.visualizer.geometry;
 
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.MandelbrotBean.ColorSchema;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.MandelbrotBean.ColorSchema;
 
 /*-----------------------------------------------------------------------
  * 

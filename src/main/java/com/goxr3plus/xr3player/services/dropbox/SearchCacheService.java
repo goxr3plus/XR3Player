@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.dropbox;
+package com.goxr3plus.xr3player.services.dropbox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import com.dropbox.core.v2.files.Metadata;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.enums.DropBoxOperation;
-import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
+import com.goxr3plus.xr3player.enums.DropBoxOperation;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 
 /**
  * The duty of this class is to Cache Dropbox Account Search so it is superior

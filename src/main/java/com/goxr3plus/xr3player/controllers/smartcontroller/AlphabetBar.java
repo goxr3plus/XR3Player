@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,7 +14,7 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * AlphabetBar

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,8 +20,8 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.FiltersModeService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.services.smartcontroller.FiltersModeService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class SmartControllerFiltersMode extends StackPane {
 

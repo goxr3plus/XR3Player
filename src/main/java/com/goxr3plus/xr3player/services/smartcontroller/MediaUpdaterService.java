@@ -1,9 +1,9 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
-import static main.java.com.goxr3plus.xr3player.application.Main.libraryMode;
+import static com.goxr3plus.xr3player.application.Main.libraryMode;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,11 +21,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**

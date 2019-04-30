@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,8 +15,8 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * Play Context Menu

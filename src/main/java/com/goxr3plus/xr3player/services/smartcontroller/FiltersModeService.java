@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,14 +27,14 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.MenuItem;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.enums.Operation;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFiltersMode;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.Operation;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFiltersMode;
+import com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public class FiltersModeService extends Service<Void> {
 

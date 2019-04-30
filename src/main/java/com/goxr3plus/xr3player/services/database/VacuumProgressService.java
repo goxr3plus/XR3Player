@@ -1,13 +1,13 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.services.database;
+package com.goxr3plus.xr3player.services.database;
 
 import java.io.File;
 
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * Get the progress of Vacuum Operation.

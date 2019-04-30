@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
+package com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 /**
  * Used to represent Visually Microphone data

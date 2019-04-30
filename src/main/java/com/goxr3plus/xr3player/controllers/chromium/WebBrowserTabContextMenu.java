@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.chromium;
+package com.goxr3plus.xr3player.controllers.chromium;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class WebBrowserTabContextMenu extends ContextMenu {
 

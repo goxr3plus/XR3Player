@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.xplayer.microphone;
+package com.goxr3plus.xr3player.xplayer.microphone;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -15,8 +15,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.MicrophoneVisualizer;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.MicrophoneVisualizer;
 
 /**
  * A basic example to analyze the pcm data of microphone and visualize it

@@ -1,6 +1,33 @@
-package main.java.com.goxr3plus.xr3player.controllers.librarymode;
+package com.goxr3plus.xr3player.controllers.librarymode;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.stream.Collectors;
+
+import org.atteo.evo.inflector.English;
+
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.SearchBox;
+import com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
+import com.goxr3plus.xr3player.controllers.general.Viewer;
+import com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXButton;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -13,34 +40,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
-import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
-import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.FileCategory;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import org.atteo.evo.inflector.English;
-
-import java.io.File;
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.stream.Collectors;
 
 /**
  * This class contains everything needed going on LibraryMode.

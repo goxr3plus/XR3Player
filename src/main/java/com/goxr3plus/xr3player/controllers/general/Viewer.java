@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.util.Comparator;
 import java.util.List;
@@ -26,13 +26,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.LibraryMode;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.LoginMode;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.MediaViewer;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.librarymode.LibraryMode;
+import com.goxr3plus.xr3player.controllers.loginmode.LoginMode;
+import com.goxr3plus.xr3player.controllers.loginmode.User;
+import com.goxr3plus.xr3player.controllers.smartcontroller.MediaViewer;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 
 /**
  * This class allows you to view the libraries.

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.models.xplayer;
+package com.goxr3plus.xr3player.models.xplayer;
 
 import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
 

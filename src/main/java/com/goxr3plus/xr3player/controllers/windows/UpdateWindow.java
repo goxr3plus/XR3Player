@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.windows;
+package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import main.java.com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.application.MainExit;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import org.json.JSONObject;
@@ -41,13 +41,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * @author GOXR3PLUS

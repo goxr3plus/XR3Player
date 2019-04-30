@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,17 +30,17 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.FileLinkType;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.enums.TagTabCategory;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.FileLinkType;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.TagTabCategory;
+import com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Allows you to view informations about the selected song like the album

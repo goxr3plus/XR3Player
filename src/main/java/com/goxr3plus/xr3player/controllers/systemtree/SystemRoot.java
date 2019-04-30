@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.systemtree;
+package com.goxr3plus.xr3player.controllers.systemtree;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileSystemView;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.Main;
 
 /**
  * Manages the SystemTree.

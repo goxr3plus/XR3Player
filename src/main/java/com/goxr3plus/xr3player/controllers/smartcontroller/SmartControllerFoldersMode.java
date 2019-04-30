@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,12 +32,12 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.FoldersModeService;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
+import com.goxr3plus.xr3player.services.smartcontroller.FoldersModeService;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class SmartControllerFoldersMode extends StackPane {
 

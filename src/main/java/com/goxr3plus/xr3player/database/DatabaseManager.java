@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.database;
+package com.goxr3plus.xr3player.database;
 
 import java.io.File;
 import java.sql.Connection;
@@ -24,19 +24,19 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.application.MainExit;
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.enums.Operation;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.Operation;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.loginmode.User;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.services.smartcontroller.MediaUpdaterService;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * This class is managing the database of the application.

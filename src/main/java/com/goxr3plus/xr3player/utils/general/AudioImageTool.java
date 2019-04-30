@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
 import java.io.ByteArrayInputStream;
 
@@ -6,7 +6,7 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.Mp3File;
 
 import javafx.scene.image.Image;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class AudioImageTool {
 

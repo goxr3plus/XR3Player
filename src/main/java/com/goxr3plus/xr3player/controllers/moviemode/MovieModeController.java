@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.moviemode;
+package com.goxr3plus.xr3player.controllers.moviemode;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class MovieModeController extends BorderPane {
 

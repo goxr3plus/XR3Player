@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.xplayer.microphone;
+package com.goxr3plus.xr3player.xplayer.microphone;
 
 public class MicUnaccessibleException extends Exception {
 

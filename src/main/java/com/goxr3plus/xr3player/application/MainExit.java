@@ -1,4 +1,18 @@
-package main.java.com.goxr3plus.xr3player.application;
+package com.goxr3plus.xr3player.application;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.services.database.VacuumProgressService;
+import com.goxr3plus.xr3player.utils.general.OSTool;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -8,19 +22,6 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.services.database.VacuumProgressService;
-import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This class contains methods for exiting and restarting the application

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.dsp;
+package com.goxr3plus.xr3player.xplayer.dsp;
 
 /**
  * The Class KJFFT.

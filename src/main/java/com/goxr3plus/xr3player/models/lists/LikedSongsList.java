@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.models.lists;
+package com.goxr3plus.xr3player.models.lists;
 
 /**
  * This class represents a List of Songs that User Likes

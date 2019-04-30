@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -10,9 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public final class NetworkingTool {
 

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,13 +21,13 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.Control;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.FilesMode;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFoldersMode;
-import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.FilesMode;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartControllerFoldersMode;
+import com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
 
 public class FoldersModeService extends Service<Void> {
 

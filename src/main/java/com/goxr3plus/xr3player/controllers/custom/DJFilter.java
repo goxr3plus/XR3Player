@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.custom;
+package com.goxr3plus.xr3player.controllers.custom;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * Represents a disc controller.

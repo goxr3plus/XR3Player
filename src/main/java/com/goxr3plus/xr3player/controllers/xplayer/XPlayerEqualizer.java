@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.xplayer;
+package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.controllers.custom.DJFilter;
-import main.java.com.goxr3plus.xr3player.controllers.custom.DJFilterListener;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.controllers.custom.DJFilter;
+import com.goxr3plus.xr3player.controllers.custom.DJFilterListener;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The Class XPlayerEqualizer.

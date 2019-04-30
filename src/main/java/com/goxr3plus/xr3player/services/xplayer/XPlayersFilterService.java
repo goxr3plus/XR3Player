@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.xplayer;
+package com.goxr3plus.xr3player.services.xplayer;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import main.java.com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.Main;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import org.jaudiotagger.audio.mp3.MP3File;
 
-import main.java.com.goxr3plus.xr3player.enums.AudioType;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.enums.AudioType;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class TimeTool {
 

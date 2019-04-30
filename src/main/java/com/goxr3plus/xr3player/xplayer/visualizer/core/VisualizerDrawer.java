@@ -1,18 +1,18 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.core;
+package com.goxr3plus.xr3player.xplayer.visualizer.core;
 
 import javafx.geometry.Orientation;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.JuliaSet;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Oscilloscope;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Polyspiral;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sierpinski;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D.Shape3D;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.JuliaSet;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.Oscilloscope;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.Polyspiral;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sierpinski;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.Sprites3D.Shape3D;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The Class VisualizerDrawer.

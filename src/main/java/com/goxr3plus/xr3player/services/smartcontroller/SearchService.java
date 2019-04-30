@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.io.File;
 import java.sql.ResultSet;
@@ -12,13 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Node;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
+import com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
 
 /**
  * The Class SearchService.

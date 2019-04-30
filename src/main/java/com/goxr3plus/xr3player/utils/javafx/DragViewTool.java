@@ -1,11 +1,11 @@
-package main.java.com.goxr3plus.xr3player.utils.javafx;
+package com.goxr3plus.xr3player.utils.javafx;
 
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.Dragboard;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
 
 public final class DragViewTool {
 

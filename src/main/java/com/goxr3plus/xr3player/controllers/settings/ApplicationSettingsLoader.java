@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.settings;
+package com.goxr3plus.xr3player.controllers.settings;
 
 import java.util.Optional;
 import java.util.Properties;
@@ -6,9 +6,9 @@ import java.util.Properties;
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController.Type;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController.Type;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class ApplicationSettingsLoader {
 

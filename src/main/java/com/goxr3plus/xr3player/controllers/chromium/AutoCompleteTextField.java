@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.chromium;
+package com.goxr3plus.xr3player.controllers.chromium;
 
 import java.util.List;
 import java.util.SortedSet;

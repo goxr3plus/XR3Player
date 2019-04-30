@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.chromium;
+package com.goxr3plus.xr3player.controllers.chromium;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -67,13 +67,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**

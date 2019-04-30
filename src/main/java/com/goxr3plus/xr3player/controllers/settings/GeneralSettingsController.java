@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.settings;
+package com.goxr3plus.xr3player.controllers.settings;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,10 +15,10 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS

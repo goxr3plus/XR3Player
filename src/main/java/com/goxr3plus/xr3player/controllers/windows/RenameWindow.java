@@ -1,7 +1,7 @@
 /*
  *
  */
-package main.java.com.goxr3plus.xr3player.controllers.windows;
+package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.IOException;
 import java.util.Set;
@@ -35,11 +35,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.enums.FileCategory;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class RenameWindow.

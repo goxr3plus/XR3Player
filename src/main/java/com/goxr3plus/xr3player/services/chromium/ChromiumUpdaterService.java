@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.services.chromium;
+package com.goxr3plus.xr3player.services.chromium;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
-import main.java.com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
+import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**

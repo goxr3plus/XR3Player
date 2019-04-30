@@ -1,15 +1,15 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.presenter;
+package com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Orientation;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
-import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * The Class Visualizer.

@@ -1,6 +1,10 @@
-package main.java.com.goxr3plus.xr3player.controllers.librarymode;
+package com.goxr3plus.xr3player.controllers.librarymode;
 
 import java.io.IOException;
+
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -14,9 +18,6 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Window;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * This is the Context Menu for every Library in the LibraryMode

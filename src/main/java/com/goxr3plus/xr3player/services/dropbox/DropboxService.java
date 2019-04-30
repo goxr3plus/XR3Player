@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.dropbox;
+package com.goxr3plus.xr3player.services.dropbox;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -24,14 +24,14 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.enums.DropBoxOperation;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
-import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.enums.DropBoxOperation;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxService extends Service<Boolean> {
 

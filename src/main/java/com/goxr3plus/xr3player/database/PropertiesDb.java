@@ -1,7 +1,7 @@
 /**
  * 
  */
-package main.java.com.goxr3plus.xr3player.database;
+package com.goxr3plus.xr3player.database;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,8 +13,8 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.utils.io.IOAction;
 
 /**
  * This class is saving all the XR3Player Settings to a property file

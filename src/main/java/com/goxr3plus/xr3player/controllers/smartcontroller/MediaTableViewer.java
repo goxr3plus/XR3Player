@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,17 +41,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.enums.TagTabCategory;
-import main.java.com.goxr3plus.xr3player.controllers.custom.StarBadge;
-import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.TagTabCategory;
+import com.goxr3plus.xr3player.controllers.custom.StarBadge;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing the data of SmartController.

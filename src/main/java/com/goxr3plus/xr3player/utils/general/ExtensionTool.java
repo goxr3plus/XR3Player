@@ -1,11 +1,11 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 public final class ExtensionTool {
 

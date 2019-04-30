@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.models.smartcontroller;
+package com.goxr3plus.xr3player.models.smartcontroller;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -31,22 +31,22 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.AudioType;
-import main.java.com.goxr3plus.xr3player.enums.FileCategory;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import main.java.com.goxr3plus.xr3player.utils.general.DateTimeTool;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.TimeTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.AudioType;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.utils.general.DateTimeTool;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class is used as super class for Audio and Video classes.

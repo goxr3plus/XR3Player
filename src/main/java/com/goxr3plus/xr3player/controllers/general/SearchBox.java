@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import org.atteo.evo.inflector.English;
 import org.controlsfx.control.textfield.TextFields;
@@ -16,10 +16,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.controllers.windows.SearchBoxWindow;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.loginmode.User;
+import com.goxr3plus.xr3player.controllers.windows.SearchBoxWindow;
 
 /**
  * Represents the Libraries Search.

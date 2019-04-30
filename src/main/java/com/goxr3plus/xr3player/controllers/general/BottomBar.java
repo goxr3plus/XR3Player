@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,12 +16,12 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.controllers.windows.ConsoleWindowController.ConsoleTab;
-import main.java.com.goxr3plus.xr3player.services.general.StoppableService;
-import main.java.com.goxr3plus.xr3player.services.general.StoppableService.StoppableServiceCategory;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.controllers.windows.ConsoleWindowController.ConsoleTab;
+import com.goxr3plus.xr3player.services.general.StoppableService;
+import com.goxr3plus.xr3player.services.general.StoppableService.StoppableServiceCategory;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The BottomBar of the Application

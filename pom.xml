@@ -20,13 +20,17 @@
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<my.project.version>128</my.project.version>
 		<ikonli.version>2.4.0</ikonli.version>
 	</properties>
 
 	<build>
 		<finalName>XR3Player</finalName>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 
 			<!-- Maven Compiler Plugin -->
@@ -52,7 +56,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>main.java.com.goxr3plus.xr3player.application.Main</mainClass>
+							<mainClass>com.goxr3plus.xr3player.application.Main</mainClass>
 							<classpathPrefix>XR3Player_lib/</classpathPrefix>
 						</manifest>
 					</archive>
@@ -73,7 +77,7 @@
 						</goals>
 						<configuration>
 							<!-- exclude junit, we need runtime dependency only -->
-							<excludeArtifactIds> junit </excludeArtifactIds>
+							<excludeArtifactIds>junit</excludeArtifactIds>
 							<outputDirectory>${project.build.directory}/XR3Player_lib/</outputDirectory>
 						</configuration>
 					</execution>
@@ -106,7 +110,7 @@
 					<descriptors>
 						<descriptor>src/assembly/assembly.xml</descriptor>
 					</descriptors>
-					<finalName>XR3Player Update ${my.project.version}</finalName>
+					<finalName>XR3Player Update ${project.version}</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
@@ -130,7 +134,7 @@
 		</repository>
 		<repository>
 			<id>jcenter</id>
-			<url>http://jcenter.bintray.com </url>
+			<url>http://jcenter.bintray.com</url>
 		</repository>
 		<repository>
 			<id>com.teamdev</id>

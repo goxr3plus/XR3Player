@@ -1,7 +1,7 @@
 /**
  * TODO LISENSE
  */
-package main.java.com.goxr3plus.xr3player.controllers.chromium;
+package com.goxr3plus.xr3player.controllers.chromium;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -20,10 +20,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.services.chromium.ChromiumUpdaterService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.OSTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.services.chromium.ChromiumUpdaterService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.OSTool;
 
 /**
  * @author GOXR3PLUS

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.xplayer;
+package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * This class is an class FXML Prototype

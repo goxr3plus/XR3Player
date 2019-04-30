@@ -1,8 +1,8 @@
 
-package main.java.com.goxr3plus.xr3player.xplayer.waveform;
+package com.goxr3plus.xr3player.xplayer.waveform;
 
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 
 /**
  * Swing panel paints the waveform of a track.

@@ -1,12 +1,12 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.models.lists;
+package com.goxr3plus.xr3player.models.lists;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import main.java.com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.Main;
 
 /**
  * The Class PlayedSongs.

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.io.File;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.MediaViewer;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;
+import com.goxr3plus.xr3player.controllers.smartcontroller.MediaViewer;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
 
 public class MediaViewerService extends Service<Void> {
 

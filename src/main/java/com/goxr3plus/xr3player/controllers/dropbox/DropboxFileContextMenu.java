@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.dropbox;
+package com.goxr3plus.xr3player.controllers.dropbox;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -16,8 +16,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The default context menu for song items of application.

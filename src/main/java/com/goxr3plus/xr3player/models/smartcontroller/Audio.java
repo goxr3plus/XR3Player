@@ -1,17 +1,17 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.models.smartcontroller;
+package com.goxr3plus.xr3player.models.smartcontroller;
 
 import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.AudioImageTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.DragViewTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.utils.general.AudioImageTool;
+import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
 
 /**
  * Representing an Audio File.

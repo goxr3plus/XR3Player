@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.settings;
+package com.goxr3plus.xr3player.controllers.settings;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -9,8 +9,8 @@ import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * 

@@ -1,10 +1,20 @@
-package main.java.com.goxr3plus.xr3player.controllers.systemtree;
+package com.goxr3plus.xr3player.controllers.systemtree;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
+import com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
+import com.goxr3plus.xr3player.enums.TagTabCategory;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -20,15 +30,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.TagTabCategory;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.PlayContextMenu;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.ShopContextMenu;
-import main.java.com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The default context menu for song items of application.

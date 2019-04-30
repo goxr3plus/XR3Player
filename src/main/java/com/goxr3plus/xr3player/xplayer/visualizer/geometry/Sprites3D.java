@@ -2,7 +2,7 @@
  * Copyright (c) 2015 Chris Newland.
  * Licensed under https://github.com/chriswhocodes/demofx/blob/master/LICENSE-BSD
  */
-package main.java.com.goxr3plus.xr3player.xplayer.visualizer.geometry;
+package com.goxr3plus.xr3player.xplayer.visualizer.geometry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +10,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The Class Sprite3D.

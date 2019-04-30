@@ -1,17 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application;
-
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
-import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.controllers.loginmode.User;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+package com.goxr3plus.xr3player.application;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +8,20 @@ import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.goxr3plus.xr3player.controllers.loginmode.User;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsLoader;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class MainLoadUser {
 

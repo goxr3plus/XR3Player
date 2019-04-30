@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.general;
+package com.goxr3plus.xr3player.services.general;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
 
 public class StoppableService extends Service<Boolean> {
 

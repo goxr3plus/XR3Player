@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.controllers.general.OnlineMusicBoxController.OnlineMusicCategory;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.controllers.general.OnlineMusicBoxController.OnlineMusicCategory;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * @author GOXR3PLUSSTUDIO

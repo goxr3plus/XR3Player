@@ -1,13 +1,13 @@
-package main.java.com.goxr3plus.xr3player.models.lists;
+package com.goxr3plus.xr3player.models.lists;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javafx.application.Platform;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
 import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
 
 public class EmotionListsController {

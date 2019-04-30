@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.systemtree;
+package com.goxr3plus.xr3player.services.systemtree;
 
 import java.util.Optional;
 
@@ -6,9 +6,9 @@ import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.control.TreeItem;
-import main.java.com.goxr3plus.xr3player.enums.Operation;
-import main.java.com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
-import main.java.com.goxr3plus.xr3player.controllers.systemtree.TreeViewManager;
+import com.goxr3plus.xr3player.enums.Operation;
+import com.goxr3plus.xr3player.controllers.systemtree.FileTreeItem;
+import com.goxr3plus.xr3player.controllers.systemtree.TreeViewManager;
 
 /**
  * The Class TreeViewService.

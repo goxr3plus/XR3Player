@@ -1,6 +1,6 @@
-package main.java.com.goxr3plus.xr3player.utils.general;
+package com.goxr3plus.xr3player.utils.general;
 
-import main.java.com.goxr3plus.xr3player.enums.OperatingSystem;
+import com.goxr3plus.xr3player.enums.OperatingSystem;
 
 public class OSTool {
 

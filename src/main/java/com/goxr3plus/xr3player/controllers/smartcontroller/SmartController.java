@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.smartcontroller;
+package com.goxr3plus.xr3player.controllers.smartcontroller;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,18 +48,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
-import main.java.com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.FilesExportService;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.InputService;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.LoadService;
-import main.java.com.goxr3plus.xr3player.services.smartcontroller.MediaViewerService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.controllers.general.Viewer;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.services.smartcontroller.FilesExportService;
+import com.goxr3plus.xr3player.services.smartcontroller.InputService;
+import com.goxr3plus.xr3player.services.smartcontroller.LoadService;
+import com.goxr3plus.xr3player.services.smartcontroller.MediaViewerService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Used to control big amounts of Media using a TableViewer mechanism

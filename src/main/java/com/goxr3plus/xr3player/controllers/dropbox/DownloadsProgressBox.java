@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.dropbox;
+package com.goxr3plus.xr3player.controllers.dropbox;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
 
 public class DownloadsProgressBox extends StackPane {
 

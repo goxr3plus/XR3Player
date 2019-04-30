@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,12 +9,12 @@ import java.util.logging.Level;
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import main.java.com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
+import com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
 
 public class LoadService extends Service<Void> {
 

@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.utils.io;
+package com.goxr3plus.xr3player.utils.io;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import org.apache.commons.io.FileUtils;
 
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public final class IOAction {
 

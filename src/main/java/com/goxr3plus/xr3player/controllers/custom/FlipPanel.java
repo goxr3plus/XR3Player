@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.custom;
+package com.goxr3plus.xr3player.controllers.custom;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;

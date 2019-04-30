@@ -1,11 +1,11 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.models.smartcontroller;
+package com.goxr3plus.xr3player.models.smartcontroller;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.Dragboard;
-import main.java.com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.Genre;
 
 /**
  * Representing an Video File.

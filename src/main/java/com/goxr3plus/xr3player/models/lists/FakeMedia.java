@@ -1,6 +1,6 @@
-package main.java.com.goxr3plus.xr3player.models.lists;
+package com.goxr3plus.xr3player.models.lists;
 
-import main.java.com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
 
 /**
  * Just to keep instances of Media for PlayedMediaList

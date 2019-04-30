@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.loginmode;
+package com.goxr3plus.xr3player.controllers.loginmode;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -18,9 +18,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.enums.UserCategory;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.enums.UserCategory;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The Class LibrarySettings.

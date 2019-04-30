@@ -1,11 +1,11 @@
-package main.java.com.goxr3plus.xr3player.controllers.general;
+package com.goxr3plus.xr3player.controllers.general;
 
 import org.controlsfx.control.PopOver;
 
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class SpecialPopOver extends PopOver {
 

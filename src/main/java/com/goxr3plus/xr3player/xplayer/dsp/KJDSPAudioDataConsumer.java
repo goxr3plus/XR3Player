@@ -2,7 +2,7 @@
  * 
  */
 
-package main.java.com.goxr3plus.xr3player.xplayer.dsp;
+package com.goxr3plus.xr3player.xplayer.dsp;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 import javax.sound.sampled.DataLine;
 
-import main.java.com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
 
 /**
  * The Class KJDSPAudioDataConsumer.

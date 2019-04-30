@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.loginmode;
+package com.goxr3plus.xr3player.controllers.loginmode;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import main.java.com.goxr3plus.xr3player.application.MainLoadUser;
+import com.goxr3plus.xr3player.application.MainLoadUser;
 import org.atteo.evo.inflector.English;
 
 import com.jfoenix.controls.JFXButton;
@@ -35,23 +35,23 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.enums.FileCategory;
-import main.java.com.goxr3plus.xr3player.enums.FileType;
-import main.java.com.goxr3plus.xr3player.enums.NotificationType;
-import main.java.com.goxr3plus.xr3player.enums.UserCategory;
-import main.java.com.goxr3plus.xr3player.controllers.custom.FlipPanel;
-import main.java.com.goxr3plus.xr3player.controllers.general.CloseAppBox;
-import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox;
-import main.java.com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
-import main.java.com.goxr3plus.xr3player.controllers.general.Viewer;
-import main.java.com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import main.java.com.goxr3plus.xr3player.utils.io.IOAction;
-import main.java.com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.UserCategory;
+import com.goxr3plus.xr3player.controllers.custom.FlipPanel;
+import com.goxr3plus.xr3player.controllers.general.CloseAppBox;
+import com.goxr3plus.xr3player.controllers.general.SearchBox;
+import com.goxr3plus.xr3player.controllers.general.SearchBox.SearchBoxType;
+import com.goxr3plus.xr3player.controllers.general.Viewer;
+import com.goxr3plus.xr3player.services.loginmode.UsersLoaderService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS

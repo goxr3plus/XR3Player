@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.tagging;
+package com.goxr3plus.xr3player.controllers.tagging;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * This class is capable of fully modifying mp3 ID3V1 tags

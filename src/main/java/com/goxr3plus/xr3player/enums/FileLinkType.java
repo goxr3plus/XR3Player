@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.enums;
+package com.goxr3plus.xr3player.enums;
 
 /**
  * @author GOXR3PLUSSTUDIO

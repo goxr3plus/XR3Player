@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.dropbox;
+package com.goxr3plus.xr3player.services.dropbox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,10 +16,10 @@ import javafx.concurrent.Task;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxClientTreeItem;
-import main.java.com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxClientTreeItem;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class AccountsService extends Service<Boolean> {
 

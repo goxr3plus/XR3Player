@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.services.smartcontroller;
+package com.goxr3plus.xr3player.services.smartcontroller;
 
 import java.io.File;
 
@@ -13,7 +13,7 @@ import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.MediaTableViewer;
+import com.goxr3plus.xr3player.controllers.smartcontroller.MediaTableViewer;
 
 /**
  * This Service tries to add the details to all Media inside the SmartController

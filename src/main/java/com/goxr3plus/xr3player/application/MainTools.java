@@ -1,13 +1,4 @@
-package main.java.com.goxr3plus.xr3player.application;
-
-import javafx.application.Platform;
-import javafx.scene.image.Image;
-import main.java.com.goxr3plus.xr3player.database.DatabaseTool;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
+package com.goxr3plus.xr3player.application;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -16,6 +7,17 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+
+import javafx.application.Platform;
+import javafx.scene.image.Image;
 
 public class MainTools {
     /**

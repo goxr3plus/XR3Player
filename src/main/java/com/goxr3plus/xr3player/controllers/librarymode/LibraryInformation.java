@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.librarymode;
+package com.goxr3plus.xr3player.controllers.librarymode;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,9 +15,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.general.SpecialPopOver;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.SpecialPopOver;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * The Class LibrarySettings.

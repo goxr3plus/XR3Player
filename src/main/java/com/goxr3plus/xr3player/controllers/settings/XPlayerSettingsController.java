@@ -1,4 +1,4 @@
-package main.java.com.goxr3plus.xr3player.controllers.settings;
+package com.goxr3plus.xr3player.controllers.settings;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -10,9 +10,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * @author GOXR3PLUS

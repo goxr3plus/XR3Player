@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3player.controllers.librarymode;
+package com.goxr3plus.xr3player.controllers.librarymode;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -33,12 +33,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3player.application.Main;
-import main.java.com.goxr3plus.xr3player.controllers.custom.Marquee;
-import main.java.com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
-import main.java.com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import main.java.com.goxr3plus.xr3player.utils.general.InfoTool;
-import main.java.com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.controllers.librarymode.Library.LibraryStatus;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Mechanism of showing the opened libraries each opened library is represented
