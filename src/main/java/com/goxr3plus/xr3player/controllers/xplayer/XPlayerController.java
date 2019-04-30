@@ -15,6 +15,42 @@ import java.util.stream.IntStream;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.streamplayer.stream.Status;
+import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
+import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.DJDisc;
+import com.goxr3plus.xr3player.controllers.custom.FlipPanel;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.controllers.dropbox.DownloadsProgressBox;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadedFile;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.controllers.windows.XPlayerWindow;
+import com.goxr3plus.xr3player.enums.FileLinkType;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.TagTabCategory;
+import com.goxr3plus.xr3player.models.smartcontroller.Audio;
+import com.goxr3plus.xr3player.models.xplayer.XPlayer;
+import com.goxr3plus.xr3player.models.xplayer.XPlayerModel;
+import com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
+import com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
+import com.goxr3plus.xr3player.utils.general.AudioImageTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
+import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
+import com.goxr3plus.xr3player.xplayer.waveform.WaveVisualization;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 
@@ -63,42 +99,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.FileLinkType;
-import com.goxr3plus.xr3player.enums.Genre;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.enums.TagTabCategory;
-import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.VisualizerType;
-import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
-import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
-import com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
-import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
-import com.goxr3plus.xr3player.xplayer.waveform.WaveVisualization;
-import com.goxr3plus.xr3player.controllers.custom.DJDisc;
-import com.goxr3plus.xr3player.controllers.custom.FlipPanel;
-import com.goxr3plus.xr3player.controllers.custom.Marquee;
-import com.goxr3plus.xr3player.controllers.dropbox.DownloadsProgressBox;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadedFile;
-import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import com.goxr3plus.xr3player.controllers.windows.XPlayerWindow;
-import com.goxr3plus.xr3player.models.smartcontroller.Audio;
-import com.goxr3plus.xr3player.models.xplayer.XPlayer;
-import com.goxr3plus.xr3player.models.xplayer.XPlayerModel;
-import com.goxr3plus.xr3player.services.xplayer.XPlayerPlayService;
-import com.goxr3plus.xr3player.services.xplayer.XPlayerSeekService;
-import com.goxr3plus.xr3player.utils.general.AudioImageTool;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.TimeTool;
-import com.goxr3plus.xr3player.utils.io.FileTypeAndAbsolutePath;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import main.java.goxr3plus.javastreamplayer.stream.Status;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerEvent;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerException;
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayerListener;
 
 /**
  * Represents the graphical interface for the deck.
@@ -2107,26 +2107,26 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 			// previousTime = xPlayerUI.xPlayer.currentTime
 
-			// .MP3 OR .WAV
-			final String extension = xPlayerModel.songExtensionProperty().get();
-			if ("mp3".equals(extension) || "wav".equals(extension)) {
+				// .MP3 OR .WAV
+				final String extension = xPlayerModel.songExtensionProperty().get();
+				if ("mp3".equals(extension) || "wav".equals(extension)) {
 
-				// Calculate the progress until now
-				progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
-						? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
-						: -1.0f;
-				// System.out.println(progress*100+"%")
-				if (visualizerWindow.isVisible())
-					Platform.runLater(() -> visualizerWindow.getProgressBar().setProgress(progress));
+					// Calculate the progress until now
+					progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
+							? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
+							: -1.0f;
+					// System.out.println(progress*100+"%")
+					if (visualizerWindow.isVisible())
+						Platform.runLater(() -> visualizerWindow.getProgressBar().setProgress(progress));
 
-				// find the current time in seconds
-				xPlayerModel.setCurrentTime((int) (xPlayerModel.getDuration() * progress));
-				// System.out.println((double) xPlayerModel.getDuration() *
-				// progress)
+					// find the current time in seconds
+					xPlayerModel.setCurrentTime((int) (xPlayerModel.getDuration() * progress));
+					// System.out.println((double) xPlayerModel.getDuration() *
+					// progress)
 
-				// .WHATEVER MUSIC FILE*
-			} else
-				xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
+					// .WHATEVER MUSIC FILE*
+				} else
+					xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
 
 			final String millisecondsFormatted = TimeTool.millisecondsToTime(microSecondsPosition / 1000);
 			// System.out.println(milliFormat)

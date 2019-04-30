@@ -8,7 +8,7 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import com.goxr3plus.xr3player.application.Main;
-import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
+import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**
  * DO NOT USE THIS CLASS.....

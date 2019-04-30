@@ -26,7 +26,7 @@ import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import com.goxr3plus.xr3player.models.smartcontroller.Media;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import main.java.goxr3plus.javastreamplayer.stream.ThreadFactoryWithNamePrefix;
+import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
 
 /**
  * This Service tries to keep all the playlists updated based on the database.

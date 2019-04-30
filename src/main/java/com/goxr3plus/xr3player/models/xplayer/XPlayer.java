@@ -3,7 +3,7 @@
  */
 package com.goxr3plus.xr3player.models.xplayer;
 
-import main.java.goxr3plus.javastreamplayer.stream.StreamPlayer;
+import com.goxr3plus.streamplayer.stream.StreamPlayer;
 
 /**
  * This class in controlling the player internally.
