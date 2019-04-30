@@ -267,7 +267,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>java-google-speech-api</artifactId>
-			<version>V2.1</version>
+			<version>8.0.0</version>
 		</dependency>
 
 		<!-- AUDIO TAG READERS -->
@@ -279,7 +279,7 @@
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>jaudiotagger</artifactId>
-			<version>V2.2.6</version>
+			<version>2.2.7</version>
 		</dependency>
 
 		<!-- AUDIO SUPPORT -->
