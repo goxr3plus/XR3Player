@@ -3,6 +3,7 @@ package com.goxr3plus.xr3player.application;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import com.goxr3plus.xr3player.controllers.djmode.DJMode;
 import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadsTableViewer;
@@ -27,7 +28,6 @@ import javafx.application.Application;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 /**

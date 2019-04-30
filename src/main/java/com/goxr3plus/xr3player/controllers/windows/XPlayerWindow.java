@@ -9,6 +9,10 @@ import java.util.logging.Logger;
 
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
@@ -18,10 +22,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS

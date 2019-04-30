@@ -5,6 +5,10 @@ package com.goxr3plus.xr3player.controllers.windows;
 
 import java.io.IOException;
 
+import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
@@ -16,10 +20,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
-import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class LibrariesSearchWindow.

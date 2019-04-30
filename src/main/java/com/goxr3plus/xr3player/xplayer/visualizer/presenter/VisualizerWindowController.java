@@ -10,6 +10,13 @@ import java.util.logging.Logger;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
@@ -39,13 +46,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.database.DatabaseTool;
-import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * The Class VisualizerWindow.

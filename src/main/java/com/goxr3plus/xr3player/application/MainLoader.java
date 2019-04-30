@@ -7,6 +7,7 @@ import java.math.BigInteger;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import com.goxr3plus.xr3player.controllers.djmode.DJMode;
 import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadsTableViewer;
@@ -58,7 +59,6 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.SplitPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
-import main.java.com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 import static com.goxr3plus.xr3player.application.Main.borderlessScene;
