@@ -52,7 +52,7 @@ public class MainLoader {
     private static final int screenMinWidth = 800;
     private static final int screenMinHeight = 600;
 
-    public static void startPart0() {
+    static void startPart0() {
 
         // Current Application Path
         System.out.println("Path :-> " + IOInfo.getBasePathForClass(Main.class));
@@ -142,7 +142,7 @@ public class MainLoader {
      * This method creates the intances of the needed classes in order the
      * application to run
      */
-    public static void startPart1() {
+    private static void startPart1() {
         // ----------------START: The below have not dependencies on other
         // ---------------------------------//
 
@@ -150,40 +150,40 @@ public class MainLoader {
 
         Main.mediaDeleteWindow = new MediaDeleteWindow();
 
-        /** The star window. */
+        /* The star window. */
         Main.starWindow = new StarWindow();
 
-        /** The rename window. */
+        /* The rename window. */
         Main.renameWindow = new RenameWindow();
 
-        /** The rename window. */
+        /* The rename window. */
         Main.emotionsWindow = new EmotionsWindow();
 
-        /**
-         * Audio Tagging Window
+        /*
+          Audio Tagging Window
          */
         Main.tagWindow = new TagWindow();
 
-        /**
-         * This window is being used to export files from the application to the outside
-         * world
+        /*
+          This window is being used to export files from the application to the outside
+          world
          */
         Main.exportWindow = new ExportWindowController();
 
-        /** The About Window of the Application */
+        /* The About Window of the Application */
         Main.aboutWindow = new AboutWindow();
 
-        /** The console Window of the Application */
+        /* The console Window of the Application */
         Main.consoleWindow = new ConsoleWindowController();
 
-        /**
-         * This Window contains the settings for the whole application
+        /*
+          This Window contains the settings for the whole application
          */
         Main.settingsWindow = new ApplicationSettingsController();
 
-        /**
-         * This class is used to capture the computer Screen or a part of it [ Check
-         * XR3Capture package]
+        /*
+          This class is used to capture the computer Screen or a part of it [ Check
+          XR3Capture package]
          */
         Main.captureWindow = new CaptureWindow();
 
@@ -191,22 +191,22 @@ public class MainLoader {
 
         //
 
-        /** The Top Bar of the Application */
+        /* The Top Bar of the Application */
         Main.topBar = new TopBar();
 
-        /** The Bottom Bar of the Application */
+        /* The Bottom Bar of the Application */
         Main.bottomBar = new BottomBar();
 
-        /** The Side Bar of The Application */
+        /* The Side Bar of The Application */
         Main.sideBar = new SideBar();
 
-        /** Application Update Screen */
+        /* Application Update Screen */
         Main.updateScreen = new MainLoadingScreen();
 
         /** The TreeView of DJMode */
         Main.treeManager = new TreeViewManager();
 
-        /** The Constant advancedSearch. */
+        /* The Constant advancedSearch. */
         // public static final AdvancedSearch advancedSearch = new AdvancedSearch()
 
         Main.mediaInformation = new MediaInformation();
@@ -214,13 +214,13 @@ public class MainLoader {
 
         Main.treeViewContextMenu = new TreeViewContextMenu();
 
-        /** The Constant songsContextMenu. */
+        /* The Constant songsContextMenu. */
         Main.songsContextMenu = new MediaContextMenu();
         Main.shopContextMenu = new ShopContextMenu();
 
         //
 
-        /** The Constant EmotionListsController. */
+        /* The Constant EmotionListsController. */
         Main.emotionListsController = new EmotionListsController();
 
         //
@@ -231,10 +231,10 @@ public class MainLoader {
         // --------------START: The below have dependencies on
         // others------------------------
 
-        /** The Constant libraryMode. */
+        /* The Constant libraryMode. */
         libraryMode = new LibraryMode();
 
-        /** The Constant djMode. */
+        /* The Constant djMode. */
         Main.djMode = new DJMode();
 
         Main.onlineMusicController = new OnlineMusicController();
@@ -243,29 +243,29 @@ public class MainLoader {
 
         Main.starredMediaList = new StarredMediaList();
 
-        /** The Search Window Smart Controller of the application */
+        /* The Search Window Smart Controller of the application */
         Main.searchWindowSmartController = new SmartController(Genre.SEARCHWINDOW, "Searching any Media", null);
 
         Main.playListModesTabPane = new PlayListModesTabPane();
 
-        /** The Constant multipleTabs. */
+        /* The Constant multipleTabs. */
         Main.playListModesSplitPane = new PlayListModesSplitPane();
 
-        /**
-         * The Login Mode where the user of the applications has to choose an account to
-         * login
+        /*
+          The Login Mode where the user of the applications has to choose an account to
+          login
          */
         loginMode = new LoginMode();
 
-        /**
-         * Entering in this mode you can change the user settings and other things that
-         * have to do with the user....
+        /*
+          Entering in this mode you can change the user settings and other things that
+          have to do with the user....
          */
         Main.userInfoMode = new UserInformation(UserCategory.LOGGED_IN);
 
-        /**
-         * This JavaFX TabPane represents a TabPane for Navigation between application
-         * Modes
+        /*
+          This JavaFX TabPane represents a TabPane for Navigation between application
+          Modes
          */
         // specialJFXTabPane = new JFXTabPane();
 
