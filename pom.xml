@@ -283,15 +283,13 @@
 		</dependency>
 
 		<!-- AUDIO SUPPORT -->
-		<!-- https://github.com/goxr3plus/java-stream-player -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>java-stream-player</artifactId>
-			<version>9.0.1</version>
+			<version>9.0.2</version>
 		</dependency>
 
 		<!-- FX-BorderlessScene -->
-		<!-- https://github.com/goxr3plus/FX-BorderlessScene -->
 		<dependency>
 			<groupId>com.github.goxr3plus</groupId>
 			<artifactId>FX-BorderlessScene</artifactId>
