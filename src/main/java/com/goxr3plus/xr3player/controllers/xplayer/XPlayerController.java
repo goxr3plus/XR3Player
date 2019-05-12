@@ -6,7 +6,6 @@ package com.goxr3plus.xr3player.controllers.xplayer;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,10 +14,7 @@ import java.util.stream.IntStream;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
-import com.goxr3plus.streamplayer.stream.Status;
-import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
 import com.goxr3plus.streamplayer.stream.StreamPlayerException;
-import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 import com.goxr3plus.xr3player.application.Main;
 import com.goxr3plus.xr3player.controllers.custom.DJDisc;
 import com.goxr3plus.xr3player.controllers.custom.FlipPanel;
@@ -49,7 +45,6 @@ import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel.Visualize
 import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerStackController;
 import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController;
 import com.goxr3plus.xr3player.xplayer.visualizer.presenter.XPlayerVisualizer;
-import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
 import com.goxr3plus.xr3player.xplayer.waveform.WaveVisualization;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
@@ -105,14 +100,14 @@ import javafx.util.Duration;
  *
  * @author GOXR3PLUS
  */
-public class XPlayerController extends StackPane implements StreamPlayerListener {
+public class XPlayerController extends StackPane {
 
-	private final FontIcon playIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 24);
-	private final FontIcon smPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 32);
-	private final FontIcon microPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 20);
-	private final FontIcon pauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 24);
-	private final FontIcon smPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 32);
-	private final FontIcon microPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 20);
+	final FontIcon playIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 24);
+	final FontIcon smPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 32);
+	final FontIcon microPlayIcon = JavaFXTool.getFontIcon("fa-play", Color.WHITE, 20);
+	final FontIcon pauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 24);
+	final FontIcon smPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 32);
+	final FontIcon microPauseIcon = JavaFXTool.getFontIcon("fa-pause", Color.WHITE, 20);
 	private static final XPlayerControllerContextMenu contextMenu = new XPlayerControllerContextMenu();
 
 	// -----------------------------------------------
@@ -154,7 +149,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackPane diskStackPane1;
 
 	@FXML
-	private Button playPauseButton;
+	Button playPauseButton;
 
 	@FXML
 	private Button stopButton;
@@ -190,7 +185,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Label visualizerLabel;
 
 	@FXML
-	private Label playerStatusLabel;
+	Label playerStatusLabel;
 
 	@FXML
 	private JFXButton visualizerVisibleLabel;
@@ -238,10 +233,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private HBox timersBox;
 
 	@FXML
-	private Label elapsedTimeLabel;
+	Label elapsedTimeLabel;
 
 	@FXML
-	private Label remainingTimeLabel;
+	Label remainingTimeLabel;
 
 	@FXML
 	private Label totalTimeLabel;
@@ -292,7 +287,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private Button smBackwardButton;
 
 	@FXML
-	private Button smPlayPauseButton;
+	Button smPlayPauseButton;
 
 	@FXML
 	private Button smStopButton;
@@ -304,13 +299,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private ToggleButton showVisualizer;
 
 	@FXML
-	private ProgressBar smTimeSliderProgress;
+	ProgressBar smTimeSliderProgress;
 
 	@FXML
-	private Slider smTimeSlider;
+	Slider smTimeSlider;
 
 	@FXML
-	private Label smTimeSliderLabel;
+	Label smTimeSliderLabel;
 
 	@FXML
 	private Label smVolumeSliderLabel;
@@ -367,10 +362,10 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackedFontIcon sizeStackedFontIcon;
 
 	@FXML
-	private ToggleButton modeToggle;
+	ToggleButton modeToggle;
 
 	@FXML
-	private ToggleButton historyToggle;
+	ToggleButton historyToggle;
 
 	@FXML
 	private StackPane microStackPane;
@@ -382,7 +377,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private StackPane diskStackPane11;
 
 	@FXML
-	private Button microPlayPauseButton;
+	Button microPlayPauseButton;
 
 	@FXML
 	private Button microStopButton;
@@ -449,7 +444,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	// ------------------------- Services --------------------------
 
 	/** The seek service. */
-	private final XPlayerSeekService seekService = new XPlayerSeekService(this);
+	final XPlayerSeekService seekService = new XPlayerSeekService(this);
 
 	/** The play service. */
 	private final XPlayerPlayService playService = new XPlayerPlayService(this);
@@ -471,13 +466,13 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private XPlayerHistory history;
 
 	/** The x player model. */
-	private XPlayerModel xPlayerModel;
+	XPlayerModel xPlayerModel;
 
 	/** The x player. */
-	private XPlayer xPlayer;
+	XPlayer xPlayer;
 
 	/** The visualizer window. */
-	private VisualizerWindowController visualizerWindow;
+	VisualizerWindowController visualizerWindow;
 
 	/**
 	 * This controller contains a Visualizer and a Label which describes every time
@@ -487,8 +482,8 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private final VisualizerStackController visualizerStackController = new VisualizerStackController();
 
 	/** The visualizer. */
-	private XPlayerVisualizer visualizer;
-	private XPlayerVisualizer djVisualizer;
+	XPlayerVisualizer visualizer;
+	XPlayerVisualizer djVisualizer;
 
 	/** The equalizer. */
 	private XPlayerEqualizer equalizer;
@@ -496,16 +491,18 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	private XPlayerPad xPlayerPad;
 
 	/** The disc. */
-	private DJDisc disc;
+	DJDisc disc;
 
-	private final Marquee mediaFileMarquee = new Marquee();
+	final Marquee mediaFileMarquee = new Marquee();
 
 	private final FlipPanel flipPane = new FlipPanel(Orientation.HORIZONTAL);
 
-	private final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
+	final SimpleBooleanProperty visualizerVisibility = new SimpleBooleanProperty(true);
 
 	//
-	private WaveVisualization waveFormVisualization;
+	WaveVisualization waveFormVisualization;
+
+	private StreamController streamController = new StreamController(this);
 
 	// ======= Events ===========
 
@@ -695,7 +692,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 		// -----XPlayer and XPlayerModel-------------
 		xPlayerModel = new XPlayerModel();
 		xPlayer = new XPlayer();
-		xPlayer.addStreamPlayerListener(this);
+		xPlayer.addStreamPlayerListener(streamController);
 
 		// -----Important-------------
 		xPlayerWindow = new XPlayerWindow(this);
@@ -1372,7 +1369,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * Used by resume method.
 	 */
-	private void resumeCode() {
+	void resumeCode() {
 		System.out.println("RESUME code....");
 
 		// Stop the fade animation
@@ -1394,7 +1391,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * Used by pause method.
 	 */
-	private void pauseCode() {
+	void pauseCode() {
 		System.out.println("PAUSE code....");
 
 		// Play the fade animation
@@ -1481,7 +1478,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * This method is making the visualizer of the player.
 	 *
-	 * @param side the side
 	 */
 	public void makeTheVisualizer() {
 
@@ -1587,8 +1583,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * This method is making the disc of the player.
 	 *
-	 * @param width    the width
-	 * @param height   the height
 	 * @param arcColor the color of the disc
 	 * @param volume   the volume
 	 * @param side     the side
@@ -2074,299 +2068,6 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Override
-	public void opened(final Object dataSource, final Map<String, Object> map) {
-		// some code here
-	}
-
-	float progress;
-
-	@Override
-	public void progress(final int nEncodedBytes, final long microSecondsPosition, final byte[] pcmdata,
-			final Map<String, Object> properties) {
-
-		// Return immediately
-		if (historyToggle.isSelected())
-			return;
-
-		// System.out.println("Entered Progress...")
-
-		// Allow DSP ?
-		if (Main.settingsWindow.getGeneralSettingsController().getHighGraphicsToggle().isSelected()
-				&& visualizerVisibility.get()) {
-			visualizer.writeDSP(pcmdata);
-		}
-
-		// DjVisualizer
-		if (djVisualizer != null)
-			djVisualizer.writeDSP(pcmdata);
-
-		// Disc is being draggged?
-		if (!discIsDragging) {
-
-			// previousTime = xPlayerUI.xPlayer.currentTime
-
-				// .MP3 OR .WAV
-				final String extension = xPlayerModel.songExtensionProperty().get();
-				if ("mp3".equals(extension) || "wav".equals(extension)) {
-
-					// Calculate the progress until now
-					progress = (nEncodedBytes > 0 && xPlayer.getTotalBytes() > 0)
-							? (nEncodedBytes * 1.0f / xPlayer.getTotalBytes() * 1.0f)
-							: -1.0f;
-					// System.out.println(progress*100+"%")
-					if (visualizerWindow.isVisible())
-						Platform.runLater(() -> visualizerWindow.getProgressBar().setProgress(progress));
-
-					// find the current time in seconds
-					xPlayerModel.setCurrentTime((int) (xPlayerModel.getDuration() * progress));
-					// System.out.println((double) xPlayerModel.getDuration() *
-					// progress)
-
-					// .WHATEVER MUSIC FILE*
-				} else
-					xPlayerModel.setCurrentTime((int) (microSecondsPosition / 1000000));
-
-			final String millisecondsFormatted = TimeTool.millisecondsToTime(microSecondsPosition / 1000);
-			// System.out.println(milliFormat)
-
-			// Paint the Modes
-			if (!xPlayer.isStopped() && !waveFormVisualization.isHover()) {
-
-				// TotalTime and CurrentTime
-				final int totalTime = xPlayerModel.getDuration();
-				final int currentTime = xPlayerModel.getCurrentTime();
-
-				if (!modeToggle.isSelected()) // Simple Mode for most of Users
-
-					// Run on JavaFX Thread
-					Platform.runLater(() -> {
-
-						// Simple Mode
-						smTimeSlider.setMin(0);
-						smTimeSlider.setMax(totalTime);
-						smTimeSlider.setValue(currentTime);
-
-						// smTimeSliderLabel
-						smTimeSliderLabel.setText(TimeTool.getTimeEdited(currentTime) + "."
-								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))) + "  / "
-								+ TimeTool.getTimeEdited(totalTime));
-
-						// smTimeSliderProgress
-						smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
-					});
-
-				else { // Advanced DJ Disc Mode
-
-					// Update the disc Angle
-					disc.calculateAngleByValue(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(), false);
-
-					// Update the disc time
-					disc.updateTimeDirectly(xPlayerModel.getCurrentTime(), xPlayerModel.getDuration(),
-							millisecondsFormatted);
-
-					// Run on JavaFX Thread
-					Platform.runLater(() -> {
-
-						// == RemainingTimeLabel
-						remainingTimeLabel.setText(TimeTool.getTimeEdited(totalTime - currentTime) + "."
-								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
-
-						// == ElapsedTimeLabel
-						elapsedTimeLabel.setText(TimeTool.getTimeEdited(currentTime) + millisecondsFormatted);
-
-						// == Repaint the Disc
-						disc.repaint();
-
-					});
-				}
-
-			}
-
-		}
-	}
-
-	@Override
-	public void statusUpdated(final StreamPlayerEvent streamPlayerEvent) {
-
-		// Player status
-		final Status status = streamPlayerEvent.getPlayerStatus();
-
-		// Status.OPENED
-		if (status == Status.OPENED && xPlayer.getSourceDataLine() != null) {
-
-			// Visualizer
-			visualizer.setupDSP(xPlayer.getSourceDataLine());
-			visualizer.startDSP(xPlayer.getSourceDataLine());
-
-			// DjVisualizer
-			if (djVisualizer != null) {
-				djVisualizer.setupDSP(xPlayer.getSourceDataLine());
-				djVisualizer.startDSP(xPlayer.getSourceDataLine());
-			}
-
-			Platform.runLater(() -> {
-
-				// WaveForm
-				// if (!seekService.isRunning())
-				// waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(),
-				// WaveFormJob.AMPLITUDES_AND_WAVEFORM);
-
-				// Marquee Text
-				mediaFileMarquee.setText(IOInfo.getFileName(xPlayerModel.songPathProperty().get()));
-
-				// Notification
-				if (Main.settingsWindow.getxPlayersSettingsController().getShowPlayerNotifications().isSelected()) {
-
-					// Check if it has Album Image
-					final Image image = AudioImageTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60);
-
-					// Show Notification
-					if (!discIsDragging)
-						AlertTool.showNotification("Playing on deck " + (getKey() + 1),
-								IOInfo.getFileName(xPlayerModel.songPathProperty().get()), Duration.seconds(4),
-								NotificationType.SIMPLE, image != null ? JavaFXTool.getImageView(image, 60, 60)
-										: JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 60));
-				}
-			});
-
-			// STATUS OPENING
-		} else if (status == Status.OPENING) {
-
-			// Run on JavaFX Thread
-			Platform.runLater(() -> {
-
-				// Wave Form Service
-				if (!seekService.isRunning())
-					waveFormVisualization.getWaveService().startService(getxPlayerModel().getSongPath(),
-							WaveFormJob.AMPLITUDES_AND_WAVEFORM);
-
-			});
-
-			// Status.RESUMED
-		} else if (status == Status.RESUMED) {
-
-			Platform.runLater(() -> {
-				// playerStatusLabel.setText("Resuming");
-				resumeCode();
-
-				// WaveForm
-				if (!waveFormVisualization.getWaveService().isRunning())
-					waveFormVisualization.startPainterService();
-
-				// Notification
-				// ActionTool.showNotification("Player [ " + this.getKey() + " ] Resuming",
-				// InfoTool.getFileName(xPlayerModel.songPathProperty().get()),
-				// Duration.seconds(2),
-				// NotificationType.SIMPLE,
-				// InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
-			});
-
-			// Status.PLAYING
-		} else if (status == Status.PLAYING) {
-
-			Platform.runLater(() -> {
-				resumeCode();
-
-				// WaveForm
-				waveFormVisualization.startPainterService();
-			});
-
-			// Status.PAUSED
-		} else if (streamPlayerEvent.getPlayerStatus() == Status.PAUSED) {
-
-			Platform.runLater(() -> {
-				playerStatusLabel.setText("Status : " + " Paused");
-				pauseCode();
-
-				// WaveForm
-				waveFormVisualization.stopPainterService();
-
-				// Notification
-				// ActionTool.showNotification("Player [ " + this.getKey() + " ] Paused",
-				// InfoTool.getFileName(xPlayerModel.songPathProperty().get()),
-				// Duration.seconds(2),
-				// NotificationType.SIMPLE,
-				// InfoTool.getAudioAlbumImage(xPlayerModel.songPathProperty().get(), 60, 60));
-			});
-
-			// Status.STOPPED
-		} else if (status == Status.STOPPED) {
-
-			// Visualizer
-			visualizer.stopDSP();
-
-			// DJVisualizer
-			if (djVisualizer != null)
-				djVisualizer.stopDSP();
-
-			Platform.runLater(() -> {
-
-				// SeekService running?
-				if (seekService.isRunning()) {
-
-					// oh yeah
-				} else {
-
-					// Change Marquee text
-					// mediaFileMarquee.setText("Player is Stopped");
-					playerStatusLabel.setText("Status : " + " Stopped");
-
-					// Set time to 0 to not have problems with SeekService
-					xPlayerModel.setCurrentTime(0);
-
-					// disk
-					disc.stopRotation();
-					disc.stopFade();
-
-					// Visualizer
-					visualizer.stopVisualizer();
-
-					// DJVisualizer
-					if (djVisualizer != null)
-						djVisualizer.stopVisualizer();
-
-					// Recalculate disc
-					disc.calculateAngleByValue(0, 0, true);
-					disc.repaint();
-
-					// Reset
-					fixPlayerStop();
-
-					// smTimeSliderProgress
-					smTimeSliderProgress.setProgress(smTimeSlider.getValue() / smTimeSlider.getMax());
-
-					// WaveForm
-					waveFormVisualization.stopPainterService();
-				}
-
-			});
-
-			// Status.SEEKING
-		} else if (status == Status.SEEKING) {
-
-			// Platform.runLater(() -> playerStatusLabel.setText("Status : "+" Seeking"));
-
-			// Status.SEEKED
-		} else if (status == Status.SEEKED) {
-			// TODO i need to add code here
-		}
-
-		// Fix the images
-		if (status == Status.STOPPED || status == Status.RESUMED || status == Status.PLAYING || status == Status.PAUSED)
-			Platform.runLater(() -> {
-				// Advanced Mode
-				playPauseButton.setGraphic(xPlayer.isPlaying() ? pauseIcon : playIcon);
-
-				// Simple Mode
-				smPlayPauseButton.setGraphic(xPlayer.isPlaying() ? smPauseIcon : smPlayIcon);
-
-				// Micro Mode
-				microPlayPauseButton.setGraphic(xPlayer.isPlaying() ? microPauseIcon : microPlayIcon);
-			});
-	}
-
 	/**
 	 * Resets player labels etc to zero
 	 */
@@ -2512,7 +2213,7 @@ public class XPlayerController extends StackPane implements StreamPlayerListener
 	/**
 	 * Set the mute of the Line. Note that mute status does not affect gain.
 	 *
-	 * @param mute True to mute the audio of False to unmute it
+	 * @param value True to mute the audio of False to unmute it
 	 */
 	public void setMute(final boolean value) {
 		muteButton.setSelected(value);
