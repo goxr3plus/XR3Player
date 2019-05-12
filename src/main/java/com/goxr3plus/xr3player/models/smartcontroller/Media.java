@@ -1072,16 +1072,10 @@ public abstract class Media {
 	}
 
 	/**
-	 * Keep track of previous emotion so not change the current image again and
-	 * again
-	 */
-	// private int previousEmotion = 0;
-
-	/**
 	 * This method is called to change the Emotion Image of the Media based on the
 	 * current Emotion
 	 *
-	 * @param emotion
+	 * @param emotion {@link Emotion}
 	 */
 	public void changeEmotionImage(final Emotion emotion) {
 
@@ -1254,7 +1248,7 @@ public abstract class Media {
 	 *
 	 * @param path the new file path
 	 */
-	public void setFilePath(final String path) {
+	private void setFilePath(final String path) {
 		this.title.set(IOInfo.getFileTitle(path));
 		this.drive.set(path.substring(0, 1));
 		this.filePath.set(path);
