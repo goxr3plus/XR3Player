@@ -3,8 +3,6 @@
  */
 package com.goxr3plus.xr3player.services.smartcontroller;
 
-import static com.goxr3plus.xr3player.application.Main.libraryMode;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -16,17 +14,20 @@ import java.util.logging.Level;
 
 import org.apache.commons.io.FileUtils;
 
-import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Tab;
+import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
 import com.goxr3plus.xr3player.application.Main;
 import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
 import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import com.goxr3plus.xr3player.models.smartcontroller.Media;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
+
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Tab;
+
+import static com.goxr3plus.xr3player.application.Main.libraryMode;
 
 /**
  * This Service tries to keep all the playlists updated based on the database.
@@ -142,7 +143,7 @@ public class MediaUpdaterService {
 					// Extra filtering
 					.filter(xPlayerController -> {
 						// If extended pass
-						if (xPlayerController.isExtended())
+						if (xPlayerController.isPlayerExtended)
 							return true;
 						// Or else check more through
 						else {
@@ -162,7 +163,7 @@ public class MediaUpdaterService {
 
 						// Fix the emotion image
 						xPlayerController.changeEmotionImage(Main.emotionListsController
-								.getEmotionForMedia(xPlayerController.getxPlayerModel().songPathProperty().get()));
+								.getEmotionForMedia(xPlayerController.xPlayerModel.songPathProperty().get()));
 
 						// Only if the Settings Mode is selected
 						if (xPlayerController.getHistoryToggle().isSelected()) {
@@ -289,7 +290,6 @@ public class MediaUpdaterService {
 	/**
 	 * Set's the Media Played or Not [ Using JavaFX Thread ]
 	 * 
-	 * @param played
 	 */
 	private static void determinePlayedStatus(final Media media, final int mode) {
 
@@ -297,7 +297,7 @@ public class MediaUpdaterService {
 		// cause we want to set different image if so...
 		final int[] playedStatus = { Media.UNKNOWN_PLAYED_STATUS };
 		Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-			final String path = xPlayerController.getxPlayerModel().songPathProperty().get();
+			final String path = xPlayerController.xPlayerModel.songPathProperty().get();
 			if (path != null && path.equals(media.getFilePath()))
 				playedStatus[0] = xPlayerController.getKey();
 

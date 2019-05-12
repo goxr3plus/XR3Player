@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXToggleButton;
 
@@ -15,10 +19,6 @@ import javafx.scene.control.Labeled;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.controllers.custom.Marquee;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * @author GOXR3PLUS
@@ -146,7 +146,7 @@ public class GeneralSettingsController extends BorderPane {
 			Main.xPlayersList.getList().forEach(controller -> {
 
 				// Marquee
-				controller.getMediaFileMarquee().checkAnimationValidity(value);
+				controller.mediaFileMarquee.checkAnimationValidity(value);
 
 				// getVisualizationsDisabledLabel
 				controller.getVisualizationsDisabledLabel().setVisible(!value);

@@ -8,21 +8,22 @@ import java.util.logging.Level;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.Node;
 import javafx.scene.control.TreeItem;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.FileCategory;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.librarymode.Library;
-import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import com.goxr3plus.xr3player.models.smartcontroller.Media;
-import com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * A custom TreeItem which represents a File
@@ -106,7 +107,6 @@ public class FileTreeItem extends TreeItem<String> {
 	/**
 	 * Rename the Media File.
 	 * 
-	 * @param controller the controller
 	 * @param node       The node based on which the Rename Window will be position
 	 *                   [[SuppressWarningsSpartan]]
 	 */
@@ -193,16 +193,16 @@ public class FileTreeItem extends TreeItem<String> {
 
 							// Inform all XPlayers Models
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-								if (oldFilePath.equals(xPlayerController.getxPlayerModel().songPathProperty().get())) {
+								if (oldFilePath.equals(xPlayerController.xPlayerModel.songPathProperty().get())) {
 
 									// filePath
-									xPlayerController.getxPlayerModel().songPathProperty().set(newFilePath);
+									xPlayerController.xPlayerModel.songPathProperty().set(newFilePath);
 
 									// object
-									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
+									xPlayerController.playService.checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(IOInfo.getFileName(newFilePath));
+									xPlayerController.mediaFileMarquee.setText(IOInfo.getFileName(newFilePath));
 
 								}
 							});

@@ -3,12 +3,13 @@ package com.goxr3plus.xr3player.controllers.settings;
 import java.util.Optional;
 import java.util.Properties;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController.Type;
+
 import javafx.scene.control.Control;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.xplayer.visualizer.presenter.VisualizerWindowController.Type;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class ApplicationSettingsLoader {
 
@@ -182,7 +183,7 @@ public class ApplicationSettingsLoader {
 
 				// Update all the players
 				Main.xPlayersList.getList().forEach(
-						xPlayerController -> xPlayerController.getVisualizer().setShowFPS(Boolean.parseBoolean(s)));
+						xPlayerController -> xPlayerController.visualizer.setShowFPS(Boolean.parseBoolean(s)));
 
 			});
 
@@ -192,16 +193,16 @@ public class ApplicationSettingsLoader {
 				// If the key is not there add background image by default
 				Optional.ofNullable(settings
 						.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-BackgroundImageCleared"))
-						.ifPresentOrElse(v -> xPlayerController.getVisualizerWindow().clearImage(Type.BACKGROUND),
-								() -> xPlayerController.getVisualizerWindow().findAppropriateImage(Type.BACKGROUND));
+						.ifPresentOrElse(v -> xPlayerController.visualizerWindow.clearImage(Type.BACKGROUND),
+								() -> xPlayerController.visualizerWindow.findAppropriateImage(Type.BACKGROUND));
 
 				// Always add foreground image
-				xPlayerController.getVisualizerWindow().findAppropriateImage(Type.FOREGROUND);
+				xPlayerController.visualizerWindow.findAppropriateImage(Type.FOREGROUND);
 
 				// Determine the visualizer display mode
 				Optional.ofNullable(
 						settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Visualizer-DisplayMode"))
-						.ifPresent(s -> xPlayerController.getVisualizer().displayMode.set(Integer.valueOf(s)));
+						.ifPresent(s -> xPlayerController.visualizer.displayMode.set(Integer.valueOf(s)));
 
 				// Check if it is on simple or advanced mode
 				Optional.ofNullable(settings.getProperty("XPlayer" + xPlayerController.getKey() + "-Advanced-Mode"))

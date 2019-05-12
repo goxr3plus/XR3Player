@@ -8,22 +8,23 @@ import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.logging.Level;
 
-import javafx.application.Platform;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.scene.Cursor;
-import javafx.scene.image.Image;
-import javafx.util.Duration;
 import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import com.goxr3plus.xr3player.enums.AudioType;
 import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 import com.goxr3plus.xr3player.utils.general.AudioImageTool;
 import com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.goxr3plus.xr3player.utils.general.TimeTool;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
 import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.scene.Cursor;
+import javafx.scene.image.Image;
+import javafx.util.Duration;
 
 /**
  * This Service is used to start the Audio of XR3Player
@@ -111,7 +112,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 		}
 
 		// The path of the audio file
-		xPlayerController.getxPlayerModel().songPathProperty().set(fileAbsolutePath);
+		xPlayerController.xPlayerModel.songPathProperty().set(fileAbsolutePath);
 
 		// Create Binding
 		xPlayerController.getFxLabel().textProperty().bind(messageProperty());
@@ -152,13 +153,13 @@ public class XPlayerPlayService extends Service<Boolean> {
 		xPlayerController.getRegionStackPane().setVisible(false);
 
 		// Set the appropriate cursor
-		if (xPlayerController.getxPlayerModel().getDuration() == 0
-				|| xPlayerController.getxPlayerModel().getDuration() == -1)
-			xPlayerController.getDisc().getCanvas().setCursor(Cursor.OPEN_HAND);
+		if (xPlayerController.xPlayerModel.getDuration() == 0
+				|| xPlayerController.xPlayerModel.getDuration() == -1)
+			xPlayerController.disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
 		// Configure Media Settings
 		xPlayerController.configureMediaSettings(false);
-		xPlayerController.getDisc().repaint();
+		xPlayerController.disc.repaint();
 
 		// unlock the Service
 		locked = false;
@@ -182,57 +183,57 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 					// Stop the previous audio
 					updateMessage("Stop previous...");
-					xPlayerController.getxPlayer().stop();
+					xPlayerController.xPlayer.stop();
 
 					// ---------------------- Load the File
 					updateMessage("File Configuration ...");
 
 					// duration
-					audioFullPath = xPlayerController.getxPlayerModel().songPathProperty().get();
+					audioFullPath = xPlayerController.xPlayerModel.songPathProperty().get();
 					audioType[0] = checkAudioTypeAndUpdateXPlayerModel(audioFullPath);
-					xPlayerController.getxPlayerModel()
+					xPlayerController.xPlayerModel
 							.setDuration(TimeTool.durationInSeconds(audioFullPath, audioType[0]));
 
 					// extension
-					xPlayerController.getxPlayerModel().songExtensionProperty()
+					xPlayerController.xPlayerModel.songExtensionProperty()
 							.set(IOInfo.getFileExtension(audioFullPath));
 
 					// == TotalTimeLabel
 					Platform.runLater(() -> xPlayerController.getTotalTimeLabel()
-							.setText(TimeTool.getTimeEdited(xPlayerController.getxPlayerModel().getDuration())));
+							.setText(TimeTool.getTimeEdited(xPlayerController.xPlayerModel.getDuration())));
 
 					// ----------------------- Load the Album Image
 					image = AudioImageTool.getAudioAlbumImage(audioFullPath, -1, -1);
 
 					// ---------------------- Open the Audio
 					updateMessage("Opening ...");
-					xPlayerController.getxPlayer().open(xPlayerController.getxPlayerModel().songObjectProperty().get());
+					xPlayerController.xPlayer.open(xPlayerController.xPlayerModel.songObjectProperty().get());
 
 					// ----------------------- Play the Audio
 					updateMessage("Starting ...");
-					xPlayerController.getxPlayer().play();
-					xPlayerController.getxPlayer().pause();
+					xPlayerController.xPlayer.play();
+					xPlayerController.xPlayer.pause();
 
 					// So the user wants to start from a position better than 0
 					if (secondsToSkip > 0) {
-						xPlayerController.getxPlayer()
-								.seek((long) ((secondsToSkip) * (xPlayerController.getxPlayer().getTotalBytes()
-										/ (float) xPlayerController.getxPlayerModel().getDuration())));
+						xPlayerController.xPlayer
+								.seek((long) ((secondsToSkip) * (xPlayerController.xPlayer.getTotalBytes()
+										/ (float) xPlayerController.xPlayerModel.getDuration())));
 
 						// Update XPlayer Model
-						xPlayerController.getxPlayerModel().setCurrentTime(secondsToSkip);
-						xPlayerController.getxPlayerModel().setCurrentAngleTime(secondsToSkip);
+						xPlayerController.xPlayerModel.setCurrentTime(secondsToSkip);
+						xPlayerController.xPlayerModel.setCurrentAngleTime(secondsToSkip);
 
 						// Update the disc Angle
-						xPlayerController.getDisc().calculateAngleByValue(secondsToSkip,
-								xPlayerController.getxPlayerModel().getDuration(), true);
+						xPlayerController.disc.calculateAngleByValue(secondsToSkip,
+								xPlayerController.xPlayerModel.getDuration(), true);
 					}
 
 					// ....well let's go
 				} catch (final Exception ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					Platform.runLater(() -> {
-						final String audioPath = xPlayerController.getxPlayerModel().songPathProperty().get();
+						final String audioPath = xPlayerController.xPlayerModel.songPathProperty().get();
 
 						// Media not existing any more?
 						if (audioType[0] != null && audioPath != null && !new File(audioPath).exists())
@@ -241,7 +242,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 									NotificationType.ERROR);
 
 						// Not available Audio Devices?
-						else if (xPlayerController.getxPlayer().getMixers().isEmpty())
+						else if (xPlayerController.xPlayer.getMixers().isEmpty())
 							AlertTool.showNotification("No Audio Devices",
 									"We can’t find an audio device.\nMake sure that headphones or speakers are connected.\n For more info, search your device for “Manage audio devices”",
 									Duration.millis(10000), NotificationType.ERROR);
@@ -251,7 +252,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 							AlertTool.showNotification("Can't play current Audio",
 									"Can't play \n["
 											+ InfoTool.getMinString(
-													xPlayerController.getxPlayerModel().songPathProperty().get(), 30,"...")
+													xPlayerController.xPlayerModel.songPathProperty().get(), 30,"...")
 											+ "]\nIt is corrupted or maybe unsupported",
 									Duration.millis(1500), NotificationType.ERROR);
 
@@ -261,7 +262,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 					// Print the current audio file path
 					System.out.println("Current audio path is ...:"
-							+ xPlayerController.getxPlayerModel().songPathProperty().get());
+							+ xPlayerController.xPlayerModel.songPathProperty().get());
 
 				}
 
@@ -282,7 +283,7 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 		// File?
 		try {
-			xPlayerController.getxPlayerModel().songObjectProperty().set(new File(path));
+			xPlayerController.xPlayerModel.songObjectProperty().set(new File(path));
 			return AudioType.FILE;
 		} catch (final Exception ex) {
 			xPlayerController.logger.log(Level.WARNING, "", ex);
@@ -290,14 +291,14 @@ public class XPlayerPlayService extends Service<Boolean> {
 
 		// URL?
 		try {
-			xPlayerController.getxPlayerModel().songObjectProperty().set(new URL(path));
+			xPlayerController.xPlayerModel.songObjectProperty().set(new URL(path));
 			return AudioType.URL;
 		} catch (final MalformedURLException ex) {
 			xPlayerController.logger.log(Level.WARNING, "MalformedURLException", ex);
 		}
 
 		// very dangerous this null here!!!!!!!!!!!
-		xPlayerController.getxPlayerModel().songObjectProperty().set(null);
+		xPlayerController.xPlayerModel.songObjectProperty().set(null);
 
 		return AudioType.UNKNOWN;
 	}
@@ -308,11 +309,11 @@ public class XPlayerPlayService extends Service<Boolean> {
 		System.out.println("XPlayer [ " + xPlayerController.getKey() + " ] PlayService Succeeded...");
 
 		// Replace the image of the disc
-		xPlayerController.getDisc().replaceImage(image);
-		xPlayerController.getMediaTagImageView().setImage(xPlayerController.getDisc().getImage());
+		xPlayerController.disc.replaceImage(image);
+		xPlayerController.getMediaTagImageView().setImage(xPlayerController.disc.getImage());
 
 		// add to played songs...
-		final String absolutePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+		final String absolutePath = xPlayerController.xPlayerModel.songPathProperty().get();
 
 		// Run this on new Thread for performance reasons
 		new Thread(() -> {

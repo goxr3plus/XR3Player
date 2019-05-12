@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.animation.FadeTransition;
@@ -18,9 +21,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerModel;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * 
@@ -162,17 +162,17 @@ public class VisualizerStackController extends StackPane {
 	 * Goes to the next Spectrum Analyzer
 	 */
 	public void nextSpectrumAnalyzer() {
-		xPlayerController.getVisualizer().displayMode
-				.set((xPlayerController.getVisualizer().displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-						: xPlayerController.getVisualizer().displayMode.get() + 1);
+		xPlayerController.visualizer.displayMode
+				.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
+						: xPlayerController.visualizer.displayMode.get() + 1);
 	}
 
 	/**
 	 * Goes to the previous Spectrum Analyzer
 	 */
 	public void previousSpectrumAnalyzer() {
-		xPlayerController.getVisualizer().displayMode.set(xPlayerController.getVisualizer().displayMode.get() - 1 >= 0
-				? xPlayerController.getVisualizer().displayMode.get() - 1
+		xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
+				? xPlayerController.visualizer.displayMode.get() - 1
 				: VisualizerModel.DISPLAYMODE_MAXIMUM);
 	}
 

@@ -3,13 +3,14 @@
  */
 package com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
+
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Orientation;
 import javafx.scene.paint.Color;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * The Class Visualizer.
@@ -211,7 +212,7 @@ abstract class Visualizer extends VisualizerDrawer {
 
 			// Avoid null pointer and also check if we have permission to draw the
 			// visualizer
-			if (xPlayerController != null && !xPlayerController.getVisualizerStackController().isVisible()) {
+			if (xPlayerController != null && !xPlayerController.visualizerStackController.isVisible()) {
 				clear();
 				draw = false;
 				return;

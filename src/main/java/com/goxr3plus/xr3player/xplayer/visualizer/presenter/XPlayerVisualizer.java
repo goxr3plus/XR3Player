@@ -3,9 +3,10 @@
  */
 package com.goxr3plus.xr3player.xplayer.visualizer.presenter;
 
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseButton;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * This class is updating the panel of the XPlayerUI.
@@ -27,7 +28,7 @@ public class XPlayerVisualizer extends Visualizer {
 		this.xPlayerUI = xPlayerUI;
 		this.getAnimationService().passXPlayer(xPlayerUI);
 
-		setScopeColor(xPlayerUI.getDisc().getArcColor());
+		setScopeColor(xPlayerUI.disc.getArcColor());
 		if (addMouseListener)
 			addMouseListener();
 	}
@@ -45,7 +46,7 @@ public class XPlayerVisualizer extends Visualizer {
 				displayMode.set((displayMode.get() + 1 > DISPLAYMODE_MAXIMUM) ? 0 : displayMode.get() + 1);
 				// SECONDARY
 			} else if (m.getButton() == MouseButton.SECONDARY)
-				xPlayerUI.getVisualizerWindow().getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
+				xPlayerUI.visualizerWindow.getVisualizerContextMenu().show(this, m.getScreenX(), m.getScreenY());
 		});
 
 	}

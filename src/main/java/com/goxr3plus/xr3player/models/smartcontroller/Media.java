@@ -14,6 +14,23 @@ import java.util.logging.Level;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.controllers.librarymode.Library;
+import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.enums.AudioType;
+import com.goxr3plus.xr3player.enums.FileCategory;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.DateTimeTool;
+import com.goxr3plus.xr3player.utils.general.ExtensionTool;
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -31,22 +48,6 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.AudioType;
-import com.goxr3plus.xr3player.enums.FileCategory;
-import com.goxr3plus.xr3player.enums.Genre;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import com.goxr3plus.xr3player.controllers.librarymode.Library;
-import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
-import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import com.goxr3plus.xr3player.utils.general.DateTimeTool;
-import com.goxr3plus.xr3player.utils.general.ExtensionTool;
-import com.goxr3plus.xr3player.utils.general.TimeTool;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * This class is used as super class for Audio and Video classes.
@@ -764,7 +765,6 @@ public abstract class Media {
 	/**
 	 * Rename the Media File.
 	 * 
-	 * @param controller the controller
 	 * @param node       The node based on which the Rename Window will be position
 	 *                   [[SuppressWarningsSpartan]]
 	 */
@@ -858,16 +858,16 @@ public abstract class Media {
 
 							// Inform all XPlayers Models
 							Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-								if (oldFilePath.equals(xPlayerController.getxPlayerModel().songPathProperty().get())) {
+								if (oldFilePath.equals(xPlayerController.xPlayerModel.songPathProperty().get())) {
 
 									// filePath
-									xPlayerController.getxPlayerModel().songPathProperty().set(newFilePath);
+									xPlayerController.xPlayerModel.songPathProperty().set(newFilePath);
 
 									// object
-									xPlayerController.getPlayService().checkAudioTypeAndUpdateXPlayerModel(newFilePath);
+									xPlayerController.playService.checkAudioTypeAndUpdateXPlayerModel(newFilePath);
 
 									// change the text of Marquee
-									xPlayerController.getMediaFileMarquee().setText(IOInfo.getFileName(newFilePath));
+									xPlayerController.mediaFileMarquee.setText(IOInfo.getFileName(newFilePath));
 
 								}
 							});

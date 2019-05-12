@@ -3,10 +3,11 @@
  */
 package com.goxr3plus.xr3player.xplayer.waveform;
 
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
+
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
-import com.goxr3plus.xr3player.xplayer.waveform.WaveFormService.WaveFormJob;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
 
 /**
  * The Class Visualizer.
@@ -141,12 +142,12 @@ public class WaveVisualization extends WaveFormPane {
 			}
 
 			// If the player is stopped , stop the animation timer
-			if (!xPlayerController.getxPlayer().isPlaying())
+			if (!xPlayerController.xPlayer.isPlaying())
 				super.stop();
 
 			// Set Timer X Position
-			final double percent = xPlayerController.getxPlayerModel().getCurrentTime()
-					/ (double) xPlayerController.getxPlayerModel().getDuration();
+			final double percent = xPlayerController.xPlayerModel.getCurrentTime()
+					/ (double) xPlayerController.xPlayerModel.getDuration();
 			setTimerXPosition((int) (percent * width));
 
 			// If resulting wave is not calculated

@@ -48,7 +48,7 @@ public class XPlayersList {
 	 * @return the xPlayer
 	 */
 	public XPlayer getXPlayer(int key) {
-		return getXPlayerController(key).getxPlayer();
+		return getXPlayerController(key).xPlayer;
 	}
 
 	/**

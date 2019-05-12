@@ -2,18 +2,19 @@ package com.goxr3plus.xr3player.services.xplayer;
 
 import java.io.File;
 
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.FileType;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.database.DatabaseTool;
-import com.goxr3plus.xr3player.enums.FileType;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderProgressListener;
@@ -57,8 +58,7 @@ public class ConverterService extends Service<Boolean> {
 	/**
 	 * Start the Service for the given file
 	 * 
-	 * @param                  <convertProgress>
-	 * 
+	 *
 	 * @param fileAbsolutePath
 	 */
 	public void convert(final String fileAbsolutePath) {
@@ -105,7 +105,7 @@ public class ConverterService extends Service<Boolean> {
 
 					// Stop the previous audio
 					updateMessage("Stop previous...");
-					xPlayerController.getxPlayer().stop();
+					xPlayerController.xPlayer.stop();
 
 				} catch (final Exception ex) {
 					ex.printStackTrace();

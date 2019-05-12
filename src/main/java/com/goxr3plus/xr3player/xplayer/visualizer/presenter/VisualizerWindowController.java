@@ -258,7 +258,7 @@ public class VisualizerWindowController extends StackPane {
 					&& !keepTopBarVisible.isSelected()) {
 				topBar.setVisible(false);
 				setCursor(Cursor.NONE);
-				xPlayerController.getVisualizer().setCursor(Cursor.NONE);
+				xPlayerController.visualizer.setCursor(Cursor.NONE);
 			}
 			// System.out.println("PauseTransition Finished")
 		});
@@ -316,9 +316,9 @@ public class VisualizerWindowController extends StackPane {
 						DatabaseTool.getXPlayersImageFolderAbsolutePathPlain(), Main.specialChooser, window)
 				.ifPresent(imageFile -> {
 					if (type == Type.BACKGROUND)
-						xPlayerController.getVisualizer().backgroundImage = new Image(imageFile.toURI() + "");
+						xPlayerController.visualizer.backgroundImage = new Image(imageFile.toURI() + "");
 					else if (type == Type.FOREGROUND)
-						xPlayerController.getVisualizer().foregroundImage = new Image(imageFile.toURI() + "");
+						xPlayerController.visualizer.foregroundImage = new Image(imageFile.toURI() + "");
 
 					// Manage Settings
 					Main.dbManager.getPropertiesDb().deleteProperty(
@@ -363,10 +363,10 @@ public class VisualizerWindowController extends StackPane {
 
 		// Replace the Image
 		if (type == Type.BACKGROUND)
-			xPlayerController.getVisualizer().backgroundImage = (image != null ? image
+			xPlayerController.visualizer.backgroundImage = (image != null ? image
 					: VisualizerDrawer.DEFAULT_BACKGROUND_IMAGE);
 		else if (type == Type.FOREGROUND)
-			xPlayerController.getVisualizer().foregroundImage = (image != null ? image
+			xPlayerController.visualizer.foregroundImage = (image != null ? image
 					: VisualizerDrawer.DEFAULT_FOREGROUND_IMAGE);
 	}
 
@@ -383,9 +383,9 @@ public class VisualizerWindowController extends StackPane {
 
 		// Set the Image to null
 		if (type == Type.BACKGROUND)
-			xPlayerController.getVisualizer().backgroundImage = null;
+			xPlayerController.visualizer.backgroundImage = null;
 		else if (type == Type.FOREGROUND)
-			xPlayerController.getVisualizer().foregroundImage = null;
+			xPlayerController.visualizer.foregroundImage = null;
 
 		// Manage Settings
 		Main.dbManager.getPropertiesDb()
@@ -450,7 +450,7 @@ public class VisualizerWindowController extends StackPane {
 	public void displayVisualizer() {
 
 		// Add the visualizer
-		centerStackPane.getChildren().add(1, xPlayerController.getVisualizerStackController());
+		centerStackPane.getChildren().add(1, xPlayerController.visualizerStackController);
 
 		// show the window
 		window.show();
@@ -466,7 +466,7 @@ public class VisualizerWindowController extends StackPane {
 		pauseTransition.playFromStart();
 		topBar.setVisible(true);
 		setCursor(Cursor.HAND);
-		xPlayerController.getVisualizer().setCursor(Cursor.HAND);
+		xPlayerController.visualizer.setCursor(Cursor.HAND);
 		// System.out.println("PauseTransition Restarted")
 	}
 
@@ -475,7 +475,7 @@ public class VisualizerWindowController extends StackPane {
 	 */
 	public void removeVisualizer() {
 		pauseTransition.stop();
-		xPlayerController.getVisualizer().setCursor(Cursor.HAND);
+		xPlayerController.visualizer.setCursor(Cursor.HAND);
 		xPlayerController.reAddVisualizer();
 		window.close();
 	}

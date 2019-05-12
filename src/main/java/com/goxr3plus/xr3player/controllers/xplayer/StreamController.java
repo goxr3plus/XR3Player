@@ -193,7 +193,7 @@ public class StreamController implements StreamPlayerListener {
 
 				// Wave Form Service
 				if (!controller.seekService.isRunning())
-					controller.waveFormVisualization.getWaveService().startService(controller.getxPlayerModel().getSongPath(),
+					controller.waveFormVisualization.getWaveService().startService(controller.xPlayerModel.getSongPath(),
 						WaveFormService.WaveFormJob.AMPLITUDES_AND_WAVEFORM);
 
 			});

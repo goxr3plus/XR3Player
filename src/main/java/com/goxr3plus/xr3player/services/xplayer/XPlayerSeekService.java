@@ -3,17 +3,18 @@ package com.goxr3plus.xr3player.services.xplayer;
 import java.io.File;
 import java.util.logging.Level;
 
+import com.goxr3plus.streamplayer.stream.StreamPlayerException;
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.scene.Cursor;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.TimeTool;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.streamplayer.stream.StreamPlayerException;
 
 /**
  * This Service is used to skip the Audio of XPlayer to different time.
@@ -56,7 +57,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 	 * @param stopPlayer
 	 */
 	public void startSeekService(final long bytesToSkip, final boolean stopPlayer) {
-		final String absoluteFilePath = xPlayerController.getxPlayerModel().songPathProperty().get();
+		final String absoluteFilePath = xPlayerController.xPlayerModel.songPathProperty().get();
 
 		// First security check
 		if (locked || isRunning() || absoluteFilePath == null) {
@@ -66,7 +67,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 		// Check if the file exists
 		if (!new File(absoluteFilePath).exists()) {
 			AlertTool.showNotification("Media doesn't exist", "Current Media File doesn't exist anymore...",
-					Duration.seconds(2), NotificationType.ERROR);
+				Duration.seconds(2), NotificationType.ERROR);
 			done();
 
 			// Fix the labels
@@ -80,7 +81,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 		// Check if the bytesTheUser wants to skip are more than the total bytes of the
 		// audio
-		if (bytesToSkip > xPlayerController.getxPlayer().getTotalBytes())
+		if (bytesToSkip > xPlayerController.xPlayer.getTotalBytes())
 			return;
 
 		// System.out.println(bytes)
@@ -122,12 +123,11 @@ public class XPlayerSeekService extends Service<Boolean> {
 		xPlayerController.speedIncreaseWorking = false;
 
 		// Put the appropriate Cursor
-		xPlayerController.getDisc().getCanvas().setCursor(Cursor.OPEN_HAND);
+		xPlayerController.disc.getCanvas().setCursor(Cursor.OPEN_HAND);
 
 		// Recalculate Angle and paint again Disc
-		xPlayerController.getDisc().calculateAngleByValue(xPlayerController.getxPlayerModel().getCurrentTime(),
-				xPlayerController.getxPlayerModel().getDuration(), true);
-		xPlayerController.getDisc().repaint();
+		xPlayerController.disc.calculateAngleByValue(xPlayerController.xPlayerModel.getCurrentTime(), xPlayerController.xPlayerModel.getDuration(), true);
+		xPlayerController.disc.repaint();
 
 		// unlock the Service
 		locked = false;
@@ -143,24 +143,24 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 				// ----------------------- Seek the Media
 				updateMessage(!xPlayerController.speedIncreaseWorking ? "Going to : [ "
-						+ TimeTool.getTimeEdited(xPlayerController.getxPlayerModel().getCurrentAngleTime()) + " ]"
-						: "Speed Level : x" + InfoTool
-								.getMinString(String.valueOf(xPlayerController.getxPlayer().getSpeedFactor()), 4,""));
+					+ TimeTool.getTimeEdited(xPlayerController.xPlayerModel.getCurrentAngleTime()) + " ]"
+					: "Speed Level : x" + InfoTool
+					.getMinString(String.valueOf(xPlayerController.xPlayer.getSpeedFactor()), 4, ""));
 
 				// Stop?
 				if (stopPlayer)
-					xPlayerController.getxPlayer().stop();
+					xPlayerController.xPlayer.stop();
 
 				// GO
 				// if (bytes != 0) { // and xPlayer.isPausedOrPlaying())
 				Main.logger.info("Seek Service Started..");
 
 				// CurrentTime
-				xPlayerController.getxPlayerModel()
-						.setCurrentTime(xPlayerController.getxPlayerModel().getCurrentAngleTime());
+				xPlayerController.xPlayerModel
+					.setCurrentTime(xPlayerController.xPlayerModel.getCurrentAngleTime());
 
 				try {
-					xPlayerController.getxPlayer().seek(bytesToSkip);
+					xPlayerController.xPlayer.seek(bytesToSkip);
 				} catch (final StreamPlayerException ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					succeded = false;
@@ -168,8 +168,8 @@ public class XPlayerSeekService extends Service<Boolean> {
 				// }
 
 				// ----------------------- Play Audio
-				if (!xPlayerController.getxPlayer().isPausedOrPlaying()) {
-					xPlayerController.getxPlayer().play();
+				if (!xPlayerController.xPlayer.isPausedOrPlaying()) {
+					xPlayerController.xPlayer.play();
 					// xPlayer.pause();
 				}
 
@@ -177,7 +177,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 				updateMessage("Applying Settings ...");
 
 				// Configure Media Settings
-				if (xPlayerController.getxPlayer().isPausedOrPlaying())
+				if (xPlayerController.xPlayer.isPausedOrPlaying())
 					xPlayerController.configureMediaSettings(true);
 
 				return succeded;

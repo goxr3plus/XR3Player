@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.jfoenix.controls.JFXCheckBox;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 /**
  * @author GOXR3PLUS
@@ -83,7 +83,7 @@ public class XPlayerSettingsController extends BorderPane {
 
 			// Update all the players
 			Main.xPlayersList.getList()
-					.forEach(xPlayerController -> xPlayerController.getVisualizer().setShowFPS(showFPS.isSelected()));
+					.forEach(xPlayerController -> xPlayerController.visualizer.setShowFPS(showFPS.isSelected()));
 
 		});
 
