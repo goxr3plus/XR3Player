@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package com.goxr3plus.xr3player.models.smartcontroller;
 
@@ -185,20 +185,20 @@ public abstract class Media {
 	/**
 	 * Constructor.
 	 *
-	 * @param path                 The path of the File
-	 * @param stars                The quality of the Media
-	 * @param timesPlayed          The times the Media has been played
-	 * @param dateImported         The date the Media was imported <b> if null given
-	 *                             then the imported time will be the current date
-	 *                             </b>
-	 * @param hourImported         The hour the Media was imported <b> if null given
-	 *                             then the imported hour will be the current time
-	 *                             </b>
+	 * @param path The path of the File
+	 * @param stars The quality of the Media
+	 * @param timesPlayed The times the Media has been played
+	 * @param dateImported The date the Media was imported <b> if null given
+	 * then the imported time will be the current date
+	 * </b>
+	 * @param hourImported The hour the Media was imported <b> if null given
+	 * then the imported hour will be the current time
+	 * </b>
 	 * @param smartControllerGenre The smartControllerGenre of the Media <b> see the
-	 *                             Genre class for more </b>
+	 * Genre class for more </b>
 	 */
 	public Media(final String path, final double stars, final int timesPlayed, final String dateImported,
-			final String hourImported, final Genre smartControllerGenre, final int number) {
+		final String hourImported, final Genre smartControllerGenre, final int number) {
 
 		// ArtWork FontIcon
 		final FontIcon artWorkImage = JavaFXTool.getFontIcon("gmi-album", Color.WHITE, 30);
@@ -227,7 +227,7 @@ public abstract class Media {
 		searchButton.setOnMouseReleased(m -> {
 			try {
 				Main.webBrowser.createTabAndSelect(
-						"https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+					"https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
 				Main.topBar.goMode(WindowMode.WEBMODE);
 			} catch (final UnsupportedEncodingException ex) {
 				ex.printStackTrace();
@@ -245,7 +245,7 @@ public abstract class Media {
 		youtubeButton.setOnMouseReleased(m -> {
 			try {
 				Main.webBrowser.createTabAndSelect(
-						"https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+					"https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
 				Main.topBar.goMode(WindowMode.WEBMODE);
 			} catch (final UnsupportedEncodingException ex) {
 				ex.printStackTrace();
@@ -261,7 +261,7 @@ public abstract class Media {
 		buyButton.setStyle("-fx-cursor:hand");
 		buyButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		buyButton.setOnMouseReleased(
-				m -> Main.shopContextMenu.showContextMenu(getTitle(), m.getScreenX(), m.getScreenY()));
+			m -> Main.shopContextMenu.showContextMenu(getTitle(), m.getScreenX(), m.getScreenY()));
 
 		// HBox
 		final HBox hbox = new HBox(searchButton, youtubeButton, buyButton);
@@ -373,8 +373,8 @@ public abstract class Media {
 		// DurationEdited
 		final int localDuration = this.duration.get();
 		durationEdited.set(!fileExists.get() ? "file missing"
-				: localDuration == -1 ? "corrupted"
-						: localDuration == 0 ? "error" : TimeTool.getTimeEditedOnHours(localDuration));
+			: localDuration == -1 ? "corrupted"
+			: localDuration == 0 ? "error" : TimeTool.getTimeEditedOnHours(localDuration));
 
 		// Image
 		if (!fileExists.get()) // File is missing ?
@@ -658,7 +658,7 @@ public abstract class Media {
 
 	/**
 	 * Bit Rate of Audio
-	 * 
+	 *
 	 * @return the bitRate
 	 */
 	public SimpleIntegerProperty bitRateProperty() {
@@ -667,7 +667,7 @@ public abstract class Media {
 
 	/**
 	 * Beats per minute of audio
-	 * 
+	 *
 	 * @return The bpm
 	 */
 	public SimpleIntegerProperty bpmProperty() {
@@ -676,7 +676,7 @@ public abstract class Media {
 
 	/**
 	 * Number of Audio inside the play list
-	 * 
+	 *
 	 * @return the number
 	 */
 	public SimpleIntegerProperty numberProperty() {
@@ -689,21 +689,21 @@ public abstract class Media {
 	/**
 	 * Delete the Media from (play list)/library or (+storage medium).
 	 *
-	 * @param permanent       <br>
-	 *                        true->storage medium + (play list)/library<br>
-	 *                        false->only from (play list)/library
-	 * @param doQuestion      <br>
-	 *                        true->asks for permission</b> <br>
-	 *                        false->not asking for permission<br>
-	 * @param commit          <br>
-	 *                        true-> will do commit<br>
-	 *                        false->will not do commit
-	 * @param c               the controller
+	 * @param permanent <br>
+	 * true->storage medium + (play list)/library<br>
+	 * false->only from (play list)/library
+	 * @param doQuestion <br>
+	 * true->asks for permission</b> <br>
+	 * false->not asking for permission<br>
+	 * @param commit <br>
+	 * true-> will do commit<br>
+	 * false->will not do commit
+	 * @param c the controller
 	 * @param deleteStatement The prepared Statement which will delete the items
-	 *                        from the SQL DataBase
+	 * from the SQL DataBase
 	 */
 	public void delete(final boolean permanent, final boolean doQuestion, final boolean commit, final SmartController c,
-			final PreparedStatement deleteStatement) {
+		final PreparedStatement deleteStatement) {
 
 		if (c.isFree(true)) {
 			boolean hasBeenDeleted = false;
@@ -734,10 +734,11 @@ public abstract class Media {
 	/**
 	 * Removes this specific Media.
 	 *
-	 * @param permanent  <br>
-	 *                   true->storage medium + (play list)/library<br>
-	 *                   false->only from (play list)/library
+	 * @param permanent <br>
+	 * true->storage medium + (play list)/library<br>
+	 * false->only from (play list)/library
 	 * @param controller the controller
+	 *
 	 * @return true, if successful
 	 */
 	private boolean removeItem(final boolean permanent, final SmartController controller) {
@@ -764,9 +765,9 @@ public abstract class Media {
 
 	/**
 	 * Rename the Media File.
-	 * 
-	 * @param node       The node based on which the Rename Window will be position
-	 *                   [[SuppressWarningsSpartan]]
+	 *
+	 * @param node The node based on which the Rename Window will be position
+	 * [[SuppressWarningsSpartan]]
 	 */
 	public void rename(final Node node) {
 
@@ -814,8 +815,8 @@ public abstract class Media {
 							if (new File(newFilePath).exists()) {
 								setFilePath(oldFilePath);
 								AlertTool.showNotification("Rename Failed",
-										"The action can not been completed:\nA file with that name already exists.",
-										Duration.millis(1500), NotificationType.WARNING);
+									"The action can not been completed:\nA file with that name already exists.",
+									Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
 								return;
 							}
@@ -824,71 +825,14 @@ public abstract class Media {
 							if (!new File(getFilePath()).renameTo(new File(newFilePath))) {
 								setFilePath(oldFilePath);
 								AlertTool.showNotification("Rename Failed",
-										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
-										Duration.millis(1500), NotificationType.WARNING);
+									"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
+									Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
 								return;
 							}
 
-							// Inform all Libraries SmartControllers
-							Main.libraryMode.viewer.getItemsObservableList().stream()
-									.map(library -> ((Library) library).getSmartController())
-									.forEach(smartController -> {
-
-										internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Inform all XPlayers SmartControllers
-							Main.xPlayersList.getList().stream().map(
-									xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-									.forEach(smartController -> {
-
-										internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Update Emotion Lists SmartControllers
-							Main.emotionsTabPane.getTabPane().getTabs().stream()
-									.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
-
-										internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Inform all XPlayers Models
-							Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-								if (oldFilePath.equals(xPlayerController.xPlayerModel.songPathProperty().get())) {
-
-									// filePath
-									xPlayerController.xPlayerModel.songPathProperty().set(newFilePath);
-
-									// object
-									xPlayerController.playService.checkAudioTypeAndUpdateXPlayerModel(newFilePath);
-
-									// change the text of Marquee
-									xPlayerController.mediaFileMarquee.setText(IOInfo.getFileName(newFilePath));
-
-								}
-							});
-
-							// Inform Played Media List
-							Main.playedSongs.renameMedia(oldFilePath, newFilePath, false);
-
-							// Inform Hated Media List
-							Main.emotionListsController.hatedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Disliked Media List
-							Main.emotionListsController.dislikedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Liked Media List
-							Main.emotionListsController.likedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Loved Media List
-							Main.emotionListsController.lovedMediaList.renameMedia(oldFilePath, newFilePath, false);
-
-							// Update the SearchWindow
-							Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
-								if (media.getFilePath().equals(oldFilePath))
-									media.setFilePath(newFilePath);
-							});
+							//Rename
+							mediaRename(oldFilePath, newFilePath);
 
 							// Let's also fix the TreeView
 							Main.treeManager.getService().rename(oldFilePath, newFilePath);
@@ -898,17 +842,17 @@ public abstract class Media {
 
 							// Show message to user
 							AlertTool.showNotification("Success Message",
-									"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
-											+ IOInfo.getFileName(newFilePath),
-									Duration.millis(2000), NotificationType.SUCCESS);
+								"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
+									+ IOInfo.getFileName(newFilePath),
+								Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred
 						} catch (final Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 							setFilePath(oldFilePath);
 							AlertTool.showNotification("Error Message",
-									"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
-									NotificationType.ERROR);
+								"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
+								NotificationType.ERROR);
 						}
 					} else // X is pressed by user || // Old name == New name
 						setFilePath(oldFilePath);
@@ -919,19 +863,83 @@ public abstract class Media {
 		// }
 	}
 
+	public static void mediaRename(String oldFilePath, String newFilePath) {
+
+		// Inform all Libraries SmartControllers
+		Main.libraryMode.viewer.getItemsObservableList().stream()
+			.map(library -> ((Library) library).getSmartController())
+			.forEach(smartController -> {
+
+				internalDataBaseRename(smartController, newFilePath, oldFilePath);
+
+			});
+
+		// Inform all XPlayers SmartControllers
+		Main.xPlayersList.getList().stream().map(
+			xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+			.forEach(smartController -> {
+
+				internalDataBaseRename(smartController, newFilePath, oldFilePath);
+
+			});
+
+		// Update Emotion Lists SmartControllers
+		Main.emotionsTabPane.getTabPane().getTabs().stream()
+			.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
+
+			internalDataBaseRename(smartController, newFilePath, oldFilePath);
+
+		});
+
+		// Inform all XPlayers Models
+		Main.xPlayersList.getList().forEach(xPlayerController -> {
+			if (oldFilePath.equals(xPlayerController.xPlayerModel.songPathProperty().get())) {
+
+				// filePath
+				xPlayerController.xPlayerModel.songPathProperty().set(newFilePath);
+
+				// object
+				xPlayerController.playService.checkAudioTypeAndUpdateXPlayerModel(newFilePath);
+
+				// change the text of Marquee
+				xPlayerController.mediaFileMarquee.setText(IOInfo.getFileName(newFilePath));
+
+			}
+		});
+
+		// Inform Played Media List
+		Main.playedSongs.renameMedia(oldFilePath, newFilePath, false);
+
+		// Inform Hated Media List
+		Main.emotionListsController.hatedMediaList.renameMedia(oldFilePath, newFilePath, false);
+		// Inform Disliked Media List
+		Main.emotionListsController.dislikedMediaList.renameMedia(oldFilePath, newFilePath, false);
+		// Inform Liked Media List
+		Main.emotionListsController.likedMediaList.renameMedia(oldFilePath, newFilePath, false);
+		// Inform Loved Media List
+		Main.emotionListsController.lovedMediaList.renameMedia(oldFilePath, newFilePath, false);
+
+		// Update the SearchWindow
+		Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
+			if (media.getFilePath().equals(oldFilePath))
+				media.setFilePath(newFilePath);
+		});
+
+	}
+
 	/**
 	 * Called to rename the SQL Table data for the SmartController
-	 * 
+	 *
 	 * @param smartController
 	 * @param newFilePath
 	 * @param oldFilePath
 	 */
 	public static void internalDataBaseRename(final SmartController smartController, final String newFilePath,
-			final String oldFilePath) {
+		final String oldFilePath) {
 
 		// if (controller1 != controller) // we already renamed on this controller
 		try (PreparedStatement dataRename = Main.dbManager.getConnection()
-				.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
+			.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET PATH=? WHERE PATH=?")) {
 
 			// Prepare Statement
 			dataRename.setString(1, newFilePath);
@@ -955,7 +963,7 @@ public abstract class Media {
 
 	/**
 	 * Evaluate the Media File using stars.
-	 * 
+	 *
 	 * @param node The node based on which the Rename Window will be position
 	 */
 	public void updateStars(final Node node) {
@@ -989,28 +997,28 @@ public abstract class Media {
 
 						// Inform all Libraries SmartControllers
 						Main.libraryMode.viewer.getItemsObservableList().stream()
-								.map(library -> ((Library) library).getSmartController()).forEach(smartController -> {
+							.map(library -> ((Library) library).getSmartController()).forEach(smartController -> {
 
-									internalDataBaseUpdateStars(smartController);
+							internalDataBaseUpdateStars(smartController);
 
-								});
+						});
 
 						// Inform all XPlayers SmartControllers
 						Main.xPlayersList.getList().stream()
-								.map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-								.forEach(smartController -> {
+							.map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
+							.forEach(smartController -> {
 
-									internalDataBaseUpdateStars(smartController);
+								internalDataBaseUpdateStars(smartController);
 
-								});
+							});
 
 						// Update Emotion Lists SmartControllers
 						Main.emotionsTabPane.getTabPane().getTabs().stream()
-								.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
+							.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
 
-									internalDataBaseUpdateStars(smartController);
+							internalDataBaseUpdateStars(smartController);
 
-								});
+						});
 
 						// Update the SearchWindow
 						Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
@@ -1033,14 +1041,14 @@ public abstract class Media {
 
 	/**
 	 * Called to update STARS on the SQL Table data for the SmartController
-	 * 
+	 *
 	 * @param smartController
 	 */
 	private void internalDataBaseUpdateStars(final SmartController smartController) {
 
 		// Do it bro!
 		try (PreparedStatement preparedUStars = Main.dbManager.getConnection()
-				.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
+			.prepareStatement("UPDATE '" + smartController.getDataBaseTableName() + "' SET STARS=? WHERE PATH=?")) {
 
 			// Prepare Statement
 			preparedUStars.setDouble(1, getStars());
@@ -1072,7 +1080,7 @@ public abstract class Media {
 	/**
 	 * This method is called to change the Emotion Image of the Media based on the
 	 * current Emotion
-	 * 
+	 *
 	 * @param emotion
 	 */
 	public void changeEmotionImage(final Emotion emotion) {
@@ -1273,13 +1281,11 @@ public abstract class Media {
 
 	/**
 	 * Sets playStatus
-	 * 
-	 * @param playStatus
-	 * 
-	 *                   -2-> Never Played <br>
-	 *                   -1-> Has been played <br>
-	 *                   0,1,2,..-> Number of Player is playing this media right
-	 *                   now..
+	 *
+	 * @param playStatus -2-> Never Played <br>
+	 * -1-> Has been played <br>
+	 * 0,1,2,..-> Number of Player is playing this media right
+	 * now..
 	 */
 	public void setPlayedStatus(final int playStatus) {
 		this.playStatus.set(playStatus);

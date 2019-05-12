@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package com.goxr3plus.xr3player.controllers.systemtree;
 
@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.controllers.librarymode.Library;
-import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import com.goxr3plus.xr3player.enums.FileCategory;
 import com.goxr3plus.xr3player.enums.NotificationType;
 import com.goxr3plus.xr3player.models.smartcontroller.Media;
@@ -51,7 +49,6 @@ public class FileTreeItem extends TreeItem<String> {
 	 * Constructor.
 	 *
 	 * @param absoluteFilePath The absolute path of the file or folder
-	 * 
 	 */
 	public FileTreeItem(String absoluteFilePath) {
 		super(absoluteFilePath);
@@ -106,9 +103,9 @@ public class FileTreeItem extends TreeItem<String> {
 
 	/**
 	 * Rename the Media File.
-	 * 
-	 * @param node       The node based on which the Rename Window will be position
-	 *                   [[SuppressWarningsSpartan]]
+	 *
+	 * @param node The node based on which the Rename Window will be position
+	 * [[SuppressWarningsSpartan]]
 	 */
 	public void rename(Node node) {
 
@@ -138,7 +135,7 @@ public class FileTreeItem extends TreeItem<String> {
 					valueProperty().unbind();
 
 					String newFilePath = new File(oldFilePath).getParent() + File.separator
-							+ Main.renameWindow.getInputField().getText() + (!isDirectory() ? extension : "");
+						+ Main.renameWindow.getInputField().getText() + (!isDirectory() ? extension : "");
 
 					// !XPressed && // Old name != New name
 					if (Main.renameWindow.wasAccepted() && !getAbsoluteFilePath().equals(newFilePath)) {
@@ -149,8 +146,8 @@ public class FileTreeItem extends TreeItem<String> {
 							if (new File(newFilePath).exists()) {
 								setAbsoluteFilePath(oldFilePath);
 								AlertTool.showNotification("Rename Failed",
-										"The action can not been completed:\nA file with that name already exists.",
-										Duration.millis(1500), NotificationType.WARNING);
+									"The action can not been completed:\nA file with that name already exists.",
+									Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
 								return;
 							}
@@ -159,71 +156,14 @@ public class FileTreeItem extends TreeItem<String> {
 							if (!new File(getAbsoluteFilePath()).renameTo(new File(newFilePath))) {
 								setAbsoluteFilePath(oldFilePath);
 								AlertTool.showNotification("Rename Failed",
-										"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
-										Duration.millis(1500), NotificationType.WARNING);
+									"The action can not been completed(Possible Reasons):\n1) The file is opened by a program,close it and try again.\n2)It doesn't exist anymore..",
+									Duration.millis(1500), NotificationType.WARNING);
 								// controller.renameWorking = false
 								return;
 							}
 
-							// Inform all Libraries SmartControllers
-							Main.libraryMode.viewer.getItemsObservableList().stream()
-									.map(library -> ((Library) library).getSmartController())
-									.forEach(smartController -> {
-
-										Media.internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Inform all XPlayers SmartControllers
-							Main.xPlayersList.getList().stream().map(
-									xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-									.forEach(smartController -> {
-
-										Media.internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Update Emotion Lists SmartControllers
-							Main.emotionsTabPane.getTabPane().getTabs().stream()
-									.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
-
-										Media.internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-									});
-
-							// Inform all XPlayers Models
-							Main.xPlayersList.getList().stream().forEach(xPlayerController -> {
-								if (oldFilePath.equals(xPlayerController.xPlayerModel.songPathProperty().get())) {
-
-									// filePath
-									xPlayerController.xPlayerModel.songPathProperty().set(newFilePath);
-
-									// object
-									xPlayerController.playService.checkAudioTypeAndUpdateXPlayerModel(newFilePath);
-
-									// change the text of Marquee
-									xPlayerController.mediaFileMarquee.setText(IOInfo.getFileName(newFilePath));
-
-								}
-							});
-
-							// Inform Played Media List
-							Main.playedSongs.renameMedia(oldFilePath, newFilePath, false);
-
-							// Inform Hated Media List
-							Main.emotionListsController.hatedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Disliked Media List
-							Main.emotionListsController.dislikedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Liked Media List
-							Main.emotionListsController.likedMediaList.renameMedia(oldFilePath, newFilePath, false);
-							// Inform Loved Media List
-							Main.emotionListsController.lovedMediaList.renameMedia(oldFilePath, newFilePath, false);
-
-							// Update the SearchWindow
-							Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
-								if (media.getFilePath().equals(oldFilePath))
-									media.setFilePath(newFilePath);
-							});
+							//Rename
+							Media.mediaRename(oldFilePath, newFilePath);
 
 							// Set new file path
 							setAbsoluteFilePath(newFilePath);
@@ -233,17 +173,17 @@ public class FileTreeItem extends TreeItem<String> {
 
 							// Show message to user
 							AlertTool.showNotification("Success Message",
-									"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
-											+ IOInfo.getFileName(newFilePath),
-									Duration.millis(2000), NotificationType.SUCCESS);
+								"Successfully rename from :\n" + IOInfo.getFileName(oldFilePath) + " \nto\n"
+									+ IOInfo.getFileName(newFilePath),
+								Duration.millis(2000), NotificationType.SUCCESS);
 
 							// Exception occurred
 						} catch (Exception ex) {
 							Main.logger.log(Level.WARNING, "", ex);
 							setAbsoluteFilePath(oldFilePath);
 							AlertTool.showNotification("Error Message",
-									"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
-									NotificationType.ERROR);
+								"Failed to rename the File:/n" + ex.getMessage(), Duration.millis(1500),
+								NotificationType.ERROR);
 						}
 					} else // X is pressed by user || // Old name == New name
 						setAbsoluteFilePath(oldFilePath);
@@ -256,7 +196,7 @@ public class FileTreeItem extends TreeItem<String> {
 
 	/**
 	 * Set Graphic Font Icon
-	 * 
+	 *
 	 * @param iconLiteral
 	 * @param color
 	 */
