@@ -24,7 +24,7 @@ public class IOInfo {
 	 * Returns the real Path of the given File , either it is symbolic link or hard
 	 * link or Windows Shortcut File
 	 * 
-	 * @param absoluteFilePath
+	 * @param absoluteFilePath Absolute File Path
 	 */
 	public static FileTypeAndAbsolutePath getRealPathFromFile(String absoluteFilePath) {
 		final Path path = Paths.get(absoluteFilePath);

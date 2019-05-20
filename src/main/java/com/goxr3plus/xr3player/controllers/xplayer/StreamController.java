@@ -27,7 +27,6 @@ public class StreamController implements StreamPlayerListener {
 		this.controller = xPlayerController;
 	}
 
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void opened(final Object dataSource, final Map<String, Object> map) {
@@ -103,9 +102,12 @@ public class StreamController implements StreamPlayerListener {
 						controller.smTimeSlider.setValue(currentTime);
 
 						// smTimeSliderLabel
-						controller.smTimeSliderLabel.setText(TimeTool.getTimeEdited(currentTime) + "."
-							+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))) + "  / "
-							+ TimeTool.getTimeEdited(totalTime));
+						controller.smTimeSliderLabel.setText(
+							TimeTool.getTimeEdited(currentTime)
+								+ "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", "")))
+								+ "  / "
+								+ TimeTool.getTimeEdited(totalTime));
 
 						// smTimeSliderProgress
 						controller.smTimeSliderProgress.setProgress(controller.smTimeSlider.getValue() / controller.smTimeSlider.getMax());
@@ -117,15 +119,16 @@ public class StreamController implements StreamPlayerListener {
 					controller.disc.calculateAngleByValue(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(), false);
 
 					// Update the disc time
-					controller.disc.updateTimeDirectly(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(),
-						millisecondsFormatted);
+					controller.disc.updateTimeDirectly(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(), millisecondsFormatted);
 
 					// Run on JavaFX Thread
 					Platform.runLater(() -> {
 
 						// == RemainingTimeLabel
-						controller.remainingTimeLabel.setText(TimeTool.getTimeEdited(totalTime - currentTime) + "."
-							+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
+						controller.remainingTimeLabel.setText(
+							TimeTool.getTimeEdited(totalTime - currentTime)
+								+ "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
 
 						// == ElapsedTimeLabel
 						controller.elapsedTimeLabel.setText(TimeTool.getTimeEdited(currentTime) + millisecondsFormatted);
