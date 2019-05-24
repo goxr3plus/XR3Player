@@ -373,7 +373,7 @@ public class SideBar extends StackPane {
 
 				/* Fix the bug with Volume Bars */
 				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
-				positions[0] += 0.07;
+				positions[0] += 0.06;
 				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
 
 				positions[0] -= 0.05;
@@ -390,7 +390,7 @@ public class SideBar extends StackPane {
 				positions[0] += 0.05;
 				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
 
-				positions[0] -= 0.07;
+				positions[0] -= 0.06;
 				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
 
 			} else if (newToggle == this.userInfoToggle) {
