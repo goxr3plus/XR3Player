@@ -51,12 +51,13 @@ module XR3Player {
 	opens com.goxr3plus.xr3player.xplayer.visualizer.presenter to javafx.fxml;
 	opens com.goxr3plus.xr3player.controllers.librarymode to javafx.fxml;
 	opens com.goxr3plus.xr3player.controllers.loginmode to javafx.fxml;
-//	opens java.lang.reflect to XR3Player;
+	opens com.goxr3plus.xr3player.controllers.dropbox to javafx.fxml;
+	opens com.goxr3plus.xr3player.controllers.chromium to javafx.fxml;
+//	opens java.lang.reflect;
 
 
 
-
-
+	requires java.base;
 	requires java.sql;
 	requires java.logging;
 	requires FX.BorderlessScene;
