@@ -1,14 +1,10 @@
 package com.goxr3plus.xr3player.application;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.math.BigInteger;
 import java.util.Optional;
 import java.util.Properties;
 
 import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
-import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import com.goxr3plus.xr3player.controllers.djmode.DJMode;
 import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadsTableViewer;
 import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
@@ -52,14 +48,12 @@ import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.goxr3plus.xr3player.utils.io.IOAction;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import com.teamdev.jxbrowser.chromium.bb;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.SplitPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
-//import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 import static com.goxr3plus.xr3player.application.Main.borderlessScene;
 import static com.goxr3plus.xr3player.application.Main.libraryMode;
@@ -67,6 +61,8 @@ import static com.goxr3plus.xr3player.application.Main.loginMode;
 import static com.goxr3plus.xr3player.application.Main.root;
 import static com.goxr3plus.xr3player.application.Main.welcomeScreen;
 import static com.goxr3plus.xr3player.application.Main.window;
+
+//import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 public class MainLoader {
 
@@ -346,27 +342,27 @@ public class MainLoader {
 
         // Load some lol images from lol base
         new Thread(() -> {
-            try {
-                final Field e = bb.class.getDeclaredField("e");
-                e.setAccessible(true);
-                final Field f = bb.class.getDeclaredField("f");
-                f.setAccessible(true);
-                final Field modifersField = Field.class.getDeclaredField("modifiers");
-                modifersField.setAccessible(true);
-                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
-                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
-                e.set(null, BigInteger.valueOf(1));
-                f.set(null, BigInteger.valueOf(1));
-                modifersField.setAccessible(false);
-            } catch (final Exception e1) {
-                e1.printStackTrace();
-            }
+//            try {
+//                final Field e = bb.class.getDeclaredField("e");
+//                e.setAccessible(true);
+//                final Field f = bb.class.getDeclaredField("f");
+//                f.setAccessible(true);
+//                final Field modifersField = Field.class.getDeclaredField("modifiers");
+//                modifersField.setAccessible(true);
+//                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
+//                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
+//                e.set(null, BigInteger.valueOf(1));
+//                f.set(null, BigInteger.valueOf(1));
+//                modifersField.setAccessible(false);
+//            } catch (final Exception e1) {
+//                e1.printStackTrace();
+//            }
 
             // Run on JavaFX Thread
             Platform.runLater(() -> {
 
                 // Chromium Web Browser
-                Main.webBrowser = new WebBrowserController();
+//                Main.webBrowser = new WebBrowserController();
 
                 // Dropbox Viewer
                 Main.dropBoxViewer = new DropboxViewer();
