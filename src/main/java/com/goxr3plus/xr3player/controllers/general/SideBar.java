@@ -3,10 +3,26 @@ package com.goxr3plus.xr3player.controllers.general;
 import java.io.File;
 import java.io.IOException;
 
-import com.goxr3plus.xr3player.application.MainExit;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.application.MainExit;
+import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
+import com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
+import com.goxr3plus.xr3player.controllers.custom.SystemMonitor.Monitor;
+import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
+import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
+import com.goxr3plus.xr3player.database.DatabaseTool;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.enums.Operation;
+import com.goxr3plus.xr3player.services.database.DatabaseExportService;
+import com.goxr3plus.xr3player.services.database.DatabaseImportService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.animation.Animation;
@@ -26,22 +42,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.database.DatabaseTool;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.enums.Operation;
-import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
-import com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
-import com.goxr3plus.xr3player.controllers.custom.SystemMonitor.Monitor;
-import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import com.goxr3plus.xr3player.controllers.settings.ApplicationSettingsController.SettingsTab;
-import com.goxr3plus.xr3player.services.database.DatabaseExportService;
-import com.goxr3plus.xr3player.services.database.DatabaseImportService;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 public class SideBar extends StackPane {
 
@@ -259,7 +259,7 @@ public class SideBar extends StackPane {
 
 	/**
 	 * Changes the side of the SideBar
-	 * 
+	 *
 	 * @param orientation
 	 */
 	public void changeSide(final NodeOrientation orientation) {
@@ -278,7 +278,7 @@ public class SideBar extends StackPane {
 
 	/**
 	 * Prepares the SideBar to be shown for LoginMode
-	 * 
+	 *
 	 * @param b
 	 */
 	public void prepareForLoginMode(final boolean b) {
@@ -328,7 +328,7 @@ public class SideBar extends StackPane {
 
 		// socialMediaToAnything
 		socialMediaToAnything
-				.setOnAction(a -> NetworkingTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
+			.setOnAction(a -> NetworkingTool.openWebSite("https://www.onlinevideoconverter.com/en/video-converter"));
 
 		// applicationConsole
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());
@@ -354,13 +354,13 @@ public class SideBar extends StackPane {
 					e.printStackTrace();
 					// Show Message to User
 					AlertTool.showNotification("Failed Opening Task Manager", "Failed Opening default Task Manager",
-							Duration.millis(2000), NotificationType.ERROR);
+						Duration.millis(2000), NotificationType.ERROR);
 				}
 			}).start();
 
 			// Show Message to User
 			AlertTool.showNotification("Opening Task Manager", "Opening default system Task Manager",
-					Duration.millis(2000), NotificationType.INFORMATION);
+				Duration.millis(2000), NotificationType.INFORMATION);
 		});
 
 		// modeTeam
@@ -371,11 +371,27 @@ public class SideBar extends StackPane {
 				// Fix things
 				Main.libraryMode.getDjModeStackPane().setVisible(false);
 
+				/* Fix the bug with Volume Bars */
+				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+				positions[0] += 0.06;
+				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+
+				positions[0] -= 0.05;
+				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+
 			} else if (newToggle == this.djModeToggle) {
 				Main.topBar.goMode(WindowMode.MAINMODE);
 
 				// Fix things
 				Main.libraryMode.getDjModeStackPane().setVisible(true);
+
+				/* Fix the bug with Volume Bars */
+				double[] positions = Main.libraryMode.getTopSplitPane().getDividerPositions();
+				positions[0] += 0.05;
+				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
+
+				positions[0] -= 0.06;
+				Main.libraryMode.getTopSplitPane().setDividerPositions(positions);
 
 			} else if (newToggle == this.userInfoToggle) {
 				Main.topBar.goMode(WindowMode.USERMODE);
@@ -440,7 +456,7 @@ public class SideBar extends StackPane {
 			mainModeStackedFont.getChildren().get(1).setVisible(!mute);
 		});
 		mainModeStackedFont.getChildren().get(0).visibleProperty()
-				.bind(mainModeStackedFont.getChildren().get(1).visibleProperty().not());
+			.bind(mainModeStackedFont.getChildren().get(1).visibleProperty().not());
 
 		// DjModeVolumeButton
 		djModeVolumeButton.setOnAction(a -> {
@@ -450,18 +466,18 @@ public class SideBar extends StackPane {
 			djModeStackedFont.getChildren().get(1).setVisible(!mute);
 		});
 		djModeStackedFont.getChildren().get(0).visibleProperty()
-				.bind(djModeStackedFont.getChildren().get(1).visibleProperty().not());
+			.bind(djModeStackedFont.getChildren().get(1).visibleProperty().not());
 
 		// BrowserVolumeButton
 		browserVolumeButton.setOnAction(a -> {
 			final boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
 			// Mute or Unmute webrowser tabs
 			Main.webBrowser.getTabPane().getTabs()
-					.forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().setAudioMuted(mute));
+				.forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().setAudioMuted(mute));
 			browserStackedFont.getChildren().get(1).setVisible(!mute);
 		});
 		browserStackedFont.getChildren().get(0).visibleProperty()
-				.bind(browserStackedFont.getChildren().get(1).visibleProperty().not());
+			.bind(browserStackedFont.getChildren().get(1).visibleProperty().not());
 
 	}
 
@@ -493,7 +509,7 @@ public class SideBar extends StackPane {
 	 */
 	public void exportDatabase() {
 		if (!zipper.isRunning() && !unZipper.isRunning() && (Main.libraryMode.openedLibrariesViewer == null
-				|| Main.libraryMode.openedLibrariesViewer.isFree(true))) {
+			|| Main.libraryMode.openedLibrariesViewer.isFree(true))) {
 
 			final File file = Main.specialChooser.exportDBFile(Main.window);
 			if (file != null) {
@@ -513,11 +529,11 @@ public class SideBar extends StackPane {
 	 */
 	public void deleteDatabase() {
 		if (!zipper.isRunning() && !unZipper.isRunning()
-				&& (Main.libraryMode.openedLibrariesViewer == null
-						|| Main.libraryMode.openedLibrariesViewer.isFree(true))
-				&& AlertTool.doQuestion(null,
-						"ARE you sure you want to PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
-						null, Main.window)) {
+			&& (Main.libraryMode.openedLibrariesViewer == null
+			|| Main.libraryMode.openedLibrariesViewer.isFree(true))
+			&& AlertTool.doQuestion(null,
+			"ARE you sure you want to PERMANENTLY \nDELETE THE DATABASE?\n\n                 ---------------------------- \n\nYou can always keep a backup of your current database if you wish.\n\n                 ---------------------------- \n\nAfter that the application will automatically restart...",
+			null, Main.window)) {
 
 			// Close database connections
 			if (Main.dbManager != null)
@@ -555,7 +571,7 @@ public class SideBar extends StackPane {
 
 	/**
 	 * /**
-	 * 
+	 *
 	 * @return the userInfoToggle
 	 */
 	public ToggleButton getUserInfoToggle() {

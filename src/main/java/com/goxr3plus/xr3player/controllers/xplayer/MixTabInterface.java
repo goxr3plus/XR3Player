@@ -2,6 +2,8 @@ package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.io.IOException;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.fxml.FXML;
@@ -12,8 +14,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
 
 public class MixTabInterface extends StackPane {
 
@@ -45,9 +45,6 @@ public class MixTabInterface extends StackPane {
 
 	// -------------------------------------------------------------
 
-	/**
-	 * Constructor.
-	 */
 	public MixTabInterface() {
 
 		// ------------------------------------FXMLLOADER

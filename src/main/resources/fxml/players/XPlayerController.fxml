@@ -27,7 +27,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: rgb(15,15,15,0.9);" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: transparent;" fx:id="xPlayerStackPane">
          <children>
@@ -268,7 +268,7 @@
                                                             </VBox>
                                                             <Label fx:id="visualizationsDisabledLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Audio Visualizations" textAlignment="CENTER" visible="false" wrapText="true" StackPane.alignment="CENTER">
                                                                <graphic>
-                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" focusTraversable="false" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button2" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="enableHighGraphics" alignment="CENTER" focusTraversable="false" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" style="-fx-background-radius: 0; -fx-font-size: 12;" styleClass="jfx-button-dark-white-selection" text="Enable High Graphics" textAlignment="CENTER" wrapText="true">
                                                                      <cursor>
                                                                         <Cursor fx:constant="HAND" />
                                                                      </cursor>
@@ -638,17 +638,17 @@
                         </HBox>
                         <HBox alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020; -fx-background-radius: 0 0 0 0;">
                            <children>
-                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="DJ" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="modeToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="jfx-button-dark-white-selection" text="DJ" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="#ff7300" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets left="1.0" right="1.0" />
                                  </HBox.margin>
                               </ToggleButton>
-                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="toggle-button3" text="History" HBox.hgrow="ALWAYS">
+                              <ToggleButton fx:id="historyToggle" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" styleClass="jfx-button-dark-white-selection" text="History" HBox.hgrow="ALWAYS">
                                  <graphic>
-                                    <FontIcon iconColor="#d4ff00" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
+                                    <FontIcon iconColor="#ff7300" iconLiteral="fas-toggle-off" iconSize="24" selectionEnd="0" selectionStart="0" />
                                  </graphic>
                                  <HBox.margin>
                                     <Insets right="1.0" />
