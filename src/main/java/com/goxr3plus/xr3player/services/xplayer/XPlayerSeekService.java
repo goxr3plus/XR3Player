@@ -160,7 +160,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 					.setCurrentTime(xPlayerController.xPlayerModel.getCurrentAngleTime());
 
 				try {
-					xPlayerController.xPlayer.seek(bytesToSkip);
+					xPlayerController.xPlayer.seekBytes(bytesToSkip);
 				} catch (final StreamPlayerException ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					succeded = false;

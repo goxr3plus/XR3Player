@@ -2,7 +2,7 @@ package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.util.Map;
 
-import com.goxr3plus.streamplayer.stream.Status;
+import com.goxr3plus.streamplayer.enums.Status;
 import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
 import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 import com.goxr3plus.xr3player.application.Main;
@@ -18,6 +18,7 @@ import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+
 
 public class StreamController implements StreamPlayerListener {
 

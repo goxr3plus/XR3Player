@@ -38,8 +38,11 @@ module XR3Player {
     exports com.goxr3plus.xr3player.services.general;
     exports com.goxr3plus.xr3player.models.lists;
 
+    requires java.sql;
+    requires java.logging;
     requires FX.BorderlessScene;
     requires XR3Capture;
+    requires com.goxr3plus.streamplayer;
     requires com.jfoenix;
     requires commons.validator;
     requires controlsfx;
@@ -50,7 +53,6 @@ module XR3Player {
     requires jaudiotagger;
     requires java.flac.encoder;
     requires java.google.speech.api;
-    requires java.stream.player;
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
