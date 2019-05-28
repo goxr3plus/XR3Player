@@ -52,7 +52,7 @@ import javafx.application.Application;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
+//import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 /**
  * The Main JavaFX Application
@@ -150,7 +150,7 @@ public class Main extends Application {
 	 * This class is used to capture the computer Screen or a part of it [ Check
 	 * XR3Capture package]
 	 */
-	public static CaptureWindow captureWindow;
+//	public static CaptureWindow captureWindow;
 
 	public static UpdateWindow updateWindow;
 

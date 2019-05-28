@@ -59,7 +59,7 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.SplitPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
-import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
+//import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 import static com.goxr3plus.xr3player.application.Main.borderlessScene;
 import static com.goxr3plus.xr3player.application.Main.libraryMode;
@@ -206,7 +206,7 @@ public class MainLoader {
           This class is used to capture the computer Screen or a part of it [ Check
           XR3Capture package]
          */
-        Main.captureWindow = new CaptureWindow();
+//        Main.captureWindow = new CaptureWindow();
 
         Main.updateWindow = new UpdateWindow();
 
@@ -315,8 +315,8 @@ public class MainLoader {
         Main.aboutWindow.getWindow().initOwner(window);
         Main.updateWindow.getWindow().initOwner(window);
         Main.tagWindow.getWindow().initOwner(window);
-        Main.captureWindow.getStage().initOwner(window);
-        Main.captureWindow.settingsWindowController.getStage().initOwner(window);
+//        Main.captureWindow.getStage().initOwner(window);
+//        Main.captureWindow.settingsWindowController.getStage().initOwner(window);
 
         // --------- Fix the Background ------------
         MainTools.determineBackgroundImage();
