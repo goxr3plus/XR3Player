@@ -226,7 +226,7 @@
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
-			<version>9.0.0</version>
+			<version>11.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfoenix</groupId>
