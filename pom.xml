@@ -20,7 +20,8 @@
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ikonli.version>11.3.3</ikonli.version>
+		<ikonli.version>11.3.4</ikonli.version>
+		<javafx.version>11.0.2</javafx.version>
 	</properties>
 
 	<build>
@@ -149,24 +150,24 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>11.0.2</version>
+			<version>${javafx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>11.0.2</version>
+			<version>${javafx.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-media</artifactId>
-			<version>11.0.2</version>
+			<version>${javafx.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-swing</artifactId>
-			<version>11.0.2</version>
+			<version>${javafx.version}</version>
 		</dependency>
 
 
@@ -335,16 +336,28 @@
 		</dependency>
 
 		<!-- JAVE2 -->
+<!--		<dependency>-->
+<!--			<groupId>ws.schild</groupId>-->
+<!--			<artifactId>jave-native-win64</artifactId>-->
+<!--			<version>2.4.7</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>ws.schild</groupId>-->
+<!--			<artifactId>jave-core</artifactId>-->
+<!--			<version>2.4.7</version>-->
+<!--		</dependency>-->
 		<dependency>
-			<groupId>ws.schild</groupId>
-			<artifactId>jave-native-win64</artifactId>
-			<version>2.4.6</version>
+			<groupId>com.github.goxr3plus</groupId>
+			<artifactId>jave2</artifactId>
+			<version>2.4.8</version>
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>*</groupId>-->
+<!--					<artifactId>*linux</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
-		<dependency>
-			<groupId>ws.schild</groupId>
-			<artifactId>jave-core</artifactId>
-			<version>2.4.6</version>
-		</dependency>
+
 
 		<!-- XR3Capture -->
 		<dependency>
