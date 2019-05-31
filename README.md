@@ -11,18 +11,12 @@ XR3Player has officially passed on Java 11.
 In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
 
 ```JAVA
---add-exports
-javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
---add-exports
-javafx.controls/com.sun.javafx.scene.control=com.jfoenix
---add-exports
-javafx.base/com.sun.javafx.binding=com.jfoenix
---add-exports
-javafx.graphics/com.sun.javafx.stage=com.jfoenix
---add-exports
-javafx.base/com.sun.javafx.event=com.jfoenix
---add-opens
-java.base/java.lang.reflect=ALL-UNNAMED
+--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
+--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix
+--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix
+--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix
+--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix
+--add-opens=java.base/java.lang.reflect=ALL-UNNAMED
 --add-exports=javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
 --add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
@@ -161,18 +155,12 @@ Follow the above instructions and run ``mvn clean package`` , be sure that you a
 In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
 
 ```JAVA
---add-exports
-javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
---add-exports
-javafx.controls/com.sun.javafx.scene.control=com.jfoenix
---add-exports
-javafx.base/com.sun.javafx.binding=com.jfoenix
---add-exports
-javafx.graphics/com.sun.javafx.stage=com.jfoenix
---add-exports
-javafx.base/com.sun.javafx.event=com.jfoenix
---add-opens
-java.base/java.lang.reflect=ALL-UNNAMED
+--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
+--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix
+--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix
+--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix
+--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix
+--add-opens=java.base/java.lang.reflect=ALL-UNNAMED
 --add-exports=javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
 --add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
