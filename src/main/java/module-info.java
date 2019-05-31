@@ -65,7 +65,7 @@ module XR3Player {
 	requires com.goxr3plus.streamplayer;
 	requires com.jfoenix;
 	requires commons.validator;
-	requires controlsfx;
+	requires org.controlsfx.controls;
 	requires dropbox.core.sdk;
 	requires evo.inflector;
 	requires flowless;

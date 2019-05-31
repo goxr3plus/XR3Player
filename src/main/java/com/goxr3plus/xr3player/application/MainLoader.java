@@ -153,7 +153,7 @@ public class MainLoader {
 
         // Show the Window
         window.show();
-        window.setIconified(true);
+        //window.setIconified(true);
 
         // Check for updates
         Main.updateWindow.searchForUpdates(false);
