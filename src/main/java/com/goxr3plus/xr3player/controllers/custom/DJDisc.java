@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import com.goxr3plus.xr3player.utils.general.TimeTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
+
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -29,9 +33,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
-import com.goxr3plus.xr3player.utils.general.TimeTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Represents a disc controller.
@@ -115,8 +116,7 @@ public class DJDisc extends StackPane {
 	/**
 	 * Constructor.
 	 * 
-	 * @param width         The width of the disc
-	 * @param height        The height of the disc
+	 * @param perimeter     The perimeter of the disc.
 	 * @param arcColor      The color of the disc arc
 	 * @param volume        The current volume of the disc
 	 * @param maximumVolume The maximum volume of the disc
@@ -230,8 +230,6 @@ public class DJDisc extends StackPane {
 	/**
 	 * Resizes the disc to the given values.
 	 *
-	 * @param width1  the width
-	 * @param height1 the height
 	 */
 	public void resizeDisc(double perimeterr) {
 		// Avoid divide by zero

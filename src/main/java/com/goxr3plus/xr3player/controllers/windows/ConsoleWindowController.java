@@ -11,6 +11,13 @@ import java.util.regex.Pattern;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
@@ -24,14 +31,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import main.java.com.goxr3plus.xr3capture.utils.ActionTool;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+
 
 /**
  * @author GOXR3PLUS
@@ -267,7 +267,7 @@ public class ConsoleWindowController extends StackPane {
 			cssTextArea.clear();
 			success = true;
 		} else if ("help".equals(command)) { // help
-			IOAction.openFileInEditor(IOInfo.getBasePathForClass(ActionTool.class) + "XR3Player Manual.pdf");
+			IOAction.openFileInEditor(IOInfo.getBasePathForClass(ConsoleWindowController.class) + "XR3Player Manual.pdf");
 			success = true;
 		} else if ("exit".equals(command) || "close".equals(command)) // close console
 			window.close();
@@ -325,7 +325,7 @@ public class ConsoleWindowController extends StackPane {
 	/**
 	 * Shows the Window.
 	 * 
-	 * @param settingsTab The default tab you want to be selected when the window is
+	 * @param consoleTab The default tab you want to be selected when the window is
 	 *                    shown
 	 */
 	public void showWindow(final ConsoleTab consoleTab) {

@@ -54,7 +54,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 	 * Start the Service.
 	 *
 	 * @param bytesToSkip Bytes to skip
-	 * @param stopPlayer
+	 * @param stopPlayer If true will stop player
 	 */
 	public void startSeekService(final long bytesToSkip, final boolean stopPlayer) {
 		final String absoluteFilePath = xPlayerController.xPlayerModel.songPathProperty().get();
@@ -136,7 +136,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 				boolean succeded = true;
@@ -160,7 +160,7 @@ public class XPlayerSeekService extends Service<Boolean> {
 					.setCurrentTime(xPlayerController.xPlayerModel.getCurrentAngleTime());
 
 				try {
-					xPlayerController.xPlayer.seek(bytesToSkip);
+					xPlayerController.xPlayer.seekBytes(bytesToSkip);
 				} catch (final StreamPlayerException ex) {
 					xPlayerController.logger.log(Level.WARNING, "", ex);
 					succeded = false;

@@ -334,7 +334,8 @@ public class SideBar extends StackPane {
 		applicationConsole.setOnAction(a -> Main.consoleWindow.show());
 
 		// snapShot
-		snapshot.setOnAction(a -> Main.captureWindow.getStage().show());
+		snapshot.setDisable(true);
+//		snapshot.setOnAction(a -> Main.captureWindow.getStage().show());
 
 		// importDataBase
 		importDataBase.setOnAction(e -> importDatabase());

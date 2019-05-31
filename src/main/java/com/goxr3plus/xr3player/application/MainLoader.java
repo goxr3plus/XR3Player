@@ -1,6 +1,8 @@
 package com.goxr3plus.xr3player.application;
 
 import java.io.File;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigInteger;
@@ -59,7 +61,6 @@ import javafx.beans.binding.Bindings;
 import javafx.scene.control.SplitPane;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
-import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 import static com.goxr3plus.xr3player.application.Main.borderlessScene;
 import static com.goxr3plus.xr3player.application.Main.libraryMode;
@@ -67,6 +68,8 @@ import static com.goxr3plus.xr3player.application.Main.loginMode;
 import static com.goxr3plus.xr3player.application.Main.root;
 import static com.goxr3plus.xr3player.application.Main.welcomeScreen;
 import static com.goxr3plus.xr3player.application.Main.window;
+
+//import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 
 public class MainLoader {
 
@@ -150,6 +153,7 @@ public class MainLoader {
 
         // Show the Window
         window.show();
+        //window.setIconified(true);
 
         // Check for updates
         Main.updateWindow.searchForUpdates(false);
@@ -206,7 +210,7 @@ public class MainLoader {
           This class is used to capture the computer Screen or a part of it [ Check
           XR3Capture package]
          */
-        Main.captureWindow = new CaptureWindow();
+//        Main.captureWindow = new CaptureWindow();
 
         Main.updateWindow = new UpdateWindow();
 
@@ -315,8 +319,8 @@ public class MainLoader {
         Main.aboutWindow.getWindow().initOwner(window);
         Main.updateWindow.getWindow().initOwner(window);
         Main.tagWindow.getWindow().initOwner(window);
-        Main.captureWindow.getStage().initOwner(window);
-        Main.captureWindow.settingsWindowController.getStage().initOwner(window);
+//        Main.captureWindow.getStage().initOwner(window);
+//        Main.captureWindow.settingsWindowController.getStage().initOwner(window);
 
         // --------- Fix the Background ------------
         MainTools.determineBackgroundImage();
@@ -348,16 +352,18 @@ public class MainLoader {
         new Thread(() -> {
             try {
                 final Field e = bb.class.getDeclaredField("e");
-                e.setAccessible(true);
+//                e.setAccessible(true);
                 final Field f = bb.class.getDeclaredField("f");
-                f.setAccessible(true);
-                final Field modifersField = Field.class.getDeclaredField("modifiers");
-                modifersField.setAccessible(true);
-                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
-                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
+//                f.setAccessible(true);
+                makeNonFinal(e);
+                makeNonFinal(f);
+//                final Field modifersField = Field.class.getDeclaredField("modifiers");
+//                modifersField.setAccessible(true);
+//                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
+//                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
                 e.set(null, BigInteger.valueOf(1));
                 f.set(null, BigInteger.valueOf(1));
-                modifersField.setAccessible(false);
+//                modifersField.setAccessible(false);
             } catch (final Exception e1) {
                 e1.printStackTrace();
             }
@@ -410,6 +416,22 @@ public class MainLoader {
         // -------------User Image View----------
         Main.sideBar.getUserImageView().imageProperty().bind(Main.userInfoMode.getUserImage().imageProperty());
 
+    }
+
+    private static VarHandle MODIFIERS;
+
+    private static void makeNonFinal(Field field) {
+        try {
+            var lookup = MethodHandles.privateLookupIn(Field.class, MethodHandles.lookup());
+            MODIFIERS = lookup.findVarHandle(Field.class, "modifiers", int.class);
+        } catch (IllegalAccessException | NoSuchFieldException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        int mods = field.getModifiers();
+        if (Modifier.isFinal(mods)) {
+            MODIFIERS.set(field, mods & ~Modifier.FINAL);
+        }
     }
 
 }

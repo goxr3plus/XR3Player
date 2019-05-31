@@ -2,7 +2,7 @@ package com.goxr3plus.xr3player.controllers.xplayer;
 
 import java.util.Map;
 
-import com.goxr3plus.streamplayer.stream.Status;
+import com.goxr3plus.streamplayer.enums.Status;
 import com.goxr3plus.streamplayer.stream.StreamPlayerEvent;
 import com.goxr3plus.streamplayer.stream.StreamPlayerListener;
 import com.goxr3plus.xr3player.application.Main;
@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+
 public class StreamController implements StreamPlayerListener {
 
 	private final XPlayerController controller;
@@ -26,7 +27,6 @@ public class StreamController implements StreamPlayerListener {
 	public StreamController(XPlayerController xPlayerController) {
 		this.controller = xPlayerController;
 	}
-
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -103,9 +103,12 @@ public class StreamController implements StreamPlayerListener {
 						controller.smTimeSlider.setValue(currentTime);
 
 						// smTimeSliderLabel
-						controller.smTimeSliderLabel.setText(TimeTool.getTimeEdited(currentTime) + "."
-							+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))) + "  / "
-							+ TimeTool.getTimeEdited(totalTime));
+						controller.smTimeSliderLabel.setText(
+							TimeTool.getTimeEdited(currentTime)
+								+ "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", "")))
+								+ "  / "
+								+ TimeTool.getTimeEdited(totalTime));
 
 						// smTimeSliderProgress
 						controller.smTimeSliderProgress.setProgress(controller.smTimeSlider.getValue() / controller.smTimeSlider.getMax());
@@ -117,15 +120,16 @@ public class StreamController implements StreamPlayerListener {
 					controller.disc.calculateAngleByValue(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(), false);
 
 					// Update the disc time
-					controller.disc.updateTimeDirectly(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(),
-						millisecondsFormatted);
+					controller.disc.updateTimeDirectly(controller.xPlayerModel.getCurrentTime(), controller.xPlayerModel.getDuration(), millisecondsFormatted);
 
 					// Run on JavaFX Thread
 					Platform.runLater(() -> {
 
 						// == RemainingTimeLabel
-						controller.remainingTimeLabel.setText(TimeTool.getTimeEdited(totalTime - currentTime) + "."
-							+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
+						controller.remainingTimeLabel.setText(
+							TimeTool.getTimeEdited(totalTime - currentTime)
+								+ "."
+								+ (9 - Integer.parseInt(millisecondsFormatted.replace(".", ""))));
 
 						// == ElapsedTimeLabel
 						controller.elapsedTimeLabel.setText(TimeTool.getTimeEdited(currentTime) + millisecondsFormatted);
