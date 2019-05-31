@@ -1,3 +1,35 @@
+# Attention for future contributors 
+
+XR3Player has officially passed on Java 11. 
+
+**Master branch** is working with Java 11 and the project is modularized .
+
+> You should have JDK 11.0.3
+
+> Maven 3.6.0 installed
+
+In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
+
+```JAVA
+--add-exports
+javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
+--add-exports
+javafx.controls/com.sun.javafx.scene.control=com.jfoenix
+--add-exports
+javafx.base/com.sun.javafx.binding=com.jfoenix
+--add-exports
+javafx.graphics/com.sun.javafx.stage=com.jfoenix
+--add-exports
+javafx.base/com.sun.javafx.event=com.jfoenix
+--add-opens
+java.base/java.lang.reflect=ALL-UNNAMED
+--add-exports=javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
+--add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
+```
+
+Soon there will be a release V3.129 running on JDK 11 and later .
+---
+
 ### Latest Version Build with JDK 10.0.2 at [21/04/2019]  , V3.128 [Download](https://goxr3plus.github.io/xr3player.io/)
 
 To install the **XR3Player**, download and double-click the **[XR3Player_Installer.exe](https://goxr3plus.github.io/xr3player.io/)**
