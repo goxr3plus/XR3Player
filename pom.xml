@@ -17,11 +17,11 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>12</maven.compiler.source>
+		<maven.compiler.target>12</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ikonli.version>11.3.4</ikonli.version>
-		<javafx.version>11.0.2</javafx.version>
+		<javafx.version>12.0.1</javafx.version>
 	</properties>
 
 	<build>
@@ -40,9 +40,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
-					<release>11</release>
+					<source>12</source>
+					<target>12</target>
+					<release>12</release>
 					<executable>javac10</executable>
 					<encoding>UTF-8</encoding>
 				</configuration>
@@ -231,7 +231,7 @@
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>9.0.8</version>
+			<version>9.0.9</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
@@ -276,7 +276,7 @@
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.11.3</version>
+			<version>1.12.1</version>
 		</dependency>
 		<!-- <dependency> <groupId>com.github.cliftonlabs</groupId> <artifactId>json-simple</artifactId> 
 			<version>3.0.2</version> </dependency> -->
@@ -325,7 +325,7 @@
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
-			<version>3.0.11</version>
+			<version>3.1.0</version>
 		</dependency>
 
 		<!-- Plularizer -->
