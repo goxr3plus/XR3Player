@@ -1,10 +1,10 @@
 # Attention for future contributors 
 
-XR3Player has officially passed on Java 11. 
+XR3Player has officially passed on Java 12. 
 
-**Master branch** is working with Java 11 and the project is modularized .
+**Master branch** is working with Java 12 and the project is modularized .
 
-> You should have JDK 11.0.3
+> You should have JDK 12.0.1
 
 > Maven 3.6.0 installed
 
@@ -21,7 +21,7 @@ In order to run the project you should add the following **VM Options** ( easy u
 --add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
 
-Soon there will be a release V3.129 running on JDK 11 and later .
+Soon there will be a release V3.129 running on JDK 12.0.1 and later .
 ---
 
 ### Latest Version Build with JDK 10.0.2 at [21/04/2019]  , V3.128 [Download](https://goxr3plus.github.io/xr3player.io/)
@@ -147,7 +147,7 @@ Started as a media player .... it will finish as an AI ....
 
 To build XR3Player, you will need:
 
-* [JDK 11.0.3]
+* [JDK 12.0.1]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
 
 Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with JDK 11
