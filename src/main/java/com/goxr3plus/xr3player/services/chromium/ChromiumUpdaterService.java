@@ -5,16 +5,16 @@ package com.goxr3plus.xr3player.services.chromium;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
 
-import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
 import com.goxr3plus.xr3player.application.Main;
 import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
 import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
-import com.goxr3plus.streamplayer.stream.ThreadFactoryWithNamePrefix;
+
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 
 /**
  * The Class FileFilterThread.
@@ -102,9 +102,9 @@ public class ChromiumUpdaterService {
 				}
 
 			} catch (final Exception ex) {
-				Main.logger.log(Level.INFO, "", ex);
+//				Main.logger.log(Level.INFO, "", ex);
 			} finally {
-				System.out.println(threadName + " exited !!!!");
+//				System.out.println(threadName + " exited !!!!");
 				Platform.runLater(() -> threadStopped.set(true));
 			}
 		};
