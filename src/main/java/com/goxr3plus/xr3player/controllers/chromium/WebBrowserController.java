@@ -10,6 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.services.chromium.ChromiumUpdaterService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.OSTool;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.teamdev.jxbrowser.chromium.Browser;
@@ -20,10 +24,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.services.chromium.ChromiumUpdaterService;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.OSTool;
 
 /**
  * @author GOXR3PLUS
@@ -229,7 +229,11 @@ public class WebBrowserController extends StackPane {
 	 * :)
 	 */
 	public void disposeAllBrowsers() {
-		tabPane.getTabs().stream().forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().dispose());
+		try {
+			tabPane.getTabs().forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().dispose());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	/**

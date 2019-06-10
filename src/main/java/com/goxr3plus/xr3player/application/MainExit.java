@@ -87,7 +87,7 @@ public class MainExit {
      */
     public static void terminateXR3Player(final int exitCode) {
 
-        System.out.println("Dis All->" + OSTool.getOS());
+        System.out.println("Terminating XR3Player OS->" + OSTool.getOS());
         switch (OSTool.getOS()) {
             case WINDOWS:
                 new Thread(() -> {
