@@ -90,7 +90,7 @@ public class Main extends Application {
 		// Chromium Extract Location Dir
 		System.setProperty("jxbrowser.license.key", "1BNDHFSC1FS4KX9XBTFN3A5IANA7Y9HQ4QVC5Y08K1KPKTJEMG2449IVWOWEJMS5M9RD3Y");
 		System.setProperty("jxbrowser.chromium.dir",
-			DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome" + APPLICATION_VERSION);
+			DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome" + "7.0");
 
 		// Disable loggers
 		pin = new Logger[]{Logger.getLogger("org.jaudiotagger"), Logger.getLogger("it.sauronsoftware.jave")};
