@@ -24,6 +24,7 @@ import com.goxr3plus.xr3player.utils.io.IOAction;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
 import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import com.jfoenix.controls.JFXButton;
+import com.teamdev.jxbrowser.browser.Browser;
 
 import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
@@ -474,7 +475,13 @@ public class SideBar extends StackPane {
 			final boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
 			// Mute or Unmute webrowser tabs
 			Main.webBrowser.getTabPane().getTabs()
-				.forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().setAudioMuted(mute));
+				.forEach(tab ->{
+					Browser browser = ((WebBrowserTabController) tab.getContent()).getBrowser();
+					if(mute)
+						browser.audio().mute();
+					else
+						browser.audio().unmute();
+				});
 			browserStackedFont.getChildren().get(1).setVisible(!mute);
 		});
 		browserStackedFont.getChildren().get(0).visibleProperty()

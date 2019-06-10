@@ -73,9 +73,9 @@ public class ChromiumUpdaterService {
 					// DropboxAuthenticationBrowser
 					if (Main.dropBoxViewer.getAuthenticationBrowser().getWindow().isShowing()) {
 						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator()
-								.setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+								.setManaged(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().navigation().isLoading());
 						Main.dropBoxViewer.getAuthenticationBrowser().getLoadingIndicator()
-								.setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().isLoading());
+								.setVisible(Main.dropBoxViewer.getAuthenticationBrowser().getBrowser().navigation().isLoading());
 					}
 
 					// ----------------------------Check if volume is enabled
@@ -95,7 +95,7 @@ public class ChromiumUpdaterService {
 						final WebBrowserTabController tabController = (WebBrowserTabController) tab.getContent();
 
 						// Is audio not muted?
-						return !tabController.getBrowser().isAudioMuted();
+						return !tabController.getBrowser().audio().isMuted();
 					}).findFirst().isPresent();
 					Main.sideBar.getBrowserStackedFont().getChildren().get(1).setVisible(notMuted);
 
@@ -128,7 +128,7 @@ public class ChromiumUpdaterService {
 			try {
 
 				// Is Audio Playing?
-				if (tabController.getBrowser().isAudioPlaying()) {
+				if (tabController.getBrowser().audio().isPlaying()) {
 					final int width = 32;
 					final int height = 25;
 					tabController.getAudioButton().setMinSize(width, height);
@@ -137,7 +137,7 @@ public class ChromiumUpdaterService {
 					tabController.getAudioButton().setVisible(true);
 
 					// Is Audio Muted or unmuted?
-					if (tabController.getBrowser().isAudioMuted()) {
+					if (tabController.getBrowser().audio().isMuted()) {
 						tabController.mutedImage.setVisible(true);
 						tabController.unmutedImage.setVisible(false);
 					} else {
@@ -153,8 +153,8 @@ public class ChromiumUpdaterService {
 				}
 
 				// Site is Loading
-				tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().isLoading());
-				tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().isLoading());
+				tabController.getProgressIndicatorStackPane().setManaged(tabController.getBrowser().navigation().isLoading());
+				tabController.getProgressIndicatorStackPane().setVisible(tabController.getBrowser().navigation().isLoading());
 			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}

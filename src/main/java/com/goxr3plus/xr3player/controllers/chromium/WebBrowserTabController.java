@@ -3,13 +3,13 @@
  */
 package com.goxr3plus.xr3player.controllers.chromium;
 
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,33 +18,30 @@ import org.apache.commons.validator.routines.UrlValidator;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.Marquee;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXButton;
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.BrowserException;
-import com.teamdev.jxbrowser.chromium.ContextMenuHandler;
-import com.teamdev.jxbrowser.chromium.ContextMenuParams;
-import com.teamdev.jxbrowser.chromium.events.FailLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.FrameLoadEvent;
-import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
-import com.teamdev.jxbrowser.chromium.events.LoadEvent;
-import com.teamdev.jxbrowser.chromium.events.NetError;
-import com.teamdev.jxbrowser.chromium.events.ProvisionalLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.StartLoadingEvent;
-import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import com.teamdev.jxbrowser.engine.Language;
+import com.teamdev.jxbrowser.engine.RenderingMode;
+import com.teamdev.jxbrowser.view.javafx.BrowserView;
 
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
@@ -60,20 +57,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.custom.Marquee;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
@@ -200,50 +188,65 @@ public class WebBrowserTabController extends StackPane {
 			tryAgain.setOnAction(a -> checkForInternetConnection());
 
 			// -------------------Browser------------------------
-			browser = new Browser();
-			browserView = new BrowserView(browser);
-			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
-			browser.setPopupHandler(params -> (Browser popUpBrowser, Rectangle initialBounds) -> {
+			Engine engine =  Engine.newInstance(
+				EngineOptions.newBuilder(RenderingMode.OFF_SCREEN)
+					// The language used on the default error pages and GUI.
+					.language(Language.ENGLISH_US)
+					// The absolute path to the directory where the data
+					// such as cache, cookies, history, GPU cache, local
+					// storage, visited links, web data, spell checking
+					// dictionary files, etc. is stored.
+					.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
+					.build());
 
-				// Check if the site is allowed to display popups
-				String browser_url = browser.getURL();
+			// Browser
+			browser = engine.newBrowser();
 
-				// Check for PopUps
-				System.out.println("Browser URL: " + browser_url);
-				if (browser_url.contains("fmovies.to"))
-					return;
+			browserView = BrowserView.newInstance(browser);
+			//todo fix
+//			browser.setContextMenuHandler(new MyContextMenuHandler(browserView));
+//			browser.setPopupHandler(params -> (Browser popUpBrowser, Rectangle initialBounds) -> {
+//
+//				// Check if the site is allowed to display popups
+//				String browser_url = browser.getURL();
+//
+//				// Check for PopUps
+//				System.out.println("Browser URL: " + browser_url);
+//				if (browser_url.contains("fmovies.to"))
+//					return;
+//
+//				// Show the Window
+//				Platform.runLater(() -> {
+//
+//					// Create a Stage
+//					Stage stage = new Stage();
+//					StackPane root = new StackPane();
+//					Scene scene = new Scene(root, 800, 600);
+//					root.getChildren().add(BrowserView.newInstance(popUpBrowser));
+//					stage.setScene(scene);
+//					stage.setTitle("Popup");
+//
+//					// Initial Bounds
+//					if (!initialBounds.isEmpty()) {
+//						stage.setX(initialBounds.getLocation().getX());
+//						stage.setY(initialBounds.getLocation().getY());
+//						stage.setWidth(initialBounds.width);
+//						stage.setHeight(initialBounds.height);
+//					}
+//
+//					// On Stage Close Request
+//					stage.setOnCloseRequest(c -> popUpBrowser.close());
+//
+//					// On Browser Dispose Listener
+//					//TODO fix
+////					popUpBrowser.addDisposeListener(disp -> Platform.runLater(stage::close));
+//
+//					// Show Stage
+//					stage.show();
+//
+//				});
 
-				// Show the Window
-				Platform.runLater(() -> {
-
-					// Create a Stage
-					Stage stage = new Stage();
-					StackPane root = new StackPane();
-					Scene scene = new Scene(root, 800, 600);
-					root.getChildren().add(new BrowserView(popUpBrowser));
-					stage.setScene(scene);
-					stage.setTitle("Popup");
-
-					// Initial Bounds
-					if (!initialBounds.isEmpty()) {
-						stage.setX(initialBounds.getLocation().getX());
-						stage.setY(initialBounds.getLocation().getY());
-						stage.setWidth(initialBounds.width);
-						stage.setHeight(initialBounds.height);
-					}
-
-					// On Stage Close Request
-					stage.setOnCloseRequest(c -> popUpBrowser.dispose());
-
-					// On Browser Dispose Listener
-					popUpBrowser.addDisposeListener(disp -> Platform.runLater(stage::close));
-
-					// Show Stage
-					stage.show();
-
-				});
-
-			});
+//			});
 
 			// -------------------BorderPane------------------------
 			borderPane.setCenter(browserView);
@@ -313,82 +316,83 @@ public class WebBrowserTabController extends StackPane {
 			Marquee marquee = new Marquee();
 			marquee.textProperty().bind(tab.getTooltip().textProperty());
 
+			//TODO FIX
 			// --Load Listener
-			browser.addLoadListener(new LoadAdapter() {
-
-				@Override
-				public void onStartLoadingFrame(StartLoadingEvent event) {
-					if (event.isMainFrame()) {
-						System.out.println("Main frame has started loading");
-
-					}
-				}
-
-				@Override
-				public void onProvisionalLoadingFrame(ProvisionalLoadingEvent event) {
-					if (event.isMainFrame()) {
-						System.out.println("Provisional load was committed for a frame");
-
-					}
-				}
-
-				@Override
-				public void onFinishLoadingFrame(FinishLoadingEvent event) {
-					if (event.isMainFrame()) {
-						System.out.println("Main frame has finished loading");
-
-					}
-				}
-
-				@Override
-				public void onFailLoadingFrame(FailLoadingEvent event) {
-					NetError errorCode = event.getErrorCode();
-					if (event.isMainFrame()) {
-						System.out.println("Main frame has failed loading: " + errorCode);
-					}
-				}
-
-				@Override
-				public void onDocumentLoadedInFrame(FrameLoadEvent event) {
-					System.out.println("Frame document is loaded.");
-					String currentURL = browser.getURL();
-
-					// Set Search Bar Text
-					Platform.runLater(() -> searchBar.setText(currentURL));
-
-				}
-
-				@Override
-				public void onDocumentLoadedInMainFrame(LoadEvent event) {
-					System.out.println("Main frame document is loaded.");
-
-					// Backward and Forward buttons
-					boolean backwardDisabled = browser.getCurrentNavigationEntry().getURL()
-							.equals(browser.getNavigationEntryAtIndex(1).getURL());
-					boolean forwardDisabled = browser.getCurrentNavigationEntry().getURL()
-							.equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL());
-
-					// Strings
-					String currentTitle = browser.getTitle();
-					String currentURL = browser.getURL();
-
-					// Run On JavaFX Thread
-					Platform.runLater(() -> {
-
-						backwardButton.setDisable(backwardDisabled);
-						forwardButton.setDisable(forwardDisabled);
-
-						// Tab Title
-						tab.getTooltip().setText(currentTitle);
-
-						// Set Search Bar Text
-						searchBar.setText(currentURL);
-					});
-
-					// Determine FavIcon
-					new Thread(() -> determineFavIcon(currentURL)).start();
-				}
-			});
+//			browser.addLoadListener(new LoadAdapter() {
+//
+//				@Override
+//				public void onStartLoadingFrame(StartLoadingEvent event) {
+//					if (event.isMainFrame()) {
+//						System.out.println("Main frame has started loading");
+//
+//					}
+//				}
+//
+//				@Override
+//				public void onProvisionalLoadingFrame(ProvisionalLoadingEvent event) {
+//					if (event.isMainFrame()) {
+//						System.out.println("Provisional load was committed for a frame");
+//
+//					}
+//				}
+//
+//				@Override
+//				public void onFinishLoadingFrame(FinishLoadingEvent event) {
+//					if (event.isMainFrame()) {
+//						System.out.println("Main frame has finished loading");
+//
+//					}
+//				}
+//
+//				@Override
+//				public void onFailLoadingFrame(FailLoadingEvent event) {
+//					NetError errorCode = event.getErrorCode();
+//					if (event.isMainFrame()) {
+//						System.out.println("Main frame has failed loading: " + errorCode);
+//					}
+//				}
+//
+//				@Override
+//				public void onDocumentLoadedInFrame(FrameLoadEvent event) {
+//					System.out.println("Frame document is loaded.");
+//					String currentURL = browser.getURL();
+//
+//					// Set Search Bar Text
+//					Platform.runLater(() -> searchBar.setText(currentURL));
+//
+//				}
+//
+//				@Override
+//				public void onDocumentLoadedInMainFrame(LoadEvent event) {
+//					System.out.println("Main frame document is loaded.");
+//
+//					// Backward and Forward buttons
+//					boolean backwardDisabled = browser.getCurrentNavigationEntry().getURL()
+//							.equals(browser.getNavigationEntryAtIndex(1).getURL());
+//					boolean forwardDisabled = browser.getCurrentNavigationEntry().getURL()
+//							.equals(browser.getNavigationEntryAtIndex(browser.getNavigationEntryCount() - 1).getURL());
+//
+//					// Strings
+//					String currentTitle = browser.
+//					String currentURL = browser.getURL();
+//
+//					// Run On JavaFX Thread
+//					Platform.runLater(() -> {
+//
+//						backwardButton.setDisable(backwardDisabled);
+//						forwardButton.setDisable(forwardDisabled);
+//
+//						// Tab Title
+//						tab.getTooltip().setText(currentTitle);
+//
+//						// Set Search Bar Text
+//						searchBar.setText(currentURL);
+//					});
+//
+//					// Determine FavIcon
+//					new Thread(() -> determineFavIcon(currentURL)).start();
+//				}
+//			});
 
 			// facIconImageView
 			facIconImageView.setFitWidth(20);
@@ -438,7 +442,12 @@ public class WebBrowserTabController extends StackPane {
 			audioButton.setPrefSize(maxSize, maxSize);
 			audioButton.setMaxSize(maxSize, maxSize);
 			audioButton.setStyle("-fx-background-radius:0; -fx-font-size:8px");
-			audioButton.setOnAction(a -> browser.setAudioMuted(!browser.isAudioMuted()));
+			audioButton.setOnAction(a -> {
+				if (browser.audio().isMuted())
+					browser.audio().unmute();
+				else
+					browser.audio().mute();
+			});
 			audioButton.setGraphic(soundStack);
 
 			// HBOX
@@ -474,29 +483,31 @@ public class WebBrowserTabController extends StackPane {
 			// reloadButton
 			reloadButton.setOnAction(a -> reloadWebSite());
 
+			//TODO fix
 			// backwardButton
 			forwardButton.setDisable(true);
 			backwardButton.setOnAction(a -> goBack());
-			backwardButton.setOnMouseReleased(m -> {
-				if (m.getButton() == MouseButton.MIDDLE) // Create and add it next to this tab
-					webBrowserController.getTabPane().getTabs().add(
-							webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
-							webBrowserController.createNewTab(browser
-									.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() - 1).getURL())
-									.getTab());
-			});
+//			backwardButton.setOnMouseReleased(m -> {
+//				if (m.getButton() == MouseButton.MIDDLE) // Create and add it next to this tab
+//					webBrowserController.getTabPane().getTabs().add(
+//							webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
+//							webBrowserController.createNewTab(browser
+//									.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() - 1).getURL())
+//									.getTab());
+//			});
 
+			//TODO fix
 			// forwardButton
 			forwardButton.setDisable(true);
 			forwardButton.setOnAction(a -> goForward());
-			forwardButton.setOnMouseReleased(m -> {
-				if (m.getButton() == MouseButton.MIDDLE) // Create and add it next to this tab
-					webBrowserController.getTabPane().getTabs().add(
-							webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
-							webBrowserController.createNewTab(browser
-									.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() + 1).getURL())
-									.getTab());
-			});
+//			forwardButton.setOnMouseReleased(m -> {
+//				if (m.getButton() == MouseButton.MIDDLE) // Create and add it next to this tab
+//					webBrowserController.getTabPane().getTabs().add(
+//							webBrowserController.getTabPane().getTabs().indexOf(tab) + 1,
+//							webBrowserController.createNewTab(browser
+//									.getNavigationEntryAtIndex(browser.getCurrentNavigationEntryIndex() + 1).getURL())
+//									.getTab());
+//			});
 
 			// homeButton
 			homeButton.setOnAction(a -> loadDefaultWebSite());
@@ -520,7 +531,7 @@ public class WebBrowserTabController extends StackPane {
 			loadWebSite(firstWebSite);
 
 			// openInDefaultBrowser
-			openInDefaultBrowser.setOnAction(a -> NetworkingTool.openWebSite(browser.getURL()));
+			openInDefaultBrowser.setOnAction(a -> NetworkingTool.openWebSite(browser.url()));
 
 			// copyText
 			copyText.setOnAction(a -> {
@@ -539,12 +550,11 @@ public class WebBrowserTabController extends StackPane {
 						"Search bar text copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
 						Duration.seconds(2), NotificationType.INFORMATION);
 			});
-		} catch (BrowserException ex) {
-			System.exit(-1);
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			// The Chromium profile directory is already used/locked by another
 			// BrowserContext instance or process.
+			ex.printStackTrace();
+			System.exit(-1);
 		}
 	}
 
@@ -634,7 +644,7 @@ public class WebBrowserTabController extends StackPane {
 			}
 
 			// Load it
-			browser.loadURL(finalWebsiteFristPart + finalWebsiteSecondPart);
+			browser.navigation().loadUrl(finalWebsiteFristPart + finalWebsiteSecondPart);
 		} catch (UnsupportedEncodingException ex) {
 			ex.printStackTrace();
 		}
@@ -645,14 +655,14 @@ public class WebBrowserTabController extends StackPane {
 	 * Loads the default website
 	 */
 	public void loadDefaultWebSite() {
-		browser.loadURL(getSelectedEngineHomeUrl());
+		browser.navigation().loadUrl(getSelectedEngineHomeUrl());
 	}
 
 	/**
 	 * Loads the current website , or if none then loads the default website
 	 */
 	public void reloadWebSite() {
-		browser.reload();
+		browser.navigation().reload();
 	}
 
 	/**
@@ -660,7 +670,7 @@ public class WebBrowserTabController extends StackPane {
 	 * 
 	 */
 	public void goBack() {
-		browser.goBack();
+		browser.navigation().goBack();
 	}
 
 	/**
@@ -668,7 +678,7 @@ public class WebBrowserTabController extends StackPane {
 	 * 
 	 */
 	public void goForward() {
-		browser.goForward();
+		browser.navigation().goForward();
 	}
 
 	/**
@@ -791,48 +801,48 @@ public class WebBrowserTabController extends StackPane {
 	 * @author GOXR3PLUSSTUDIO
 	 *
 	 */
-	private static class MyContextMenuHandler implements ContextMenuHandler {
-
-		private final Pane pane;
-
-		/**
-		 * Constructor
-		 * 
-		 * @param parent
-		 */
-		private MyContextMenuHandler(Pane parent) {
-			this.pane = parent;
-		}
-
-		public void showContextMenu(final ContextMenuParams p) {
-			Platform.runLater(() -> createAndDisplayContextMenu(p));
-		}
-
-		private void createAndDisplayContextMenu(final ContextMenuParams p) {
-			final ContextMenu contextMenu = new ContextMenu();
-
-			// If there's link under mouse pointer, create and add
-			// the "Open link in new window" menu item to our context menu
-			if (!p.getLinkText().isEmpty())
-				contextMenu.getItems().add(createMenuItem("Open link in new Tab",
-						() -> Main.webBrowser.addNewTabOnTheEnd(p.getLinkURL())));
-
-			// Create and add "Reload" menu item to our context menu
-			contextMenu.getItems().add(createMenuItem("Reload", () -> p.getBrowser().reload()));
-
-			// Display context menu at required location on screen
-			java.awt.Point location = p.getLocation();
-			Point2D screenLocation = pane.localToScreen(location.x, location.y);
-			contextMenu.show(Main.window, screenLocation.getX(), screenLocation.getY());
-		}
-
-		private static MenuItem createMenuItem(String title, final Runnable action) {
-			MenuItem menuItem = new MenuItem(title);
-			menuItem.setOnAction(a -> action.run()
-
-			);
-			return menuItem;
-		}
-	}
+//	private static class MyContextMenuHandler implements ContextMenuHandler {
+//
+//		private final Pane pane;
+//
+//		/**
+//		 * Constructor
+//		 *
+//		 * @param parent
+//		 */
+//		private MyContextMenuHandler(Pane parent) {
+//			this.pane = parent;
+//		}
+//
+//		public void showContextMenu(final ContextMenuParams p) {
+//			Platform.runLater(() -> createAndDisplayContextMenu(p));
+//		}
+//
+//		private void createAndDisplayContextMenu(final ContextMenuParams p) {
+//			final ContextMenu contextMenu = new ContextMenu();
+//
+//			// If there's link under mouse pointer, create and add
+//			// the "Open link in new window" menu item to our context menu
+//			if (!p.getLinkText().isEmpty())
+//				contextMenu.getItems().add(createMenuItem("Open link in new Tab",
+//						() -> Main.webBrowser.addNewTabOnTheEnd(p.getLinkURL())));
+//
+//			// Create and add "Reload" menu item to our context menu
+//			contextMenu.getItems().add(createMenuItem("Reload", () -> p.getBrowser().reload()));
+//
+//			// Display context menu at required location on screen
+//			java.awt.Point location = p.getLocation();
+//			Point2D screenLocation = pane.localToScreen(location.x, location.y);
+//			contextMenu.show(Main.window, screenLocation.getX(), screenLocation.getY());
+//		}
+//
+//		private static MenuItem createMenuItem(String title, final Runnable action) {
+//			MenuItem menuItem = new MenuItem(title);
+//			menuItem.setOnAction(a -> action.run()
+//
+//			);
+//			return menuItem;
+//		}
+//	}
 
 }

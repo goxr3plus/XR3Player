@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package com.goxr3plus.xr3player.controllers.chromium;
 
@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.teamdev.jxbrowser.view.javafx.BrowserView;
 
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -22,9 +25,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * The Class VisualizerWindow.
@@ -62,8 +62,6 @@ public class ChromiumFullScreenController extends StackPane {
 
 	/**
 	 * Constructor.
-	 *
-	 * @param xPlayerController xPlayerController
 	 */
 	public ChromiumFullScreenController() {
 
@@ -79,7 +77,7 @@ public class ChromiumFullScreenController extends StackPane {
 
 		// FXMLLOADER
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserFullScreenController.fxml"));
+			getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserFullScreenController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
@@ -87,7 +85,7 @@ public class ChromiumFullScreenController extends StackPane {
 			loader.load();
 		} catch (IOException ex) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE,
-					"ChromiumFullScreenController FXML can't be loaded!", ex);
+				"ChromiumFullScreenController FXML can't be loaded!", ex);
 		}
 
 	}
@@ -132,7 +130,7 @@ public class ChromiumFullScreenController extends StackPane {
 
 	/**
 	 * Pass a browserView instance and from which controller it came
-	 * 
+	 *
 	 * @param browserView
 	 */
 	public void goFullScreenMode(BrowserView browserView, WebBrowserTabController webBrowserTabController) {
@@ -153,7 +151,7 @@ public class ChromiumFullScreenController extends StackPane {
 		window.show();
 
 		AlertTool.showNotification("Hint!", "Press F11 to exit full screen ", Duration.seconds(2),
-				NotificationType.INFORMATION);
+			NotificationType.INFORMATION);
 	}
 
 	/**
@@ -174,22 +172,22 @@ public class ChromiumFullScreenController extends StackPane {
 	}
 
 	/*-----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * 							GETTERS
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
 	 */
 
@@ -203,22 +201,22 @@ public class ChromiumFullScreenController extends StackPane {
 	}
 
 	/*-----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
-	 * 
+	 *
+	 *
 	 * 							Methods
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
-	 * 
+	 *
 	 * -----------------------------------------------------------------------
 	 */
 

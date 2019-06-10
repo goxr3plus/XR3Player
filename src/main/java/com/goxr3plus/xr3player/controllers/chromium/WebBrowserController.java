@@ -16,7 +16,7 @@ import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.goxr3plus.xr3player.utils.general.OSTool;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
-import com.teamdev.jxbrowser.chromium.Browser;
+import com.teamdev.jxbrowser.browser.Browser;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -212,11 +212,11 @@ public class WebBrowserController extends StackPane {
 	public void disposeBrowser(Browser browser) {
 		switch (OSTool.getOS()) {
 		case WINDOWS:
-			new Thread(browser::dispose).start();
+			new Thread(browser::close).start();
 			break;
 		case LINUX:
 		case MAC:
-			Platform.runLater(browser::dispose);
+			Platform.runLater(browser::close);
 			break;
 		default:
 			System.out.println("Can't dispose browser instance!!!");
@@ -230,7 +230,7 @@ public class WebBrowserController extends StackPane {
 	 */
 	public void disposeAllBrowsers() {
 		try {
-			tabPane.getTabs().forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().dispose());
+			tabPane.getTabs().forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().close());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -239,7 +239,7 @@ public class WebBrowserController extends StackPane {
 	/**
 	 * Closes the tabs to the right of the given Tab
 	 * 
-	 * @param tab
+	 * @param givenTab
 	 */
 	public void closeTabsToTheRight(Tab givenTab) {
 		// Return if size <= 1
@@ -261,7 +261,7 @@ public class WebBrowserController extends StackPane {
 	/**
 	 * Closes the tabs to the left of the given Tab
 	 * 
-	 * @param tab
+	 * @param givenTab
 	 */
 	public void closeTabsToTheLeft(Tab givenTab) {
 		// Return if size <= 1

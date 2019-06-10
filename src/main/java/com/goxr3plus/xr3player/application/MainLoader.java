@@ -5,7 +5,6 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.math.BigInteger;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -54,7 +53,6 @@ import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.goxr3plus.xr3player.utils.io.IOAction;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
-import com.teamdev.jxbrowser.chromium.bb;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -153,7 +151,7 @@ public class MainLoader {
 
         // Show the Window
         window.show();
-        //window.setIconified(true);
+        window.setIconified(true);
 
         // Check for updates
         Main.updateWindow.searchForUpdates(false);
@@ -350,23 +348,23 @@ public class MainLoader {
 
         // Load some lol images from lol base
         new Thread(() -> {
-            try {
-                final Field e = bb.class.getDeclaredField("e");
-//                e.setAccessible(true);
-                final Field f = bb.class.getDeclaredField("f");
-//                f.setAccessible(true);
-                makeNonFinal(e);
-                makeNonFinal(f);
-//                final Field modifersField = Field.class.getDeclaredField("modifiers");
-//                modifersField.setAccessible(true);
-//                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
-//                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
-                e.set(null, BigInteger.valueOf(1));
-                f.set(null, BigInteger.valueOf(1));
-//                modifersField.setAccessible(false);
-            } catch (final Exception e1) {
-                e1.printStackTrace();
-            }
+//            try {
+////                final Field e = bb.class.getDeclaredField("e");
+//////                e.setAccessible(true);
+////                final Field f = bb.class.getDeclaredField("f");
+//////                f.setAccessible(true);
+////                makeNonFinal(e);
+////                makeNonFinal(f);
+//////                final Field modifersField = Field.class.getDeclaredField("modifiers");
+//////                modifersField.setAccessible(true);
+//////                modifersField.setInt(e, ~Modifier.FINAL & e.getModifiers());
+//////                modifersField.setInt(f, ~Modifier.FINAL & f.getModifiers());
+////                e.set(null, BigInteger.valueOf(1));
+////                f.set(null, BigInteger.valueOf(1));
+//////                modifersField.setAccessible(false);
+////            } catch (final Exception e1) {
+////                e1.printStackTrace();
+////            }
 
             // Run on JavaFX Thread
             Platform.runLater(() -> {

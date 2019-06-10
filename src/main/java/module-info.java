@@ -90,4 +90,5 @@ module XR3Player {
 	requires reactfx;
 	requires richtextfx;
 	requires zt.zip;
+	requires jxbrowser.javafx;
 }

@@ -88,6 +88,7 @@ public class Main extends Application {
 	static {
 
 		// Chromium Extract Location Dir
+		System.setProperty("jxbrowser.license.key", "1BNDHFSC1FS4KX9XBTFN3A5IANA7Y9HQ4QVC5Y08K1KPKTJEMG2449IVWOWEJMS5M9RD3Y");
 		System.setProperty("jxbrowser.chromium.dir",
 			DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome" + APPLICATION_VERSION);
 

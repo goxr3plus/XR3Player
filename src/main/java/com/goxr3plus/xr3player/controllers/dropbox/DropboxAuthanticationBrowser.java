@@ -1,6 +1,7 @@
 package com.goxr3plus.xr3player.controllers.dropbox;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.jsoup.Jsoup;
 
@@ -9,10 +10,16 @@ import com.dropbox.core.DbxAuthFinish;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.DbxWebAuth;
-import com.teamdev.jxbrowser.chromium.Browser;
-import com.teamdev.jxbrowser.chromium.events.FinishLoadingEvent;
-import com.teamdev.jxbrowser.chromium.events.LoadAdapter;
-import com.teamdev.jxbrowser.chromium.javafx.BrowserView;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.teamdev.jxbrowser.browser.Browser;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import com.teamdev.jxbrowser.engine.Language;
+import com.teamdev.jxbrowser.engine.RenderingMode;
+import com.teamdev.jxbrowser.navigation.event.FrameLoadFinished;
+import com.teamdev.jxbrowser.view.javafx.BrowserView;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -28,9 +35,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 /**
  * Opens a browser inside the application for DropBox Authentication Process
@@ -48,6 +52,7 @@ public class DropboxAuthanticationBrowser extends StackPane {
 
 	// ----------------------------------------------------------------
 
+	private Engine engine ;
 	private Browser browser;
 
 	/**
@@ -103,20 +108,26 @@ public class DropboxAuthanticationBrowser extends StackPane {
 	@FXML
 	private void initialize() {
 
-		// Browser
-		browser = new Browser();
+		engine =  Engine.newInstance(
+			EngineOptions.newBuilder(RenderingMode.OFF_SCREEN)
+				// The language used on the default error pages and GUI.
+				.language(Language.ENGLISH_US)
+				// The absolute path to the directory where the data
+				// such as cache, cookies, history, GPU cache, local
+				// storage, visited links, web data, spell checking
+				// dictionary files, etc. is stored.
+				.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
+				.build());
 
-		borderPane.setCenter(new BrowserView(browser));
-		browser.addLoadListener(new LoadAdapter() {
-			/**
-			 * [[SuppressWarningsSpartan]]
-			 */
-			@Override
-			public void onFinishLoadingFrame(FinishLoadingEvent event) {
-				if (event.isMainFrame()) {
-					String currentURL = browser.getURL();
+		// Browser
+		browser = engine.newBrowser();
+
+		borderPane.setCenter(BrowserView.newInstance(browser));
+		browser.navigation().on(FrameLoadFinished.class, event -> {
+//				if (event.isMainFrame()) {
+					String currentURL = event.url();
 					if ("https://www.dropbox.com/1/oauth2/authorize_submit".equals(currentURL)) {
-						String html = event.getBrowser().getHTML();
+						String html = event.frame().html();
 						new Thread(() -> {
 							try {
 								String code = Jsoup.parse(html).body().getElementById("auth-code")
@@ -127,8 +138,7 @@ public class DropboxAuthanticationBrowser extends StackPane {
 							}
 						}).start();
 					}
-				}
-			}
+//				}
 		});
 
 	}
@@ -138,11 +148,14 @@ public class DropboxAuthanticationBrowser extends StackPane {
 	 */
 	public void showAuthenticationWindow() {
 
-		browser.getCacheStorage().clearCache();
-		browser.getCookieStorage().deleteAll();
+		/* Clearing HTTP Cache */
+		engine.httpCache().clearDiskCache(()->{});
+
+		/* Clearing All Cookies */
+		engine.cookieStore().deleteAll();
 
 		// Load it
-		browser.loadURL(getAuthonticationRequestURL());
+		browser.navigation().loadUrl(getAuthonticationRequestURL());
 
 		// Show the Window
 		window.show();
