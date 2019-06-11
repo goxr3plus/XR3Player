@@ -12,7 +12,6 @@ import com.goxr3plus.fxborderlessscene.borderless.BorderlessScene;
 import com.goxr3plus.xr3player.controllers.chromium.WebBrowserController;
 import com.goxr3plus.xr3player.controllers.djmode.DJMode;
 import com.goxr3plus.xr3player.controllers.dropbox.DropboxDownloadsTableViewer;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
 import com.goxr3plus.xr3player.controllers.general.BottomBar;
 import com.goxr3plus.xr3player.controllers.general.EmotionsTabPane;
 import com.goxr3plus.xr3player.controllers.general.MainLoadingScreen;
@@ -53,6 +52,10 @@ import com.goxr3plus.xr3player.utils.general.InfoTool;
 import com.goxr3plus.xr3player.utils.io.IOAction;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+import com.teamdev.jxbrowser.engine.Engine;
+import com.teamdev.jxbrowser.engine.EngineOptions;
+import com.teamdev.jxbrowser.engine.Language;
+import com.teamdev.jxbrowser.engine.RenderingMode;
 
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -366,16 +369,30 @@ public class MainLoader {
 ////                e1.printStackTrace();
 ////            }
 
+            //Create the EngineM
+            Main.engine = Engine.newInstance(
+                EngineOptions.newBuilder(RenderingMode.HARDWARE_ACCELERATED)
+                    // The language used on the default error pages and GUI.
+                    .language(Language.ENGLISH_US)
+                    // The absolute path to the directory where the data
+                    // such as cache, cookies, history, GPU cache, local
+                    // storage, visited links, web data, spell checking
+                    // dictionary files, etc. is stored.
+                    //.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
+                    .build());
+
             // Run on JavaFX Thread
             Platform.runLater(() -> {
 
+                String h = System.getProperty("jxbrowser.license.key");
+
                 // Chromium Web Browser
                 Main.webBrowser = new WebBrowserController();
-
-                // Dropbox Viewer
-                Main.dropBoxViewer = new DropboxViewer();
-                Main.dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
-                Main.playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
+//
+//                // Dropbox Viewer
+//                Main.dropBoxViewer = new DropboxViewer();
+//                Main.dropBoxViewer.getAuthenticationBrowser().getWindow().initOwner(window);
+//                Main.playListModesTabPane.getDropBoxTab().setContent(Main.dropBoxViewer);
                 Main.dropboxDownloadsTableViewer = new DropboxDownloadsTableViewer();
                 Main.playListModesTabPane.getDropBoxDownloadsTab().setContent(Main.dropboxDownloadsTableViewer);
             });

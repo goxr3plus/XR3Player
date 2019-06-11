@@ -47,6 +47,7 @@ import com.goxr3plus.xr3player.database.PropertiesDb;
 import com.goxr3plus.xr3player.models.lists.EmotionListsController;
 import com.goxr3plus.xr3player.models.lists.PlayedMediaList;
 import com.goxr3plus.xr3player.models.lists.StarredMediaList;
+import com.teamdev.jxbrowser.engine.Engine;
 
 import javafx.application.Application;
 import javafx.scene.layout.BorderPane;
@@ -89,8 +90,8 @@ public class Main extends Application {
 
 		// Chromium Extract Location Dir
 		System.setProperty("jxbrowser.license.key", "1BNDHFSC1FS4KX9XBTFN3A5IANA7Y9HQ4QVC5Y08K1KPKTJEMG2449IVWOWEJMS5M9RD3Y");
-		System.setProperty("jxbrowser.chromium.dir",
-			DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome" + "7.0");
+//		System.setProperty("jxbrowser.chromium.dir",
+//			DatabaseTool.getAbsoluteDatabaseParentFolderPathWithSeparator() + "Chrome" + "7.0");
 
 		// Disable loggers
 		pin = new Logger[]{Logger.getLogger("org.jaudiotagger"), Logger.getLogger("it.sauronsoftware.jave")};
@@ -99,6 +100,8 @@ public class Main extends Application {
 	}
 
 	// ------ START: The below have not dependencies on classes ------//
+
+	public static Engine engine ;
 
 	public static WelcomeScreen welcomeScreen;
 

@@ -1,7 +1,6 @@
 package com.goxr3plus.xr3player.controllers.dropbox;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import org.jsoup.Jsoup;
 
@@ -109,14 +108,14 @@ public class DropboxAuthanticationBrowser extends StackPane {
 	private void initialize() {
 
 		engine =  Engine.newInstance(
-			EngineOptions.newBuilder(RenderingMode.OFF_SCREEN)
+			EngineOptions.newBuilder(RenderingMode.HARDWARE_ACCELERATED)
 				// The language used on the default error pages and GUI.
 				.language(Language.ENGLISH_US)
 				// The absolute path to the directory where the data
 				// such as cache, cookies, history, GPU cache, local
 				// storage, visited links, web data, spell checking
 				// dictionary files, etc. is stored.
-				.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
+//				.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
 				.build());
 
 		// Browser

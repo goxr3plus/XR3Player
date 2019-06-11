@@ -17,11 +17,11 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>12</maven.compiler.source>
-		<maven.compiler.target>12</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ikonli.version>11.3.4</ikonli.version>
-		<javafx.version>12.0.1</javafx.version>
+		<javafx.version>11.0.2</javafx.version>
 	</properties>
 
 	<build>
@@ -40,10 +40,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>12</source>
-					<target>12</target>
-					<release>12</release>
-					<executable>javac12</executable>
+					<source>11</source>
+					<target>11</target>
+					<release>11</release>
+					<executable>javac11</executable>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>

@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.goxr3plus.xr3player.controllers.chromium;
 
@@ -9,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,10 +26,6 @@ import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 import com.jfoenix.controls.JFXButton;
 import com.teamdev.jxbrowser.browser.Browser;
-import com.teamdev.jxbrowser.engine.Engine;
-import com.teamdev.jxbrowser.engine.EngineOptions;
-import com.teamdev.jxbrowser.engine.Language;
-import com.teamdev.jxbrowser.engine.RenderingMode;
 import com.teamdev.jxbrowser.view.javafx.BrowserView;
 
 import javafx.application.Platform;
@@ -66,7 +61,7 @@ import net.sf.image4j.codec.ico.ICODecoder;
 
 /**
  * This class represents a Tab from The WebBrowser
- * 
+ *
  * @author GOXR3PLUS
  *
  */
@@ -145,7 +140,7 @@ public class WebBrowserTabController extends StackPane {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param tab
 	 * @param firstWebSite
 	 */
@@ -158,7 +153,7 @@ public class WebBrowserTabController extends StackPane {
 		// ------------------------------------FXMLLOADER
 		// ----------------------------------------
 		FXMLLoader loader = new FXMLLoader(
-				getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabController.fxml"));
+			getClass().getResource(InfoTool.BROWSER_FXMLS + "WebBrowserTabController.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
@@ -188,19 +183,8 @@ public class WebBrowserTabController extends StackPane {
 			tryAgain.setOnAction(a -> checkForInternetConnection());
 
 			// -------------------Browser------------------------
-			Engine engine =  Engine.newInstance(
-				EngineOptions.newBuilder(RenderingMode.OFF_SCREEN)
-					// The language used on the default error pages and GUI.
-					.language(Language.ENGLISH_US)
-					// The absolute path to the directory where the data
-					// such as cache, cookies, history, GPU cache, local
-					// storage, visited links, web data, spell checking
-					// dictionary files, etc. is stored.
-					.userDataDir(Paths.get("/Users/Me/JxBrowser/UserData"))
-					.build());
-
 			// Browser
-			browser = engine.newBrowser();
+			browser = Main.engine.newBrowser();
 
 			browserView = BrowserView.newInstance(browser);
 			//todo fix
@@ -467,7 +451,7 @@ public class WebBrowserTabController extends StackPane {
 
 			searchBar.setOnAction(a ->
 
-			loadWebSite(searchBar.getText()));
+				loadWebSite(searchBar.getText()));
 			searchBar.focusedProperty().addListener((observable, oldValue, newValue) -> {
 				if (newValue)
 					Platform.runLater(() -> searchBar.selectAll());
@@ -520,12 +504,12 @@ public class WebBrowserTabController extends StackPane {
 
 			// showVersion
 			about.setOnAction(a -> JavaFXTool.createAlert("Browser Information", null,
-					"Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO",
-					AlertType.INFORMATION, StageStyle.UTILITY, Main.window, null).showAndWait());
+				"Browser Version :" + WebBrowserController.VERSION + "\n" + "Created by: GOXR3PLUS STUDIO",
+				AlertType.INFORMATION, StageStyle.UTILITY, Main.window, null).showAndWait());
 
 			// goFullScreen
 			goFullScreen.setOnAction(
-					a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
+				a -> webBrowserController.chromiumFullScreenController.goFullScreenMode(browserView, this));
 
 			// Finally load the firstWebSite
 			loadWebSite(firstWebSite);
@@ -547,8 +531,8 @@ public class WebBrowserTabController extends StackPane {
 
 				// Notification
 				AlertTool.showNotification("Copied to Clipboard",
-						"Search bar text copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
-						Duration.seconds(2), NotificationType.INFORMATION);
+					"Search bar text copied to clipboard,you can paste it anywhere on the your system.\nFor example in Windows with [CTRL+V], in Mac[COMMAND+V]",
+					Duration.seconds(2), NotificationType.INFORMATION);
 			});
 		} catch (Exception ex) {
 			// The Chromium profile directory is already used/locked by another
@@ -562,7 +546,7 @@ public class WebBrowserTabController extends StackPane {
 	 * Returns back the main domain of the given url for example
 	 * https://duckduckgo.com/?q=/favicon.ico returns <br>
 	 * https://duckduckgo.com
-	 * 
+	 *
 	 * @param urlInput
 	 * @return
 	 */
@@ -579,27 +563,27 @@ public class WebBrowserTabController extends StackPane {
 	/**
 	 * Return the Search Url for the Search Provider For example for `Google`
 	 * returns `https://www.google.com/search?q=`
-	 * 
+	 *
 	 * @param searchProvider
 	 * @return The Search Engine Url
 	 */
 	public String getSearchEngineHomeUrl(String searchProvider) {
 		// Find
 		switch (searchProvider.toLowerCase()) {
-		case "bing":
-			return "http://www.bing.com";
-		case "duckduckgo":
-			return "https://duckduckgo.com";
-		case "yahoo":
-			return "https://search.yahoo.com";
-		default: // then google
-			return "https://www.google.com";
+			case "bing":
+				return "http://www.bing.com";
+			case "duckduckgo":
+				return "https://duckduckgo.com";
+			case "yahoo":
+				return "https://search.yahoo.com";
+			default: // then google
+				return "https://www.google.com";
 		}
 	}
 
 	/**
 	 * Get the default url home page for the selected search provider
-	 * 
+	 *
 	 * @return Get the default url home page for the selected search provider
 	 */
 	public String getSelectedEngineHomeUrl() {
@@ -609,7 +593,7 @@ public class WebBrowserTabController extends StackPane {
 	/**
 	 * Loads the given website , either directly if the url is a valid WebSite Url
 	 * or using a SearchEngine like Google
-	 * 
+	 *
 	 * @param webSite
 	 */
 	private void loadWebSite(String webSite) {
@@ -629,16 +613,16 @@ public class WebBrowserTabController extends StackPane {
 				finalWebsiteSecondPart = "";
 			else {
 				switch (((RadioMenuItem) searchEngineGroup.getSelectedToggle()).getText()) {
-				case "bing":
-				case "duckduckgo":
-					finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
-					break;
-				case "yahoo": // I need to find a solution for this
-					finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
-					break;
-				default: // then google
-					finalWebsiteSecondPart = "//search?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
-					break;
+					case "bing":
+					case "duckduckgo":
+						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
+						break;
+					case "yahoo": // I need to find a solution for this
+						finalWebsiteSecondPart = "//?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
+						break;
+					default: // then google
+						finalWebsiteSecondPart = "//search?q=" + URLEncoder.encode(searchBar.getText(), "UTF-8");
+						break;
 				}
 
 			}
@@ -667,7 +651,7 @@ public class WebBrowserTabController extends StackPane {
 
 	/**
 	 * Goes Backward one Page
-	 * 
+	 *
 	 */
 	public void goBack() {
 		browser.navigation().goBack();
@@ -675,7 +659,7 @@ public class WebBrowserTabController extends StackPane {
 
 	/**
 	 * Goes Forward one Page
-	 * 
+	 *
 	 */
 	public void goForward() {
 		browser.navigation().goForward();
@@ -725,7 +709,7 @@ public class WebBrowserTabController extends StackPane {
 
 	/**
 	 * Determines if the tab title will have a moving animation or not
-	 * 
+	 *
 	 * @param value
 	 */
 	public void setMovingTitleEnabled(boolean value) {
@@ -797,7 +781,7 @@ public class WebBrowserTabController extends StackPane {
 
 	/**
 	 * Right Click ContextMenuHandler
-	 * 
+	 *
 	 * @author GOXR3PLUSSTUDIO
 	 *
 	 */
