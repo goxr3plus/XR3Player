@@ -379,5 +379,14 @@
 		<!-- XR3Converter -->
 		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>XR3Converter</artifactId> 
 			<version>V3.1</version> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.4.2</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 </project>
