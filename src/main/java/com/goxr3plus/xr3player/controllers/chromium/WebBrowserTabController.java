@@ -502,9 +502,7 @@ public class WebBrowserTabController extends StackPane {
 			homeButton.setOnAction(a -> loadDefaultWebSite());
 
 			// movingTitleAnimation
-			movingTitleAnimation.selectedProperty().addListener((observable, oldValue, newValue) -> {
-				marquee.checkAnimationValidity(newValue);
-			});
+			movingTitleAnimation.selectedProperty().addListener((observable, oldValue, newValue) -> marquee.checkAnimationValidity(newValue));
 			movingTitleAnimation.setSelected(WebBrowserController.MOVING_TITLES_ENABLED);
 
 			// showVersion

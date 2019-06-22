@@ -84,23 +84,21 @@ public class ArtWorkController extends StackPane {
 	private void initialize() {
 
 		// Save
-		save.setOnAction(a -> {
-			Optional.ofNullable(Main.specialChooser
-					.prepareToExportImage(Main.window, "cover" + DatabaseTool.random.nextInt(50000) + ".png"))
-					.ifPresent(file -> {
-						// System.out.println(file.getAbsolutePath())
+		save.setOnAction(a -> Optional.ofNullable(Main.specialChooser
+				.prepareToExportImage(Main.window, "cover" + DatabaseTool.random.nextInt(50000) + ".png"))
+				.ifPresent(file -> {
+					// System.out.println(file.getAbsolutePath())
 
-						// Do the job using an external Thread
-						new Thread(() -> saveToFile(pictureUpdaterService.getImage(), file)).start();
+					// Do the job using an external Thread
+					new Thread(() -> saveToFile(pictureUpdaterService.getImage(), file)).start();
 
-						// Show a Notification to User
-						AlertTool.showNotification("Exporting Album Image",
-								"From File: \n" + InfoTool.getMinString(
-										IOInfo.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100, "..."),
-								Duration.seconds(2), NotificationType.SIMPLE);
+					// Show a Notification to User
+					AlertTool.showNotification("Exporting Album Image",
+							"From File: \n" + InfoTool.getMinString(
+									IOInfo.getFileName(pictureUpdaterService.getFileAbsolutePath()), 100, "..."),
+							Duration.seconds(2), NotificationType.SIMPLE);
 
-					});
-		});
+				}));
 
 	}
 

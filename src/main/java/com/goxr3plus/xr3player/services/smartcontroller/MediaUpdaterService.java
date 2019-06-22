@@ -256,9 +256,7 @@ public class MediaUpdaterService {
 				// Set timesPlayed
 				Main.playedSongs.getSet().stream()
 						.filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst()
-						.ifPresent(playedFile -> {
-							media.timesPlayedProperty().set(playedFile.getTimesPlayed());
-						});
+						.ifPresent(playedFile -> media.timesPlayedProperty().set(playedFile.getTimesPlayed()));
 
 				// Set stars
 				// The is a problem with this , what if the file is the same but ... in
