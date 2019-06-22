@@ -10,142 +10,162 @@
 <?import org.fxmisc.richtext.InlineCssTextArea?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="444.0" prefWidth="804.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane>
-         <center>
-            <TableView fx:id="tableView" styleClass="media-table-view" tableMenuButtonVisible="true" BorderPane.alignment="CENTER">
-               <columns>
-                  <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#" />
-                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="85.0" minWidth="85.0" prefWidth="85.0" sortable="false" text="Search,Buy,Share">
-                     <graphic>
-                        <HBox alignment="CENTER" spacing="6.0">
-                           <children>
-                              <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="20" />
-                              <FontIcon iconColor="WHITE" iconLiteral="fab-youtube" iconSize="20" />
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="20" />
-                           </children>
-                        </HBox>
-                     </graphic>
+<fx:root prefHeight="444.0" prefWidth="804.0" stylesheets="@../../style/application.css" type="StackPane"
+         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane>
+        <center>
+          <TableView fx:id="tableView" styleClass="media-table-view" tableMenuButtonVisible="true"
+                     BorderPane.alignment="CENTER">
+              <columns>
+                  <TableColumn fx:id="number" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="#"/>
+                  <TableColumn fx:id="getInfoBuy" editable="false" maxWidth="85.0" minWidth="85.0" prefWidth="85.0"
+                               sortable="false" text="Search,Buy,Share">
+                      <graphic>
+                          <HBox alignment="CENTER" spacing="6.0">
+                              <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="20"/>
+                              <FontIcon iconColor="WHITE" iconLiteral="fab-youtube" iconSize="20"/>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="20"/>
+                          </HBox>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" text="Artwork" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="26" />
-                     </graphic>
+                  <TableColumn fx:id="artwork" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" text="Artwork"
+                               visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="26"/>
+                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="playStatus" maxWidth="-1.0" minWidth="32.0" prefWidth="32.0" text="Played">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-play-circle" iconSize="22" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fas-play-circle" iconSize="22"/>
+                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="mediaType" maxWidth="36.0" minWidth="36.0" prefWidth="36.0" text="Type">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="28" />
-                     </graphic></TableColumn>
-                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0" text="Name" />
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="typ-filter" iconSize="28"/>
+                      </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="title" maxWidth="1.7976931348623157E308" minWidth="50.0" prefWidth="50.0"
+                               text="Name"/>
                   <TableColumn fx:id="emotions" maxWidth="32.0" minWidth="32.0" prefWidth="32.0" text="Emotion">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="26" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="typ-thumbs-up" iconSize="26"/>
+                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="duration" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Length">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
                   <TableColumn fx:id="stars" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Stars">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="typ-star" iconSize="26" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="typ-star" iconSize="26"/>
+                      </graphic>
                   </TableColumn>
-                     <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Play Count" />
-                  <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Extension" visible="false" />
-                  <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-inbox" iconSize="24" />
-                     </graphic>
-                  </TableColumn>            
-                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false" />
-                  <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false" />
-                  <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false" />
-                  <TableColumn fx:id="composer" minWidth="65.0" prefWidth="75.0" text="Composer" visible="false" />
+                  <TableColumn fx:id="timesPlayed" maxWidth="75.0" minWidth="75.0" prefWidth="75.0"
+                               text="Play Count"/>
+                  <TableColumn fx:id="fileType" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Extension"
+                               visible="false"/>
+                  <TableColumn fx:id="fileSize" maxWidth="250.0" minWidth="130.0" prefWidth="139.0" text="File Size"
+                               visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-inbox" iconSize="24"/>
+                      </graphic>
+                  </TableColumn>
+                  <TableColumn fx:id="artist" minWidth="65.0" prefWidth="75.0" text="Artist" visible="false"/>
+                  <TableColumn fx:id="mood" minWidth="65.0" prefWidth="75.0" text="Mood" visible="false"/>
+                  <TableColumn fx:id="album" minWidth="65.0" prefWidth="75.0" text="Album" visible="false"/>
+                  <TableColumn fx:id="composer" minWidth="65.0" prefWidth="75.0" text="Composer" visible="false"/>
                   <TableColumn fx:id="comment" minWidth="65.0" prefWidth="75.0" text="Comment" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-commenting" iconSize="24" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-commenting" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate" />
-                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm" />
-                  <TableColumn fx:id="genre" minWidth="65.0" prefWidth="75.0" text="Genre" visible="false" />
-                  <TableColumn fx:id="key" minWidth="65.0" prefWidth="75.0" text="Key" visible="false" />
-                  <TableColumn fx:id="year" minWidth="65.0" prefWidth="75.0" text="Year" visible="false" />
-                  <TableColumn fx:id="tempo" minWidth="65.0" prefWidth="75.0" text="Tempo" visible="false" />
-                  <TableColumn fx:id="copyright" minWidth="65.0" prefWidth="75.0" text="Copyright" visible="false" />
-                  <TableColumn fx:id="track" minWidth="65.0" prefWidth="75.0" text="Track" visible="false" />
-                  <TableColumn fx:id="track_total" minWidth="65.0" prefWidth="75.0" text="Track Total" visible="false" />
-                  <TableColumn fx:id="remixer" minWidth="65.0" prefWidth="75.0" text="Remixer" visible="false" />
-                  <TableColumn fx:id="djMixer" minWidth="65.0" prefWidth="75.0" text="DJMixer" visible="false" />
-                  <TableColumn fx:id="rating" minWidth="65.0" prefWidth="75.0" text="Rating" visible="false" />
-                  <TableColumn fx:id="producer" minWidth="65.0" prefWidth="75.0" text="Producer" visible="false" />
-                  <TableColumn fx:id="performer" minWidth="65.0" prefWidth="75.0" text="Performer" visible="false" />
-                  <TableColumn fx:id="orchestra" minWidth="65.0" prefWidth="75.0" text="Orchestra" visible="false" />
-                  <TableColumn fx:id="country" minWidth="65.0" prefWidth="75.0" text="Country" visible="false" />
-                  <TableColumn fx:id="lyricist" minWidth="65.0" prefWidth="75.0" text="Lyricist" visible="false" />
-                  <TableColumn fx:id="conductor" minWidth="65.0" prefWidth="75.0" text="Conductor" visible="false" />
-                  <TableColumn fx:id="amazonID" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" visible="false" />
-                  <TableColumn fx:id="encoder" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false" />
+                  <TableColumn fx:id="bitRate" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bit Rate"/>
+                  <TableColumn fx:id="bpm" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" text="Bpm"/>
+                  <TableColumn fx:id="genre" minWidth="65.0" prefWidth="75.0" text="Genre" visible="false"/>
+                  <TableColumn fx:id="key" minWidth="65.0" prefWidth="75.0" text="Key" visible="false"/>
+                  <TableColumn fx:id="year" minWidth="65.0" prefWidth="75.0" text="Year" visible="false"/>
+                  <TableColumn fx:id="tempo" minWidth="65.0" prefWidth="75.0" text="Tempo" visible="false"/>
+                  <TableColumn fx:id="copyright" minWidth="65.0" prefWidth="75.0" text="Copyright" visible="false"/>
+                  <TableColumn fx:id="track" minWidth="65.0" prefWidth="75.0" text="Track" visible="false"/>
+                  <TableColumn fx:id="track_total" minWidth="65.0" prefWidth="75.0" text="Track Total"
+                               visible="false"/>
+                  <TableColumn fx:id="remixer" minWidth="65.0" prefWidth="75.0" text="Remixer" visible="false"/>
+                  <TableColumn fx:id="djMixer" minWidth="65.0" prefWidth="75.0" text="DJMixer" visible="false"/>
+                  <TableColumn fx:id="rating" minWidth="65.0" prefWidth="75.0" text="Rating" visible="false"/>
+                  <TableColumn fx:id="producer" minWidth="65.0" prefWidth="75.0" text="Producer" visible="false"/>
+                  <TableColumn fx:id="performer" minWidth="65.0" prefWidth="75.0" text="Performer" visible="false"/>
+                  <TableColumn fx:id="orchestra" minWidth="65.0" prefWidth="75.0" text="Orchestra" visible="false"/>
+                  <TableColumn fx:id="country" minWidth="65.0" prefWidth="75.0" text="Country" visible="false"/>
+                  <TableColumn fx:id="lyricist" minWidth="65.0" prefWidth="75.0" text="Lyricist" visible="false"/>
+                  <TableColumn fx:id="conductor" minWidth="65.0" prefWidth="75.0" text="Conductor" visible="false"/>
+                  <TableColumn fx:id="amazonID" minWidth="65.0" prefWidth="75.0" text="Amazon_ID" visible="false"/>
+                  <TableColumn fx:id="encoder" minWidth="65.0" prefWidth="75.0" text="Encoder" visible="false"/>
                   <TableColumn fx:id="drive" maxWidth="80.0" minWidth="80.0" text="Drive" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-laptop" iconSize="24" />
-                     </graphic>
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-laptop" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="filePath" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Path" visible="false" />
-                  <TableColumn fx:id="fileName" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="File Name" visible="false" />
-                  <TableColumn fx:id="hourImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Time Imported" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24" />
-                     </graphic>
+                  <TableColumn fx:id="filePath" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0"
+                               text="File Path" visible="false"/>
+                  <TableColumn fx:id="fileName" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0"
+                               text="File Name" visible="false"/>
+                  <TableColumn fx:id="hourImported" maxWidth="1.7976931348623157E308" minWidth="150.0"
+                               prefWidth="150.0" text="Time Imported" visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-clock-o" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="dateImported" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date Imported" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar" iconSize="24" />
-                     </graphic>
+                  <TableColumn fx:id="dateImported" maxWidth="1.7976931348623157E308" minWidth="150.0"
+                               prefWidth="150.0" text="Date Imported" visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-calendar" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="dateFileCreated" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Created" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-plus-o" iconSize="24" />
-                     </graphic>
+                  <TableColumn fx:id="dateFileCreated" maxWidth="1.7976931348623157E308" minWidth="150.0"
+                               prefWidth="150.0" text="Date File Created" visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-plus-o" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-                  <TableColumn fx:id="dateFileModified" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" text="Date File Modified" visible="false">
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-check-o" iconSize="24" />
-                     </graphic>
+                  <TableColumn fx:id="dateFileModified" maxWidth="1.7976931348623157E308" minWidth="150.0"
+                               prefWidth="150.0" text="Date File Modified" visible="false">
+                      <graphic>
+                          <FontIcon iconColor="WHITE" iconLiteral="fa-calendar-check-o" iconSize="24"/>
+                      </graphic>
                   </TableColumn>
-               </columns>
-               <padding>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </padding>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-         </center>
-         <bottom>
+              </columns>
+              <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+              </padding>
+              <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+              </columnResizePolicy>
+          </TableView>
+        </center>
+        <bottom>
             <HBox style="-fx-background-color: #151515;" BorderPane.alignment="CENTER">
-               <children>
-                  <InlineCssTextArea fx:id="detailCssTextArea" editable="false" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0" styleClass="inline-css-text-area" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="quickSearchTextField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;" text="Search...">
-                     <padding>
-                        <Insets right="5.0" />
-                     </padding></Label>
-               </children>
+                <InlineCssTextArea fx:id="detailCssTextArea" editable="false" maxHeight="-Infinity"
+                                   minHeight="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="22.0"
+                                   styleClass="inline-css-text-area" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="quickSearchTextField" maxHeight="1.7976931348623157E308"
+                       maxWidth="1.7976931348623157E308"
+                       style="-fx-background-color: #151515; -fx-text-fill: white; -fx-font-weight: bold;"
+                       text="Search...">
+                    <padding>
+                        <Insets right="5.0"/>
+                    </padding>
+                </Label>
             </HBox>
-         </bottom>
-      </BorderPane>
-      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
-         </graphic>
-      </Label>
-   </children>
+        </bottom>
+    </BorderPane>
+    <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308"
+           style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;"
+           styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false"
+           wrapText="true">
+        <graphic>
+          <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper"/>
+        </graphic>
+    </Label>
 </fx:root>

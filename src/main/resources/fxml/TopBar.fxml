@@ -30,35 +30,35 @@
             <Insets right="10.0" />
          </BorderPane.margin>
          <graphic>
-            <HBox alignment="CENTER" spacing="5.0">
-               <children>
-                  <FontIcon fx:id="highGraphics" iconColor="#fc4848" iconLiteral="fas-tachometer-alt" iconSize="24" />
-               </children>
-            </HBox>
+             <HBox alignment="CENTER" spacing="5.0">
+                 <FontIcon fx:id="highGraphics" iconColor="#fc4848" iconLiteral="fas-tachometer-alt" iconSize="24"/>
+             </HBox>
          </graphic>
       </Label>
    </center>
    <left>
-      <HBox alignment="CENTER" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton fx:id="showHideSideBar" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button2" text=" ">
-               <tooltip>
-                  <Tooltip text="Side Bar" />
-               </tooltip>
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-large" iconSize="32" selectionEnd="0" selectionStart="0" />
-               </graphic>
-            </JFXButton>
-            <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-background-color: #303030;">
-               <children>
-                  <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="239.0" promptText="what are you looking for ?" styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20" />
-               </children>
+       <HBox alignment="CENTER" minWidth="0.0" spacing="15.0" BorderPane.alignment="CENTER">
+           <JFXButton fx:id="showHideSideBar" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button2"
+                      text=" ">
+              <tooltip>
+                  <Tooltip text="Side Bar"/>
+              </tooltip>
+              <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-large" iconSize="32" selectionEnd="0"
+                            selectionStart="0"/>
+              </graphic>
+           </JFXButton>
+           <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0"
+                 style="-fx-background-color: #303030;">
                <HBox.margin>
-                  <Insets right="10.0" />
+                   <Insets right="10.0"/>
                </HBox.margin>
-            </HBox>
-         </children>
-      </HBox>
+               <TextField fx:id="searchField" editable="false" focusTraversable="false" prefHeight="25.0"
+                          prefWidth="239.0" promptText="what are you looking for ?" styleClass="dark-text-field"
+                          HBox.hgrow="ALWAYS"/>
+               <FontIcon iconColor="WHITE" iconLiteral="fas-search" iconSize="20"/>
+           </HBox>
+       </HBox>
    </left>
 </fx:root>
