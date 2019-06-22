@@ -94,7 +94,7 @@ public class SearchService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 			/**
 			 * [[SuppressWarningsSpartan]]
 			 */

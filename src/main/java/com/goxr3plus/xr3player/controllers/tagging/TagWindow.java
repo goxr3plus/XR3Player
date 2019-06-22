@@ -185,7 +185,7 @@ public class TagWindow extends StackPane {
 
 		// listView
 		// listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE)
-		listView.setCellFactory(lv -> new ListCell<String>() {
+		listView.setCellFactory(lv -> new ListCell<>() {
 			@Override
 			public void updateItem(String item, boolean empty) {
 				super.updateItem(item, empty);

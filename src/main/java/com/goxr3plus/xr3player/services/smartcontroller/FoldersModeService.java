@@ -62,7 +62,7 @@ public class FoldersModeService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 			@Override
 			protected Void call() throws Exception {
 
@@ -72,17 +72,17 @@ public class FoldersModeService extends Service<Void> {
 				// Determine filesMode
 				switch (((Control) Main.settingsWindow.getPlayListsSettingsController().getWhichFilesToShowGenerally()
 						.getSelectedToggle()).getTooltip().getText()) {
-				case "1":
-					filesMode = FilesMode.SELECTED_MEDIA;
-					break;
-				case "2":
-					filesMode = FilesMode.CURRENT_PAGE;
-					break;
-				case "3":
-					filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
-					break;
-				default:
-					filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+					case "1":
+						filesMode = FilesMode.SELECTED_MEDIA;
+						break;
+					case "2":
+						filesMode = FilesMode.CURRENT_PAGE;
+						break;
+					case "3":
+						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
+						break;
+					default:
+						filesMode = FilesMode.EVERYTHING_ON_PLAYLIST;
 				}
 
 				// Change Top Label Text
@@ -213,7 +213,7 @@ public class FoldersModeService extends Service<Void> {
 
 		@Override
 		protected Task<Void> createTask() {
-			return new Task<Void>() {
+			return new Task<>() {
 
 				@Override
 				protected Void call() throws Exception {
@@ -235,18 +235,18 @@ public class FoldersModeService extends Service<Void> {
 				 * 
 				 * @param dir The full path of the directory
 				 * @return Position [0] Total number of files contained in this folder <br>
-				 *         Position [1] Total number of files contained in this folder && inside
-				 *         the Playlist Database <br>
+				 * Position [1] Total number of files contained in this folder && inside
+				 * the Playlist Database <br>
 				 */
 				private int[] countFiles(File dir) {
-					int[] count = { 0, 0 };
+					int[] count = {0, 0};
 
 					// Folder exists?
 					if (dir.exists())
 						try {
 							Files.walkFileTree(Paths.get(dir.getPath()),
 									new HashSet<>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
-									new SimpleFileVisitor<Path>() {
+									new SimpleFileVisitor<>() {
 										@Override
 										public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
 												throws IOException {

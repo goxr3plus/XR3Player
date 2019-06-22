@@ -59,7 +59,7 @@ public class SearchCacheService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 
 			@Override
 			protected Boolean call() throws Exception {
@@ -90,7 +90,7 @@ public class SearchCacheService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 * 
+			 *
 			 * @param path The searting path
 			 */
 			private void populateCachedList(String path) throws DbxException {

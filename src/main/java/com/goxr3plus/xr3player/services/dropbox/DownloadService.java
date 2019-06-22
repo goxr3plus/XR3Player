@@ -64,7 +64,7 @@ public class DownloadService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -102,7 +102,7 @@ public class DownloadService extends Service<Boolean> {
 
 			/**
 			 * Download Dropbox File to Local Computer
-			 * 
+			 *
 			 * @param client                Current connected client
 			 * @param dropboxFile           The file path on the Dropbox cloud server ->
 			 *                              [/foldername/something.txt] or a Folder [/fuck]
@@ -113,7 +113,7 @@ public class DownloadService extends Service<Boolean> {
 			 * @throws IOException
 			 */
 			public void downloadFile(final DbxClientV2 client, final DropboxFile dropboxFile,
-					final String localFileAbsolutePath) throws DownloadErrorException, DbxException, IOException {
+									 final String localFileAbsolutePath) throws DownloadErrorException, DbxException, IOException {
 				final String dropBoxFilePath = dropboxFile.getMetadata().getPathLower();
 
 				// Simple File
@@ -121,14 +121,14 @@ public class DownloadService extends Service<Boolean> {
 					// Create DbxDownloader
 					downloadFile = client.files().download(dropBoxFilePath);
 					try (// FileOutputStream
-							FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
-							// ProgressOutPutStream
-							ProgressOutputStream output = new ProgressOutputStream(fOut,
-									downloadFile.getResult().getSize(), (long completed, long totalSize) -> {
-										// System.out.println( ( completed * 100 ) / totalSize + " %")
+						 FileOutputStream fOut = new FileOutputStream(localFileAbsolutePath);
+						 // ProgressOutPutStream
+						 ProgressOutputStream output = new ProgressOutputStream(fOut,
+								 downloadFile.getResult().getSize(), (long completed, long totalSize) -> {
+							 // System.out.println( ( completed * 100 ) / totalSize + " %")
 
-										updateProgress((completed * 100), totalSize);
-									})) {
+							 updateProgress((completed * 100), totalSize);
+						 })) {
 
 						// FileOutputStream
 						System.out.println("Downloading .... " + dropBoxFilePath);

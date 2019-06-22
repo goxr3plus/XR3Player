@@ -72,13 +72,13 @@ public class MediaViewerService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 
 			@Override
 			protected Void call() throws Exception {
 
 				// counter
-				int[] counter = { 0 };
+				int[] counter = {0};
 				int total = smartController.getItemsObservableList().size();
 
 				// Update Message

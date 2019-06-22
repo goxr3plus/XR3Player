@@ -163,7 +163,7 @@ public class FiltersModeService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 			/**
 			 * [[SuppressWarningsSpartan]]
 			 */
@@ -345,7 +345,7 @@ public class FiltersModeService extends Service<Void> {
 
 			/**
 			 * Return the artist of the given audio file (mp3) actually
-			 * 
+			 *
 			 * @param file  The audio File
 			 * @param media The audio File in case it is already a Media Class File
 			 * @return Return the artist of the given audio file (mp3) actually
@@ -356,7 +356,7 @@ public class FiltersModeService extends Service<Void> {
 				// Check file existence , length and extension
 				if (file.exists()
 						&& "mp3".equals(
-								media != null ? media.getFileType() : IOInfo.getFileExtension(file.getAbsolutePath()))
+						media != null ? media.getFileType() : IOInfo.getFileExtension(file.getAbsolutePath()))
 						&& file.length() != 0) {
 
 					// MP3File

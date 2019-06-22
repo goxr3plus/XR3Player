@@ -458,7 +458,7 @@ public class MediaTableViewer extends StackPane {
 
 		// emotion
 		emotions.setCellValueFactory(new PropertyValueFactory<>("emotion"));
-		emotions.setCellFactory(col -> new TableCell<Media, Integer>() {
+		emotions.setCellFactory(col -> new TableCell<>() {
 
 			// Emotion Button
 			Button emotionButton = new Button("");
@@ -550,7 +550,7 @@ public class MediaTableViewer extends StackPane {
 
 		// stars
 		stars.setCellValueFactory(new PropertyValueFactory<>("stars"));
-		stars.setCellFactory(col -> new TableCell<Media, Double>() {
+		stars.setCellFactory(col -> new TableCell<>() {
 
 			// Star Badge
 			StarBadge starBadge = new StarBadge(0.0);
@@ -582,7 +582,7 @@ public class MediaTableViewer extends StackPane {
 
 		// hasBeenPlayed
 		playStatus.setCellValueFactory(new PropertyValueFactory<>("playStatus"));
-		playStatus.setCellFactory(col -> new TableCell<Media, Integer>() {
+		playStatus.setCellFactory(col -> new TableCell<>() {
 
 			// Icon FontIcon
 			// HBox flowPane = new HBox();
@@ -629,7 +629,7 @@ public class MediaTableViewer extends StackPane {
 
 		// mediaType
 		mediaType.setCellValueFactory(new PropertyValueFactory<>("mediaType"));
-		mediaType.setCellFactory(col -> new TableCell<Media, Integer>() {
+		mediaType.setCellFactory(col -> new TableCell<>() {
 
 			// Icon FontIcon
 			FontIcon icon = new FontIcon();
