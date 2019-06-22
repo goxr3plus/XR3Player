@@ -8,94 +8,88 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="530.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane minHeight="0.0">
-         <center>
-            <JFXTabPane minHeight="0.0" minWidth="0.0" side="LEFT" styleClass="specialJFXTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-               <tabs>
-                  <Tab fx:id="openedLibrariesTab" closable="false">
-                     <graphic>
+<fx:root prefHeight="530.0" prefWidth="811.0" stylesheets="@../style/application.css" type="StackPane"
+         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane minHeight="0.0">
+        <center>
+            <JFXTabPane minHeight="0.0" minWidth="0.0" side="LEFT" styleClass="specialJFXTabPane"
+                        tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                <Tab fx:id="openedLibrariesTab" closable="false">
+                    <graphic>
                         <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Opened Libraries" textAlignment="CENTER" wrapText="true">
-                                 <graphic>
-                                    <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="32" />
-                                 </graphic>
-                              </Label>
-                           </children>
+                            <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                                   prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                                   text="Opened Libraries" textAlignment="CENTER" wrapText="true">
+                                <graphic>
+                                    <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="32"/>
+                                </graphic>
+                            </Label>
                         </Group>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="dropBoxTab" closable="false">
-                     <graphic>
+                    </graphic>
+                </Tab>
+                <Tab fx:id="dropBoxTab" closable="false">
+                    <graphic>
                         <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text=" Dropbox " textAlignment="CENTER" wrapText="true">
-                                 <graphic>
-                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32" />
-                                 </graphic>
-                              </Label>
-                           </children>
+                            <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                                   prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                                   text=" Dropbox " textAlignment="CENTER" wrapText="true">
+                                <graphic>
+                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="32"/>
+                                </graphic>
+                            </Label>
                         </Group>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="downloadsTab" closable="false">
-                     <content>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane">
-                                 <tabs>
-                                    <Tab fx:id="dropBoxDownloadsTab" closable="false" text="Dropbox ">
-                                       <graphic>
-                                          <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20" />
-                                       </graphic>
-                                    </Tab>
-                                 </tabs>
-                              </JFXTabPane>
-                           </children></StackPane>
-                     </content>
-                     <graphic>
+                    </graphic>
+                </Tab>
+                <Tab fx:id="downloadsTab" closable="false">
+                    <graphic>
                         <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Downloads">
-                                 <graphic>
-                                    <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt" iconSize="25" />
-                                 </graphic>
-                              </Label>
-                           </children>
+                            <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                                   prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                                   text="Downloads">
+                                <graphic>
+                                    <FontIcon iconColor="#ceff26" iconLiteral="fas-cloud-download-alt"
+                                              iconSize="25"/>
+                                </graphic>
+                            </Label>
                         </Group>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="onlineMusicTab" closable="false">
-                     <graphic>
+                    </graphic>
+                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <JFXTabPane minHeight="0.0" styleClass="specialJFXTabPane">
+                            <Tab fx:id="dropBoxDownloadsTab" closable="false" text="Dropbox ">
+                                <graphic>
+                                    <FontIcon iconColor="#25c1ff" iconLiteral="fa-dropbox" iconSize="20"/>
+                                </graphic>
+                            </Tab>
+                        </JFXTabPane>
+                    </StackPane>
+                </Tab>
+                <Tab fx:id="onlineMusicTab" closable="false">
+                    <graphic>
                         <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Online Music" textAlignment="CENTER" wrapText="true">
-                                 <graphic>
-                                    <FontIcon iconColor="#ff3c26" iconLiteral="far-gem" iconSize="25" />
-                                 </graphic>
-                              </Label>
-                           </children>
+                            <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                                   prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                                   text="Online Music" textAlignment="CENTER" wrapText="true">
+                                <graphic>
+                                    <FontIcon iconColor="#ff3c26" iconLiteral="far-gem" iconSize="25"/>
+                                </graphic>
+                            </Label>
                         </Group>
-                     </graphic>
-                  </Tab>
-                  <Tab fx:id="emotionListsTab" closable="false">
-                     <graphic>
+                    </graphic>
+                </Tab>
+                <Tab fx:id="emotionListsTab" closable="false">
+                    <graphic>
                         <Group>
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Emotion Lists">
-                                 <graphic>
-                                    <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="25" />
-                                 </graphic>
-                              </Label>
-                           </children>
+                            <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                                   prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                                   text="Emotion Lists">
+                                <graphic>
+                                    <FontIcon iconColor="#ff3c26" iconLiteral="fas-heart" iconSize="25"/>
+                                </graphic>
+                            </Label>
                         </Group>
-                     </graphic>
-                  </Tab>
-               </tabs>
+                    </graphic>
+                </Tab>
             </JFXTabPane>
-         </center>
-      </BorderPane>
-   </children>
+        </center>
+    </BorderPane>
 </fx:root>

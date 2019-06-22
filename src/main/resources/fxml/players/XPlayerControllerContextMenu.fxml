@@ -14,23 +14,21 @@
             <FontIcon iconColor="WHITE" iconLiteral="fas-shopping-cart" iconSize="18" />
          </graphic>
       </Menu>
-      <Menu fx:id="findLyrics" mnemonicParsing="false" text="Find Lyrics">
-         <items>
-            <MenuItem fx:id="lyricFinderOrg" mnemonicParsing="false" onAction="#action" text="LyricFinder.org">
-               <graphic>
-                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
-               </graphic>
-            </MenuItem>
-            <MenuItem fx:id="lyricsCom" mnemonicParsing="false" onAction="#action" text="Lyrics.com">
-               <graphic>
-                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
-               </graphic>
-            </MenuItem>
-         </items>
-         <graphic>
-            <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
-         </graphic>
-      </Menu>
+       <Menu fx:id="findLyrics" mnemonicParsing="false" text="Find Lyrics">
+           <graphic>
+               <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24"/>
+           </graphic>
+           <MenuItem fx:id="lyricFinderOrg" mnemonicParsing="false" onAction="#action" text="LyricFinder.org">
+              <graphic>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24"/>
+              </graphic>
+           </MenuItem>
+           <MenuItem fx:id="lyricsCom" mnemonicParsing="false" onAction="#action" text="Lyrics.com">
+              <graphic>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24"/>
+              </graphic>
+           </MenuItem>
+       </Menu>
       <SeparatorMenuItem mnemonicParsing="false" />
       <MenuItem fx:id="copy" mnemonicParsing="false" onAction="#action" text="Copy">
          <graphic>

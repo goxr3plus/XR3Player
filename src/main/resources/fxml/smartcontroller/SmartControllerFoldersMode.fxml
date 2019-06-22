@@ -12,91 +12,99 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <StackPane style="-fx-background-color: #202020;">
-         <children>
-            <VBox>
-               <children>
-                  <HBox>
-                     <children>
-                        <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text="Associated Folders Explorer" HBox.hgrow="ALWAYS">
-                           <graphic>
-                              <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
-                           </graphic>
-                           <padding>
-                              <Insets bottom="3.0" top="3.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" spacing="5.0">
-                     <children>
-                        <Button fx:id="settings" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="settings" />
-                           </tooltip>
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0" selectionStart="0" />
-                           </graphic>
-                        </Button>
-                        <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Refresh" />
-                           </tooltip>
-                           <graphic>
-                              <FontIcon iconColor="#32abe8" iconLiteral="fas-sync-alt" iconSize="20" />
-                           </graphic>
-                        </Button>
-                        <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <tooltip>
-                              <Tooltip text="Collapse All" />
-                           </tooltip>
-                           <graphic>
-                              <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" />
-                           </graphic>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="2.0" top="2.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-            <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER" visible="false" wrapText="true">
-               <tooltip>
-                  <Tooltip text="Displays from which folders the Playlist Media are coming from ..." />
-               </tooltip>
-               <graphic>
-                  <Button fx:id="backToMedia" mnemonicParsing="false" prefWidth="173.0" style="-fx-font-size: 25;" styleClass="jfx-button4" text="Back" textAlignment="CENTER" wrapText="true">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="far-arrow-alt-circle-left" iconSize="52" />
-                     </graphic>
-                  </Button>
-               </graphic>
-            </Label>
-         </children>
-      </StackPane>
-      <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
-         <children>
-            <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0" />
-         </children>
-         <padding>
-            <Insets top="25.0" />
-         </padding>
-      </VBox>
-   </children>
+<fx:root prefHeight="332.0" prefWidth="555.0" stylesheets="@../../style/application.css" type="StackPane"
+         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane style="-fx-background-color: #202020;">
+        <VBox>
+            <HBox>
+                <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
+                       maxWidth="1.7976931348623157E308"
+                       style="-fx-border-color: transparent; -fx-background-color: #151515;"
+                       styleClass="applicationSettingsLabel2" text="Associated Folders Explorer"
+                       HBox.hgrow="ALWAYS">
+                    <graphic>
+                        <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24"/>
+                    </graphic>
+                    <padding>
+                        <Insets bottom="3.0" top="3.0"/>
+                    </padding>
+                </Label>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0">
+                <VBox.margin>
+                    <Insets bottom="2.0" top="2.0"/>
+                </VBox.margin>
+                <Button fx:id="settings" maxHeight="1.7976931348623157E308" maxWidth="-Infinity"
+                        minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0"
+                        style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <tooltip>
+                        <Tooltip text="settings"/>
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-cog" iconSize="20" selectionEnd="0"
+                                  selectionStart="0"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="refresh" maxHeight="1.7976931348623157E308" maxWidth="-Infinity"
+                        minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0"
+                        style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <tooltip>
+                        <Tooltip text="Refresh"/>
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconColor="#32abe8" iconLiteral="fas-sync-alt" iconSize="20"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="collapseTree" maxHeight="1.7976931348623157E308" maxWidth="-Infinity"
+                        minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="42.0"
+                        style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <tooltip>
+                        <Tooltip text="Collapse All"/>
+                    </tooltip>
+                    <graphic>
+                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24"
+                                  selectionEnd="0" selectionStart="0"/>
+                    </graphic>
+                </Button>
+            </HBox>
+            <TreeView fx:id="treeView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308"
+               maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;"
+               styleClass="applicationSettingsLabel2" text="No associated Folders found !" textAlignment="CENTER"
+               visible="false" wrapText="true">
+            <tooltip>
+                <Tooltip text="Displays from which folders the Playlist Media are coming from ..."/>
+            </tooltip>
+            <graphic>
+                <Button fx:id="backToMedia" mnemonicParsing="false" prefWidth="173.0" style="-fx-font-size: 25;"
+                        styleClass="jfx-button4" text="Back" textAlignment="CENTER" wrapText="true">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-arrow-alt-circle-left" iconSize="52"/>
+                    </graphic>
+                </Button>
+            </graphic>
+        </Label>
+    </StackPane>
+    <VBox fx:id="indicatorVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);"
+          visible="false">
+        <padding>
+            <Insets top="25.0"/>
+        </padding>
+        <ProgressIndicator fx:id="progressIndicator" maxHeight="1.7976931348623157E308"
+                           maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="617.0" progress="0.0"/>
+    </VBox>
 </fx:root>
