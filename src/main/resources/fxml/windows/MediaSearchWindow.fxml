@@ -10,18 +10,17 @@
 <fx:root prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Search Window" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button-dark-white-selection" text=" ">
+               <graphic>
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+               </graphic>
+            </JFXButton>
+         </children>
          <BorderPane.margin>
-            <Insets bottom="5.0"/>
+            <Insets bottom="5.0" />
          </BorderPane.margin>
-         <Label alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;"
-                styleClass="applicationSettingsLabel2" text="Search Window" HBox.hgrow="ALWAYS"/>
-         <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                    styleClass="jfx-button-dark-white-selection" text=" ">
-            <graphic>
-               <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
-            </graphic>
-         </JFXButton>
       </HBox>
    </top>
 </fx:root>

@@ -7,13 +7,14 @@
 
 
 <HBox alignment="CENTER" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets bottom="2.0" top="2.0"/>
-    </padding>
-    <Label fx:id="label" contentDisplay="CENTER" graphicTextGap="1.0"
-           style="-fx-font-weight: bold; -fx-text-fill: black; -fx-font-size: 11;">
-        <graphic>
-          <FontIcon iconColor="#ffce1c" iconLiteral="far-star" iconSize="32" text=""/>
-        </graphic>
-    </Label>
+   <children>
+      <Label fx:id="label" contentDisplay="CENTER" graphicTextGap="1.0" style="-fx-font-weight: bold; -fx-text-fill: black; -fx-font-size: 11;">
+         <graphic>
+            <FontIcon iconColor="#ffce1c" iconLiteral="far-star" iconSize="32" text="" />
+         </graphic>
+      </Label>
+   </children>
+   <padding>
+      <Insets bottom="2.0" top="2.0" />
+   </padding>
 </HBox>

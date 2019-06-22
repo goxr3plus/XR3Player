@@ -12,50 +12,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="275.0" stylesheets="@../style/application.css"
-         type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox fx:id="vBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
-        <HBox minHeight="0.0" minWidth="0.0">
-            <VBox.margin>
-                <Insets/>
-            </VBox.margin>
-            <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                   maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
-                   style="-fx-border-color: transparent; -fx-background-color: #151515;"
-                   styleClass="applicationSettingsLabel2" text=" System Explorer " HBox.hgrow="ALWAYS">
-                <graphic>
-                    <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24"/>
-                </graphic>
-                <padding>
-                    <Insets bottom="2.0" top="2.0"/>
-                </padding>
-            </Label>
-            <Button fx:id="collapseTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                    minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0"
-                    style="-fx-background-radius: 0;" styleClass="jfx-button4">
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-                <tooltip>
-                    <Tooltip text="Collapse Tree View"/>
-                </tooltip>
-                <graphic>
-                    <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0"
-                              selectionStart="0"/>
-                </graphic>
-            </Button>
-        </HBox>
-        <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
-            <VBox.margin>
-                <Insets/>
-            </VBox.margin>
-        </TreeView>
-    </VBox>
-    <Label fx:id="searchLabel" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="white-black-label"
-           text="Searching" visible="false">
-        <graphic>
-          <ProgressIndicator minHeight="0.0" minWidth="0.0"/>
-        </graphic>
-    </Label>
+<fx:root minHeight="0.0" minWidth="0.0" prefHeight="487.0" prefWidth="275.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="vBox" alignment="CENTER" minHeight="0.0" minWidth="0.0" style="-fx-background-color: #202020;">
+         <children>
+            <HBox minHeight="0.0" minWidth="0.0">
+               <children>
+                  <Label fx:id="topLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-background-color: #151515;" styleClass="applicationSettingsLabel2" text=" System Explorer " HBox.hgrow="ALWAYS">
+                     <graphic>
+                        <FontIcon iconColor="#ddaa33" iconLiteral="fas-sitemap" iconSize="24" />
+                     </graphic>
+                     <padding>
+                        <Insets bottom="2.0" top="2.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="collapseTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" style="-fx-background-radius: 0;" styleClass="jfx-button4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Collapse Tree View" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="#d4ff00" iconLiteral="typ-arrow-minimise" iconSize="24" selectionEnd="0" selectionStart="0" />
+                     </graphic>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <TreeView fx:id="treeView" minHeight="0.0" minWidth="0.0" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TreeView>
+         </children>
+      </VBox>
+      <Label fx:id="searchLabel" alignment="CENTER" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" styleClass="white-black-label" text="Searching" visible="false">
+         <graphic>
+            <ProgressIndicator minHeight="0.0" minWidth="0.0" />
+         </graphic>
+      </Label>
+   </children>
 </fx:root>

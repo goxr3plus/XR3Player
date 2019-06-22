@@ -5,28 +5,31 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="102.0" prefWidth="662.0" stylesheets="@../style/application.css" type="StackPane"
-         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
-        <Tab fx:id="hateTab" closable="false" text="Hated">
-            <graphic>
-                <FontIcon iconColor="#dd3f3f" iconLiteral="icm-angry2" iconSize="24"/>
-            </graphic>
-        </Tab>
-        <Tab fx:id="dislikeTab" closable="false" text="Disliked">
-            <graphic>
-                <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="24"/>
-            </graphic>
-        </Tab>
-        <Tab fx:id="likeTab" closable="false" text="Liked">
-            <graphic>
-                <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="24"/>
-            </graphic>
-        </Tab>
-        <Tab fx:id="loveTab" closable="false" text="Loved  ">
-            <graphic>
-                <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="24"/>
-            </graphic>
-        </Tab>
-    </JFXTabPane>
+<fx:root prefHeight="102.0" prefWidth="662.0" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
+         <tabs>
+            <Tab fx:id="hateTab" closable="false" text="Hated">
+               <graphic>
+                  <FontIcon iconColor="#dd3f3f" iconLiteral="icm-angry2" iconSize="24" />
+               </graphic>
+            </Tab>
+            <Tab fx:id="dislikeTab" closable="false" text="Disliked">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-down" iconSize="24" />
+               </graphic>
+            </Tab>
+            <Tab fx:id="likeTab" closable="false" text="Liked">
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="far-thumbs-up" iconSize="24" />
+               </graphic>
+            </Tab>
+            <Tab fx:id="loveTab" closable="false" text="Loved  ">
+               <graphic>
+                  <FontIcon iconColor="#dd3f3f" iconLiteral="far-heart" iconSize="24" />
+               </graphic>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
 </fx:root>

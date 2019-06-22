@@ -12,85 +12,91 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;"
-         stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane>
-        <bottom>
-            <StackPane prefHeight="55.0" style="-fx-border-color: firebrick transparent transparent transparent;"
-                       BorderPane.alignment="CENTER">
-                <BorderPane.margin>
-                    <Insets top="5.0"/>
-                </BorderPane.margin>
-                <padding>
-                    <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
-                </padding>
-                <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                           styleClass="jfx-button-dark-white-selection" text="Close"
-                           StackPane.alignment="CENTER_RIGHT">
-                    <tooltip>
-                        <Tooltip text="Close the Window"/>
-                    </tooltip>
-                    <graphic>
-                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="viewOnGithub" focusTraversable="false" layoutX="682.0" layoutY="11.0"
-                           maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="GitHub Page"
-                           StackPane.alignment="CENTER_LEFT">
-                    <tooltip>
-                        <Tooltip text="View XR3Player on Github"/>
-                    </tooltip>
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="24"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0"
-                           maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Download latest update">
-                    <tooltip>
-                        <Tooltip text="Download the latest XR3Player Version"/>
-                    </tooltip>
-                    <graphic>
-                        <FontIcon iconColor="#91ff5a" iconLiteral="fas-cloud-download-alt" iconSize="32"/>
-                    </graphic>
-                </JFXButton>
+<fx:root prefHeight="556.0" prefWidth="754.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane>
+         <bottom>
+            <StackPane prefHeight="55.0" style="-fx-border-color: firebrick transparent transparent transparent;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="closeWindow" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
+                     <tooltip>
+                        <Tooltip text="Close the Window" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="viewOnGithub" focusTraversable="false" layoutX="682.0" layoutY="11.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="GitHub Page" StackPane.alignment="CENTER_LEFT">
+                     <tooltip>
+                        <Tooltip text="View XR3Player on Github" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fab-github" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="automaticUpdate" focusTraversable="false" layoutX="11.0" layoutY="11.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button4" text="Download latest update">
+                     <tooltip>
+                        <Tooltip text="Download the latest XR3Player Version" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="#91ff5a" iconLiteral="fas-cloud-download-alt" iconSize="32" />
+                     </graphic>
+                  </JFXButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets top="5.0" />
+               </BorderPane.margin>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
             </StackPane>
-        </bottom>
-        <center>
+         </bottom>
+         <center>
             <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
-                <Tab fx:id="whatsNewTab" closable="false" styleClass="sTab" text="What's new ?">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-bullhorn" iconSize="24"/>
-                    </graphic>
-                    <BorderPane fx:id="whatsNewContainer"/>
-                </Tab>
-                <Tab fx:id="upcomingFeaturesTab" closable="false" styleClass="sTab" text="Upcoming Features">
-                    <graphic>
-                        <FontIcon iconColor="#32d3d9" iconLiteral="fas-flask" iconSize="24"/>
-                    </graphic>
-                    <BorderPane fx:id="upcomingFeaturesContainer"/>
-                </Tab>
-                <Tab fx:id="knowBugsTab" closable="false" styleClass="sTab" text="Known Bugs">
-                    <graphic>
-                        <FontIcon iconColor="#f24d4d" iconLiteral="fas-bug" iconSize="24"/>
-                    </graphic>
-                    <BorderPane fx:id="knownBugsContainer"/>
-                </Tab>
-                <Tab fx:id="releasesHistoryTab" closable="false" disable="true" styleClass="sTab">
-                    <ScrollPane fitToHeight="true" fitToWidth="true">
-                        <Accordion fx:id="gitHubAccordion"/>
-                    </ScrollPane>
-                </Tab>
+               <tabs>
+                  <Tab fx:id="whatsNewTab" closable="false" styleClass="sTab" text="What's new ?">
+                     <content>
+                        <BorderPane fx:id="whatsNewContainer" />
+                     </content>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-bullhorn" iconSize="24" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="upcomingFeaturesTab" closable="false" styleClass="sTab" text="Upcoming Features">
+                     <content>
+                        <BorderPane fx:id="upcomingFeaturesContainer" />
+                     </content>
+                     <graphic>
+                        <FontIcon iconColor="#32d3d9" iconLiteral="fas-flask" iconSize="24" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="knowBugsTab" closable="false" styleClass="sTab" text="Known Bugs">
+                     <content>
+                        <BorderPane fx:id="knownBugsContainer" />
+                     </content>
+                     <graphic>
+                        <FontIcon iconColor="#f24d4d" iconLiteral="fas-bug" iconSize="24" />
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="releasesHistoryTab" closable="false" disable="true" styleClass="sTab">
+                     <content>
+                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                           <content>
+                              <Accordion fx:id="gitHubAccordion" />
+                           </content>
+                        </ScrollPane>
+                     </content>
+                  </Tab>
+               </tabs>
             </JFXTabPane>
-        </center>
-        <top>
-          <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                 minHeight="-Infinity" prefHeight="46.0" style="-fx-font-size: 15; -fx-border-color: transparent;"
-                 styleClass="applicationSettingsLabel2" text="Bar" BorderPane.alignment="CENTER">
-              <BorderPane.margin>
-                  <Insets bottom="5.0"/>
-              </BorderPane.margin>
-          </Label>
-        </top>
-    </BorderPane>
+         </center>
+         <top>
+            <Label fx:id="topLabel" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="46.0" style="-fx-font-size: 15; -fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="Bar" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="5.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+      </BorderPane>
+   </children>
 </fx:root>

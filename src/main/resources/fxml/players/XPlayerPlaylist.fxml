@@ -10,49 +10,45 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefHeight="409.0" prefWidth="632.0" style="-fx-background-color: transparent;"
-         stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane fx:id="borderPane" style="-fx-background-color: transparent;">
-        <top>
-          <Button fx:id="play" disable="true" maxHeight="-Infinity" maxWidth="80.0" minHeight="0.0"
-                  mnemonicParsing="false" prefHeight="0.0" text="Play" BorderPane.alignment="CENTER">
-              <tooltip>
-                  <Tooltip text="Play all the items in row"/>
-              </tooltip>
-              <BorderPane.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="1.0"/>
-              </BorderPane.margin>
-              <cursor>
-                  <Cursor fx:constant="HAND"/>
-              </cursor>
-          </Button>
-        </top>
-    </BorderPane>
-    <Region fx:id="region" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false"/>
-    <ProgressIndicator fx:id="progressSpinner" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="173.0"
-                       prefWidth="204.0" visible="false"/>
-    <HBox fx:id="horizontalBox" alignment="CENTER" spacing="5.0">
-        <Button fx:id="previousButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0"
-                style="-fx-font-weight: bold;" text="&lt;">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-        <Button fx:id="stopPlayingList" mnemonicParsing="false" prefHeight="46.0" prefWidth="62.0"
-                style="-fx-font-weight: bold;" text="Stop">
-            <tooltip>
-                <Tooltip text="Stop playing the playlist"/>
-            </tooltip>
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-        <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0"
-                style="-fx-font-weight: bold;" text="&gt;">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-    </HBox>
+<fx:root prefHeight="409.0" prefWidth="632.0" style="-fx-background-color: transparent;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane" style="-fx-background-color: transparent;">
+         <top>
+            <Button fx:id="play" disable="true" maxHeight="-Infinity" maxWidth="80.0" minHeight="0.0" mnemonicParsing="false" prefHeight="0.0" text="Play" BorderPane.alignment="CENTER">
+               <tooltip>
+                  <Tooltip text="Play all the items in row" />
+               </tooltip>
+               <BorderPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="1.0" />
+               </BorderPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </top></BorderPane>
+      <Region fx:id="region" style="-fx-background-color: rgb(0,0,0,0.8);" visible="false" />
+      <ProgressIndicator fx:id="progressSpinner" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="173.0" prefWidth="204.0" visible="false" />
+      <HBox fx:id="horizontalBox" alignment="CENTER" spacing="5.0">
+         <children>
+            <Button fx:id="previousButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" style="-fx-font-weight: bold;" text="&lt;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="stopPlayingList" mnemonicParsing="false" prefHeight="46.0" prefWidth="62.0" style="-fx-font-weight: bold;" text="Stop">
+               <tooltip>
+                  <Tooltip text="Stop playing the playlist" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="20.0" prefWidth="40.0" style="-fx-font-weight: bold;" text="&gt;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+   </children>
 </fx:root>

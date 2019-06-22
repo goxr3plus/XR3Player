@@ -13,186 +13,189 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root minHeight="0.0" prefHeight="632.0" prefWidth="1017.0" stylesheets="@../../style/application.css"
-         type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane minHeight="0.0" style="-fx-background-color: rgb(0,0,0,0.85);">
-        <center>
-            <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
-                <Tab text="Example1"/>
+<fx:root minHeight="0.0" prefHeight="632.0" prefWidth="1017.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane minHeight="0.0" style="-fx-background-color: rgb(0,0,0,0.85);">
+         <center>
+            <JFXTabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Example1" />
+               </tabs>
             </JFXTabPane>
-        </center>
-        <bottom>
-            <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="53.0" minWidth="0.0" prefHeight="53.0"
-                        prefWidth="1017.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
-                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308">
-                    <JFXButton fx:id="youtube" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/youtube.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Youtube"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="soundCloud" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/soundcloud.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open  SoundCloud"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="facebook" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/facebook.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Facebook"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="printerest" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/pinterest.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Printerest"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="twitter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/twitter.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Twitter"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="linkedIn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/linkedin.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open  LinkedIn"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="dropBox" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/dropbox.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Dropbox"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="gmail" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/gmail.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Gmail"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="googleDrive" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/google-drive.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Open Google Cloud"/>
-                        </tooltip>
-                    </JFXButton>
-                    <JFXButton fx:id="googleMaps" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                               focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0"
-                               style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
-                        <graphic>
-                            <ImageView pickOnBounds="true" preserveRatio="true">
-                                <Image url="@../../image/maps.png"/>
-                            </ImageView>
-                        </graphic>
-                        <cursor>
-                            <Cursor fx:constant="HAND"/>
-                        </cursor>
-                        <tooltip>
-                            <Tooltip text="Opem Google Maps"/>
-                        </tooltip>
-                    </JFXButton>
-                </HBox>
+         </center>
+         <bottom>
+            <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="53.0" minWidth="0.0" prefHeight="53.0" prefWidth="1017.0" vbarPolicy="NEVER" BorderPane.alignment="CENTER">
+               <content>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308">
+                     <children>
+                        <JFXButton fx:id="youtube" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/youtube.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Youtube" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="soundCloud" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/soundcloud.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open  SoundCloud" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="facebook" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/facebook.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Facebook" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="printerest" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/pinterest.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Printerest" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="twitter" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/twitter.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Twitter" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="linkedIn" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/linkedin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open  LinkedIn" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="dropBox" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/dropbox.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Dropbox" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="gmail" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/gmail.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Gmail" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="googleDrive" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/google-drive.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Open Google Cloud" />
+                           </tooltip>
+                        </JFXButton>
+                        <JFXButton fx:id="googleMaps" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" style="-fx-background-radius: 0;" styleClass="arrowButton2" text=" ">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../image/maps.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <tooltip>
+                              <Tooltip text="Opem Google Maps" />
+                           </tooltip>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </content>
             </ScrollPane>
-        </bottom>
-        <top>
-          <JFXButton fx:id="addTab" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                     maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Tab"
-                     BorderPane.alignment="CENTER">
-              <tooltip>
-                  <Tooltip text="Back"/>
-              </tooltip>
-              <cursor>
-                  <Cursor fx:constant="HAND"/>
-              </cursor>
-              <graphic>
-                  <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="24"/>
-              </graphic>
-          </JFXButton>
-        </top>
-    </BorderPane>
+         </bottom>
+         <top>
+            <JFXButton fx:id="addTab" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Tab" BorderPane.alignment="CENTER">
+               <tooltip>
+                  <Tooltip text="Back" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="24" />
+               </graphic>
+            </JFXButton>
+         </top>
+      </BorderPane>
+   </children>
 </fx:root>

@@ -31,37 +31,35 @@
             </Label>
          </center>
          <right>
-             <HBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-                 <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                            maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0"
-                            style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
-                    <font>
-                        <Font size="8.0"/>
-                    </font>
-                    <graphic>
+            <HBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
                         <StackedFontIcon fx:id="sizeStackedFontIcon">
-                            <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0"
-                                      selectionStart="0" visible="false"/>
-                            <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0"
-                                      layoutY="29.0" selectionEnd="0" selectionStart="0"/>
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                           </children>
                         </StackedFontIcon>
-                    </graphic>
-                 </JFXButton>
-                 <JFXButton fx:id="closeWindow" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                            maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0"
-                            style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
-                    <font>
-                        <Font size="8.0"/>
-                    </font>
-                    <graphic>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="closeWindow" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="32.0" prefWidth="32.0" style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
                         <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
-                            <effect>
-                                <DropShadow/>
-                            </effect>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </FontIcon>
-                    </graphic>
-                 </JFXButton>
-             </HBox>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
          </right>
       </BorderPane>
    </top>

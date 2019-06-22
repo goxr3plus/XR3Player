@@ -22,123 +22,109 @@
 
 <!-- <?import commons.javafx.webbrowser.browser.SearchEngineComboBox?> -->
 
-<fx:root prefHeight="448.0" prefWidth="667.0" style="-fx-background-color: #101010;"
-         stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets top="5.0"/>
-    </padding>
-    <BorderPane fx:id="borderPane">
-        <top>
+<fx:root prefHeight="448.0" prefWidth="667.0" style="-fx-background-color: #101010;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane">
+         <top>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="667.0" spacing="5.0" BorderPane.alignment="CENTER">
-                <BorderPane.margin>
-                    <Insets bottom="3.0" left="5.0" right="5.0"/>
-                </BorderPane.margin>
-                <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY"
-                           focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity"
-                           minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="#33ee7e" iconLiteral="typ-arrow-maximise" iconSize="28"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                           styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-arrow-left" iconSize="20"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0"
-                           layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0"
-                           layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-arrow-right" iconSize="20"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0"
-                           layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-home" iconSize="24"/>
-                    </graphic>
-                </JFXButton>
-                <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;"
-                           styleClass="dark-text-area" HBox.hgrow="ALWAYS"/>
-                <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0"
-                           layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20"/>
-                    </graphic>
-                    <tooltip>
-                        <Tooltip text="Copy Address Bar text"/>
-                    </tooltip>
-                </JFXButton>
-                <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0"
-                           layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-search" iconSize="20"/>
-                    </graphic>
-                </JFXButton>
-                <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                           layoutX="47.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-globe" iconSize="20"/>
-                    </graphic>
-                    <tooltip>
-                        <Tooltip text="Open in default browser"/>
-                    </tooltip>
-                </JFXButton>
-                <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity"
-                            mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;"
-                            styleClass="dark-menu-button">
-                    <HBox.margin>
-                        <Insets/>
-                    </HBox.margin>
-                    <items>
+               <children>
+                  <JFXButton fx:id="goFullScreen" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="48.0" layoutY="15.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="#33ee7e" iconLiteral="typ-arrow-maximise" iconSize="28" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="backwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-arrow-left" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="reloadButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-sync-alt" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="forwardButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="10.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-arrow-right" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="homeButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="118.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-home" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+                  <TextField fx:id="searchBar" maxHeight="30.0" promptText="Search..." style="-fx-font-weight: bold;" styleClass="dark-text-area" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="copyText" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="176.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-clone" iconSize="20" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Copy Address Bar text" />
+                     </tooltip>
+                  </JFXButton>
+                  <JFXButton fx:id="goButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="156.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-search" iconSize="20" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="openInDefaultBrowser" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" layoutX="47.0" layoutY="15.0" styleClass="jfx-button4" text=" ">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-globe" iconSize="20" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Open in default browser" />
+                     </tooltip>
+                  </JFXButton>
+                  <MenuButton contentDisplay="GRAPHIC_ONLY" maxHeight="30.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-radius: 0;" styleClass="dark-menu-button">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <items>
                         <Menu mnemonicParsing="false" text="Search Engine">
-                            <RadioMenuItem mnemonicParsing="false" selected="true" text="Google">
-                                <toggleGroup>
-                                    <ToggleGroup fx:id="searchEngineGroup"/>
-                                </toggleGroup>
-                            </RadioMenuItem>
-                            <RadioMenuItem mnemonicParsing="false" text="DuckDuckGo" toggleGroup="$searchEngineGroup"/>
-                            <RadioMenuItem mnemonicParsing="false" text="Bing" toggleGroup="$searchEngineGroup"/>
-                            <RadioMenuItem mnemonicParsing="false" text="Yahoo" toggleGroup="$searchEngineGroup"/>
+                          <items>
+                              <RadioMenuItem mnemonicParsing="false" selected="true" text="Google">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="searchEngineGroup" />
+                                 </toggleGroup>
+                              </RadioMenuItem>
+                              <RadioMenuItem mnemonicParsing="false" text="DuckDuckGo" toggleGroup="$searchEngineGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Bing" toggleGroup="$searchEngineGroup" />
+                              <RadioMenuItem mnemonicParsing="false" text="Yahoo" toggleGroup="$searchEngineGroup" />
+                          </items>
                         </Menu>
-                        <CheckMenuItem fx:id="movingTitleAnimation" mnemonicParsing="false"
-                                       text="Moving Title Animation"/>
-                        <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser"/>
-                    </items>
-                    <graphic>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-cog" iconSize="20"/>
-                    </graphic>
-                </MenuButton>
+                        <CheckMenuItem fx:id="movingTitleAnimation" mnemonicParsing="false" text="Moving Title Animation" />
+                        <MenuItem fx:id="about" mnemonicParsing="false" text="About Browser" />
+                     </items>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-cog" iconSize="20" />
+                     </graphic>
+                  </MenuButton>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" />
+               </BorderPane.margin>
             </HBox>
-        </top>
-    </BorderPane>
-    <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-          spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">
-        <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true"/>
-        <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity"
-                  mouseTransparent="true"
-                  text="&#10;1.Check the address for typing errors such as ww.example.com instead of www.example.com&#10;&#10;2.If you are unable to load any pages, check your computer’s network connection.&#10;&#10;3.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web."
-                  wrapText="true">
-            <VBox.margin>
-                <Insets left="5.0" right="5.0"/>
-            </VBox.margin>
-        </TextArea>
-        <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c"
-                   styleClass="jfx-button-dark-white-selection" text="Try Again">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-            <graphic>
-                <ProgressIndicator fx:id="tryAgainIndicator" styleClass="dropbox-progress-indicator"
-                                   visible="false"/>
-            </graphic>
-        </JFXButton>
-    </VBox>
+         </top>
+      </BorderPane>
+      <VBox fx:id="errorPane" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="15.0" style="-fx-background-color: rgb(255,255,255,0.9);" visible="false">
+         <children>
+            <Label styleClass="sideBarSectionLabel" text="Server not found" textAlignment="CENTER" wrapText="true" />
+            <TextArea editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" mouseTransparent="true" text="&#10;1.Check the address for typing errors such as ww.example.com instead of www.example.com&#10;&#10;2.If you are unable to load any pages, check your computer’s network connection.&#10;&#10;3.If your computer or network is protected by a firewall or proxy, make sure that XR3Player is permitted to access the Web." wrapText="true">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin></TextArea>
+            <JFXButton fx:id="tryAgain" buttonType="RAISED" contentDisplay="RIGHT" ripplerFill="#fa0c0c" styleClass="jfx-button-dark-white-selection" text="Try Again">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ProgressIndicator fx:id="tryAgainIndicator" styleClass="dropbox-progress-indicator" visible="false" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets top="5.0" />
+   </padding>
 </fx:root>

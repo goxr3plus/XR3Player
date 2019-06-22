@@ -26,115 +26,91 @@
       </ToggleButton>
    </left>
    <center>
-       <StackPane BorderPane.alignment="CENTER">
-           <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
-                 minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;">
-               <MenuButton focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0"
-                           mnemonicParsing="false" popupSide="TOP" prefHeight="0.0" prefWidth="0.0"
-                           style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings" visible="false">
-                   <items>
-                       <MenuItem mnemonicParsing="false">
+      <StackPane BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="hBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="30.0" style="-fx-border-width: 2;">
+               <children>
+                  <MenuButton focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" popupSide="TOP" prefHeight="0.0" prefWidth="0.0" style="-fx-font-size: 11;" styleClass="ar" text="Fast Settings" visible="false">
+                     <items>
+                        <MenuItem mnemonicParsing="false">
                            <graphic>
-                               <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity"
-                                                minHeight="-Infinity" prefHeight="25.0"
-                                                style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar"
-                                                textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13"/>
+                              <JFXToggleButton fx:id="showHideSideBar" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Hide Side Bar" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
                            </graphic>
-                       </MenuItem>
-                       <MenuItem mnemonicParsing="false">
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false">
                            <graphic>
-                               <JFXToggleButton fx:id="keyBindings" focusTraversable="false" maxHeight="-Infinity"
-                                                minHeight="-Infinity" prefHeight="25.0"
-                                                style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings"
-                                                textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13"/>
+                              <JFXToggleButton fx:id="keyBindings" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Key Bindings" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
                            </graphic>
-                       </MenuItem>
-                       <MenuItem mnemonicParsing="false">
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false">
                            <graphic>
-                               <JFXToggleButton fx:id="speechRecognitionToggle" disable="true"
-                                                focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity"
-                                                prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;"
-                                                text="Speech Recognition" textFill="WHITE" toggleColor="WHITE"
-                                                toggleLineColor="#f43e13"/>
+                              <JFXToggleButton fx:id="speechRecognitionToggle" disable="true" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Speech Recognition" textFill="WHITE" toggleColor="WHITE" toggleLineColor="#f43e13" />
                            </graphic>
-                       </MenuItem>
-                   </items>
-               </MenuButton>
-               <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY"
-                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0"
-                      prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER"
-                      textFill="#ae1100" wrapText="true">
-                   <cursor>
-                       <Cursor fx:constant="DEFAULT"/>
-                   </cursor>
-                   <padding>
-                       <Insets left="4.0" right="4.0"/>
-                   </padding>
-                   <tooltip>
-                       <Tooltip text="Internet connection is available?"/>
-                   </tooltip>
-                   <graphic>
-                       <FontIcon iconColor="#16a8e0" iconLiteral="typ-wi-fi" iconSize="28"/>
-                   </graphic>
-               </Label>
-               <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM"
-                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0"
-                      style="-fx-font-weight: bold; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER"
-                      wrapText="true">
-                   <cursor>
-                       <Cursor fx:constant="DEFAULT"/>
-                   </cursor>
-                   <padding>
-                       <Insets left="4.0" right="4.0"/>
-                   </padding>
-                   <tooltip>
-                       <Tooltip text="Internet connection is available?"/>
-                   </tooltip>
-               </Label>
-               <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0"
-                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0"
-                      style="-fx-font-weight: bold;" text="17:14" textAlignment="CENTER" textFill="WHITE"
-                      wrapText="true">
-                   <cursor>
-                       <Cursor fx:constant="DEFAULT"/>
-                   </cursor>
-                   <padding>
-                       <Insets left="4.0" right="4.0"/>
-                   </padding>
-                   <tooltip>
-                       <Tooltip text="Current System Time"/>
-                   </tooltip>
-                   <graphic>
-                       <FontIcon iconColor="#16a8e0" iconLiteral="fa-clock-o" iconSize="24"/>
-                   </graphic>
-               </Label>
-               <FontIcon iconColor="#16a8e0" iconLiteral="typ-plug" iconSize="24">
-                   <HBox.margin>
-                       <Insets left="5.0"/>
-                   </HBox.margin>
-               </FontIcon>
-               <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0"
-                      layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                      prefHeight="54.0" style="-fx-font-weight: bold;" text="20 minutes" textAlignment="CENTER"
-                      textFill="WHITE" wrapText="true">
-                   <cursor>
-                       <Cursor fx:constant="DEFAULT"/>
-                   </cursor>
-                   <padding>
-                       <Insets left="4.0" right="4.0"/>
-                   </padding>
-                   <tooltip>
-                       <Tooltip text="Total time the application is being alive"/>
-                   </tooltip>
-               </Label>
-           </HBox>
-           <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                      maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="enable" visible="false">
-              <graphic>
-                  <FontIcon fx:id="barEnabledFontIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24"
-                            selectionEnd="0" selectionStart="0"/>
-              </graphic>
-           </JFXButton>
-       </StackPane>
+                        </MenuItem>
+                     </items>
+                  </MenuButton>
+                  <Label fx:id="internetConnectionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="33.0" style="-fx-font-weight: bold;" text="OFF" textAlignment="CENTER" textFill="#ae1100" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip text="Internet connection is available?" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="#16a8e0" iconLiteral="typ-wi-fi" iconSize="28" />
+                     </graphic>
+                  </Label>
+                  <Label fx:id="internetConnectionDescriptionLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold; -fx-text-fill: white;" text="Disconnected" textAlignment="CENTER" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip text="Internet connection is available?" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="currentTimeLabel" alignment="CENTER" layoutX="522.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="17:14" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip text="Current System Time" />
+                     </tooltip>
+                     <graphic>
+                        <FontIcon iconColor="#16a8e0" iconLiteral="fa-clock-o" iconSize="24" />
+                     </graphic>
+                  </Label>
+                  <FontIcon iconColor="#16a8e0" iconLiteral="typ-plug" iconSize="24">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </FontIcon>
+                  <Label fx:id="runningTimeLabel" alignment="CENTER" contentDisplay="BOTTOM" layoutX="515.0" layoutY="11.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" style="-fx-font-weight: bold;" text="20 minutes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <cursor>
+                        <Cursor fx:constant="DEFAULT" />
+                     </cursor>
+                     <padding>
+                        <Insets left="4.0" right="4.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip text="Total time the application is being alive" />
+                     </tooltip>
+                  </Label>
+               </children>
+            </HBox>
+            <JFXButton fx:id="enableBar" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="enable" visible="false">
+               <graphic>
+                  <FontIcon fx:id="barEnabledFontIcon1" iconColor="#d4ff00" iconLiteral="typ-eye-outline" iconSize="24" selectionEnd="0" selectionStart="0" />
+               </graphic></JFXButton>
+         </children>
+      </StackPane>
    </center>
 </fx:root>

@@ -10,32 +10,33 @@
 
 <fx:root prefHeight="189.0" prefWidth="458.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-       <VBox alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
-           <JFXRadioButton selected="true" styleClass="settingsRadioButton" text="Delete from List only">
-              <toggleGroup>
-                  <ToggleGroup fx:id="group"/>
-              </toggleGroup>
-           </JFXRadioButton>
-           <JFXRadioButton styleClass="settingsRadioButton" text="Delete from List and Computer" toggleGroup="$group"/>
-       </VBox>
+      <VBox alignment="CENTER_LEFT" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXRadioButton selected="true" styleClass="settingsRadioButton" text="Delete from List only">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton styleClass="settingsRadioButton" text="Delete from List and Computer" toggleGroup="$group" />
+         </children>
+      </VBox>
    </center>
    <top>
-       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
-           <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308"
-                  styleClass="applicationSettingsLabel" text="Security question">
-              <padding>
-                  <Insets bottom="3.0"/>
-              </padding>
-              <VBox.margin>
-                  <Insets bottom="3.0"/>
-              </VBox.margin>
-              <graphic>
-                  <FontIcon iconColor="#ea1cf5" iconLiteral="ri-question" iconSize="24"/>
-              </graphic>
-           </Label>
-           <Label fx:id="mediaNameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0"
-                  maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;"
-                  styleClass="applicationSettingsLabel" text="Sona Name .mp3 or some other extension here"/>
-       </VBox>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" styleClass="applicationSettingsLabel" text="Security question">
+               <padding>
+                  <Insets bottom="3.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="3.0" />
+               </VBox.margin>
+               <graphic>
+                  <FontIcon iconColor="#ea1cf5" iconLiteral="ri-question" iconSize="24" />
+               </graphic>
+            </Label>
+            <Label fx:id="mediaNameLabel" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Sona Name .mp3 or some other extension here" />
+         </children>
+      </VBox>
    </top>
 </fx:root>

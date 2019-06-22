@@ -12,60 +12,58 @@
 <?import javafx.scene.layout.StackPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="432.0" prefWidth="600.0" stylesheets="@../../style/application.css" type="StackPane"
-         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
-        <Tab closable="false" text="Console ">
-            <graphic>
-                <FontIcon iconColor="WHITE" iconLiteral="fas-terminal" iconSize="24"/>
-            </graphic>
-            <BorderPane fx:id="borderPane" style="-fx-background-color: #202020;">
-                <bottom>
-                    <HBox alignment="CENTER" prefHeight="37.0" prefWidth="596.0" spacing="4.0"
-                          style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
-                        <BorderPane.margin>
-                            <Insets bottom="5.0" left="2.0" right="2.0" top="2.0"/>
-                        </BorderPane.margin>
-                        <JFXTextField fx:id="commandTextField" focusColor="#fce23b"
-                                      maxHeight="1.7976931348623157E308"
-                                      promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;"
-                                      styleClass="dark-text-field" HBox.hgrow="ALWAYS"/>
-                        <Button fx:id="go" focusTraversable="false" layoutX="498.0" layoutY="11.0"
-                                maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4"
-                                text="Run ">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <tooltip>
-                                <Tooltip text="Close the Window"/>
-                            </tooltip>
-                        </Button>
-                        <Button fx:id="help" focusTraversable="false" layoutX="556.0" layoutY="11.0"
-                                maxHeight="1.7976931348623157E308" mnemonicParsing="false"
-                                style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Help">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <tooltip>
-                                <Tooltip text="Open XR3Player Manual"/>
-                            </tooltip>
-                        </Button>
-                        <Button fx:id="close" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                                mnemonicParsing="false" styleClass="jfx-button-dark-white-selection" text="Close">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <tooltip>
-                                <Tooltip text="Close the Window"/>
-                            </tooltip>
-                            <graphic>
-                                <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
-                            </graphic>
-                        </Button>
-                    </HBox>
-                </bottom>
-            </BorderPane>
-        </Tab>
-        <Tab closable="false" disable="true"/>
-    </JFXTabPane>
+<fx:root prefHeight="432.0" prefWidth="600.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane fx:id="tabPane" styleClass="specialJFXTabPane">
+         <tabs>
+          <Tab closable="false" text="Console ">
+               <content>
+                  <BorderPane fx:id="borderPane" style="-fx-background-color: #202020;">
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="37.0" prefWidth="596.0" spacing="4.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXTextField fx:id="commandTextField" focusColor="#fce23b" maxHeight="1.7976931348623157E308" promptText="Type Command and Press Enter..." style="-fx-font-weight: bold;" styleClass="dark-text-field" HBox.hgrow="ALWAYS" />
+                              <Button fx:id="go" focusTraversable="false" layoutX="498.0" layoutY="11.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button4" text="Run ">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Close the Window" />
+                                 </tooltip>
+                              </Button>
+                              <Button fx:id="help" focusTraversable="false" layoutX="556.0" layoutY="11.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Help">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Open XR3Player Manual" />
+                                 </tooltip>
+                              </Button>
+                              <Button fx:id="close" focusTraversable="false" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="jfx-button-dark-white-selection" text="Close">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <tooltip>
+                                    <Tooltip text="Close the Window" />
+                                 </tooltip>
+                                 <graphic>
+                                    <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="5.0" left="2.0" right="2.0" top="2.0" />
+                           </BorderPane.margin>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-terminal" iconSize="24" />
+               </graphic>
+          </Tab>
+          <Tab closable="false" disable="true" />
+         </tabs>
+      </JFXTabPane>
+   </children>
 </fx:root>

@@ -16,90 +16,75 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;"
-         stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
-        <BorderPane minHeight="0.0" minWidth="0.0">
-            <top>
-                <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                            mnemonicParsing="false" popupSide="RIGHT" styleClass="dark-menu-button"
-                            text="Filter : Artist" textAlignment="CENTER" wrapText="true"
-                            BorderPane.alignment="CENTER">
-                    <items>
+<fx:root prefHeight="500.0" prefWidth="817.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent;">
+         <items>
+            <BorderPane minHeight="0.0" minWidth="0.0">
+               <top>
+                  <MenuButton fx:id="filterMenuButton" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" popupSide="RIGHT" styleClass="dark-menu-button" text="Filter : Artist" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <items>
                         <RadioMenuItem mnemonicParsing="false" selected="true" text="Artist">
-                            <toggleGroup>
-                                <ToggleGroup fx:id="selectedFilter"/>
-                            </toggleGroup>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="selectedFilter" />
+                           </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem mnemonicParsing="false" text="Album" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="Genre" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="Year" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="BPM" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="Bit Rate" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="Key" toggleGroup="$selectedFilter"/>
-                        <RadioMenuItem mnemonicParsing="false" text="Composer" toggleGroup="$selectedFilter"/>
-                    </items>
-                    <graphic>
-                        <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24"/>
-                    </graphic>
-                </MenuButton>
-            </top>
-            <center>
-                <StackPane BorderPane.alignment="CENTER">
-                    <ListView fx:id="listView"/>
-                    <Label fx:id="nothingFoundLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308"
-                           style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;"
-                           styleClass="applicationSettingsLabel2" text="No Media Found" textAlignment="CENTER"
-                           wrapText="true">
-                        <graphic>
-                            <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24"/>
-                        </graphic>
-                    </Label>
-                </StackPane>
-            </center>
-        </BorderPane>
-        <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
-            <top>
-                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;"
-                       styleClass="applicationSettingsLabel" text="Tracks" textAlignment="CENTER" wrapText="true"
-                       BorderPane.alignment="CENTER"/>
-            </top>
-        </BorderPane>
-    </SplitPane>
-    <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;"
-           styleClass="applicationSettingsLabel2" text="No media" textAlignment="CENTER" visible="false"
-           wrapText="true">
-        <graphic>
-          <Button fx:id="backToMedia" mnemonicParsing="false" prefWidth="173.0" style="-fx-font-size: 25;"
-                  styleClass="jfx-button4" text="Back" textAlignment="CENTER" wrapText="true">
-              <cursor>
-                  <Cursor fx:constant="HAND"/>
-              </cursor>
-              <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="far-arrow-alt-circle-left" iconSize="52"/>
-              </graphic>
-          </Button>
-        </graphic>
-    </Label>
-    <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);"
-          visible="false">
-        <padding>
-            <Insets top="25.0"/>
-        </padding>
-        <Label fx:id="loadingVBoxLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="15.0"
-               maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0"
-               prefWidth="817.0" style="-fx-border-color: transparent; -fx-font-size: 18;"
-               styleClass="applicationSettingsLabel2" text="Detecting Artists " textAlignment="CENTER"
-               wrapText="true">
-            <graphic>
-                <ProgressBar fx:id="loadingProgressBar" minHeight="10.0" prefHeight="25.0" prefWidth="170.0"
-                             styleClass="transparent-progress-bar"/>
-            </graphic>
-        </Label>
-        <JFXButton fx:id="cancelButton" focusTraversable="false" style="-fx-font-size: 20;" styleClass="jfx-button4"
-                   text="Cancel"/>
-    </VBox>
+                        <RadioMenuItem mnemonicParsing="false" text="Album" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Genre" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Year" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="BPM" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Bit Rate" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Key" toggleGroup="$selectedFilter" />
+                        <RadioMenuItem mnemonicParsing="false" text="Composer" toggleGroup="$selectedFilter" />
+                     </items>
+                     <graphic>
+                        <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
+                     </graphic>
+                  </MenuButton>
+               </top>
+               <center>
+                  <StackPane BorderPane.alignment="CENTER">
+                     <children>
+                        <ListView fx:id="listView" />
+                        <Label fx:id="nothingFoundLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="No Media Found" textAlignment="CENTER" wrapText="true">
+                           <graphic>
+                              <FontIcon iconColor="#f5ca30" iconLiteral="typ-filter" iconSize="24" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" SplitPane.resizableWithParent="false">
+               <top>
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Tracks" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER" />
+               </top></BorderPane>
+         </items>
+      </SplitPane>
+      <Label fx:id="detailsLabel" alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel2" text="No media" textAlignment="CENTER" visible="false" wrapText="true">
+         <graphic>
+            <Button fx:id="backToMedia" mnemonicParsing="false" prefWidth="173.0" style="-fx-font-size: 25;" styleClass="jfx-button4" text="Back" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="far-arrow-alt-circle-left" iconSize="52" />
+               </graphic>
+            </Button>
+         </graphic>
+      </Label>
+      <VBox fx:id="loadingVBox" alignment="CENTER" spacing="5.0" style="-fx-background-color: rgb(40,40,40,0.95);" visible="false">
+         <children>
+            <Label fx:id="loadingVBoxLabel" alignment="CENTER" contentDisplay="BOTTOM" graphicTextGap="15.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="817.0" style="-fx-border-color: transparent; -fx-font-size: 18;" styleClass="applicationSettingsLabel2" text="Detecting Artists " textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ProgressBar fx:id="loadingProgressBar" minHeight="10.0" prefHeight="25.0" prefWidth="170.0" styleClass="transparent-progress-bar" />
+               </graphic>
+            </Label>
+            <JFXButton fx:id="cancelButton" focusTraversable="false" style="-fx-font-size: 20;" styleClass="jfx-button4" text="Cancel" />
+         </children>
+         <padding>
+            <Insets top="25.0" />
+         </padding>
+      </VBox>
+   </children>
 </fx:root>
