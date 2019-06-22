@@ -15,8 +15,7 @@ public class LovedSongsList extends DatabaseList {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param dataBaseTableName
+	 *
 	 */
 	public LovedSongsList() {
 		super(dataBaseTableName);

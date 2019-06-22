@@ -151,7 +151,7 @@ public final class AutoCompleteTextField {
 	 * @param textField
 	 * @param maximumEntries
 	 * @param addKeyListener !NOT IMPLEMENTED!
-	 * @param list
+	 * @param sortedSet auto complete entries
 	 */
 	public void bindAutoCompletion(TextField textField, int maximumEntries, boolean addKeyListener,
 			SortedSet<String> sortedSet) {

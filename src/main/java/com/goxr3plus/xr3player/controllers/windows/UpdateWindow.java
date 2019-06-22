@@ -414,7 +414,7 @@ public class UpdateWindow extends StackPane {
 	 * specific format
 	 * 
 	 * @param textArea
-	 * @param Element
+	 * @param element
 	 */
 	private void analyzeUpdate(final InlineCssTextArea textArea, final Element element) {
 		textArea.appendText("\n\n");

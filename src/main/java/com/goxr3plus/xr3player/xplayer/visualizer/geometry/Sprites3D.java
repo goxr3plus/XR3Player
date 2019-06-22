@@ -144,7 +144,8 @@ public class Sprites3D {
 	/**
 	 * Instantiates a new sprite 3 D.
 	 *
-	 * @param gc the gc
+	 * @param visualizerDrawer
+	 * @param shape
 	 */
 	public Sprites3D(VisualizerDrawer visualizerDrawer, Shape3D shape) {
 		// super(gc);
@@ -331,9 +332,6 @@ public class Sprites3D {
 	/**
 	 * Draws the sprite.
 	 *
-	 * @param width  the width
-	 * @param height the height
-	 * @param band   the band
 	 */
 	public void draw() {
 		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
@@ -421,7 +419,7 @@ public class Sprites3D {
 	 * @param translateX the translate X
 	 * @param translateY the translate Y
 	 * @param translateZ the translate Z
-	 * @param band       the band
+	 * @param bands       the bands
 	 * @return the point 3 D
 	 */
 	private final Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,

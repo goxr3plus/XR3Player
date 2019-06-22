@@ -308,9 +308,7 @@ public class DJFilter extends StackPane {
 	/**
 	 * Calculate the disc angle based on mouse position.
 	 *
-	 * @param m       the m
-	 * @param current the current
-	 * @param total   the total
+	 * @param m       the event
 	 */
 	public void setAngleUsingMouseEvent(MouseEvent m) {
 		// Define mouseX , mouseY

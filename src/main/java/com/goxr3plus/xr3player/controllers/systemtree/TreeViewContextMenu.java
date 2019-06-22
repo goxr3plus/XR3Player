@@ -109,10 +109,10 @@ public class TreeViewContextMenu extends ContextMenu {
 
 	/**
 	 * Show the ContextMenu
-	 * 
+	 *
+	 * @param treeItem
 	 * @param x
 	 * @param y
-	 * @param absoluteFilePath
 	 */
 	public void show(final FileTreeItem treeItem, final double x, final double y) {
 		this.treeItem = treeItem;

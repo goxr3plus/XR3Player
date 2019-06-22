@@ -601,7 +601,6 @@ public class SmartController extends StackPane {
 	 * @param permanent  <br>
 	 *                   true->storage medium + (play list)/library<br>
 	 *                   false->only from (play list)/library
-	 * @param controller the controller
 	 */
 	public void prepareDelete(boolean permanent) {
 		int previousTotal = getTotalInDataBase();

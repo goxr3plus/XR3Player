@@ -244,7 +244,7 @@ public class MediaInformation extends StackPane {
 	/**
 	 * Updates the image shown.
 	 * 
-	 * @param media the media [[SuppressWarningsSpartan]]
+	 * @param mediar the media [[SuppressWarningsSpartan]]
 	 */
 	public void updateInformation(Media mediar) {
 		service.updateInformation(mediar);
@@ -282,7 +282,7 @@ public class MediaInformation extends StackPane {
 		/**
 		 * Updates the image shown.
 		 * 
-		 * @param media the media [[SuppressWarningsSpartan]]
+		 * @param mediar the media [[SuppressWarningsSpartan]]
 		 */
 		public void updateInformation(Media mediar) {
 			media = mediar;
