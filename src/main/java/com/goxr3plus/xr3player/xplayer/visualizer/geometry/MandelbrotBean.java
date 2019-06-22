@@ -46,7 +46,7 @@ public class MandelbrotBean {
 
 	public boolean isIsMandelbrot() {
 		// if z is 0 then it is a Mandelbrot set
-		return (getZ() == 0 && getZi() == 0) ? true : false;
+		return getZ() == 0 && getZi() == 0;
 	}
 
 	public MandelbrotBean(int convergenceSteps, double reMin, double reMax, double imMin, double imMax, double z,
