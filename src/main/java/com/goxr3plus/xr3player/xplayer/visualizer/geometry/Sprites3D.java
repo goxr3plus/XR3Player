@@ -355,9 +355,7 @@ public class Sprites3D {
 			array[i] *= 100.00;
 		}
 
-		for (int i = 0; i < points.size(); i++) {
-			Point3D point = points.get(i);
-
+		for (Point3D point : points) {
 			renderList.add(transform(point, roll, pitch, yaw, xOffset, yOffset, zOffset, array));
 		}
 
@@ -375,9 +373,7 @@ public class Sprites3D {
 		else
 			imageBall = images[4];
 
-		for (int i = 0; i < renderList.size(); i++) {
-			Point3D point = renderList.get(i);
-
+		for (Point3D point : renderList) {
 			drawPoint(point, visualizerDrawer.getVisualizerWidth(), visualizerDrawer.getVisualizerHeight());
 		}
 	}

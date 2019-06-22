@@ -71,14 +71,12 @@ public class MicrophoneAnalyzer extends Microphone {
 	 */
 	public static int calculateRMSLevel(byte[] audioData) {
 		long lSum = 0;
-		for (int i = 0; i < audioData.length; i++)
-			lSum = lSum + audioData[i];
+		for (byte sample : audioData) lSum = lSum + sample;
 
 		double dAvg = lSum / audioData.length;
 
 		double sumMeanSquare = 0d;
-		for (int j = 0; j < audioData.length; j++)
-			sumMeanSquare = sumMeanSquare + Math.pow(audioData[j] - dAvg, 2d);
+		for (byte sample : audioData) sumMeanSquare = sumMeanSquare + Math.pow(sample - dAvg, 2d);
 
 		double averageMeanSquare = sumMeanSquare / audioData.length;
 		return (int) (Math.pow(averageMeanSquare, 0.5d) + 0.5);

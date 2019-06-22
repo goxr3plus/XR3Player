@@ -142,13 +142,11 @@ public class Sierpinski {
 
 		int triangleCount = renderList.size();
 
-		for (int i = 0; i < triangleCount; i++) {
-			Triangle tri = renderList.get(i);
-
-			if (tri.getTopY() < visualizerDrawer.canvasHeight) {
-				drawTriangle(tri);
-			}
-		}
+        for (Triangle triangle : renderList) {
+            if (triangle.getTopY() < visualizerDrawer.canvasHeight) {
+                drawTriangle(triangle);
+            }
+        }
 	}
 
 	/**
