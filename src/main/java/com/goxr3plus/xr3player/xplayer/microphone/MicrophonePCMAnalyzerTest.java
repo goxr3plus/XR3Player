@@ -46,9 +46,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 
 		// Scene
 		primaryStage.setScene(new Scene(borderPane));
-		primaryStage.setOnCloseRequest(c -> {
-			System.exit(-1);
-		});
+		primaryStage.setOnCloseRequest(c -> System.exit(-1));
 
 		primaryStage.show();
 
