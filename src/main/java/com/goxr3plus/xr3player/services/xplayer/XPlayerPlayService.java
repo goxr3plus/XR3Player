@@ -172,11 +172,11 @@ public class XPlayerPlayService extends Service<Boolean> {
 	 */
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
-				final AudioType[] audioType = { null };
+				final AudioType[] audioType = {null};
 				String audioFullPath = null;
 
 				try {
@@ -241,18 +241,18 @@ public class XPlayerPlayService extends Service<Boolean> {
 									"Current Media File doesn't exist anymore...", Duration.seconds(2),
 									NotificationType.ERROR);
 
-						// Not available Audio Devices?
+							// Not available Audio Devices?
 						else if (xPlayerController.xPlayer.getMixers().isEmpty())
 							AlertTool.showNotification("No Audio Devices",
 									"We can’t find an audio device.\nMake sure that headphones or speakers are connected.\n For more info, search your device for “Manage audio devices”",
 									Duration.millis(10000), NotificationType.ERROR);
 
-						// Audio Corrupted?
+							// Audio Corrupted?
 						else
 							AlertTool.showNotification("Can't play current Audio",
 									"Can't play \n["
 											+ InfoTool.getMinString(
-													xPlayerController.xPlayerModel.songPathProperty().get(), 30,"...")
+											xPlayerController.xPlayerModel.songPathProperty().get(), 30, "...")
 											+ "]\nIt is corrupted or maybe unsupported",
 									Duration.millis(1500), NotificationType.ERROR);
 

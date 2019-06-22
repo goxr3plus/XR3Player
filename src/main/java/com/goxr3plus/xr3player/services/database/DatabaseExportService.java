@@ -112,7 +112,7 @@ public class DatabaseExportService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -126,7 +126,7 @@ public class DatabaseExportService extends Service<Boolean> {
 
 				// GO
 				try (FileOutputStream fos = new FileOutputStream(zipFile);
-						ZipOutputStream zos = new ZipOutputStream(fos)) {
+					 ZipOutputStream zos = new ZipOutputStream(fos)) {
 
 					// Start
 					for (String file : fileList) {

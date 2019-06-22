@@ -149,7 +149,7 @@ public class DropboxFilesTableViewer extends StackPane {
 
 		// fileType
 		fileThumbnail.setCellValueFactory(new PropertyValueFactory<>("extension"));
-		fileThumbnail.setCellFactory(cell -> new TableCell<DropboxFile, String>() {
+		fileThumbnail.setCellFactory(cell -> new TableCell<>() {
 			// Icon FontIcon
 			FontIcon icon = new FontIcon();
 

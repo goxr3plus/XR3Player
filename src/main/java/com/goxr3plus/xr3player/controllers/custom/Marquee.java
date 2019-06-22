@@ -109,7 +109,7 @@ public class Marquee extends Pane {
 	private final void startAnimation() {
 
 		// KeyFrame
-		KeyFrame updateFrame = new KeyFrame(Duration.millis(35), new EventHandler<ActionEvent>() {
+		KeyFrame updateFrame = new KeyFrame(Duration.millis(35), new EventHandler<>() {
 
 			private boolean rightMovement;
 

@@ -59,7 +59,7 @@ public class TreeViewService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 			/**
 			 * [[SuppressWarningsSpartan]]
 			 */
@@ -95,7 +95,7 @@ public class TreeViewService extends Service<Void> {
 			/**
 			 * Run all the children of given TreeItem and return back the one matching the
 			 * value if any
-			 * 
+			 *
 			 * @param item
 			 * @param value
 			 * @return
@@ -116,7 +116,7 @@ public class TreeViewService extends Service<Void> {
 
 			/**
 			 * This method is the same with the above though i am using it for file renaming
-			 * 
+			 *
 			 * @param item
 			 * @param fileAbsolutePath
 			 * @return
