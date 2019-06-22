@@ -387,7 +387,7 @@ public class Sprites3D {
 	 *
 	 * @param points the points
 	 */
-	private final void zSort(List<Point3D> points) {
+	private void zSort(List<Point3D> points) {
 		Collections.sort(points, zComparator);
 	}
 
@@ -424,8 +424,8 @@ public class Sprites3D {
 	 * @param band       the band
 	 * @return the point 3 D
 	 */
-	private final Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,
-			double translateY, double translateZ, float[] bands) {
+	private Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,
+                              double translateY, double translateZ, float[] bands) {
 
 		// rotate around Z axis (roll)
 		double newX = orig.x * cos(bands[0]) - orig.y * sin(roll);
@@ -471,7 +471,7 @@ public class Sprites3D {
 	 * @param width  the width
 	 * @param height the height
 	 */
-	private final void drawPoint(Point3D point, double width, double height) {
+	private void drawPoint(Point3D point, double width, double height) {
 		double x = width / 2 + point.x / point.z * zoom;
 		double y = height / 2 + point.y / point.z * zoom;
 
