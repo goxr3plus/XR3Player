@@ -136,7 +136,7 @@ public class GeneralSettingsController extends BorderPane {
 
 		// highGraphicsToggle
 		highGraphicsToggle.selectedProperty().addListener((observable, oldValue, newValue) -> {
-			boolean value = newValue.booleanValue();
+			boolean value = newValue;
 			// System.out.println("High graphics is :"+value)
 
 			// Update the properties file
