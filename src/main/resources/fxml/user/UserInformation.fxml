@@ -18,138 +18,131 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" type="StackPane"
-         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@../../style/userInformation.css"/>
-        <URL value="@../../style/application.css"/>
-    </stylesheets>
-    <HBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: #303030;">
-        <BorderPane minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
-            <top>
-                <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                    <center>
-                        <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;"
-                              BorderPane.alignment="CENTER">
-                            <BorderPane.margin>
-                                <Insets/>
-                            </BorderPane.margin>
-                            <padding>
-                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                            </padding>
-                            <Label fx:id="userName" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                                   maxWidth="1.7976931348623157E308"
-                                   style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;"
-                                   text="User Name " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
-                                <font>
-                                    <Font size="42.0"/>
-                                </font>
-                            </Label>
-                            <HBox alignment="CENTER">
-                                <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0"
-                                           maxHeight="1.7976931348623157E308"
-                                           styleClass="jfx-button-dark-white-selection" text="Delete">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND"/>
-                                    </cursor>
-                                    <graphic>
-                                        <FontIcon iconColor="#fc5e5e" iconLiteral="fas-times" iconSize="24"/>
-                                    </graphic>
-                                </JFXButton>
-                                <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="0.0"
-                                           maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0"
-                                           prefWidth="0.0" style="-fx-text-fill: white;" text="Rename"
-                                           visible="false">
-                                    <cursor>
-                                        <Cursor fx:constant="HAND"/>
-                                    </cursor>
-                                </JFXButton>
-                            </HBox>
+<fx:root prefHeight="673.0" prefWidth="1003.0" styleClass="userInformationMode" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox minHeight="0.0" minWidth="0.0" style="-fx-background-color: #303030;">
+         <children>
+            <BorderPane minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+               <top>
+                  <BorderPane minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox prefHeight="200.0" spacing="5.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="userName" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #202020; -fx-text-fill: white; -fx-font-weight: bold;" text="User Name " textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="42.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <JFXButton fx:id="delete" focusTraversable="false" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Delete">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <graphic>
+                                          <FontIcon iconColor="#fc5e5e" iconLiteral="fas-times" iconSize="24" />
+                                       </graphic>
+                                    </JFXButton>
+                                    <JFXButton fx:id="rename" disable="true" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white;" text="Rename" visible="false">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
                         </VBox>
-                    </center>
-                    <top>
-                        <JFXButton fx:id="goBack" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                                   maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Back"
-                                   BorderPane.alignment="CENTER">
-                            <tooltip>
-                                <Tooltip text="Back"/>
-                            </tooltip>
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <graphic>
-                                <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-circle-left" iconSize="32"/>
-                            </graphic>
+                     </center>
+                     <top>
+                        <JFXButton fx:id="goBack" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Back" BorderPane.alignment="CENTER">
+                           <tooltip>
+                              <Tooltip text="Back" />
+                           </tooltip>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-arrow-circle-left" iconSize="32" />
+                           </graphic>
                         </JFXButton>
-                    </top>
-                    <right>
-                        <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0"
-                                   style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
-                            <cursor>
-                                <Cursor fx:constant="HAND"/>
-                            </cursor>
-                            <StackedFontIcon fx:id="noImageStackedFontIcon">
-                                <cursor>
-                                    <Cursor fx:constant="HAND"/>
-                                </cursor>
-                                <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190"/>
-                                <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50"
-                                          translateY="-15.0"/>
-                            </StackedFontIcon>
-                            <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
-                                <cursor>
-                                    <Cursor fx:constant="HAND"/>
-                                </cursor>
-                            </ImageView>
+                     </top>
+                     <right>
+                        <StackPane fx:id="imageViewStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
+                           <children>
+                              <StackedFontIcon fx:id="noImageStackedFontIcon">
+                                 <children>
+                                    <FontIcon iconColor="WHITE" iconLiteral="far-user-circle" iconSize="190" />
+                                    <FontIcon iconColor="#fc5e5e" iconLiteral="fas-plus-circle" iconSize="50" translateY="-15.0" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </StackedFontIcon>
+                              <ImageView fx:id="userImage" fitHeight="190.0" fitWidth="190.0" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </StackPane>
-                    </right>
-                </BorderPane>
-            </top>
-            <center>
-                <JFXTabPane minHeight="0.0" minWidth="0.0" styleClass="specialJFXTabPane"
-                            stylesheets="@../../style/application.css" BorderPane.alignment="CENTER">
-                    <Tab text="General Information">
-                        <graphic>
-                            <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" iconSize="24"/>
-                        </graphic>
-                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0"
-                              style="-fx-background-color: #202020;">
-                            <padding>
-                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
-                            </padding>
-                            <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0"
-                                   maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
-                                <graphic>
-                                    <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="32"/>
-                                </graphic>
-                            </Label>
-                            <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel"
-                                   text="1/1/2018">
-                                <graphic>
-                                    <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32"/>
-                                </graphic>
-                            </Label>
-                            <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER"
-                                   layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308"
-                                   styleClass="infoLabel" text="0">
-                                <graphic>
-                                    <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55"
-                                              text=""/>
-                                </graphic>
-                            </Label>
-                            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
-                                   maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
-                                <graphic>
-                                    <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308"
-                                              maxWidth="1.7976931348623157E308" promptText="comments..."
-                                              style="-fx-background-color: #101010;" styleClass="dark-text-area"
-                                              wrapText="true"/>
-                                </graphic>
-                            </Label>
-                        </VBox>
-                    </Tab>
-                </JFXTabPane>
-            </center>
-        </BorderPane>
-    </HBox>
+                     </right>
+                  </BorderPane>
+               </top>
+               <center>
+                  <JFXTabPane minHeight="0.0" minWidth="0.0" styleClass="specialJFXTabPane" stylesheets="@../../style/application.css" BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab text="General Information">
+                           <content>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: #202020;">
+                                 <children>
+                                    <Label fx:id="librariesLabel" layoutX="25.0" layoutY="65.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="15">
+                                       <graphic>
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="32" />
+                                       </graphic>
+                                    </Label>
+                                    <Label fx:id="dateCreated" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="1/1/2018">
+                                       <graphic>
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32" />
+                                       </graphic>
+                                    </Label>
+                                    <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="99.0" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0">
+                                       <graphic>
+                                          <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text="" />
+                                       </graphic>
+                                    </Label>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" VBox.vgrow="ALWAYS">
+                                       <graphic>
+                                          <TextArea fx:id="commentsArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" promptText="comments..." style="-fx-background-color: #101010;" styleClass="dark-text-area" wrapText="true" />
+                                       </graphic>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" iconSize="24" />
+                           </graphic>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+            </BorderPane>
+         </children>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@../../style/userInformation.css" />
+      <URL value="@../../style/application.css" />
+   </stylesheets>
 </fx:root>

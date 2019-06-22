@@ -13,89 +13,81 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0"
-          spacing="3.0">
-        <HBox alignment="TOP_CENTER" spacing="5.0">
-            <VBox.margin>
-                <Insets/>
-            </VBox.margin>
-            <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false"
-                       maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0"
-                       style="-fx-font-size: 10;" styleClass="jfx-button4" text="R">
-                <font>
-                    <Font size="8.0"/>
-                </font>
-            </JFXButton>
-            <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                       maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0"
-                       style="-fx-font-size: 10;" styleClass="jfx-button-yellow" text="-">
-                <font>
-                    <Font size="8.0"/>
-                </font>
-                <graphic>
-                    <FontIcon iconColor="WHITE" iconLiteral="fas-window-minimize" iconSize="17"/>
-                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                       maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0"
-                       style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
-                <font>
-                    <Font size="8.0"/>
-                </font>
-                <graphic>
-                    <StackedFontIcon fx:id="sizeStackedFontIcon">
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0"
-                                  selectionStart="0" visible="false"/>
-                        <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0"
-                                  layoutY="29.0" selectionEnd="0" selectionStart="0"/>
-                    </StackedFontIcon>
-                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                       maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0"
-                       style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
-                <font>
-                    <Font size="8.0"/>
-                </font>
-                <graphic>
-                    <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
-                        <effect>
-                            <DropShadow/>
-                        </effect>
-                    </FontIcon>
-                </graphic>
-            </JFXButton>
-        </HBox>
-        <HBox alignment="CENTER" spacing="5.0">
-            <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT"
-                       focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;"
-                       styleClass="jfx-button4" text="Donate">
-                <graphic>
-                    <FontIcon iconColor="WHITE" iconLiteral="fa-money"/>
-                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT"
-                       focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;"
-                       styleClass="jfx-button4" text="About">
-                <graphic>
-                    <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle"/>
-                </graphic>
-            </JFXButton>
-            <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;"
-                        styleClass="jfx-button4">
-                <items>
-                    <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..."/>
-                    <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default"/>
-                </items>
-                <cursor>
-                    <Cursor fx:constant="HAND"/>
-                </cursor>
-                <graphic>
-                    <FontIcon iconColor="WHITE" iconLiteral="far-image"/>
-                </graphic>
-            </MenuButton>
-        </HBox>
-    </VBox>
+<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="51.0" spacing="3.0">
+         <children>
+            <HBox alignment="TOP_CENTER" spacing="5.0">
+               <children>
+                  <JFXButton fx:id="restartButton" contentDisplay="TEXT_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button4" text="R">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="minimize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-yellow" text="-">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-window-minimize" iconSize="17" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="maxOrNormalize" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-green" text="+">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <StackedFontIcon fx:id="sizeStackedFontIcon">
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" selectionEnd="0" selectionStart="0" visible="false" />
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-plus" iconSize="20" layoutX="10.0" layoutY="29.0" selectionEnd="0" selectionStart="0" />
+                           </children>
+                        </StackedFontIcon>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="exitApplication" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="24.0" style="-fx-font-size: 10;" styleClass="jfx-button-red" text="X">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-close" iconSize="20">
+                           <effect>
+                              <DropShadow />
+                           </effect></FontIcon>
+                     </graphic>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" spacing="5.0">
+               <children>
+                  <JFXButton fx:id="donate" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="Donate">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fa-money" />
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="about" alignment="CENTER" buttonType="RAISED" contentDisplay="RIGHT" focusTraversable="false" maxWidth="1.7976931348623157E308" style="-fx-font-size: 9;" styleClass="jfx-button4" text="About">
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" />
+                     </graphic>
+                  </JFXButton>
+                  <MenuButton mnemonicParsing="false" style="-fx-font-size: 10; -fx-background-radius: 0;" styleClass="jfx-button4">
+                     <items>
+                        <MenuItem fx:id="chooseBackground" mnemonicParsing="false" text="Choose..." />
+                        <MenuItem fx:id="resetBackground" mnemonicParsing="false" text="Default" />
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <FontIcon iconColor="WHITE" iconLiteral="far-image" />
+                     </graphic>
+                  </MenuButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </fx:root>

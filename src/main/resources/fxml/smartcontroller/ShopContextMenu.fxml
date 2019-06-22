@@ -8,56 +8,58 @@
 
 <fx:root type="ContextMenu" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
-       <Menu mnemonicParsing="false" text="Amazon">
-           <graphic>
-               <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-           </graphic>
-           <MenuItem fx:id="amazonUS" mnemonicParsing="false" onAction="#action" text="US (Amazon.com)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonCanada" mnemonicParsing="false" onAction="#action" text="Canada (Amazon.ca)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonGermany" mnemonicParsing="false" onAction="#action" text="Germany (Amazon.de)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonFrance" mnemonicParsing="false" onAction="#action" text="France (Amazon.fr)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonSpain" mnemonicParsing="false" onAction="#action" text="Spain (Amazon.es)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonItaly" mnemonicParsing="false" onAction="#action" text="Italy (Amazon.it)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonJapan" mnemonicParsing="false" onAction="#action" text="Japan (Amazon.co.jp)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="amazonChina" mnemonicParsing="false" onAction="#action" text="China (Amazon.cn)">
-              <graphic>
-                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18"/>
-              </graphic>
-           </MenuItem>
-       </Menu>
+      <Menu mnemonicParsing="false" text="Amazon">
+         <items>
+            <MenuItem fx:id="amazonUS" mnemonicParsing="false" onAction="#action" text="US (Amazon.com)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonUK" mnemonicParsing="false" onAction="#action" text="UK (Amazon.com)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonCanada" mnemonicParsing="false" onAction="#action" text="Canada (Amazon.ca)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonGermany" mnemonicParsing="false" onAction="#action" text="Germany (Amazon.de)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonFrance" mnemonicParsing="false" onAction="#action" text="France (Amazon.fr)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonSpain" mnemonicParsing="false" onAction="#action" text="Spain (Amazon.es)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonItaly" mnemonicParsing="false" onAction="#action" text="Italy (Amazon.it)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonJapan" mnemonicParsing="false" onAction="#action" text="Japan (Amazon.co.jp)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="amazonChina" mnemonicParsing="false" onAction="#action" text="China (Amazon.cn)">
+               <graphic>
+                  <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+               </graphic>
+            </MenuItem>
+         </items>
+         <graphic>
+            <FontIcon iconColor="#eec334" iconLiteral="fab-amazon" iconSize="18" />
+         </graphic>
+      </Menu>
       <MenuItem fx:id="soundCloud" mnemonicParsing="false" onAction="#action" text="SoundCloud">
          <graphic>
             <FontIcon iconColor="#ffa72d" iconLiteral="fab-soundcloud" iconSize="18" />

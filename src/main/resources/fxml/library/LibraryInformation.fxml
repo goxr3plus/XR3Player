@@ -17,81 +17,76 @@
       <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
    </padding>
    <top>
-       <GridPane prefHeight="186.0" prefWidth="342.0" BorderPane.alignment="CENTER">
-           <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="31.0"/>
-               <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0"/>
-           </columnConstraints>
-           <rowConstraints>
-               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-               <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES"/>
-               <RowConstraints maxHeight="47.0" minHeight="8.0" prefHeight="24.0" vgrow="SOMETIMES"/>
-               <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES"/>
-           </rowConstraints>
-           <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel">
-              <tooltip>
-                  <Tooltip text="Total songs in Library"/>
-              </tooltip>
-              <GridPane.margin>
-                  <Insets left="5.0"/>
-              </GridPane.margin>
-              <graphic>
-                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="32"/>
-              </graphic>
-           </Label>
-           <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="116.0"
-                  styleClass="infoLabel" GridPane.rowIndex="1">
-              <tooltip>
-                  <Tooltip text="Date the Library was created"/>
-              </tooltip>
-              <GridPane.margin>
-                  <Insets left="5.0"/>
-              </GridPane.margin>
-              <graphic>
-                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32"/>
-              </graphic>
-           </Label>
-           <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
-              <tooltip>
-                  <Tooltip text="Rating in Stars "/>
-              </tooltip>
-              <GridPane.margin>
-                  <Insets left="5.0"/>
-              </GridPane.margin>
-              <graphic>
-                  <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="28"/>
-              </graphic>
-           </Label>
-           <Label fx:id="totalItems" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                  maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="-" GridPane.columnIndex="1">
-              <tooltip>
-                  <Tooltip text="Total songs in Library"/>
-              </tooltip>
-           </Label>
-           <Label fx:id="dateLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                  maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="- " GridPane.columnIndex="1"
-                  GridPane.rowIndex="1">
-              <tooltip>
-                  <Tooltip text="Date the Library was created"/>
-              </tooltip>
-           </Label>
-           <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                  maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="-" GridPane.columnIndex="1"
-                  GridPane.rowIndex="2">
-              <cursor>
-                  <Cursor fx:constant="HAND"/>
-              </cursor>
-              <tooltip>
-                  <Tooltip text="Rating in Stars "/>
-              </tooltip>
-           </Label>
-           <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308"
-                  styleClass="infoLabel" text="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
-              <graphic>
-                  <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text=""/>
-              </graphic>
-           </Label>
-       </GridPane>
+      <GridPane prefHeight="186.0" prefWidth="342.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0" prefWidth="31.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="299.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="29.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="47.0" minHeight="8.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel">
+               <tooltip>
+                  <Tooltip text="Total songs in Library" />
+               </tooltip>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+               <graphic>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="32" />
+               </graphic>
+            </Label>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="116.0" styleClass="infoLabel" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Date the Library was created" />
+               </tooltip>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+               <graphic>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-date-range" iconSize="32" />
+               </graphic>
+            </Label>
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Rating in Stars " />
+               </tooltip>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+               <graphic>
+                  <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="28" />
+               </graphic>
+            </Label>
+            <Label fx:id="totalItems" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="-" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Total songs in Library" />
+               </tooltip>
+            </Label>
+            <Label fx:id="dateLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="- " GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Date the Library was created" />
+               </tooltip>
+            </Label>
+            <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="Rating in Stars " />
+               </tooltip>
+            </Label>
+            <Label fx:id="commentsLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="infoLabel" text="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <graphic>
+                  <FontIcon iconColor="#ff4a4a" iconLiteral="fas-circle-notch" iconSize="55" text="" />
+               </graphic>
+            </Label>
+         </children>
+      </GridPane>
    </top>
    <stylesheets>
       <URL value="@../../style/application.css" />

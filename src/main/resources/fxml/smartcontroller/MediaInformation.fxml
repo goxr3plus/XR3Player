@@ -17,238 +17,153 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import org.kordamp.ikonli.javafx.StackedFontIcon?>
 
-<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0"
-         styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane"
-         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane>
-        <top>
+<fx:root maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="345.0" styleClass="media-information" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane>
+         <top>
             <HBox BorderPane.alignment="CENTER">
-                <BorderPane.margin>
-                    <Insets bottom="2.0"/>
-                </BorderPane.margin>
-                <Button fx:id="mediaImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity"
-                        maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                        prefHeight="90.0" prefWidth="90.0" styleClass="jfx-button4">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                    <tooltip>
-                        <Tooltip text="Press to view file details and tags"/>
-                    </tooltip>
-                    <graphic>
+               <children>
+                  <Button fx:id="mediaImageButton" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="jfx-button4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Press to view file details and tags" />
+                     </tooltip>
+                     <graphic>
                         <StackedFontIcon>
-                            <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="90"/>
-                            <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
-                                <cursor>
-                                    <Cursor fx:constant="HAND"/>
-                                </cursor>
-                            </ImageView>
+                           <children>
+                              <FontIcon iconColor="WHITE" iconLiteral="gmi-album" iconSize="90" />
+                              <ImageView fx:id="imageView" fitHeight="82.0" fitWidth="82.0" pickOnBounds="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
                         </StackedFontIcon>
-                    </graphic>
-                </Button>
-                <VBox prefHeight="54.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
-                    <Label fx:id="title" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" text="-" wrapText="true" VBox.vgrow="ALWAYS">
-                        <VBox.margin>
-                            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
-                        </VBox.margin>
-                    </Label>
-                </VBox>
+                     </graphic>
+                  </Button>
+                  <VBox prefHeight="54.0" prefWidth="292.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" wrapText="true" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                           </VBox.margin></Label>
+                     </children>
+                  </VBox>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="2.0" />
+               </BorderPane.margin>
             </HBox>
-        </top>
-        <center>
-            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0"
-                        BorderPane.alignment="CENTER">
-                <GridPane alignment="CENTER" vgap="5.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0"
-                                           percentWidth="36.0" prefWidth="105.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0"
-                                           percentWidth="64.0" prefWidth="323.0"/>
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                    </rowConstraints>
-                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="mediaInfoLabel" text="Duration"/>
-                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="mediaInfoLabel" text="Stars" GridPane.rowIndex="1"/>
-                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="mediaInfoLabel" text="Drive" GridPane.rowIndex="2"/>
-                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="mediaInfoLabel" text="Type" GridPane.rowIndex="5"/>
-                    <Label fx:id="drive" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1"
-                           GridPane.rowIndex="2"/>
-                    <Label fx:id="stars" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1"
-                           GridPane.rowIndex="1"/>
-                    <Label fx:id="duration" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" prefWidth="231.0" text="-" GridPane.columnIndex="1"/>
-                    <Label fx:id="type" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1"
-                           GridPane.rowIndex="5"/>
-                    <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                           styleClass="mediaInfoLabel" text="Size" GridPane.rowIndex="3"/>
-                    <Label fx:id="size" alignment="CENTER" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1"
-                           GridPane.rowIndex="3"/>
-                    <Label layoutX="10.0" layoutY="124.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Sample Rate"
-                           GridPane.rowIndex="6"/>
-                    <Label layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Bit Rate"
-                           GridPane.rowIndex="7"/>
-                    <Label fx:id="bitRate" alignment="CENTER" layoutX="110.0" layoutY="124.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                    <Label fx:id="sampleRate" alignment="CENTER" layoutX="110.0" layoutY="124.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                    <Label layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Encoder"
-                           GridPane.rowIndex="9"/>
-                    <Label fx:id="encoder" alignment="CENTER" layoutX="110.0" layoutY="160.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-                    <Label layoutX="11.0" layoutY="149.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Format"
-                           GridPane.rowIndex="8"/>
-                    <Label layoutX="11.0" layoutY="149.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Channel"
-                           GridPane.rowIndex="10"/>
-                    <Label fx:id="channel" alignment="CENTER" layoutX="110.0" layoutY="149.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="10"/>
-                    <Label fx:id="format" alignment="CENTER" layoutX="110.0" layoutY="149.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-                    <Label layoutX="10.0" layoutY="227.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MP3G Layer"
-                           GridPane.rowIndex="13"/>
-                    <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MP3 start byte"
-                           GridPane.rowIndex="16"/>
-                    <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Total frames"
-                           GridPane.rowIndex="15"/>
-                    <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="NoOfSamples"
-                           GridPane.rowIndex="14"/>
-                    <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MPEG Version"
-                           GridPane.rowIndex="12"/>
-                    <Label layoutX="10.0" layoutY="231.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Protected"
-                           GridPane.rowIndex="23"/>
-                    <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Padding"
-                           GridPane.rowIndex="22"/>
-                    <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Copyrighted"
-                           GridPane.rowIndex="21"/>
-                    <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Original"
-                           GridPane.rowIndex="20"/>
-                    <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Variable Bit Rate?"
-                           GridPane.rowIndex="19"/>
-                    <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Empasis"
-                           GridPane.rowIndex="17"/>
-                    <Label layoutX="10.0" layoutY="345.0" maxHeight="1.7976931348623157E308"
-                           maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Private"
-                           GridPane.rowIndex="24"/>
-                    <Label fx:id="isPrivate" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="24"/>
-                    <Label fx:id="isProtected" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="23"/>
-                    <Label fx:id="isPadding" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="22"/>
-                    <Label fx:id="isCopyrighted" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="21"/>
-                    <Label fx:id="isOriginal" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="20"/>
-                    <Label fx:id="isVariableBitRate" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="19"/>
-                    <Label fx:id="empasis" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="17"/>
-                    <Label fx:id="mp3StartByte" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="16"/>
-                    <Label fx:id="totalFrames" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="15"/>
-                    <Label fx:id="noOfSamples" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="14"/>
-                    <Label fx:id="mpegLayer" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-                    <Label fx:id="mpegVersion" alignment="CENTER" layoutX="10.0" layoutY="7.0"
-                           maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-"
-                           GridPane.columnIndex="1" GridPane.rowIndex="12"/>
-                </GridPane>
+         </top>
+         <center>
+            <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <content>
+                  <GridPane alignment="CENTER" vgap="5.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="36.0" prefWidth="105.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" percentWidth="64.0" prefWidth="323.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Duration" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Stars" GridPane.rowIndex="1" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Drive" GridPane.rowIndex="2" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Type" GridPane.rowIndex="5" />
+                        <Label fx:id="drive" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="stars" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="duration" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="231.0" text="-" GridPane.columnIndex="1" />
+                        <Label fx:id="type" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Size" GridPane.rowIndex="3" />
+                        <Label fx:id="size" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label layoutX="10.0" layoutY="124.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Sample Rate" GridPane.rowIndex="6" />
+                        <Label layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Bit Rate" GridPane.rowIndex="7" />
+                        <Label fx:id="bitRate" alignment="CENTER" layoutX="110.0" layoutY="124.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label fx:id="sampleRate" alignment="CENTER" layoutX="110.0" layoutY="124.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label layoutX="10.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Encoder" GridPane.rowIndex="9" />
+                        <Label fx:id="encoder" alignment="CENTER" layoutX="110.0" layoutY="160.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label layoutX="11.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Format" GridPane.rowIndex="8" />
+                        <Label layoutX="11.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Channel" GridPane.rowIndex="10" />
+                        <Label fx:id="channel" alignment="CENTER" layoutX="110.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <Label fx:id="format" alignment="CENTER" layoutX="110.0" layoutY="149.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label layoutX="10.0" layoutY="227.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MP3G Layer" GridPane.rowIndex="13" />
+                        <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MP3 start byte" GridPane.rowIndex="16" />
+                        <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Total frames" GridPane.rowIndex="15" />
+                        <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="NoOfSamples" GridPane.rowIndex="14" />
+                        <Label layoutX="10.0" layoutY="9.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="MPEG Version" GridPane.rowIndex="12" />
+                        <Label layoutX="10.0" layoutY="231.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Protected" GridPane.rowIndex="23" />
+                        <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Padding" GridPane.rowIndex="22" />
+                        <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Copyrighted" GridPane.rowIndex="21" />
+                        <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Original" GridPane.rowIndex="20" />
+                        <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Variable Bit Rate?" GridPane.rowIndex="19" />
+                        <Label layoutX="10.0" layoutY="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Empasis" GridPane.rowIndex="17" />
+                        <Label layoutX="10.0" layoutY="345.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="mediaInfoLabel" text="Private" GridPane.rowIndex="24" />
+                        <Label fx:id="isPrivate" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="24" />
+                        <Label fx:id="isProtected" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+                        <Label fx:id="isPadding" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="22" />
+                        <Label fx:id="isCopyrighted" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                        <Label fx:id="isOriginal" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                        <Label fx:id="isVariableBitRate" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                        <Label fx:id="empasis" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                        <Label fx:id="mp3StartByte" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                        <Label fx:id="totalFrames" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                        <Label fx:id="noOfSamples" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                        <Label fx:id="mpegLayer" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <Label fx:id="mpegVersion" alignment="CENTER" layoutX="10.0" layoutY="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="-" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                     </children>
+                  </GridPane>
+               </content>
             </ScrollPane>
-        </center>
-        <StackPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-        </StackPane.margin>
-        <bottom>
-          <Button fx:id="showMore" contentDisplay="RIGHT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308"
-                  mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Edit tags"
-                  textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
-              <BorderPane.margin>
-                  <Insets left="5.0" right="5.0"/>
-              </BorderPane.margin>
-              <cursor>
-                  <Cursor fx:constant="HAND"/>
-              </cursor>
-              <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fa-tags" iconSize="24"/>
-              </graphic>
-          </Button>
-        </bottom>
-    </BorderPane>
-    <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308"
-           style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;"
-           styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false"
-           wrapText="true">
-        <graphic>
-          <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper"/>
-        </graphic>
-    </Label>
+         </center>
+         <StackPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </StackPane.margin>
+         <bottom>
+            <Button fx:id="showMore" contentDisplay="RIGHT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-radius: 0;" styleClass="jfx-button4" text="Edit tags" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </BorderPane.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fa-tags" iconSize="24" />
+               </graphic>
+            </Button>
+         </bottom>
+      </BorderPane>
+      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-font-size: 25; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
+         </graphic>
+      </Label>
+   </children>
 </fx:root>

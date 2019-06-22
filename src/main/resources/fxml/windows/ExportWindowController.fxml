@@ -13,88 +13,92 @@
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="464.0" prefWidth="689.0" style="-fx-background-color: #252525;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-       <VBox fx:id="containerVBox" alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
-           <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
-               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308"
-                      styleClass="white-black-label" text="Which files to export ">
-                   <VBox.margin>
-                       <Insets bottom="5.0"/>
-                   </VBox.margin>
-               </Label>
-               <HBox alignment="CENTER" spacing="10.0">
-                   <ToggleButton mnemonicParsing="false" styleClass="toggle-button3" text="Selected Items">
-                       <toggleGroup>
-                           <ToggleGroup fx:id="whatFilesToExportGroup"/>
-                       </toggleGroup>
-                   </ToggleButton>
-                   <ToggleButton layoutX="487.0" layoutY="10.0" mnemonicParsing="false" selected="true"
-                                 styleClass="toggle-button3" text="Current Page"
-                                 toggleGroup="$whatFilesToExportGroup"/>
-                   <ToggleButton layoutX="541.0" layoutY="10.0" mnemonicParsing="false" styleClass="toggle-button3"
-                                 text="Everything on Playlist" toggleGroup="$whatFilesToExportGroup"/>
-               </HBox>
-           </VBox>
-           <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
-               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308"
-                      styleClass="white-black-label" text="Export files to ">
-                   <VBox.margin>
-                       <Insets bottom="5.0"/>
-                   </VBox.margin>
-               </Label>
-               <HBox alignment="CENTER" spacing="10.0">
-                   <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Folder">
-                       <toggleGroup>
-                           <ToggleGroup fx:id="exportAsGroup"/>
-                       </toggleGroup>
-                   </ToggleButton>
-                   <ToggleButton layoutX="399.0" layoutY="10.0" mnemonicParsing="false" styleClass="toggle-button3"
-                                 text="Zip Archive" toggleGroup="$exportAsGroup"/>
-               </HBox>
-           </VBox>
-           <VBox alignment="TOP_CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+      <VBox fx:id="containerVBox" alignment="TOP_CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Which files to export ">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" styleClass="toggle-button3" text="Selected Items">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="whatFilesToExportGroup" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton layoutX="487.0" layoutY="10.0" mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Current Page" toggleGroup="$whatFilesToExportGroup" />
+                        <ToggleButton layoutX="541.0" layoutY="10.0" mnemonicParsing="false" styleClass="toggle-button3" text="Everything on Playlist" toggleGroup="$whatFilesToExportGroup" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox maxWidth="1.7976931348623157E308" spacing="5.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Export files to ">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="toggle-button3" text="Folder">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="exportAsGroup" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton layoutX="399.0" layoutY="10.0" mnemonicParsing="false" styleClass="toggle-button3" text="Zip Archive" toggleGroup="$exportAsGroup" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" styleClass="white-black-label" text="Where to export the files" VBox.vgrow="SOMETIMES">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></Label>
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                     <content>
+                        <VBox fx:id="exportFoldersVBox" minHeight="0.0" minWidth="0.0" spacing="5.0">
+                           <padding>
+                              <Insets right="7.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+                  <JFXButton fx:id="addFolder" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Add Folder">
+                     <graphic>
+                        <FontIcon iconColor="#64ff41" iconLiteral="fas-plus" iconSize="24" />
+                     </graphic>
+                  </JFXButton>
+               </children>
                <VBox.margin>
-                   <Insets bottom="10.0" left="15.0" right="15.0"/>
+                  <Insets bottom="10.0" left="15.0" right="15.0" />
                </VBox.margin>
-               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308"
-                      styleClass="white-black-label" text="Where to export the files" VBox.vgrow="SOMETIMES">
-                   <VBox.margin>
-                       <Insets bottom="10.0"/>
-                   </VBox.margin>
-               </Label>
-               <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-                   <VBox fx:id="exportFoldersVBox" minHeight="0.0" minWidth="0.0" spacing="5.0">
-                       <padding>
-                           <Insets right="7.0"/>
-                       </padding>
-                   </VBox>
-               </ScrollPane>
-               <JFXButton fx:id="addFolder" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                          maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="Add Folder">
-                   <graphic>
-                       <FontIcon iconColor="#64ff41" iconLiteral="fas-plus" iconSize="24"/>
-                   </graphic>
-               </JFXButton>
-           </VBox>
-       </VBox>
+            </VBox>
+         </children>
+      </VBox>
    </center>
    <padding>
       <Insets bottom="5.0" left="2.0" right="2.0" top="2.0" />
    </padding>
    <bottom>
-       <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
-           <JFXButton fx:id="okButton" focusTraversable="false" maxHeight="1.7976931348623157E308"
-                      maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="OK" HBox.hgrow="ALWAYS">
-              <graphic>
-                  <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24"/>
-              </graphic>
-           </JFXButton>
-           <JFXButton fx:id="cancelButton" focusTraversable="false" layoutX="376.0" layoutY="10.0"
-                      maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                      styleClass="jfx-button-dark-white-selection" text="Cancel" HBox.hgrow="ALWAYS">
-              <graphic>
-                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
-              </graphic>
-           </JFXButton>
-       </HBox>
+      <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="okButton" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="OK" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="cancelButton" focusTraversable="false" layoutX="376.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Cancel" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
    </bottom>
 </fx:root>

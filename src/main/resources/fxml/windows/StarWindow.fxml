@@ -11,63 +11,59 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../../style/application.css"
-         type="GridPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="-Infinity" prefWidth="270.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="0.0" prefWidth="50.0"/>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="0.0" prefWidth="50.0"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-    </rowConstraints>
-    <padding>
-        <Insets bottom="2.0" left="2.0"/>
-    </padding>
-    <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" GridPane.halignment="CENTER"
-            GridPane.rowIndex="1"/>
-    <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-           style="-fx-border-color: transparent; -fx-background-color: transparent;"
-           styleClass="applicationSettingsLabel2" text="Perfect!" GridPane.columnSpan="3" GridPane.rowIndex="2"/>
-    <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="3">
-        <padding>
-            <Insets left="5.0" right="5.0"/>
-        </padding>
-        <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0"
-               style="-fx-font-size: 14; -fx-border-color: transparent; -fx-background-color: transparent;"
-               styleClass="applicationSettingsLabel2" text="Name" HBox.hgrow="ALWAYS">
-            <tooltip>
-                <Tooltip text="Empty Tooltip"/>
-            </tooltip>
-            <HBox.margin>
-                <Insets top="5.0"/>
-            </HBox.margin>
-        </Label>
-    </HBox>
-    <JFXButton fx:id="ok" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308"
-               styleClass="jfx-button4" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <tooltip>
-          <Tooltip text="Okay"/>
-        </tooltip>
-        <GridPane.margin>
-          <Insets right="5.0"/>
-        </GridPane.margin>
-        <graphic>
-          <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24"/>
-        </graphic>
-    </JFXButton>
-    <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308"
-               styleClass="jfx-button-dark-white-selection" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
-        <tooltip>
-          <Tooltip text="Cancel"/>
-        </tooltip>
-        <GridPane.margin>
-          <Insets right="5.0"/>
-        </GridPane.margin>
-        <graphic>
-          <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
-        </graphic>
-    </JFXButton>
+<fx:root prefHeight="101.0" prefWidth="406.0" styleClass="starWindow" stylesheets="@../../style/application.css" type="GridPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="-Infinity" prefWidth="270.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="0.0" prefWidth="50.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="0.0" prefWidth="50.0" />
+  </columnConstraints>
+  <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Canvas fx:id="canvas" height="33.0" style="-fx-cursor: hand;" width="160.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label fx:id="starsLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent; -fx-background-color: transparent;" styleClass="applicationSettingsLabel2" text="Perfect!" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+      <HBox alignment="CENTER" spacing="5.0" GridPane.columnSpan="3">
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <children>
+            <Label fx:id="titleLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="27.0" style="-fx-font-size: 14; -fx-border-color: transparent; -fx-background-color: transparent;" styleClass="applicationSettingsLabel2" text="Name" HBox.hgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="Empty Tooltip" />
+               </tooltip>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <JFXButton fx:id="ok" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button4" text="OK" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <tooltip>
+            <Tooltip text="Okay" />
+         </tooltip>
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin>
+         <graphic>
+            <FontIcon iconColor="#64ff41" iconLiteral="fas-check" iconSize="24" />
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="close" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxWidth="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <tooltip>
+            <Tooltip text="Cancel" />
+         </tooltip>
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin>
+         <graphic>
+            <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
+         </graphic>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" />
+   </padding>
 </fx:root>

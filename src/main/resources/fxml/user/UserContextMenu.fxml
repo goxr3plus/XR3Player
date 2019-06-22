@@ -22,26 +22,28 @@
             <FontIcon iconColor="#d03e3e" iconLiteral="typ-delete" iconSize="32" />
          </graphic>
       </MenuItem>
-       <Menu mnemonicParsing="false" text="Background">
-           <graphic>
-               <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0"/>
-           </graphic>
-           <MenuItem fx:id="changeImage" mnemonicParsing="false" text="Change">
-              <graphic>
-                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="resetImage" mnemonicParsing="false" text="Reset default">
-              <graphic>
-                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0"/>
-              </graphic>
-           </MenuItem>
-           <MenuItem fx:id="exportImage" mnemonicParsing="false" text="Export image (CTRL + E)">
-              <graphic>
-                  <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24"/>
-              </graphic>
-           </MenuItem>
-       </Menu>
+      <Menu mnemonicParsing="false" text="Background">
+         <items>
+            <MenuItem fx:id="changeImage" mnemonicParsing="false" text="Change">
+               <graphic>
+                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="resetImage" mnemonicParsing="false" text="Reset default">
+               <graphic>
+                  <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+               </graphic>
+            </MenuItem>
+            <MenuItem fx:id="exportImage" mnemonicParsing="false" text="Export image (CTRL + E)">
+               <graphic>
+                  <FontIcon iconColor="#abfa34" iconLiteral="far-hdd" iconSize="24" />
+               </graphic>
+            </MenuItem>
+         </items>
+         <graphic>
+            <FontIcon iconColor="#d4ff00" iconLiteral="far-image" iconSize="24" selectionEnd="0" />
+         </graphic>
+      </Menu>
       <MenuItem fx:id="moreInfo" mnemonicParsing="false" text="More info (CTRL + I)">
          <graphic>
             <FontIcon iconColor="#e8ac14" iconLiteral="fas-info-circle" iconSize="24" />

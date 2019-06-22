@@ -12,75 +12,74 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<fx:root hgap="5.0" prefHeight="374.0" prefWidth="322.0" type="GridPane" vgap="5.0"
-         xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
-    <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="306.0"/>
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="162.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES"/>
-    </rowConstraints>
-    <padding>
-        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-    </padding>
-    <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="343.0" GridPane.rowIndex="5">
-        <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="cancel">
-            <HBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </HBox.margin>
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-        <Button fx:id="save" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Save">
-            <HBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </HBox.margin>
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </Button>
-        <JFXSpinner/>
-    </HBox>
-    <JFXTextField fx:id="stationName" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308"
-                  promptText="stationName*" unFocusColor="#4d4d4d" GridPane.rowIndex="1">
-        <font>
-          <Font size="14.0"/>
-        </font>
-        <GridPane.margin>
-          <Insets top="10.0"/>
-        </GridPane.margin>
-    </JFXTextField>
-    <JFXTextField fx:id="stationUrl" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308"
-                  promptText="stationUrl*" GridPane.rowIndex="2">
-        <font>
-          <Font size="14.0"/>
-        </font>
-        <GridPane.margin>
-          <Insets top="10.0"/>
-        </GridPane.margin>
-    </JFXTextField>
-    <JFXTextField fx:id="stationCreator" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308"
-                  promptText="stationCreator" GridPane.rowIndex="3">
-        <font>
-          <Font size="14.0"/>
-        </font>
-        <GridPane.margin>
-          <Insets top="10.0"/>
-        </GridPane.margin>
-    </JFXTextField>
-    <JFXTextArea fx:id="stationDescription" focusColor="#f2bb07" labelFloat="true" maxHeight="1.7976931348623157E308"
-                 promptText="description" wrapText="true" GridPane.rowIndex="4">
-        <font>
-          <Font size="14.0"/>
-        </font>
-        <GridPane.margin>
-          <Insets top="10.0"/>
-        </GridPane.margin>
-    </JFXTextArea>
+<fx:root hgap="5.0" prefHeight="374.0" prefWidth="322.0" type="GridPane" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.0" minWidth="10.0" prefWidth="306.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="63.0" valignment="TOP" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="131.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="162.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="74.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="266.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="44.0" prefWidth="343.0" GridPane.rowIndex="5">
+         <children>
+            <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="cancel">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="save" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Save">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <JFXSpinner />
+         </children>
+      </HBox>
+      <JFXTextField fx:id="stationName" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="stationName*" unFocusColor="#4d4d4d" GridPane.rowIndex="1">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="stationUrl" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="stationUrl*" GridPane.rowIndex="2">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextField fx:id="stationCreator" focusColor="#f2bb07" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="stationCreator" GridPane.rowIndex="3">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </JFXTextField>
+      <JFXTextArea fx:id="stationDescription" focusColor="#f2bb07" labelFloat="true" maxHeight="1.7976931348623157E308" promptText="description" wrapText="true" GridPane.rowIndex="4">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </JFXTextArea>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </fx:root>

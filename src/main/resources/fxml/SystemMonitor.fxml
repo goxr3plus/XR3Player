@@ -7,22 +7,19 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.StackPane?>
 
-<fx:root prefWidth="80.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css"
-         type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <padding>
-        <Insets left="5.0" right="5.0"/>
-    </padding>
-    <ProgressBar fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                 minWidth="-Infinity" prefHeight="27.0" prefWidth="69.0" progress="0.54"
-                 style="-fx-background-color: #505050;" styleClass="transparent-progress-bar"/>
-    <Label fx:id="progressLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-           style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11;" text="RAM 32 %"
-           textAlignment="CENTER" wrapText="true">
-        <cursor>
-          <Cursor fx:constant="HAND"/>
-        </cursor>
-        <tooltip>
-          <Tooltip/>
-        </tooltip>
-    </Label>
+<fx:root prefWidth="80.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressBar fx:id="progressBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="69.0" progress="0.54" style="-fx-background-color: #505050;" styleClass="transparent-progress-bar" />
+      <Label fx:id="progressLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 11;" text="RAM 32 %" textAlignment="CENTER" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <tooltip>
+            <Tooltip />
+         </tooltip>
+      </Label>
+   </children>
+   <padding>
+      <Insets left="5.0" right="5.0" />
+   </padding>
 </fx:root>

@@ -12,31 +12,34 @@
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="375.0" prefWidth="460.0" style="-fx-background-color: rgb(0,0,0,0.9);" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-       <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-           <HBox fx:id="bottomHBox" alignment="TOP_CENTER">
-               <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS">
-                   <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefRows="0"
-                             style="-fx-background-color: #202020;" vgap="5.0"/>
-               </ScrollPane>
-           </HBox>
-       </ScrollPane>
+      <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+         <content>
+            <HBox fx:id="bottomHBox" alignment="TOP_CENTER">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" HBox.hgrow="ALWAYS">
+                     <content>
+                        <TilePane fx:id="tilePane" alignment="TOP_CENTER" hgap="5.0" prefColumns="0" prefRows="0" style="-fx-background-color: #202020;" vgap="5.0" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </HBox>
+         </content>
+      </ScrollPane>
    </center>
    <top>
-       <HBox fx:id="hbox" alignment="CENTER_LEFT" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-           <MenuButton alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0"
-                       rotate="180.0" style="-fx-font-size: 11; -fx-background-radius: 0;"
-                       styleClass="dark-menu-button">
-               <items>
-                   <Menu fx:id="presets" mnemonicParsing="false" text="Presets" visible="false"/>
-                   <MenuItem fx:id="resetFilters" mnemonicParsing="false" text="Reset All"/>
-               </items>
-              <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="20" selectionEnd="0"/>
-              </graphic>
-           </MenuButton>
-           <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
-                  style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel"
-                  text="Filter Description " HBox.hgrow="ALWAYS"/>
-       </HBox>
+      <HBox fx:id="hbox" alignment="CENTER_LEFT" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <MenuButton alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" rotate="180.0" style="-fx-font-size: 11; -fx-background-radius: 0;" styleClass="dark-menu-button">
+              <items>
+                  <Menu fx:id="presets" mnemonicParsing="false" text="Presets" visible="false" />
+                  <MenuItem fx:id="resetFilters" mnemonicParsing="false" text="Reset All" />
+              </items>
+               <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="typ-th-large-outline" iconSize="20" selectionEnd="0" />
+               </graphic>
+            </MenuButton>
+            <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: transparent;" styleClass="applicationSettingsLabel" text="Filter Description " HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
    </top>
 </fx:root>

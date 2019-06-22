@@ -12,124 +12,108 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../../style/application.css" type="StackPane"
-         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <cursor>
-        <Cursor fx:constant="HAND"/>
-    </cursor>
-    <effect>
-        <DropShadow/>
-    </effect>
-    <ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true"
-               StackPane.alignment="CENTER">
-        <viewport>
-<Rectangle2D/>
-        </viewport>
-    </ImageView>
-    <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="64.0"
-           style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;"
-           text="5.0" StackPane.alignment="TOP_RIGHT">
-        <cursor>
-          <Cursor fx:constant="HAND"/>
-        </cursor>
-        <tooltip>
-          <Tooltip text="Stars"/>
-        </tooltip>
-        <StackPane.margin>
-          <Insets top="40.0"/>
-        </StackPane.margin>
-        <graphic>
-          <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="24"/>
-        </graphic>
-    </Label>
-    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="162.0"
-          prefWidth="50.0" spacing="15.0" StackPane.alignment="TOP_LEFT">
-        <StackPane.margin>
-            <Insets bottom="5.0" left="5.0" top="5.0"/>
-        </StackPane.margin>
-        <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0"
-               prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;"
-               textAlignment="CENTER" wrapText="true">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-            <graphic>
-                <FontIcon iconColor="#e8ac14" iconLiteral="fas-info-circle" iconSize="32"/>
-            </graphic>
-            <tooltip>
-                <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true"/>
-            </tooltip>
-        </Label>
-        <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0"
-               prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;"
-               textAlignment="CENTER">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-            <tooltip>
-                <Tooltip text="User has a note"/>
-            </tooltip>
-            <graphic>
-                <FontIcon iconColor="#0d6aa4" iconLiteral="fas-comments" iconSize="32"/>
-            </graphic>
-        </Label>
-        <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0"
-               style="-fx-background-radius: 45; -fx-background-color: white;" textAlignment="CENTER">
-            <tooltip>
-                <Tooltip text="Image is missing !!"/>
-            </tooltip>
-            <cursor>
-                <Cursor fx:constant="DEFAULT"/>
-            </cursor>
-            <graphic>
-                <FontIcon iconColor="#ff3d07" iconLiteral="fa-warning" iconSize="32" translateX="5.0"/>
-            </graphic>
-        </Label>
-    </VBox>
-    <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0"
-           style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;"
-           text="99999" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
-        <cursor>
-          <Cursor fx:constant="DEFAULT"/>
-        </cursor>
-        <padding>
-          <Insets left="4.0" right="4.0"/>
-        </padding>
-        <tooltip>
-          <Tooltip text="Total Items"/>
-        </tooltip>
-        <StackPane.margin>
-          <Insets top="5.0"/>
-        </StackPane.margin>
-        <graphic>
-          <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24"/>
-        </graphic>
-    </Label>
-    <VBox alignment="BOTTOM_CENTER" pickOnBounds="false">
-        <CheckBox fx:id="selectedCheckBox" alignment="CENTER" focusTraversable="false"
-                  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"
-                  style="-fx-background-color: #101010;" styleClass="medium-check-box" visible="false"
-                  VBox.vgrow="ALWAYS">
-            <cursor>
-                <Cursor fx:constant="HAND"/>
-            </cursor>
-        </CheckBox>
-        <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity"
-               maxWidth="1.7976931348623157E308" prefHeight="30.0"
-               style="-fx-font-size: 17; -fx-background-color: #151515;" styleClass="libraryNameLabel"
-               text="Library" wrapText="true">
-            <tooltip>
-                <Tooltip/>
-            </tooltip>
-        </Label>
-    </VBox>
-    <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
-           maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
-           style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;"
-           styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false"
-           wrapText="true">
-        <graphic>
-          <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper"/>
-        </graphic>
-    </Label>
+<fx:root pickOnBounds="false" styleClass="library" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<ImageView fx:id="imageView" fitHeight="195.0" fitWidth="190.0" nodeOrientation="INHERIT" pickOnBounds="true" StackPane.alignment="CENTER">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+		</ImageView>
+      <Label fx:id="ratingLabel" alignment="CENTER" graphicTextGap="0.0" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 14;" text="5.0" StackPane.alignment="TOP_RIGHT">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <tooltip>
+            <Tooltip text="Stars" />
+         </tooltip>
+         <StackPane.margin>
+            <Insets top="40.0" />
+         </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="#f5d236" iconLiteral="fas-star" iconSize="24" />
+         </graphic>
+      </Label>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="162.0" prefWidth="50.0" spacing="15.0" StackPane.alignment="TOP_LEFT">
+         <children>
+            <Label fx:id="informationLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;" textAlignment="CENTER" wrapText="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="#e8ac14" iconLiteral="fas-info-circle" iconSize="32" />
+               </graphic>
+               <tooltip>
+                  <Tooltip text="Click to edit user information" textAlignment="CENTER" wrapText="true" />
+               </tooltip>
+            </Label>
+            <Label fx:id="descriptionLabel" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-color: white; -fx-background-radius: 45;" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <tooltip>
+                  <Tooltip text="User has a note" />
+               </tooltip>
+               <graphic>
+                  <FontIcon iconColor="#0d6aa4" iconLiteral="fas-comments" iconSize="32" />
+               </graphic>
+            </Label>
+            <Label fx:id="warningLabel" contentDisplay="GRAPHIC_ONLY" prefHeight="42.0" prefWidth="42.0" style="-fx-background-radius: 45; -fx-background-color: white;" textAlignment="CENTER">
+               <tooltip>
+                  <Tooltip text="Image is missing !!" />
+               </tooltip>
+               <cursor>
+                  <Cursor fx:constant="DEFAULT" />
+               </cursor>
+               <graphic>
+                  <FontIcon iconColor="#ff3d07" iconLiteral="fa-warning" iconSize="32" translateX="5.0" />
+               </graphic>
+            </Label>
+         </children>
+         <StackPane.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </StackPane.margin>
+      </VBox>
+      <Label fx:id="totalItemsLabel" alignment="CENTER" graphicTextGap="0.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-text-fill: black; -fx-font-weight: bold;" text="99999" textAlignment="CENTER" StackPane.alignment="TOP_RIGHT">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <padding>
+            <Insets left="4.0" right="4.0" />
+         </padding>
+         <tooltip>
+            <Tooltip text="Total Items" />
+         </tooltip>
+         <StackPane.margin>
+            <Insets top="5.0" />
+         </StackPane.margin>
+         <graphic>
+            <FontIcon iconColor="#ff4a4a" iconLiteral="gmi-audiotrack" iconSize="24" />
+         </graphic>
+      </Label>
+      <VBox alignment="BOTTOM_CENTER" pickOnBounds="false">
+         <children>
+            <CheckBox fx:id="selectedCheckBox" alignment="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #101010;" styleClass="medium-check-box" visible="false" VBox.vgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+      		<Label fx:id="nameLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="30.0" style="-fx-font-size: 17; -fx-background-color: #151515;" styleClass="libraryNameLabel" text="Library" wrapText="true">
+      			<tooltip>
+      				<Tooltip />
+      			</tooltip>
+      		</Label>
+         </children>
+      </VBox>
+      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
+         <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
+         </graphic>
+      </Label>
+	</children>
+	<cursor>
+		<Cursor fx:constant="HAND" />
+	</cursor>
+   <effect>
+      <DropShadow />
+   </effect>
 </fx:root>

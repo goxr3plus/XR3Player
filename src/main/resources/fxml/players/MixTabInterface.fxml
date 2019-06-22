@@ -13,91 +13,88 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="389.0" prefWidth="207.0" style="-fx-background-color: #202020;"
-         stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
-    <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
-        <bottom>
+<fx:root prefHeight="389.0" prefWidth="207.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0">
+         <bottom>
             <VBox alignment="CENTER" minHeight="0.0" minWidth="0.0" BorderPane.alignment="CENTER">
-                <BorderPane minHeight="0.0" minWidth="0.0">
-                    <center>
-                        <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
-                                   maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0"
-                                   styleClass="jfx-button-red" text="|" BorderPane.alignment="CENTER">
-                            <graphic>
-                                <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24"/>
-                            </graphic>
+               <children>
+                  <BorderPane minHeight="0.0" minWidth="0.0">
+                     <center>
+                        <JFXButton fx:id="balanceButton" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="29.0" styleClass="jfx-button-red" text="|" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fa-balance-scale" iconSize="24" />
+                           </graphic>
                         </JFXButton>
-                    </center>
-                    <VBox.margin>
-                        <Insets left="2.0" right="2.0"/>
-                    </VBox.margin>
-                    <left>
+                     </center>
+                     <VBox.margin>
+                        <Insets left="2.0" right="2.0" />
+                     </VBox.margin>
+                     <left>
                         <MenuButton fx:id="sync1" mnemonicParsing="false" text="SYNC" BorderPane.alignment="CENTER">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Speed"/>
-                                <MenuItem mnemonicParsing="false" text="Volume"/>
-                                <MenuItem mnemonicParsing="false" text="Speed + Volume"/>
-                            </items>
-                            <styleClass>
-                                <String fx:value="dark-menu-button"/>
-                                <String fx:value="jfx-button-yellow"/>
-                            </styleClass>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Speed" />
+                            <MenuItem mnemonicParsing="false" text="Volume" />
+                              <MenuItem mnemonicParsing="false" text="Speed + Volume" />
+                          </items>
+                           <styleClass>
+                              <String fx:value="dark-menu-button" />
+                              <String fx:value="jfx-button-yellow" />
+                           </styleClass>
                         </MenuButton>
-                    </left>
-                    <right>
-                        <MenuButton fx:id="sync2" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="SYNC"
-                                    BorderPane.alignment="CENTER">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Speed"/>
-                                <MenuItem mnemonicParsing="false" text="Volume"/>
-                                <MenuItem mnemonicParsing="false" text="Speed + Volume"/>
-                            </items>
-                            <styleClass>
-                                <String fx:value="dark-menu-button"/>
-                                <String fx:value="jfx-button-yellow"/>
-                            </styleClass>
+                     </left>
+                     <right>
+                        <MenuButton fx:id="sync2" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="SYNC" BorderPane.alignment="CENTER">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Speed" />
+                              <MenuItem mnemonicParsing="false" text="Volume" />
+                              <MenuItem mnemonicParsing="false" text="Speed + Volume" />
+                           </items>
+                           <styleClass>
+                              <String fx:value="dark-menu-button" />
+                              <String fx:value="jfx-button-yellow" />
+                           </styleClass>
                         </MenuButton>
-                    </right>
-                    <padding>
-                        <Insets top="5.0"/>
-                    </padding>
-                </BorderPane>
-                <StackPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #000000;">
-                    <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="5.0"/>
-                    </padding>
-                    <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0"
-                          prefHeight="15.0">
-                        <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0"
-                                     minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0"
-                                     HBox.hgrow="ALWAYS">
-                            <styleClass>
-                                <String fx:value="transparent-progress-bar"/>
-                                <String fx:value="transparent-volume-progress-bar2-nostrip"/>
-                            </styleClass>
-                        </ProgressBar>
-                        <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0"
-                                     maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
-                                     mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
-                            <styleClass>
-                                <String fx:value="transparent-progress-bar"/>
-                                <String fx:value="transparent-volume-progress-bar3-nostrip"/>
-                            </styleClass>
-                        </ProgressBar>
-                    </HBox>
-                    <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="250.0"
-                            maxWidth="1.7976931348623157E308" minorTickCount="55" value="125.0">
-                        <styleClass>
-                            <String fx:value="transparency-slider"/>
-                            <String fx:value="timer-slider"/>
-                        </styleClass>
-                    </Slider>
-                </StackPane>
+                     </right>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </BorderPane>
+                  <StackPane minHeight="0.0" minWidth="0.0" style="-fx-background-color: #000000;">
+                     <children>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="15.0">
+                           <children>
+                              <ProgressBar fx:id="volumeProgress1" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                                 <styleClass>
+                                    <String fx:value="transparent-progress-bar" />
+                                    <String fx:value="transparent-volume-progress-bar2-nostrip" />
+                                 </styleClass>
+                              </ProgressBar>
+                              <ProgressBar fx:id="volumeProgress2" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" mouseTransparent="true" prefHeight="15.0" progress="1.0" HBox.hgrow="ALWAYS">
+                                 <styleClass>
+                                    <String fx:value="transparent-progress-bar" />
+                                    <String fx:value="transparent-volume-progress-bar3-nostrip" />
+                                 </styleClass>
+                              </ProgressBar>
+                           </children>
+                        </HBox>
+                        <Slider fx:id="masterVolumeSlider" majorTickUnit="15.0" max="250.0" maxWidth="1.7976931348623157E308" minorTickCount="55" value="125.0">
+                           <styleClass>
+                              <String fx:value="transparency-slider" />
+                              <String fx:value="timer-slider" />
+                           </styleClass>
+                        </Slider>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </StackPane>
+               </children>
             </VBox>
-        </bottom>
-        <center>
-          <HBox fx:id="centerHBox" BorderPane.alignment="CENTER"/>
-        </center>
-    </BorderPane>
+         </bottom>
+         <center>
+            <HBox fx:id="centerHBox" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
 </fx:root>
