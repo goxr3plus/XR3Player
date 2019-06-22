@@ -18,89 +18,93 @@
 <?import javafx.scene.paint.Stop?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root minHeight="15.0" minWidth="15.0" prefHeight="618.0" prefWidth="897.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="500.0" layoutX="360.0" layoutY="74.0">
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-         <image>
-            <Image url="@../image/dark-dj.jpg" />
-         </image>
-      </ImageView>
-      <MediaView preserveRatio="false" />
-      <FontIcon iconLiteral="fas-circle-notch" iconSize="500" selectionFill="#3de36e">
-         <iconColor>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="BLACK" />
-                  <Stop color="#e282ff" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </iconColor>
-      </FontIcon>
-      <HBox fx:id="topHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="67.0" prefWidth="897.0" spacing="25.0" style="-fx-background-color: rgb(10,10,10,0.6);" StackPane.alignment="TOP_RIGHT">
-         <children>
-            <CheckBox fx:id="showOnStartUp" focusTraversable="false" mnemonicParsing="false" selected="true" styleClass="small-check-box" text="Always show on start up ?">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </CheckBox>
-            <JFXToggleButton fx:id="sound" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="0.0" style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00" visible="false" />
-         </children>
-         <cursor>
-            <Cursor fx:constant="MOVE" />
-         </cursor>
-      </HBox>
-      <Label alignment="CENTER" graphicTextGap="15.0" style="-fx-border-color: transparent; -fx-background-color: #101010;" styleClass="applicationSettingsLabel2" text="GOXR3PLUS STUDIO" StackPane.alignment="BOTTOM_LEFT">
-         <graphic>
+<fx:root minHeight="15.0" minWidth="15.0" prefHeight="618.0" prefWidth="897.0" style="-fx-background-color: #101010;"
+         stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/10.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fx:id="backgroundImage" fitHeight="600.0" fitWidth="500.0" layoutX="360.0" layoutY="74.0">
+        <viewport>
+            <Rectangle2D/>
+        </viewport>
+        <Image url="@../image/dark-dj.jpg"/>
+    </ImageView>
+    <MediaView preserveRatio="false"/>
+    <FontIcon iconLiteral="fas-circle-notch" iconSize="500" selectionFill="#3de36e">
+        <iconColor>
+          <LinearGradient endX="1.0" endY="1.0">
+              <stops>
+                  <Stop color="BLACK"/>
+                  <Stop color="#e282ff" offset="1.0"/>
+              </stops>
+          </LinearGradient>
+        </iconColor>
+    </FontIcon>
+    <HBox fx:id="topHBox" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="67.0"
+          prefWidth="897.0" spacing="25.0" style="-fx-background-color: rgb(10,10,10,0.6);"
+          StackPane.alignment="TOP_RIGHT">
+        <cursor>
+            <Cursor fx:constant="MOVE"/>
+        </cursor>
+        <CheckBox fx:id="showOnStartUp" focusTraversable="false" mnemonicParsing="false" selected="true"
+                  styleClass="small-check-box" text="Always show on start up ?">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </CheckBox>
+        <JFXToggleButton fx:id="sound" focusTraversable="false" maxHeight="0.0" maxWidth="0.0" minHeight="0.0"
+                         minWidth="0.0" prefHeight="0.0" prefWidth="0.0"
+                         style="-fx-text-fill: white; -fx-font-weight: bold;" text="Sound" toggleColor="#5d8f00"
+                         visible="false"/>
+    </HBox>
+    <Label alignment="CENTER" graphicTextGap="15.0"
+           style="-fx-border-color: transparent; -fx-background-color: #101010;" styleClass="applicationSettingsLabel2"
+           text="GOXR3PLUS STUDIO" StackPane.alignment="BOTTOM_LEFT">
+        <graphic>
             <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-               <image>
-                  <Image url="@../image/smallLogo.jpg" />
-               </image>
+                <viewport>
+                    <Rectangle2D/>
+                </viewport>
+                <Image url="@../image/smallLogo.jpg"/>
             </ImageView>
-         </graphic>
-         <StackPane.margin>
-            <Insets bottom="10.0" />
-         </StackPane.margin>
-      </Label>
-      <Label fx:id="versionLabel" alignment="CENTER" graphicTextGap="15.0" layoutX="10.0" layoutY="569.0" style="-fx-border-color: transparent; -fx-background-color: #101010; -fx-font-size: 25; -fx-font-weight: bold;" styleClass="applicationSettingsLabel2" text="XR3Player" StackPane.alignment="BOTTOM_RIGHT">
-         <graphic>
+        </graphic>
+        <StackPane.margin>
+          <Insets bottom="10.0"/>
+        </StackPane.margin>
+    </Label>
+    <Label fx:id="versionLabel" alignment="CENTER" graphicTextGap="15.0" layoutX="10.0" layoutY="569.0"
+           style="-fx-border-color: transparent; -fx-background-color: #101010; -fx-font-size: 25; -fx-font-weight: bold;"
+           styleClass="applicationSettingsLabel2" text="XR3Player" StackPane.alignment="BOTTOM_RIGHT">
+        <graphic>
             <ImageView fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-               <image>
-                  <Image url="@../image/icon.png" />
-               </image>
+                <viewport>
+                    <Rectangle2D/>
+                </viewport>
+                <Image url="@../image/icon.png"/>
             </ImageView>
-         </graphic>
-         <StackPane.margin>
-            <Insets bottom="10.0" />
-         </StackPane.margin>
-      </Label>
-      <VBox alignment="CENTER" pickOnBounds="false" spacing="15.0" StackPane.alignment="CENTER">
-         <effect>
-            <DropShadow />
-         </effect>
-         <children>
-            <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0" style="-fx-background-radius: 90; -fx-font-size: 30;" styleClass="jfx-button4" text="Go" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="55" />
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="15.0" style="-fx-background-radius: 90; -fx-font-size: 30; -fx-background-color: firebrick;" styleClass="jfx-button4" text="Exit" textAlignment="CENTER" textFill="#d30b0b" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-         </children>
-      </VBox>
-   </children>
+        </graphic>
+        <StackPane.margin>
+          <Insets bottom="10.0"/>
+        </StackPane.margin>
+    </Label>
+    <VBox alignment="CENTER" pickOnBounds="false" spacing="15.0" StackPane.alignment="CENTER">
+        <effect>
+            <DropShadow/>
+        </effect>
+        <JFXButton fx:id="startButton" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="5.0"
+                   style="-fx-background-radius: 90; -fx-font-size: 30;" styleClass="jfx-button4" text="Go"
+                   textAlignment="CENTER" wrapText="true">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+            <graphic>
+                <FontIcon iconColor="WHITE" iconLiteral="far-play-circle" iconSize="55"/>
+            </graphic>
+        </JFXButton>
+        <JFXButton fx:id="exit" contentDisplay="RIGHT" focusTraversable="false" graphicTextGap="15.0"
+                   style="-fx-background-radius: 90; -fx-font-size: 30; -fx-background-color: firebrick;"
+                   styleClass="jfx-button4" text="Exit" textAlignment="CENTER" textFill="#d30b0b" wrapText="true">
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </JFXButton>
+    </VBox>
 </fx:root>
