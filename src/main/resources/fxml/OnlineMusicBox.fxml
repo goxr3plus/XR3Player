@@ -6,26 +6,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER" styleClass="online-music-vbox-box">
-         <children>
-            <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-font-size: 20; -fx-border-color: transparent;;" styleClass="online-music-vbox-box-label" text="Top Songs" textAlignment="CENTER" wrapText="true">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin></Label>
-            <FontIcon fx:id="fontIcon" iconColor="WHITE" iconLiteral="far-hand-peace" iconSize="100" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" left="5.0" right="5.0" />
-         </padding>
-         <StackPane.margin>
-            <Insets />
-         </StackPane.margin>
-      </VBox>
-      <Label fx:id="stackLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="online-music-vbox-box-stack-label" text="Open in Browser" textAlignment="CENTER" visible="false" wrapText="true">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="32" />
-         </graphic></Label>
-   </children>
+<fx:root stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER" styleClass="online-music-vbox-box">
+        <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0"/>
+        </padding>
+        <StackPane.margin>
+            <Insets/>
+        </StackPane.margin>
+        <Label fx:id="descriptionLabel" alignment="CENTER" maxWidth="1.7976931348623157E308"
+               style="-fx-font-size: 20; -fx-border-color: transparent;;" styleClass="online-music-vbox-box-label"
+               text="Top Songs" textAlignment="CENTER" wrapText="true">
+            <VBox.margin>
+                <Insets bottom="10.0"/>
+            </VBox.margin>
+        </Label>
+        <FontIcon fx:id="fontIcon" iconColor="WHITE" iconLiteral="far-hand-peace" iconSize="100"/>
+    </VBox>
+    <Label fx:id="stackLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+           styleClass="online-music-vbox-box-stack-label" text="Open in Browser" textAlignment="CENTER" visible="false"
+           wrapText="true">
+        <graphic>
+          <FontIcon iconColor="WHITE" iconLiteral="fab-chrome" iconSize="32"/>
+        </graphic>
+    </Label>
 </fx:root>
