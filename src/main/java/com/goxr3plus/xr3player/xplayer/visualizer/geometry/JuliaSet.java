@@ -65,8 +65,8 @@ public class JuliaSet {
 		// int Y_OFFSET = 50
 
 		// Move canvans to the middlepoint
-		visualizerDrawer.setLayoutX(visualizerDrawer.canvasWidth / 2.00);
-		visualizerDrawer.setLayoutY(visualizerDrawer.canvasHeight / 2.00);
+		visualizerDrawer.setLayoutX(visualizerDrawer.getCanvasWidth() / 2.00);
+		visualizerDrawer.setLayoutY(visualizerDrawer.getCanvasHeight() / 2.00);
 		// setLayoutX(canvasWidth / ( bean.getReMax() - bean.getReMin() ) / 2 +
 		// X_OFFSET / 2)
 		// setLayoutY(canvasHeight / ( bean.getImMax() - bean.getImMin() ) / 2 -
@@ -76,19 +76,19 @@ public class JuliaSet {
 		bean.setConvergenceColor(Color.BLUEVIOLET);
 
 		// Calculations
-		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 2);
+		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 2);
 
 		// System.out.println(array[0] + " , " + array[1])
 		bean.setZ(-array[0] + array[0] < 0.5 ? -0.4 : -0.1);// bean.setZ(0.3)
 		bean.setZi(array[1] + 0.4);// bean.setZi(-0.5)
 
 		// Paint it
-		double precision = Math.max((bean.getReMax() - bean.getReMin()) / visualizerDrawer.canvasWidth,
-				(bean.getImMax() - bean.getImMin()) / visualizerDrawer.canvasHeight); // 0.004
+		double precision = Math.max((bean.getReMax() - bean.getReMin()) / visualizerDrawer.getCanvasWidth(),
+				(bean.getImMax() - bean.getImMin()) / visualizerDrawer.getCanvasHeight()); // 0.004
 
 		double convergenceValue;
-		for (double c = bean.getReMin(), xR = 0; xR < visualizerDrawer.canvasWidth; c += precision, xR++) {
-			for (double ci = bean.getImMin(), yR = 0; yR < visualizerDrawer.canvasHeight; ci += precision, yR++) {
+		for (double c = bean.getReMin(), xR = 0; xR < visualizerDrawer.getCanvasWidth(); c += precision, xR++) {
+			for (double ci = bean.getImMin(), yR = 0; yR < visualizerDrawer.getCanvasHeight(); ci += precision, yR++) {
 
 				// Calculate convergenceValue
 				convergenceValue = bean.isIsMandelbrot() ? checkConvergence(ci, c, 0, 0, bean.getConvergenceSteps())

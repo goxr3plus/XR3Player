@@ -86,22 +86,22 @@ public class Oscilloscope {
 
 		// It will be stereo?
 		if (stereo)
-			pSample1 = visualizerDrawer.pLeftChannel;
+			pSample1 = visualizerDrawer.getpLeftChannel();
 		else // not?Then merge the array
-			pSample1 = visualizerDrawer.stereoMerge;
+			pSample1 = visualizerDrawer.getStereoMerge();
 
 		// Background
 		visualizerDrawer.drawBackgroundImage();
 
-		visualizerDrawer.gc.setStroke(visualizerDrawer.scopeColor);
+		visualizerDrawer.gc.setStroke(visualizerDrawer.getScopeColor());
 		// System.out.println(pSample.length)
 
-		int yLast1 = (int) (pSample1[0] * (float) visualizerDrawer.halfCanvasHeight)
-				+ visualizerDrawer.halfCanvasHeight;
+		int yLast1 = (int) (pSample1[0] * (float) visualizerDrawer.getHalfCanvasHeight())
+				+ visualizerDrawer.getHalfCanvasHeight();
 		int samIncrement1 = 1;
-		for (int a = samIncrement1, c = 0; c < visualizerDrawer.canvasWidth; a += samIncrement1, c++) {
-			int yNow = (int) (pSample1[a] * (float) visualizerDrawer.halfCanvasHeight)
-					+ visualizerDrawer.halfCanvasHeight;
+		for (int a = samIncrement1, c = 0; c < visualizerDrawer.getCanvasWidth(); a += samIncrement1, c++) {
+			int yNow = (int) (pSample1[a] * (float) visualizerDrawer.getHalfCanvasHeight())
+					+ visualizerDrawer.getHalfCanvasHeight();
 			visualizerDrawer.gc.strokeLine(c, yLast1, c + 1.00, yNow);
 			yLast1 = yNow;
 		}
@@ -111,14 +111,14 @@ public class Oscilloscope {
 			colorIndex = (colorIndex == colorSize - 1) ? 0 : colorIndex + 1;
 			visualizerDrawer.gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
 
-			float[] pSample2 = visualizerDrawer.pRightChannel;
+			float[] pSample2 = visualizerDrawer.getpRightChannel();
 
-			int yLast2 = (int) (pSample2[0] * (float) visualizerDrawer.halfCanvasHeight)
-					+ visualizerDrawer.halfCanvasHeight;
+			int yLast2 = (int) (pSample2[0] * (float) visualizerDrawer.getHalfCanvasHeight())
+					+ visualizerDrawer.getHalfCanvasHeight();
 			int samIncrement2 = 1;
-			for (int a = samIncrement2, c = 0; c < visualizerDrawer.canvasWidth; a += samIncrement2, c++) {
-				int yNow = (int) (pSample2[a] * (float) visualizerDrawer.halfCanvasHeight)
-						+ visualizerDrawer.halfCanvasHeight;
+			for (int a = samIncrement2, c = 0; c < visualizerDrawer.getCanvasWidth(); a += samIncrement2, c++) {
+				int yNow = (int) (pSample2[a] * (float) visualizerDrawer.getHalfCanvasHeight())
+						+ visualizerDrawer.getHalfCanvasHeight();
 				visualizerDrawer.gc.strokeLine(c, yLast2, c + 1.00, yNow);
 				yLast2 = yNow;
 			}
@@ -140,10 +140,10 @@ public class Oscilloscope {
 		visualizerDrawer.gc.setStroke(Color.hsb(colorIndex, 1.0f, 1.0f));
 		// System.out.println(colorIndex / (float) colorSize)
 
-		int newSampleCount = (int) (visualizerDrawer.dataLine.getFormat().getFrameRate() * 0.023);
-		bandWidth = (float) visualizerDrawer.canvasWidth / (float) newSampleCount;
-		int halfHeight = visualizerDrawer.canvasHeight / 2;
-		int quarterHeight = visualizerDrawer.canvasHeight / 4;
+		int newSampleCount = (int) (visualizerDrawer.getDataLine().getFormat().getFrameRate() * 0.023);
+		bandWidth = (float) visualizerDrawer.getCanvasWidth() / (float) newSampleCount;
+		int halfHeight = visualizerDrawer.getCanvasHeight() / 2;
+		int quarterHeight = visualizerDrawer.getCanvasHeight() / 4;
 		xOld = 0;
 		yOld = 0;
 		// System.out.println(bandWidth)
@@ -154,10 +154,10 @@ public class Oscilloscope {
 		for (int i = 0; i < newSampleCount; i++) {
 			x = (int) (i * bandWidth);
 			y = halfHeight
-					+ (int) (quarterHeight * (visualizerDrawer.pLeftChannel[i] + visualizerDrawer.pRightChannel[i]));
+					+ (int) (quarterHeight * (visualizerDrawer.getpLeftChannel()[i] + visualizerDrawer.getpRightChannel()[i]));
 
-			x = Math.min(Math.max(0, x), visualizerDrawer.canvasWidth);
-			y = Math.min(Math.max(0, y), visualizerDrawer.canvasHeight);
+			x = Math.min(Math.max(0, x), visualizerDrawer.getCanvasWidth());
+			y = Math.min(Math.max(0, y), visualizerDrawer.getCanvasHeight());
 
 			visualizerDrawer.gc.strokeLine(xOld, halfHeight, x, y);
 			xOld = x;

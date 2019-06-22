@@ -38,7 +38,7 @@ abstract class Visualizer extends VisualizerDrawer {
 			// System.out.println("New Visualizer Width is:" + newValue)
 
 			// Canvas Width
-			canvasWidth = (int) widthProperty().get();
+			setCanvasWidth((int) widthProperty().get());
 
 			// Compute the Color Scale
 			computeColorScale();
@@ -49,11 +49,11 @@ abstract class Visualizer extends VisualizerDrawer {
 			// System.out.println("New Visualizer Height is:" + newValue)
 
 			// Canvas Height
-			canvasHeight = (int) heightProperty().get();
-			halfCanvasHeight = canvasHeight >> 1;
+			setCanvasHeight((int) heightProperty().get());
+			setHalfCanvasHeight(getCanvasHeight() >> 1);
 
 			// Sierpinski
-			sierpinski.sierpinskiRootHeight = canvasHeight;
+			sierpinski.sierpinskiRootHeight = getCanvasHeight();
 
 			// Compute the Color Scale
 			computeColorScale();
@@ -140,8 +140,10 @@ abstract class Visualizer extends VisualizerDrawer {
 		@Override
 		public void start() {
 			// Values must be >0
-			if (canvasWidth <= 0 || canvasHeight <= 0)
-				canvasHeight = canvasWidth = 1;
+			if (getCanvasWidth() <= 0 || getCanvasHeight() <= 0) {
+				setCanvasHeight(1);
+				setCanvasWidth(1);
+			}
 
 			next50Milliseconds = nextSecond = 0L;
 			super.start();
@@ -248,7 +250,7 @@ abstract class Visualizer extends VisualizerDrawer {
 
 			// Check for 1 second passed
 			if (nanos >= nextSecond) {
-				fps = framesPerSecond;
+				setFps(framesPerSecond);
 				framesPerSecond = 0;
 				nextSecond = nanos + ONE_SECOND_NANOS;
 			}
@@ -299,11 +301,11 @@ abstract class Visualizer extends VisualizerDrawer {
 				}
 
 				// -- Show FPS if necessary.
-				if (showFPS) {
+				if (isShowFPS()) {
 					gc.setFill(Color.BLACK);
-					gc.fillRect(0, canvasHeight - 15.00, 50, 28);
+					gc.fillRect(0, getCanvasHeight() - 15.00, 50, 28);
 					gc.setStroke(Color.WHITE);
-					gc.strokeText("FPS: " + fps, 0, canvasHeight - 3.00); // + " (FRRH: " + frameRateRatioHint + ")"
+					gc.strokeText("FPS: " + getFps(), 0, getCanvasHeight() - 3.00); // + " (FRRH: " + frameRateRatioHint + ")"
 				}
 
 			} // END: if draw == TRUE

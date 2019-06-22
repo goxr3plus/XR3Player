@@ -28,36 +28,27 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	/**
 	 * The width of the canvas
 	 */
-	public int canvasWidth = 0;
+	private int canvasWidth = 0;
 	/**
 	 * The height of the canvas
 	 */
-	public int canvasHeight = 0;
+	private int canvasHeight = 0;
 	/**
 	 * Half the height of the canvas
 	 */
-	public int halfCanvasHeight = 0;
+	private int halfCanvasHeight = 0;
 
 	/** The left. */
-	public float[] pLeftChannel = new float[1024];
+	private float[] pLeftChannel = new float[1024];
 
 	/** The right. */
-	public float[] pRightChannel = new float[1024];
+	private float[] pRightChannel = new float[1024];
 
 	/** Merged Right and Left */
-	public float[] stereoMerge = new float[1024];
+	private float[] stereoMerge = new float[1024];
 
 	/** The frame rate ratio hint. */
 	protected float frameRateRatioHint;
-
-	/** The w sadfrr. */
-	private float wSadfrr;
-
-	/** The w FFT. */
-	private float[] wFFT;
-
-	/** The w fs. */
-	private float wFs;
 
 	/**
 	 * The maximum that the display mode can reach
@@ -99,7 +90,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	private static final float DEFAULT_VU_METER_DECAY = 0.02f;
 
 	/** The scope color. */
-	public Color scopeColor;
+	private Color scopeColor;
 
 	/** The spectrum analyser colors. */
 	static Color[] spectrumAnalyserColors = getDefaultSpectrumAnalyserColors();
@@ -151,7 +142,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	protected float saDecay = DEFAULT_SPECTRUM_ANALYSER_DECAY;
 
 	/** The source data line. */
-	public DataLine dataLine;
+	private DataLine dataLine;
 
 	/** The old left. */
 	// -- VU Meter
@@ -174,10 +165,10 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	protected int framesPerSecond;
 
 	/** The fps. */
-	public int fps = DEFAULT_FPS;
+	private int fps = DEFAULT_FPS;
 
 	/** The show FPS. */
-	public boolean showFPS;
+	private boolean showFPS;
 
 	/**
 	 * Default Constructor.
@@ -442,7 +433,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		return saDecay;
 	}
 
-	/**
+	/** The scope color. */ /**
 	 * Gets the scope color.
 	 *
 	 * @return Returns the color the scope is rendered in.
@@ -655,9 +646,12 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 */
 	public float[] returnBandsArray(float[] pSample, int arrayLength) {
 
-		wFFT = fft.calculate(pSample);
-		wSadfrr = saDecay * frameRateRatioHint;
-		wFs = 0;
+		/** The w FFT. */
+		float[] wFFT = fft.calculate(pSample);
+		/** The w sadfrr. */
+		float wSadfrr = saDecay * frameRateRatioHint;
+		/** The w fs. */
+		float wFs = 0;
 		float[] array = new float[arrayLength];
 		for (int a = 0, band = 0; band < array.length; a += saMultiplier, band++) {
 			wFs = 0;
@@ -708,6 +702,73 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 		// return true;
 		// }
 
+	}
+
+	/**
+	 * The width of the canvas
+	 */
+	public int getCanvasWidth() {
+		return canvasWidth;
+	}
+
+	public void setCanvasWidth(int canvasWidth) {
+		this.canvasWidth = canvasWidth;
+	}
+
+	/**
+	 * The height of the canvas
+	 */
+	public int getCanvasHeight() {
+		return canvasHeight;
+	}
+
+	public void setCanvasHeight(int canvasHeight) {
+		this.canvasHeight = canvasHeight;
+	}
+
+	/** The left. */
+	public float[] getpLeftChannel() {
+		return pLeftChannel;
+	}
+
+	/**
+	 * Half the height of the canvas
+	 */
+	public int getHalfCanvasHeight() {
+		return halfCanvasHeight;
+	}
+
+	public void setHalfCanvasHeight(int halfCanvasHeight) {
+		this.halfCanvasHeight = halfCanvasHeight;
+	}
+
+	/** The right. */
+	public float[] getpRightChannel() {
+		return pRightChannel;
+	}
+
+	/** Merged Right and Left */
+	public float[] getStereoMerge() {
+		return stereoMerge;
+	}
+
+	/** The source data line. */
+	public DataLine getDataLine() {
+		return dataLine;
+	}
+
+	/** The fps. */
+	public int getFps() {
+		return fps;
+	}
+
+	public void setFps(int fps) {
+		this.fps = fps;
+	}
+
+	/** The show FPS. */
+	public boolean isShowFPS() {
+		return showFPS;
 	}
 
 	/*-----------------------------------------------------------------------

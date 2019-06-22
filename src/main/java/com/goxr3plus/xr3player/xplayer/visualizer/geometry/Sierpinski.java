@@ -75,7 +75,7 @@ public class Sierpinski {
 	 */
 	public void drawSierpinski() {
 		// Calculations
-		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
+		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 3);
 		sierpinskiSmallest = array[1] * 100 < 10 ? 10 : array[1] * 100;
 		sierpinskiAcceleration = array[0] * 0.1;
 		// System.out.println(sierpinskiAcceleration)
@@ -97,11 +97,11 @@ public class Sierpinski {
 
 		sierpinskiRootHeight += acceleration;
 
-		if (sierpinskiRootHeight >= 2 * visualizerDrawer.canvasHeight) {
-			sierpinskiRootHeight = visualizerDrawer.canvasHeight;
+		if (sierpinskiRootHeight >= 2 * visualizerDrawer.getCanvasHeight()) {
+			sierpinskiRootHeight = visualizerDrawer.getCanvasHeight();
 		}
 
-		Triangle root = new Triangle(visualizerDrawer.canvasWidth / 2, 0, sierpinskiRootHeight);
+		Triangle root = new Triangle(visualizerDrawer.getCanvasWidth() / 2, 0, sierpinskiRootHeight);
 
 		shrink(root);
 	}
@@ -116,7 +116,7 @@ public class Sierpinski {
 		double topY = triangle.getTopY();
 		double triangleHeight = triangle.getHeight();
 
-		if (topY >= visualizerDrawer.canvasHeight) {
+		if (topY >= visualizerDrawer.getCanvasHeight()) {
 			return;
 		}
 
@@ -145,7 +145,7 @@ public class Sierpinski {
 		for (int i = 0; i < triangleCount; i++) {
 			Triangle tri = renderList.get(i);
 
-			if (tri.getTopY() < visualizerDrawer.canvasHeight) {
+			if (tri.getTopY() < visualizerDrawer.getCanvasHeight()) {
 				drawTriangle(tri);
 			}
 		}

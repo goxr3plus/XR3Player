@@ -55,7 +55,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	 */
 	public void drawForegroundImage() {
 
-		float[] array = returnBandsArray(stereoMerge, 1);
+		float[] array = returnBandsArray(getStereoMerge(), 1);
 
 		// !null
 		if (foregroundImage != null) {
@@ -63,14 +63,14 @@ public class VisualizerDrawer extends VisualizerModel {
 			// Compute
 			double imageW;// = foregroundImage.getWidth()
 			double imageH;// = foregroundImage.getHeight()
-			if (canvasWidth < canvasHeight)
-				imageW = imageH = canvasWidth / 2.00;
+			if (getCanvasWidth() < getCanvasHeight())
+				imageW = imageH = getCanvasWidth() / 2.00;
 			else
-				imageW = imageH = canvasHeight / 2.00;
+				imageW = imageH = getCanvasHeight() / 2.00;
 
 			// Draw it
-			gc.drawImage(foregroundImage, (canvasWidth / 2.00 - imageW / 2) - imageW * array[0] / 2,
-					(canvasHeight / 2.00 - imageH / 2) - imageH * array[0] / 2, imageW + imageW * array[0],
+			gc.drawImage(foregroundImage, (getCanvasWidth() / 2.00 - imageW / 2) - imageW * array[0] / 2,
+					(getCanvasHeight() / 2.00 - imageH / 2) - imageH * array[0] / 2, imageW + imageW * array[0],
 					imageH + imageH * array[0]);
 
 		}
@@ -81,7 +81,7 @@ public class VisualizerDrawer extends VisualizerModel {
 	 */
 	public void drawBackgroundImage() {
 
-		float[] array = returnBandsArray(stereoMerge, 1);
+		float[] array = returnBandsArray(getStereoMerge(), 1);
 
 		// !null
 		if (backgroundImage != null) {
@@ -98,8 +98,8 @@ public class VisualizerDrawer extends VisualizerModel {
 
 			// Draw it
 			double front = Math.abs(array[0]) / 4;
-			gc.drawImage(backgroundImage, -(front * canvasWidth), -(front * canvasHeight),
-					canvasWidth + (front * canvasWidth) * 2, canvasHeight + (front * canvasHeight) * 2);
+			gc.drawImage(backgroundImage, -(front * getCanvasWidth()), -(front * getCanvasHeight()),
+					getCanvasWidth() + (front * getCanvasWidth()) * 2, getCanvasHeight() + (front * getCanvasHeight()) * 2);
 			// gc.drawImage(backgroundImage,canvasWidth - imageW) - imageW * array[0] / 2,
 			// (canvasHeight - imageH) - imageH * array[0], imageW + imageW * array[0],
 			// imageH + imageH * array[0])
@@ -205,10 +205,10 @@ public class VisualizerDrawer extends VisualizerModel {
 
 		// Calculate the radius
 		int radius;
-		if (canvasHeight > canvasWidth)
-			radius = canvasWidth / 2;
+		if (getCanvasHeight() > getCanvasWidth())
+			radius = getCanvasWidth() / 2;
 		else
-			radius = canvasHeight / 2;
+			radius = getCanvasHeight() / 2;
 		radius = (int) (radius / 1.5);
 
 		gc.setLineWidth(2);
@@ -218,8 +218,8 @@ public class VisualizerDrawer extends VisualizerModel {
 		int previousEndX = -1;
 		int previousEndY = -1;
 
-		double centerX = canvasWidth / 2.00;
-		double centerY = canvasHeight / 2.00;
+		double centerX = getCanvasWidth() / 2.00;
+		double centerY = getCanvasHeight() / 2.00;
 
 		// for loop
 		for (float angle = 0; angle <= 360; angle++) {
@@ -248,7 +248,7 @@ public class VisualizerDrawer extends VisualizerModel {
 			int startX = (int) (centerX + mathSin * radius); // startX
 			int startY = (int) (centerY + mathCos * radius); // startY
 
-			double add = Math.abs(stereoMerge[(int) angle]) * (radius);
+			double add = Math.abs(getStereoMerge()[(int) angle]) * (radius);
 
 			int endX = (int) (centerX + mathSin * (radius + add)); // endX
 			int endY = (int) (centerY + mathCos * (radius + add)); // endY
@@ -298,15 +298,15 @@ public class VisualizerDrawer extends VisualizerModel {
 	 */
 	public void drawSpectrumBars() {
 
-		float barWidth = (float) canvasWidth / (float) saBands;
-		float[] array = returnBandsArray(stereoMerge, saBands);
+		float barWidth = (float) getCanvasWidth() / (float) saBands;
+		float[] array = returnBandsArray(getStereoMerge(), saBands);
 		float c = 0;
 
 		// Background
 		this.drawBackgroundImage();
 
 		for (int band = 0; band < saBands; band++) {
-			drawSpectrumBar((int) c, canvasHeight, (int) barWidth - 1, (int) (array[band] * canvasHeight), band);
+			drawSpectrumBar((int) c, getCanvasHeight(), (int) barWidth - 1, (int) (array[band] * getCanvasHeight()), band);
 			c += barWidth;
 		}
 	}
@@ -377,13 +377,13 @@ public class VisualizerDrawer extends VisualizerModel {
 		float wRight = 0.0f;
 		float wSadfrr = vuDecay * frameRateRatioHint;
 
-		for (int a = 0; a < pLeftChannel.length; a++) {
-			wLeft += Math.abs(pLeftChannel[a]);
-			wRight += Math.abs(pRightChannel[a]);
+		for (int a = 0; a < getpLeftChannel().length; a++) {
+			wLeft += Math.abs(getpLeftChannel()[a]);
+			wRight += Math.abs(getpRightChannel()[a]);
 		}
 
-		wLeft = (wLeft = (wLeft * 2.0f) / pLeftChannel.length) > 1.0f ? 1.0f : wLeft;
-		wRight = (wRight = (wRight * 2.0f) / pRightChannel.length) > 1.0f ? 1.0f : wRight;
+		wLeft = (wLeft = (wLeft * 2.0f) / getpLeftChannel().length) > 1.0f ? 1.0f : wLeft;
+		wRight = (wRight = (wRight * 2.0f) / getpRightChannel().length) > 1.0f ? 1.0f : wRight;
 
 		/*
 		 * vuAverage += ( ( wLeft + wRight ) / 2.0f ); vuSamples++; if ( vuSamples > 128
@@ -410,14 +410,14 @@ public class VisualizerDrawer extends VisualizerModel {
 
 		// Horizontal
 		if (orientation == Orientation.HORIZONTAL) {
-			int wHeight = (canvasHeight >> 1) - 5;
-			drawHorizontalVolumeMeterBar(2, 2, (int) (oldLeft * (float) (canvasWidth - 2)), wHeight);
-			drawHorizontalVolumeMeterBar(2, wHeight + 32, (int) (oldRight * (float) (canvasWidth - 2)), wHeight);
+			int wHeight = (getCanvasHeight() >> 1) - 5;
+			drawHorizontalVolumeMeterBar(2, 2, (int) (oldLeft * (float) (getCanvasWidth() - 2)), wHeight);
+			drawHorizontalVolumeMeterBar(2, wHeight + 32, (int) (oldRight * (float) (getCanvasWidth() - 2)), wHeight);
 			// Vertical
 		} else {
-			int wWidth = (canvasWidth >> 1) - 5;
-			drawVerticalVolumeMeterBar(4, canvasHeight, wWidth - 1, (int) (oldLeft * (float) (canvasHeight)));
-			drawVerticalVolumeMeterBar(wWidth + 8, canvasHeight, wWidth - 1, (int) (oldRight * (float) (canvasHeight)));
+			int wWidth = (getCanvasWidth() >> 1) - 5;
+			drawVerticalVolumeMeterBar(4, getCanvasHeight(), wWidth - 1, (int) (oldLeft * (float) (getCanvasHeight())));
+			drawVerticalVolumeMeterBar(wWidth + 8, getCanvasHeight(), wWidth - 1, (int) (oldRight * (float) (getCanvasHeight())));
 		}
 
 	}
@@ -461,11 +461,11 @@ public class VisualizerDrawer extends VisualizerModel {
 	private void drawVerticalVolumeMeterBar(int x, int y, int pWidth, int pHeight) {
 
 		// Draw the rectangles
-		gc.setStroke(super.scopeColor);
+		gc.setStroke(super.getScopeColor());
 
 		// float c = 0;
 		int min = y - pHeight;
-		for (int a = canvasHeight; a >= min; a -= 2) {
+		for (int a = getCanvasHeight(); a >= min; a -= 2) {
 			// c += vuVColorScale;
 			// if (c < 256.0f)
 			// gc.setStroke(spectrumAnalyserColors[(int) c]);
@@ -475,7 +475,7 @@ public class VisualizerDrawer extends VisualizerModel {
 
 		// Drag the rectangles inside rectangles
 		gc.setStroke(Color.BLACK);
-		for (int a = canvasHeight; a >= min; a -= 15) {
+		for (int a = getCanvasHeight(); a >= min; a -= 15) {
 			gc.strokeRect(x, a, pWidth, 1);
 		}
 	}

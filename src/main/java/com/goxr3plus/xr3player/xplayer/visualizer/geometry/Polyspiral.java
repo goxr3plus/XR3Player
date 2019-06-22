@@ -154,7 +154,7 @@ public class Polyspiral {
 	public void drawPolySpiral() {
 
 		// Calculations
-		final float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
+		final float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 3);
 
 		int length;
 		int total;
@@ -181,7 +181,7 @@ public class Polyspiral {
 
 		// Set the background fill
 		visualizerDrawer.gc.setFill(Color.rgb(0, 0, 0, array[0]));
-		visualizerDrawer.gc.fillRect(0, 0, visualizerDrawer.canvasWidth, visualizerDrawer.canvasHeight);
+		visualizerDrawer.gc.fillRect(0, 0, visualizerDrawer.getCanvasWidth(), visualizerDrawer.getCanvasHeight());
 
 		// Draw Random Ovals
 		/*
@@ -198,8 +198,8 @@ public class Polyspiral {
 			visualizerDrawer.gc.setFill(Color.hsb(colorIndex2, 1.0f, 1.0f));
 
 			// Draw the Oval
-			visualizerDrawer.gc.fillOval(random.nextInt(visualizerDrawer.canvasWidth),
-					random.nextInt(visualizerDrawer.canvasHeight), length + 2.00, length + 2.00);
+			visualizerDrawer.gc.fillOval(random.nextInt(visualizerDrawer.getCanvasWidth()),
+					random.nextInt(visualizerDrawer.getCanvasHeight()), length + 2.00, length + 2.00);
 		}
 		//
 		// // Draw Lights
@@ -384,8 +384,8 @@ public class Polyspiral {
 	 * Calculate.
 	 */
 	void calculate() {
-		final int maxX = visualizerDrawer.canvasWidth - 1;
-		final int maxY = visualizerDrawer.canvasHeight - 1;
+		final int maxX = visualizerDrawer.getCanvasWidth() - 1;
+		final int maxY = visualizerDrawer.getCanvasHeight() - 1;
 		pixelSize = Math.max(rWidth / maxX, rHeight / maxY);
 		centerX = maxX / 2;
 		centerY = maxY / 2;
@@ -421,7 +421,7 @@ public class Polyspiral {
 	 * Draws a polyspiral and 4 arcs
 	 */
 	private void drawPolyspiral2() {
-		final float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 4);
+		final float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 4);
 
 		// Background
 		// visualizerDrawer.drawBackgroundImage()
@@ -435,8 +435,8 @@ public class Polyspiral {
 		incr = (incr + 0.3 + Math.abs(array[0])) % 360;
 		double len = 6;
 		final double angleIncrement = Math.toRadians(incr);
-		double x1 = visualizerDrawer.canvasWidth / 2.00;
-		double y1 = visualizerDrawer.canvasHeight / 2.00;
+		double x1 = visualizerDrawer.getCanvasWidth() / 2.00;
+		double y1 = visualizerDrawer.getCanvasHeight() / 2.00;
 		double angle = angleIncrement;
 
 		// visualizerDrawer.gc.setStroke(Color.RED)
