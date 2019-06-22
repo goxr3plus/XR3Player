@@ -121,7 +121,7 @@ public class IOInfo {
 			InfoTool.logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
-		return (attr.creationTime() + "").replaceAll("T|Z", " ");
+		return (attr.creationTime() + "").replaceAll("[TZ]", " ");
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class IOInfo {
 			InfoTool.logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
-		return (attr.lastModifiedTime() + "").replaceAll("T|Z", " ");
+		return (attr.lastModifiedTime() + "").replaceAll("[TZ]", " ");
 	}
 
 	/**
