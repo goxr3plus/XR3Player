@@ -122,7 +122,7 @@ public class DJMode extends BorderPane {
 	 * Adds the appropriate key listeners to the Parent.
 	 */
 	@Deprecated
-	private final void addKeyListeners() {
+	private void addKeyListeners() {
 
 		// // Key Pressed Events
 		// setOnKeyPressed(key -> {
