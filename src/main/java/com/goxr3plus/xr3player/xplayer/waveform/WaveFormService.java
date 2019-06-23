@@ -77,8 +77,7 @@ public class WaveFormService extends Service<Boolean> {
 	public void startService(String fileAbsolutePath, WaveFormJob waveFormJob) {
 
 		// Security Check
-		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && this.fileAbsolutePath != null
-				&& fileAbsolutePath.equals(this.fileAbsolutePath) && wavAmplitudes != null) // If it is the same file
+		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && fileAbsolutePath.equals(this.fileAbsolutePath) && wavAmplitudes != null) // If it is the same file
 			return;
 
 		// Check

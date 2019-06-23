@@ -143,7 +143,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isPdf(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && "pdf".equals(extension);
+		return "pdf".equals(extension);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public final class ExtensionTool {
 	 * @return True if the file is an PDF else false
 	 */
 	public static boolean isPdfCheckExtension(final String extension) {
-		return extension != null && "pdf".equals(extension);
+		return "pdf".equals(extension);
 	}
 
 	/**
@@ -164,7 +164,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isZip(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && POPULAR_ZIP_EXTENSIONS.contains(extension);
+		return POPULAR_ZIP_EXTENSIONS.contains(extension);
 	}
 
 	/**

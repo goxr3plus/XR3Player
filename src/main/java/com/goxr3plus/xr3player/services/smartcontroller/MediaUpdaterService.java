@@ -151,11 +151,9 @@ public class MediaUpdaterService {
 							if (xPlayerController.getKey() == 0 && Main.topBar.getWindowMode() == WindowMode.MAINMODE)
 								return true;
 							// For other players
-							else if (xPlayerController.getKey() != 0
-									&& Main.libraryMode.getDjModeStackPane().isVisible())
-								return true;
+							else return xPlayerController.getKey() != 0
+									&& Main.libraryMode.getDjModeStackPane().isVisible();
 						}
-						return false;
 					})
 
 					// For each
