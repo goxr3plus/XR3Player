@@ -59,8 +59,8 @@ public class MediaTagsService extends Service<Boolean> {
 
 	/**
 	 * Restarts the Service
-	 * 
-	 * @param observableList
+	 *
+	 * @param mediaTableViewer
 	 */
 	public void restartService(MediaTableViewer mediaTableViewer) {
 

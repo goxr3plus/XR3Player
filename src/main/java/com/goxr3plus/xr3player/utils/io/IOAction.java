@@ -224,7 +224,7 @@ public final class IOAction {
 	/**
 	 * Creates the given File or Folder if not exists and returns the result
 	 * 
-	 * @param absoluteFilePath The absolute path of the File|Folder
+	 * @param file The absolute path of the File|Folder
 	 * @param fileType         Create DIRECTORY OR FILE ?
 	 * @return True if exists or have been successfully created , otherwise false
 	 */

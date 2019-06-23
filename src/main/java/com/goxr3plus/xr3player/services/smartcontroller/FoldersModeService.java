@@ -53,7 +53,7 @@ public class FoldersModeService extends Service<Void> {
 	/**
 	 * Constructor
 	 * 
-	 * @param smartController
+	 * @param smartControllerFoldersMode
 	 */
 	public FoldersModeService(SmartControllerFoldersMode smartControllerFoldersMode) {
 		this.smartControllerFoldersMode = smartControllerFoldersMode;
@@ -233,7 +233,7 @@ public class FoldersModeService extends Service<Void> {
 				/**
 				 * Count files in a directory (including files in all sub directories)
 				 * 
-				 * @param directory The full path of the directory
+				 * @param dir The full path of the directory
 				 * @return Position [0] Total number of files contained in this folder <br>
 				 *         Position [1] Total number of files contained in this folder && inside
 				 *         the Playlist Database <br>

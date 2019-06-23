@@ -150,7 +150,7 @@ public class ShopContextMenu extends ContextMenu {
 	/**
 	 * Shows the context menu based on the variables below.
 	 *
-	 * @param media Given media file
+	 * @param mediaTitle Given media title
 	 * @param x     Horizontal mouse position on the screen
 	 * @param y     Vertical mouse position on the screen
 	 * 

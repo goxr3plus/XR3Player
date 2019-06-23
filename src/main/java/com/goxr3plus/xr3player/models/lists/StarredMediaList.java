@@ -21,8 +21,7 @@ public class StarredMediaList extends DatabaseList {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param dataBaseTableName
+	 *
 	 */
 	public StarredMediaList() {
 		super(dataBaseTableName);

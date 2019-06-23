@@ -939,7 +939,7 @@ public class Library extends StackPane {
     /**
      * Opens the Library.
      *
-     * @param open          the open
+     * @param status
      * @param firstLoadHack the first load hack
      */
     public void setLibraryStatus(final LibraryStatus status, final boolean firstLoadHack) {

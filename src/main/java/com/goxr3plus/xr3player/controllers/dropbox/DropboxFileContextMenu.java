@@ -90,10 +90,11 @@ public class DropboxFileContextMenu extends ContextMenu {
 
 	/**
 	 * Show the ContextMenu
-	 * 
-	 * @param x
-	 * @param y
-	 * @param absoluteFilePath
+	 *
+	 * @param dropboxFile
+	 * @param x the x position of the popup anchor in screen coordinates
+	 * @param y the y position of the popup anchor in screen coordinates
+	 * @param node
 	 */
 	public void show(DropboxFile dropboxFile, double x, double y, Node node) {
 		this.dropboxFile = dropboxFile;
