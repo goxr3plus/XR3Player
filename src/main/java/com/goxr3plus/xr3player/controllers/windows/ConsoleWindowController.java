@@ -65,7 +65,7 @@ public class ConsoleWindowController extends StackPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	/** The Window */
-	private final Stage window = new Stage();
+	private Stage window;
 
 	/**
 	 * The Speech Recognition of the Application
@@ -84,6 +84,13 @@ public class ConsoleWindowController extends StackPane {
 	 * Constructor
 	 */
 	public ConsoleWindowController() {
+
+
+	}
+
+	private Stage initFromConstructor() {
+		Stage window;
+		window = new Stage();
 
 		// ------------------------------------FXMLLOADER
 		final FXMLLoader loader = new FXMLLoader(
@@ -108,6 +115,7 @@ public class ConsoleWindowController extends StackPane {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
 		});
+		return window;
 	}
 
 	/**
@@ -115,6 +123,7 @@ public class ConsoleWindowController extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
+		window = initFromConstructor();
 
 		// -- cssTextArea
 		cssTextArea.setEditable(false);
