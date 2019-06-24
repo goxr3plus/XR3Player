@@ -354,7 +354,7 @@ public class DatabaseManager {
 
 		@Override
 		protected Task<Void> createTask() {
-			return new Task<Void>() {
+			return new Task<>() {
 				@Override
 				protected Void call() throws Exception {
 					// int totalSteps = 4
@@ -363,8 +363,8 @@ public class DatabaseManager {
 					// -------------------------------------------------
 					try (ResultSet resultSet = getConnection().createStatement()
 							.executeQuery("SELECT* FROM LIBRARIES;");
-							ResultSet dbCounter = getConnection().createStatement()
-									.executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
+						 ResultSet dbCounter = getConnection().createStatement()
+								 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 
 						totalLibraries = dbCounter.getInt(1);
 
@@ -374,7 +374,7 @@ public class DatabaseManager {
 
 						// Kepp a List of all Libraries
 						final List<Node> libraries = new ArrayList<>(totalLibraries);
-						final int[] counter = { 0 };
+						final int[] counter = {0};
 
 						// Load all the libraries
 						while (resultSet.next()) {
@@ -477,7 +477,7 @@ public class DatabaseManager {
 
 							// Update the emotion smart controller
 							Main.emotionListsController
-									.updateSelectedSmartController(new boolean[] { true, true, true, true });
+									.updateSelectedSmartController(new boolean[]{true, true, true, true});
 
 							// Update the selected smart controller
 							((SmartController) Main.emotionsTabPane.getTabPane().getSelectionModel().getSelectedItem()

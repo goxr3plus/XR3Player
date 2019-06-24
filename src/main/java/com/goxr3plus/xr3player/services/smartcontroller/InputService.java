@@ -136,10 +136,10 @@ public class InputService extends Service<Void> {
 	 */
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 			/*
 			 * (non-Javadoc)
-			 * 
+			 *
 			 * @see javafx.concurrent.Task#call()
 			 */
 			@Override
@@ -211,11 +211,11 @@ public class InputService extends Service<Void> {
 							if (file.exists() && !isCancelled())
 								try {
 									Files.walkFileTree(Paths.get(file.getPath()),
-											new HashSet<FileVisitOption>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)),
-											Integer.MAX_VALUE, new SimpleFileVisitor<Path>() {
+											new HashSet<>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)),
+											Integer.MAX_VALUE, new SimpleFileVisitor<>() {
 												@Override
 												public FileVisitResult visitFile(Path filePath,
-														BasicFileAttributes attrs) throws IOException {
+																				 BasicFileAttributes attrs) throws IOException {
 
 													// System.out.println("Adding...."+s.toString())
 
@@ -240,7 +240,7 @@ public class InputService extends Service<Void> {
 
 												@Override
 												public FileVisitResult preVisitDirectory(Path dir,
-														BasicFileAttributes attrs) throws IOException {
+																						 BasicFileAttributes attrs) throws IOException {
 													return isCancelled() ? FileVisitResult.TERMINATE
 															: FileVisitResult.CONTINUE;
 												}
@@ -304,19 +304,18 @@ public class InputService extends Service<Void> {
 
 			/**
 			 * Count files in a directory (including files in all sub directories)
-			 * 
 			 * @param dir The Full path of the Directory
 			 * @return Total number of files contained in this folder
 			 */
 			int countFiles(File dir) {
-				int[] count = { 0 };
+				int[] count = {0};
 
 				// Folder exists?
 				if (dir.exists())
 					try {
 						Files.walkFileTree(Paths.get(dir.getPath()),
 								new HashSet<>(Arrays.asList(FileVisitOption.FOLLOW_LINKS)), Integer.MAX_VALUE,
-								new SimpleFileVisitor<Path>() {
+								new SimpleFileVisitor<>() {
 									@Override
 									public FileVisitResult visitFile(Path filePath, BasicFileAttributes attrs)
 											throws IOException {
@@ -353,7 +352,7 @@ public class InputService extends Service<Void> {
 
 			/**
 			 * Insert this song into the dataBase table
-			 * 
+			 *
 			 * @param path
 			 * @param stars
 			 * @param timesPlayed
@@ -361,7 +360,7 @@ public class InputService extends Service<Void> {
 			 * @param hourCreated
 			 */
 			void insertMedia(String path, double stars, int timesPlayed, String dateCreated, String hourCreated,
-					PreparedStatement preparedInsert) {
+							 PreparedStatement preparedInsert) {
 
 				try {
 

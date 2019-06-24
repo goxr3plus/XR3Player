@@ -135,7 +135,7 @@ public class LoadService extends Service<Void> {
 
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<Void>() {
+		return new Task<>() {
 
 			@Override
 			protected Void call() throws Exception {
@@ -157,7 +157,7 @@ public class LoadService extends Service<Void> {
 						+ smartController.getMaximumPerPage() + " OFFSET "
 						+ smartController.currentPageProperty().get() * smartController.getMaximumPerPage();
 				try (ResultSet resultSet = Main.dbManager.getConnection().createStatement().executeQuery(query);
-						ResultSet dbCounter = Main.dbManager.getConnection().createStatement().executeQuery(query)) {
+					 ResultSet dbCounter = Main.dbManager.getConnection().createStatement().executeQuery(query)) {
 
 					// Count how many items the result returned...
 					int currentMaximumPerList = 0;
@@ -166,7 +166,7 @@ public class LoadService extends Service<Void> {
 
 					// Fetch the items from the database
 					List<Media> array = new ArrayList<>();
-					for (Audio song = null; resultSet.next();) {
+					for (Audio song = null; resultSet.next(); ) {
 						song = new Audio(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
 								resultSet.getInt("TIMESPLAYED"), resultSet.getString("DATE"),
 								resultSet.getString("HOUR"), smartController.getGenre(), array.size() + 1);

@@ -40,7 +40,7 @@ public class StoppableService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -51,7 +51,7 @@ public class StoppableService extends Service<Boolean> {
 
 					// Check the category
 					if (category == StoppableServiceCategory.INTERNET_CHECKER) { // INTERNET_CHECKER
-						boolean[] newStatus = { false };
+						boolean[] newStatus = {false};
 
 						// Run until Service is cancelled
 						while (!isCancelled()) {
@@ -79,7 +79,7 @@ public class StoppableService extends Service<Boolean> {
 
 						}
 					} else if (category == StoppableServiceCategory.TIMER_CHECKER) { // TIMER_CHECKER
-						String[] localTime = { "" };
+						String[] localTime = {""};
 
 						// Run until Service is cancelled
 						while (!isCancelled()) {

@@ -96,7 +96,7 @@ public class ConverterService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 				boolean succeeded = true;

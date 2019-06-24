@@ -106,7 +106,7 @@ public class DatabaseImportService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -170,7 +170,7 @@ public class DatabaseImportService extends Service<Boolean> {
 						total = 1;
 
 					// Start
-					for (byte[] buffer = new byte[1024]; ze != null;) {
+					for (byte[] buffer = new byte[1024]; ze != null; ) {
 
 						String fileName = ze.getName();
 						File newFile = new File(outPutFolder + File.separator + fileName);

@@ -185,7 +185,7 @@ public class DropboxService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -268,7 +268,7 @@ public class DropboxService extends Service<Boolean> {
 
 						// CountDown Latch
 						final CountDownLatch countDown = new CountDownLatch(1);
-						final boolean[] searchCacheServiceIsRunning = { false };
+						final boolean[] searchCacheServiceIsRunning = {false};
 						Platform.runLater(() -> {
 							searchCacheServiceIsRunning[0] = searchCacheService.isRunning();
 							countDown.countDown();
@@ -369,9 +369,7 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
-			 * @param path A unique identifier for the file. Must match pattern "{@code
-			 *       (/(.|[\\r\\n])*)?|id:.*|(ns:[0-9]+(/.*)?)}" and not be {@code null}.
+			 * @param path
 			 * @param children
 			 * @param recursive
 			 * @param appendToMap
@@ -379,7 +377,7 @@ public class DropboxService extends Service<Boolean> {
 			 * @throws ListFolderErrorException
 			 */
 			public void listAllFiles(final String path, final ObservableList<DropboxFile> children,
-					final boolean recursive, final boolean appendToMap) throws DbxException {
+									 final boolean recursive, final boolean appendToMap) throws DbxException {
 
 				ListFolderResult result = client.files().listFolder(path);
 
@@ -428,7 +426,6 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
 			 * @param path
 			 * @param children
 			 * @throws DbxException
@@ -484,9 +481,8 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 * 
+			 *
 			 * @return
-			 * 
 			 */
 			public ObservableList<DropboxFile> cachedSearch(final List<Metadata> cachedList) {
 
@@ -498,7 +494,7 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * Deletes the given file or folder from Dropbox Account
-			 * 
+			 *
 			 * @param path The path of the Dropbox File or Folder
 			 */
 			public boolean delete(final String path) {
@@ -528,7 +524,7 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * Renames the given file or folder from Dropbox Account
-			 * 
+			 *
 			 * @param oldPath
 			 * @param newPath
 			 */
@@ -577,7 +573,7 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * Create a folder from Dropbox Account
-			 * 
+			 *
 			 * @param path Folder name
 			 */
 			public boolean createFolder(final String path) {

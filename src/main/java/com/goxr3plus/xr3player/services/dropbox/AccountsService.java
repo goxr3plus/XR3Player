@@ -62,12 +62,12 @@ public class AccountsService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
-				final int[] counter = { 0 };
-				final int[] totalSize = { dropBoxViewer.getSavedAccountsArray().size() };
+				final int[] counter = {0};
+				final int[] totalSize = {dropBoxViewer.getSavedAccountsArray().size()};
 
 				// Create a multimap
 				final Map<String, List<String>> multimap = new HashMap<>();
@@ -106,7 +106,7 @@ public class AccountsService extends Service<Boolean> {
 
 						// For each element on the list
 						list.forEach(accessToken -> parent.getChildren()
-								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25,"..."), accessToken, email,
+								.add(produceTreeItem(InfoTool.getMinString(accessToken, 25, "..."), accessToken, email,
 										JavaFXTool.getFontIcon("fas-key", goldColor, 20))));
 
 						// Append to the treeview root item
@@ -123,12 +123,12 @@ public class AccountsService extends Service<Boolean> {
 
 			/**
 			 * Fast method to produce TreeItems without duplicate code
-			 * 
+			 *
 			 * @param value
 			 * @return
 			 */
 			private DropboxClientTreeItem produceTreeItem(final String value, final String accessToken, final String email,
-					final Node graphic) {
+														  final Node graphic) {
 				final DropboxClientTreeItem treeItem = new DropboxClientTreeItem(value, accessToken, email);
 				treeItem.setGraphic(graphic);
 
