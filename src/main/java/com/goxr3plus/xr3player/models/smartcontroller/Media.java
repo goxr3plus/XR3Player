@@ -868,28 +868,23 @@ public abstract class Media {
 		// Inform all Libraries SmartControllers
 		Main.libraryMode.viewer.getItemsObservableList().stream()
 			.map(library -> ((Library) library).getSmartController())
-			.forEach(smartController -> {
-
-				internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-			});
+			.forEach(
+					smartController -> internalDataBaseRename(smartController, newFilePath, oldFilePath)
+			);
 
 		// Inform all XPlayers SmartControllers
 		Main.xPlayersList.getList().stream().map(
 			xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-			.forEach(smartController -> {
-
-				internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-			});
+			.forEach(
+					smartController -> internalDataBaseRename(smartController, newFilePath, oldFilePath)
+			);
 
 		// Update Emotion Lists SmartControllers
 		Main.emotionsTabPane.getTabPane().getTabs().stream()
-			.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
-
-			internalDataBaseRename(smartController, newFilePath, oldFilePath);
-
-		});
+				.map(tab -> (SmartController) tab.getContent())
+				.forEach(
+						smartController -> internalDataBaseRename(smartController, newFilePath, oldFilePath)
+				);
 
 		// Inform all XPlayers Models
 		Main.xPlayersList.getList().forEach(xPlayerController -> {
@@ -997,28 +992,23 @@ public abstract class Media {
 
 						// Inform all Libraries SmartControllers
 						Main.libraryMode.viewer.getItemsObservableList().stream()
-							.map(library -> ((Library) library).getSmartController()).forEach(smartController -> {
-
-							internalDataBaseUpdateStars(smartController);
-
-						});
+								.map(library -> ((Library) library).getSmartController())
+								.forEach(
+										smartController -> internalDataBaseUpdateStars(smartController)
+								);
 
 						// Inform all XPlayers SmartControllers
 						Main.xPlayersList.getList().stream()
 							.map(xPlayerController -> xPlayerController.getxPlayerPlayList().getSmartController())
-							.forEach(smartController -> {
-
-								internalDataBaseUpdateStars(smartController);
-
-							});
+							.forEach(
+									smartController -> internalDataBaseUpdateStars(smartController)
+							);
 
 						// Update Emotion Lists SmartControllers
 						Main.emotionsTabPane.getTabPane().getTabs().stream()
-							.map(tab -> (SmartController) tab.getContent()).forEach(smartController -> {
-
-							internalDataBaseUpdateStars(smartController);
-
-						});
+							.map(tab -> (SmartController) tab.getContent())
+								.forEach(smartController -> internalDataBaseUpdateStars(smartController)
+								);
 
 						// Update the SearchWindow
 						Main.searchWindowSmartController.getItemsObservableList().forEach(media -> {
