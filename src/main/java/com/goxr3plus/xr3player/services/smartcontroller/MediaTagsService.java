@@ -59,8 +59,8 @@ public class MediaTagsService extends Service<Boolean> {
 
 	/**
 	 * Restarts the Service
-	 * 
-	 * @param observableList
+	 *
+	 * @param mediaTableViewer
 	 */
 	public void restartService(MediaTableViewer mediaTableViewer) {
 
@@ -115,7 +115,7 @@ public class MediaTagsService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 
 			/**
 			 * [[SuppressWarningsSpartan]]
@@ -123,9 +123,9 @@ public class MediaTagsService extends Service<Boolean> {
 			@Override
 			protected Boolean call() throws Exception {
 
-				boolean[] success = { true };
-				int[] counter = { 0 };
-				int[] total = { mediaTableViewer.getSmartController().getItemsObservableList().size() };
+				boolean[] success = {true};
+				int[] counter = {0};
+				int[] total = {mediaTableViewer.getSmartController().getItemsObservableList().size()};
 				if (operation == AllDetailsServiceOperation.ALL)
 					total[0] *= 2;
 

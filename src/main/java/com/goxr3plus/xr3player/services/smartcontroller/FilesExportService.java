@@ -117,7 +117,7 @@ public class FilesExportService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 
@@ -154,7 +154,7 @@ public class FilesExportService extends Service<Boolean> {
 									!smartController.getFiltersModeTab().isSelected()
 											? smartController.getItemsObservableList().stream().map(Media::getFilePath)
 											: smartController.getFiltersMode().getMediaTableViewer().getTableView()
-													.getItems().stream().map(Media::getFilePath);
+											.getItems().stream().map(Media::getFilePath);
 
 							// Step 2
 							proceedStream(stream, targetDirectory);
@@ -172,10 +172,10 @@ public class FilesExportService extends Service<Boolean> {
 									// Is Filter Mode Selected?
 									(!smartController.getFiltersModeTab().isSelected())
 											? smartController.getNormalModeMediaTableViewer().getSelectionModel()
-													.getSelectedItems().stream().map(Media::getFilePath)
+											.getSelectedItems().stream().map(Media::getFilePath)
 											: smartController.getFiltersMode().getMediaTableViewer().getTableView()
-													.getSelectionModel().getSelectedItems().stream()
-													.map(Media::getFilePath);
+											.getSelectionModel().getSelectedItems().stream()
+											.map(Media::getFilePath);
 
 							// Step 2
 							proceedStream(stream, targetDirectory);
@@ -217,15 +217,12 @@ public class FilesExportService extends Service<Boolean> {
 				});
 
 				// Check if cancelled
-				if (isCancelled())
-					return false;
-				else
-					return true;
+				return !isCancelled();
 			}
 
 			/**
 			 * Proceed futher to complete the Service
-			 * 
+			 *
 			 * @param stream
 			 */
 			private void proceedStream(final Stream<String> stream, final File targetDirectory) {
@@ -262,8 +259,8 @@ public class FilesExportService extends Service<Boolean> {
 						if (ex.getMessage().contains(
 								"(The process cannot access the file because it is being used by another process)"))
 							AlertTool.showNotification("Error Message", "[ "
-									+ IOInfo.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
-									+ "The process cannot access the file because it is being used by another process",
+											+ IOInfo.getFileName(targetDirectory.getAbsolutePath()) + " ]\n"
+											+ "The process cannot access the file because it is being used by another process",
 									Duration.seconds(4), NotificationType.ERROR);
 						ex.printStackTrace();
 					}

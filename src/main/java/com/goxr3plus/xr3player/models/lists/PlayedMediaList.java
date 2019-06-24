@@ -20,8 +20,7 @@ public class PlayedMediaList extends DatabaseList {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param dataBaseTableName
+	 *
 	 */
 	public PlayedMediaList() {
 		super(dataBaseTableName);

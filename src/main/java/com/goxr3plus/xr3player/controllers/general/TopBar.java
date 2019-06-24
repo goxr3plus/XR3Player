@@ -148,9 +148,7 @@ public class TopBar extends BorderPane {
 		});
 
 		// showHideSideBar
-		showHideSideBar.setOnAction(a -> {
-			Main.bottomBar.getShowHideSideBar().setSelected(!Main.bottomBar.getShowHideSideBar().isSelected());
-		});
+		showHideSideBar.setOnAction(a -> Main.bottomBar.getShowHideSideBar().setSelected(!Main.bottomBar.getShowHideSideBar().isSelected()));
 	}
 
 	/**

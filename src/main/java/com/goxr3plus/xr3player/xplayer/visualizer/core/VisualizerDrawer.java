@@ -50,8 +50,7 @@ public class VisualizerDrawer extends VisualizerModel {
 
 	/**
 	 * Draws the foreground image of the visualizer
-	 * 
-	 * @param array The samples array
+	 *
 	 */
 	public void drawForegroundImage() {
 

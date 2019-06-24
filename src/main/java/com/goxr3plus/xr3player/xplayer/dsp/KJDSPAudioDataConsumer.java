@@ -437,13 +437,13 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 					float wFrr = (float) fpsAsNS / (float) desiredFpsAsNS;
 
 					// -- Dispatch sample data to digital signal processors.
-					for (int a = 0; a < dsps.size(); a++) {
-						try {
-							dsps.get(a).process(left, right, stereoMerge(left, right), wFrr);
-						} catch (Exception ex) {
-							Logger.getLogger(getClass().getName()).log(Level.SEVERE, "- DSP Exception: ", ex);
-						}
-					}
+                    for (KJDigitalSignalProcessor dsp : dsps) {
+                        try {
+                            dsp.process(left, right, stereoMerge(left, right), wFrr);
+                        } catch (Exception ex) {
+                            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "- DSP Exception: ", ex);
+                        }
+                    }
 
 					// KJJukeBox.getDSPDialog().setDSPInformation(
 					// String.valueOf( 1000.0f / ( (float)( wEtn - wStn ) /

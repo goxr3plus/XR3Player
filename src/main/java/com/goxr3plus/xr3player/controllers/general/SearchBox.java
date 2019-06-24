@@ -184,7 +184,7 @@ public class SearchBox extends HBox {
 		 */
 		@Override
 		protected Task<Void> createTask() {
-			return new Task<Void>() {
+			return new Task<>() {
 				@Override
 				protected Void call() throws Exception {
 					// Variables
@@ -195,10 +195,10 @@ public class SearchBox extends HBox {
 					if (searchBoxType == SearchBoxType.USERSSEARCHBOX)
 						Main.loginMode.viewer.getItemsObservableList().stream()
 								.filter(user -> ((User) user).getName().toLowerCase().contains(word)).forEach(user -> {
-									Platform.runLater(() -> getSearchBoxWindow().addItem(((User) user).getName(),
-											ac -> Main.loginMode.viewer.setCenterItem(user)));
-									++found;
-								});
+							Platform.runLater(() -> getSearchBoxWindow().addItem(((User) user).getName(),
+									ac -> Main.loginMode.viewer.setCenterItem(user)));
+							++found;
+						});
 					else if (searchBoxType == SearchBoxType.LIBRARYSEARCHBOX)
 						Main.libraryMode.viewer.getItemsObservableList().stream()
 								.filter(library -> ((Library) library).getLibraryName().toLowerCase().contains(word))

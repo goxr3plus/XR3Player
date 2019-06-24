@@ -15,87 +15,91 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="544.0" prefWidth="864.0" stylesheets="@../../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane style="-fx-background-color: #202020;">
-         <center>
+<fx:root prefHeight="544.0" prefWidth="864.0" stylesheets="@../../style/application.css" type="StackPane"
+         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane style="-fx-background-color: #202020;">
+        <center>
             <SplitPane fx:id="splitPane" dividerPositions="0.4" BorderPane.alignment="CENTER">
-               <items>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ListView fx:id="listView" VBox.vgrow="ALWAYS" />
-                        <HBox alignment="CENTER" style="-fx-background-color: #101010;">
-                           <children>
-                              <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
-                                 <tooltip>
-                                    <Tooltip text="Previous" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="#e0e023" iconLiteral="fas-arrow-alt-circle-left" iconSize="28" />
-                                 </graphic>
-                              </JFXButton>
-                              <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
-                                 <tooltip>
-                                    <Tooltip text="Next" />
-                                 </tooltip>
-                                 <graphic>
-                                    <FontIcon iconColor="#e0e023" iconLiteral="fas-arrow-alt-circle-right" iconSize="28" />
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
-                     <tabs>
-                        <Tab fx:id="basicInfoTab" text="Basic Info">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle" />
-                           </graphic></Tab>
-                        <Tab fx:id="artWorkTab" text="Artwork">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="gmi-album" />
-                           </graphic></Tab>
-                        <Tab fx:id="id3v1Tab" text="ID3v1">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-tag" />
-                           </graphic></Tab>
-                        <Tab fx:id="id3v2Tab" text="ID3v2">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-tags" />
-                           </graphic></Tab>
-                     </tabs>
-                  </JFXTabPane>
-               </items>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
+                <BorderPane.margin>
+                    <Insets/>
+                </BorderPane.margin>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <ListView fx:id="listView" VBox.vgrow="ALWAYS"/>
+                    <HBox alignment="CENTER" style="-fx-background-color: #101010;">
+                        <JFXButton fx:id="previous" contentDisplay="CENTER" focusTraversable="false"
+                                   graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity"
+                                   prefHeight="35.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                            <tooltip>
+                                <Tooltip text="Previous"/>
+                            </tooltip>
+                            <graphic>
+                                <FontIcon iconColor="#e0e023" iconLiteral="fas-arrow-alt-circle-left"
+                                          iconSize="28"/>
+                            </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="next" contentDisplay="CENTER" focusTraversable="false"
+                                   graphicTextGap="0.0" minHeight="-Infinity" minWidth="-Infinity"
+                                   prefHeight="35.0" prefWidth="50.0" styleClass="jfx-button4" text=" ">
+                            <tooltip>
+                                <Tooltip text="Next"/>
+                            </tooltip>
+                            <graphic>
+                                <FontIcon iconColor="#e0e023" iconLiteral="fas-arrow-alt-circle-right"
+                                          iconSize="28"/>
+                            </graphic>
+                        </JFXButton>
+                    </HBox>
+                </VBox>
+                <JFXTabPane fx:id="tabPane" style="-fx-background-color: #303030;" styleClass="specialJFXTabPane">
+                    <Tab fx:id="basicInfoTab" text="Basic Info">
+                        <graphic>
+                            <FontIcon iconColor="WHITE" iconLiteral="fas-info-circle"/>
+                        </graphic>
+                    </Tab>
+                    <Tab fx:id="artWorkTab" text="Artwork">
+                        <graphic>
+                            <FontIcon iconColor="WHITE" iconLiteral="gmi-album"/>
+                        </graphic>
+                    </Tab>
+                    <Tab fx:id="id3v1Tab" text="ID3v1">
+                        <graphic>
+                            <FontIcon iconColor="WHITE" iconLiteral="fas-tag"/>
+                        </graphic>
+                    </Tab>
+                    <Tab fx:id="id3v2Tab" text="ID3v2">
+                        <graphic>
+                            <FontIcon iconColor="WHITE" iconLiteral="fas-tags"/>
+                        </graphic>
+                    </Tab>
+                </JFXTabPane>
             </SplitPane>
-         </center>
-         <bottom>
+        </center>
+        <bottom>
             <StackPane BorderPane.alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" spacing="1.0" style="-fx-background-color: #303030;">
-                     <padding>
-                        <Insets bottom="4.0" top="4.0" />
-                     </padding>
-                  </HBox>
-                  <JFXButton fx:id="closeButton" focusTraversable="false" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <graphic>
-                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
-                     </graphic>
-                  </JFXButton>
-               </children>
+                <HBox alignment="CENTER" spacing="1.0" style="-fx-background-color: #303030;">
+                    <padding>
+                        <Insets bottom="4.0" top="4.0"/>
+                    </padding>
+                </HBox>
+                <JFXButton fx:id="closeButton" focusTraversable="false" styleClass="jfx-button-dark-white-selection"
+                           text="Close" StackPane.alignment="CENTER_RIGHT">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                    <graphic>
+                        <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
+                    </graphic>
+                </JFXButton>
             </StackPane>
-         </bottom>
-      </BorderPane>
-      <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;" styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false" wrapText="true">
-         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper" />
-         </graphic>
-      </Label>
-   </children>
+        </bottom>
+    </BorderPane>
+    <Label fx:id="dragAndDropLabel" alignment="CENTER" maxHeight="1.7976931348623157E308"
+           maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0"
+           style="-fx-border-color: transparent; -fx-font-size: 12; -fx-background-color: #202020F1;"
+           styleClass="applicationSettingsLabel2" text="Drop your files" textAlignment="CENTER" visible="false"
+           wrapText="true">
+        <graphic>
+          <FontIcon iconColor="WHITE" iconLiteral="fas-eye-dropper"/>
+        </graphic>
+    </Label>
 </fx:root>

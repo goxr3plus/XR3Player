@@ -169,9 +169,11 @@ public class SmartControllerFoldersMode extends StackPane {
 		});
 
 		// Custom Cell Factory
-		treeView.setCellFactory(tv -> new TreeCell<String>() {
+		treeView.setCellFactory(tv -> new TreeCell<>() {
 
-			/** FontIcon */
+			/**
+			 * FontIcon
+			 */
 			private FontIcon icon = new FontIcon();
 
 			{
@@ -210,7 +212,7 @@ public class SmartControllerFoldersMode extends StackPane {
 
 			/**
 			 * Set Graphic Font Icon
-			 * 
+			 *
 			 * @param iconLiteral
 			 * @param color
 			 */

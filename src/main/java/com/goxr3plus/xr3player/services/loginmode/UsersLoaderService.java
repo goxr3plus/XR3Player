@@ -71,11 +71,11 @@ public class UsersLoaderService extends Service<Boolean> {
 	 */
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 			@Override
 			protected Boolean call() throws Exception {
 				// Variables
-				final int[] counter = { 0 };
+				final int[] counter = {0};
 				final int totalUsers = Main.loginMode.viewer.getItemsObservableList().size();
 
 				try {
@@ -91,11 +91,11 @@ public class UsersLoaderService extends Service<Boolean> {
 							// --------------------Now continue
 							// normally----------------------------------------------
 							final Properties userInformationSettings = user.getUserInformationDb().loadProperties(); // Load
-																												// the
-																												// properties
-																												// from
-																												// the
-																												// File
+							// the
+							// properties
+							// from
+							// the
+							// File
 
 							// --Total Libraries
 							Optional.ofNullable(userInformationSettings.getProperty("Total-Libraries")).ifPresent(s -> {
@@ -132,9 +132,9 @@ public class UsersLoaderService extends Service<Boolean> {
 									});
 
 						} // If the UserInformation Properties File doesn't exit try to take
-							// Total-Libraries information from the actual sqlite.db file
-							// this process is slow as fu.ck that's why i am keeping information inside a
-							// properties file generally...
+						// Total-Libraries information from the actual sqlite.db file
+						// this process is slow as fu.ck that's why i am keeping information inside a
+						// properties file generally...
 						else {
 							// System.out.println("UsersInformationDb doesn't Exists"); //debugging
 
@@ -153,10 +153,10 @@ public class UsersLoaderService extends Service<Boolean> {
 								// --Create connection and load user information
 								try (Connection connection = DriverManager
 										.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
-										ResultSet dbCounter = connection.createStatement()
-												.executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
+									 ResultSet dbCounter = connection.createStatement()
+											 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
 
-									final int[] totalLibraries = { 0 };
+									final int[] totalLibraries = {0};
 									totalLibraries[0] += dbCounter.getInt(1);
 									Thread.sleep(500);
 

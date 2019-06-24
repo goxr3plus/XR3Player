@@ -151,11 +151,9 @@ public class MediaUpdaterService {
 							if (xPlayerController.getKey() == 0 && Main.topBar.getWindowMode() == WindowMode.MAINMODE)
 								return true;
 							// For other players
-							else if (xPlayerController.getKey() != 0
-									&& Main.libraryMode.getDjModeStackPane().isVisible())
-								return true;
+							else return xPlayerController.getKey() != 0
+									&& Main.libraryMode.getDjModeStackPane().isVisible();
 						}
-						return false;
 					})
 
 					// For each
@@ -256,9 +254,7 @@ public class MediaUpdaterService {
 				// Set timesPlayed
 				Main.playedSongs.getSet().stream()
 						.filter(playedFile -> media.getFilePath().equals(playedFile.getPath())).findFirst()
-						.ifPresent(playedFile -> {
-							media.timesPlayedProperty().set(playedFile.getTimesPlayed());
-						});
+						.ifPresent(playedFile -> media.timesPlayedProperty().set(playedFile.getTimesPlayed()));
 
 				// Set stars
 				// The is a problem with this , what if the file is the same but ... in

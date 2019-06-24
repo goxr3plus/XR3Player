@@ -63,7 +63,6 @@ public class ChromiumFullScreenController extends StackPane {
 	/**
 	 * Constructor.
 	 *
-	 * @param xPlayerController xPlayerController
 	 */
 	public ChromiumFullScreenController() {
 

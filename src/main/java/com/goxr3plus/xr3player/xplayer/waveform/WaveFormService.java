@@ -77,8 +77,7 @@ public class WaveFormService extends Service<Boolean> {
 	public void startService(String fileAbsolutePath, WaveFormJob waveFormJob) {
 
 		// Security Check
-		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && this.fileAbsolutePath != null
-				&& fileAbsolutePath.equals(this.fileAbsolutePath) && wavAmplitudes != null) // If it is the same file
+		if (waveFormJob == WaveFormJob.AMPLITUDES_AND_WAVEFORM && fileAbsolutePath.equals(this.fileAbsolutePath) && wavAmplitudes != null) // If it is the same file
 			return;
 
 		// Check
@@ -139,7 +138,7 @@ public class WaveFormService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<Boolean>() {
+		return new Task<>() {
 
 			@Override
 			protected Boolean call() throws Exception {
@@ -178,7 +177,7 @@ public class WaveFormService extends Service<Boolean> {
 
 			/**
 			 * Try to process a Non Wav File
-			 * 
+			 *
 			 * @param fileFormat
 			 * @return
 			 * @throws IOException
@@ -220,7 +219,7 @@ public class WaveFormService extends Service<Boolean> {
 
 			/**
 			 * Get Wav Amplitudes
-			 * 
+			 *
 			 * @param file
 			 * @return
 			 * @throws UnsupportedAudioFileException
@@ -301,7 +300,7 @@ public class WaveFormService extends Service<Boolean> {
 
 			/**
 			 * Process the amplitudes
-			 * 
+			 *
 			 * @param sourcePcmData
 			 * @return An array with amplitudes
 			 */
@@ -337,7 +336,7 @@ public class WaveFormService extends Service<Boolean> {
 
 			/**
 			 * Transcode to Wav
-			 * 
+			 *
 			 * @param sourceFile
 			 * @param destinationFile
 			 * @throws EncoderException

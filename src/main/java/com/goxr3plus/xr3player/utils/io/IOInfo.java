@@ -101,7 +101,7 @@ public class IOInfo {
 	 * <p>
 	 * If the file system implementation does not support a time stamp to indicate
 	 * the time when the file was created then this method returns an implementation
-	 * specific default value, typically the {@link #lastModifiedTime()
+	 * specific default value, typically the {@link BasicFileAttributes#lastModifiedTime()
 	 * last-modified-time} or a {@code FileTime} representing the epoch
 	 * (1970-01-01T00:00:00Z).
 	 *
@@ -121,7 +121,7 @@ public class IOInfo {
 			InfoTool.logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
-		return (attr.creationTime() + "").replaceAll("T|Z", " ");
+		return (attr.creationTime() + "").replaceAll("[TZ]", " ");
 	}
 
 	/**
@@ -199,7 +199,7 @@ public class IOInfo {
 			InfoTool.logger.log(Level.WARNING, ex.getMessage(), ex);
 			return "error";
 		}
-		return (attr.lastModifiedTime() + "").replaceAll("T|Z", " ");
+		return (attr.lastModifiedTime() + "").replaceAll("[TZ]", " ");
 	}
 
 	/**

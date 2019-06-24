@@ -6,51 +6,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox alignment="CENTER">
-         <children>
-            <JFXButton fx:id="leftArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" styleClass="jfx-button4" text=" ">
-               <graphic>
-                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-up" iconSize="32" />
-               </graphic>
-            </JFXButton>
-            <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" vbarPolicy="NEVER">
-               <content>
-                  <VBox fx:id="alphabetBox" spacing="1.0">
-                     <children>
-                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="A" />
-                        <JFXButton text="B" />
-                        <JFXButton maxHeight="1.7976931348623157E308" text="C" />
-                        <JFXButton text="D" />
-                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="E" />
-                        <JFXButton text="F" />
-                        <JFXButton text="G" />
-                        <JFXButton text="H" />
-                        <JFXButton text="I" />
-                        <JFXButton text="J" />
-                        <JFXButton text="K" />
-                        <JFXButton text="L" />
-                        <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="32.0" text="M" />
-                        <JFXButton text="N" />
-                        <JFXButton text="O" />
-                        <JFXButton text="P" />
-                        <JFXButton text="Q" />
-                        <JFXButton text="R" />
-                        <JFXButton text="S" />
-                        <JFXButton text="T" />
-                        <JFXButton text="V" />
-                        <JFXButton text="U" />
-                     </children>
-                  </VBox>
-               </content>
-            </ScrollPane>
-            <JFXButton fx:id="rightArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button4" text=" ">
-               <graphic>
-                  <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-down" iconSize="32" />
-               </graphic>
-            </JFXButton>
-         </children>
-      </VBox>
-   </children>
+<fx:root style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="StackPane"
+         xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER">
+        <JFXButton fx:id="leftArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+                   maxHeight="30.0" minHeight="30.0" prefHeight="30.0" styleClass="jfx-button4" text=" ">
+            <graphic>
+                <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-up" iconSize="32"/>
+            </graphic>
+        </JFXButton>
+        <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
+                    maxWidth="1.7976931348623157E308" vbarPolicy="NEVER">
+            <VBox fx:id="alphabetBox" spacing="1.0">
+                <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="A"/>
+                <JFXButton text="B"/>
+                <JFXButton maxHeight="1.7976931348623157E308" text="C"/>
+                <JFXButton text="D"/>
+                <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="E"/>
+                <JFXButton text="F"/>
+                <JFXButton text="G"/>
+                <JFXButton text="H"/>
+                <JFXButton text="I"/>
+                <JFXButton text="J"/>
+                <JFXButton text="K"/>
+                <JFXButton text="L"/>
+                <JFXButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="32.0"
+                           text="M"/>
+                <JFXButton text="N"/>
+                <JFXButton text="O"/>
+                <JFXButton text="P"/>
+                <JFXButton text="Q"/>
+                <JFXButton text="R"/>
+                <JFXButton text="S"/>
+                <JFXButton text="T"/>
+                <JFXButton text="V"/>
+                <JFXButton text="U"/>
+            </VBox>
+        </ScrollPane>
+        <JFXButton fx:id="rightArrow" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" focusTraversable="false"
+                   maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" styleClass="jfx-button4" text=" ">
+            <graphic>
+                <FontIcon iconColor="#ffe81f" iconLiteral="fas-angle-down" iconSize="32"/>
+            </graphic>
+        </JFXButton>
+    </VBox>
 </fx:root>

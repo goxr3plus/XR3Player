@@ -179,7 +179,7 @@ public class SystemMonitor extends StackPane {
 
 		@Override
 		protected Task<Void> createTask() {
-			return new Task<Void>() {
+			return new Task<>() {
 
 				@Override
 				protected Void call() throws Exception {

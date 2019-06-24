@@ -144,7 +144,8 @@ public class Sprites3D {
 	/**
 	 * Instantiates a new sprite 3 D.
 	 *
-	 * @param gc the gc
+	 * @param visualizerDrawer
+	 * @param shape
 	 */
 	public Sprites3D(VisualizerDrawer visualizerDrawer, Shape3D shape) {
 		// super(gc);
@@ -331,9 +332,6 @@ public class Sprites3D {
 	/**
 	 * Draws the sprite.
 	 *
-	 * @param width  the width
-	 * @param height the height
-	 * @param band   the band
 	 */
 	public void draw() {
 		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 3);
@@ -355,9 +353,7 @@ public class Sprites3D {
 			array[i] *= 100.00;
 		}
 
-		for (int i = 0; i < points.size(); i++) {
-			Point3D point = points.get(i);
-
+		for (Point3D point : points) {
 			renderList.add(transform(point, roll, pitch, yaw, xOffset, yOffset, zOffset, array));
 		}
 
@@ -375,9 +371,7 @@ public class Sprites3D {
 		else
 			imageBall = images[4];
 
-		for (int i = 0; i < renderList.size(); i++) {
-			Point3D point = renderList.get(i);
-
+		for (Point3D point : renderList) {
 			drawPoint(point, visualizerDrawer.getVisualizerWidth(), visualizerDrawer.getVisualizerHeight());
 		}
 	}
@@ -387,7 +381,7 @@ public class Sprites3D {
 	 *
 	 * @param points the points
 	 */
-	private final void zSort(List<Point3D> points) {
+	private void zSort(List<Point3D> points) {
 		Collections.sort(points, zComparator);
 	}
 
@@ -421,11 +415,11 @@ public class Sprites3D {
 	 * @param translateX the translate X
 	 * @param translateY the translate Y
 	 * @param translateZ the translate Z
-	 * @param band       the band
+	 * @param bands       the bands
 	 * @return the point 3 D
 	 */
-	private final Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,
-			double translateY, double translateZ, float[] bands) {
+	private Point3D transform(Point3D orig, double pitch, double yaw, double roll, double translateX,
+                              double translateY, double translateZ, float[] bands) {
 
 		// rotate around Z axis (roll)
 		double newX = orig.x * cos(bands[0]) - orig.y * sin(roll);
@@ -471,7 +465,7 @@ public class Sprites3D {
 	 * @param width  the width
 	 * @param height the height
 	 */
-	private final void drawPoint(Point3D point, double width, double height) {
+	private void drawPoint(Point3D point, double width, double height) {
 		double x = width / 2 + point.x / point.z * zoom;
 		double y = height / 2 + point.y / point.z * zoom;
 

@@ -168,10 +168,12 @@ public final class JavaFXTool {
 	 * Open's a select Window and if the user selects an image it saves it with the
 	 * given title and to the given folder , the extension is automatically found
 	 * from the original one Image
-	 * 
-	 * @param imageNameToDelete The images containing this name will be deleted
+	 *
+	 * @param title
 	 * @param folderForSaving   This folder must already exist!
-	 * 
+	 * @param specialChooser
+	 * @param window
+	 *
 	 * @return The image file which of course can be null if the user doesn't
 	 *         selected anything
 	 */

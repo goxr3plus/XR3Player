@@ -55,11 +55,8 @@ public class WindowsShortcut {
 	}
 
 	public WindowsShortcut(final File file) throws IOException, ParseException {
-		final InputStream in = new FileInputStream(file);
-		try {
+		try (InputStream in = new FileInputStream(file)) {
 			parseLink(getBytes(in));
-		} finally {
-			in.close();
 		}
 	}
 
@@ -149,11 +146,7 @@ public class WindowsShortcut {
 			final int file_atts_offset = 0x18;
 			final byte file_atts = link[file_atts_offset];
 			final byte is_dir_mask = (byte) 0x10;
-			if ((file_atts & is_dir_mask) > 0) {
-				isDirectory = true;
-			} else {
-				isDirectory = false;
-			}
+			isDirectory = (file_atts & is_dir_mask) > 0;
 
 			// if the shell settings are present, skip them
 			final int shell_offset = 0x4c;
@@ -197,10 +190,7 @@ public class WindowsShortcut {
 	private static String getNullDelimitedString(final byte[] bytes, final int off) {
 		int len = 0;
 		// count bytes until the null character (0)
-		while (true) {
-			if (bytes[off + len] == 0) {
-				break;
-			}
+		while (bytes[off + len] != 0) {
 			len++;
 		}
 		return new String(bytes, off, len);

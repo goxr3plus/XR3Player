@@ -41,8 +41,9 @@ public class PropertiesDb {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param localDbManager
+	 *
+	 * @param propertiesAbsolutePath
+	 * @param updatePropertiesLocked
 	 */
 	public PropertiesDb(final String propertiesAbsolutePath, final boolean updatePropertiesLocked) {
 		this.fileAbsolutePath = propertiesAbsolutePath;
@@ -169,8 +170,8 @@ public class PropertiesDb {
 
 	/**
 	 * Lock or unlock the update of properties
-	 * 
-	 * @param canUpdateProperty the canUpdateProperty to set
+	 *
+	 * @param updatePropertiesLocked
 	 */
 	public void setUpdatePropertiesLocked(final boolean updatePropertiesLocked) {
 		this.updatePropertiesLocked = updatePropertiesLocked;
