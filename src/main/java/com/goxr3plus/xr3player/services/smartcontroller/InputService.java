@@ -304,7 +304,6 @@ public class InputService extends Service<Void> {
 
 			/**
 			 * Count files in a directory (including files in all sub directories)
-			 * 
 			 * @param dir The Full path of the Directory
 			 * @return Total number of files contained in this folder
 			 */

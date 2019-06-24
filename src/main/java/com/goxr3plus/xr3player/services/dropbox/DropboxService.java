@@ -369,9 +369,7 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
-			 * @param path A unique identifier for the file. Must match pattern "{@code
-			 *       (/(.|[\\r\\n])*)?|id:.*|(ns:[0-9]+(/.*)?)}" and not be {@code null}.
+			 * @param path
 			 * @param children
 			 * @param recursive
 			 * @param appendToMap
@@ -428,7 +426,6 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
 			 * @param path
 			 * @param children
 			 * @throws DbxException
