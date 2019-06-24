@@ -10,26 +10,20 @@
 
 <fx:root prefHeight="480.0" prefWidth="837.0" style="-fx-background-color: #101010;" stylesheets="@../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <StackPane BorderPane.alignment="CENTER">
-         <children>
-            <HBox>
-               <children>
-                  <StackPane fx:id="stack1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <ImageView fx:id="imageView1" fitHeight="313.0" fitWidth="344.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@../image/fmovies.jpg" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="label1" alignment="CENTER" contentDisplay="TOP" style="-fx-font-size: 50;" styleClass="online-music-vbox-box-label" text="FMOVIES" textAlignment="CENTER" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </StackPane>
-               </children>
-            </HBox>
-         </children>
-      </StackPane>
+       <StackPane BorderPane.alignment="CENTER">
+           <HBox>
+               <StackPane fx:id="stack1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                          minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS">
+                   <cursor>
+                       <Cursor fx:constant="HAND"/>
+                   </cursor>
+                   <ImageView fx:id="imageView1" fitHeight="313.0" fitWidth="344.0" pickOnBounds="true">
+                       <Image url="@../image/fmovies.jpg"/>
+                   </ImageView>
+                   <Label fx:id="label1" alignment="CENTER" contentDisplay="TOP" style="-fx-font-size: 50;"
+                          styleClass="online-music-vbox-box-label" text="FMOVIES" textAlignment="CENTER"/>
+               </StackPane>
+           </HBox>
+       </StackPane>
    </center>
 </fx:root>
