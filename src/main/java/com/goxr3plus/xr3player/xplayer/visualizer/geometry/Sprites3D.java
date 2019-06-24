@@ -334,7 +334,7 @@ public class Sprites3D {
 	 *
 	 */
 	public void draw() {
-		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.stereoMerge, 3);
+		float[] array = visualizerDrawer.returnBandsArray(visualizerDrawer.getStereoMerge(), 3);
 
 		// gc.clearRect(0, 0, width, height);
 		// gc.setStroke(Color.WHITE);
