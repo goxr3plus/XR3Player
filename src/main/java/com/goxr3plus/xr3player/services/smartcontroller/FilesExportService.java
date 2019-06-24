@@ -217,10 +217,7 @@ public class FilesExportService extends Service<Boolean> {
 				});
 
 				// Check if cancelled
-				if (isCancelled())
-					return false;
-				else
-					return true;
+				return !isCancelled();
 			}
 
 			/**

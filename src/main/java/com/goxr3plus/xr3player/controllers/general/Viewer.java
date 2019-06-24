@@ -139,8 +139,7 @@ public class Viewer extends Region {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param scrollBar
+	 *
 	 */
 	private void init() {
 
@@ -410,7 +409,7 @@ public class Viewer extends Region {
 	/**
 	 * Add multiple libraries at once.
 	 *
-	 * @param library List full of Libraries
+	 * @param list List full of Libraries
 	 */
 	public void addMultipleItems(List<Node> list) {
 
@@ -734,8 +733,8 @@ public class Viewer extends Region {
 	/**
 	 * Checks if this item is the center item
 	 * 
-	 * @param Item
-	 * @return True if it is
+	 * @param item Node to be checked
+	 * @return True if it is the center item.
 	 */
 	public boolean isCenterItem(Node item) {
 		return !itemsObservableList.isEmpty() && getNotNullList().get(centerIndex).equals(item);

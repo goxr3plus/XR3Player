@@ -213,7 +213,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	 * @param leftChannel        Audio data for the left channel.
 	 * @param rightChannel       Audio data for the right channel.
 	 * @param stereoMerge        Merged Audio data from left and right channel
-	 * @param frameRateRatioHint A float value representing the ratio of the current
+	 * @param pFrameRateRatioHint A float value representing the ratio of the current
 	 *                           frame rate to the desired frame rate. It is used to
 	 *                           keep DSP animation consistent if the frame rate
 	 *                           drop below the desired frame rate.

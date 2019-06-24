@@ -369,11 +369,10 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
-			 * @param client
 			 * @param path
 			 * @param children
-			 * @param arrayList
+			 * @param recursive
+			 * @param appendToMap
 			 * @throws DbxException
 			 * @throws ListFolderErrorException
 			 */
@@ -427,8 +426,6 @@ public class DropboxService extends Service<Boolean> {
 
 			/**
 			 * List all the Files inside DropboxAccount
-			 *
-			 * @param client
 			 * @param path
 			 * @param children
 			 * @throws DbxException

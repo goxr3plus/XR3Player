@@ -344,7 +344,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	/**
 	 * Closes the tabs to the right of the given Tab
 	 * 
-	 * @param tab
+	 * @param givenTab
 	 */
 	public void closeTabsToTheRight(Tab givenTab) {
 		// Return if size <= 1
@@ -366,7 +366,7 @@ public class OpenedLibrariesViewer extends StackPane {
 	/**
 	 * Closes the tabs to the left of the given Tab
 	 * 
-	 * @param tab
+	 * @param givenTab
 	 */
 	public void closeTabsToTheLeft(Tab givenTab) {
 		// Return if size <= 1

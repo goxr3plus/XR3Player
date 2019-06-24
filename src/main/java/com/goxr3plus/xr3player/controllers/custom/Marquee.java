@@ -106,7 +106,7 @@ public class Marquee extends Pane {
 	/**
 	 * This method starts the Animation of the marquee
 	 */
-	private final void startAnimation() {
+	private void startAnimation() {
 
 		// KeyFrame
 		KeyFrame updateFrame = new KeyFrame(Duration.millis(35), new EventHandler<>() {

@@ -16,39 +16,43 @@
 
 <fx:root prefHeight="538.0" prefWidth="843.0" style="-fx-background-color: #202020;" stylesheets="@../../style/application.css" type="BorderPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
-      <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #202020;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="restoreAllSettings" mnemonicParsing="false" styleClass="jfx-button4" text="Restore all settings " StackPane.alignment="CENTER_LEFT">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <tooltip>
-                  <Tooltip text="Restore to default all the settings !" />
-               </tooltip>
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="fas-share" iconSize="24" />
-               </graphic>
-            </Button>
-            <JFXButton fx:id="doneButton" focusTraversable="false" maxHeight="1.7976931348623157E308" styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
-               <tooltip>
-                  <Tooltip text="Close the Window" />
-               </tooltip>
-               <graphic>
-                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24" />
-               </graphic>
-            </JFXButton>
-            <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" styleClass="jfx-button4" text="Copy Settings from User">
-               <graphic>
-                  <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="24" />
-               </graphic></MenuButton>
-         </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </StackPane>
+       <StackPane maxHeight="-Infinity" prefHeight="0.0" prefWidth="600.0" style="-fx-background-color: #202020;"
+                  BorderPane.alignment="CENTER">
+           <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+           </padding>
+           <BorderPane.margin>
+               <Insets/>
+           </BorderPane.margin>
+           <Button fx:id="restoreAllSettings" mnemonicParsing="false" styleClass="jfx-button4"
+                   text="Restore all settings " StackPane.alignment="CENTER_LEFT">
+              <cursor>
+                  <Cursor fx:constant="HAND"/>
+              </cursor>
+              <tooltip>
+                  <Tooltip text="Restore to default all the settings !"/>
+              </tooltip>
+              <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="fas-share" iconSize="24"/>
+              </graphic>
+           </Button>
+           <JFXButton fx:id="doneButton" focusTraversable="false" maxHeight="1.7976931348623157E308"
+                      styleClass="jfx-button-dark-white-selection" text="Close" StackPane.alignment="CENTER_RIGHT">
+              <tooltip>
+                  <Tooltip text="Close the Window"/>
+              </tooltip>
+              <graphic>
+                  <FontIcon iconColor="#f83e3e" iconLiteral="fas-times" iconSize="24"/>
+              </graphic>
+           </JFXButton>
+           <MenuButton fx:id="copySettingsMenuButton" maxHeight="-Infinity" minHeight="-Infinity"
+                       mnemonicParsing="false" popupSide="RIGHT" prefHeight="35.0" styleClass="jfx-button4"
+                       text="Copy Settings from User">
+              <graphic>
+                  <FontIcon iconColor="WHITE" iconLiteral="gmi-content-copy" iconSize="24"/>
+              </graphic>
+           </MenuButton>
+       </StackPane>
    </bottom>
    <padding>
       <Insets top="2.0" />
@@ -67,74 +71,72 @@
       </Button>
    </top>
    <center>
-      <JFXTabPane side="LEFT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
-         <tabs>
-            <Tab fx:id="generalTab" closable="false" styleClass="sTab">
-               <graphic>
+       <JFXTabPane side="LEFT" styleClass="specialJFXTabPane" BorderPane.alignment="CENTER">
+           <Tab fx:id="generalTab" closable="false" styleClass="sTab">
+              <graphic>
                   <Group>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="General" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-wrench" iconSize="32" />
-                           </graphic>
-                        </Label>
-                     </children>
+                      <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                             prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                             text="General" textAlignment="CENTER" wrapText="true">
+                          <graphic>
+                              <FontIcon iconColor="WHITE" iconLiteral="fas-wrench" iconSize="32"/>
+                          </graphic>
+                      </Label>
                   </Group>
-               </graphic>
-            </Tab>
-          <Tab fx:id="playListsTab" closable="false" styleClass="sTab">
-               <graphic>
+              </graphic>
+           </Tab>
+           <Tab fx:id="playListsTab" closable="false" styleClass="sTab">
+                <graphic>
+                    <Group>
+                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                               prefHeight="65.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                               text="Playlists" textAlignment="CENTER" wrapText="true">
+                            <graphic>
+                                <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="42"/>
+                            </graphic>
+                        </Label>
+                    </Group>
+                </graphic>
+           </Tab>
+           <Tab fx:id="librariesTab" closable="false" styleClass="sTab">
+              <graphic>
                   <Group>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="65.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Playlists" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <FontIcon iconColor="#e1c943" iconLiteral="gmi-library-music" iconSize="42" />
-                           </graphic>
-                        </Label>
-                     </children>
+                      <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                             prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                             text="Libraries" textAlignment="CENTER" wrapText="true">
+                          <graphic>
+                              <FontIcon iconColor="#e0b143" iconLiteral="far-folder" iconSize="32"/>
+                          </graphic>
+                      </Label>
                   </Group>
-               </graphic>
-            </Tab>
-            <Tab fx:id="librariesTab" closable="false" styleClass="sTab">
-               <graphic>
+              </graphic>
+           </Tab>
+           <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab">
+                <graphic>
+                    <Group>
+                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                               prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                               text="Shortcuts" textAlignment="CENTER" wrapText="true">
+                            <graphic>
+                                <FontIcon iconColor="WHITE" iconLiteral="fas-keyboard" iconSize="32"/>
+                            </graphic>
+                        </Label>
+                    </Group>
+                </graphic>
+           </Tab>
+           <Tab closable="false" styleClass="sTab" fx:id="xPlayersTab">
+              <graphic>
                   <Group>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Libraries" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <FontIcon iconColor="#e0b143" iconLiteral="far-folder" iconSize="32" />
-                           </graphic>
-                        </Label>
-                     </children>
+                      <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0"
+                             prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;"
+                             text="Players" textAlignment="CENTER" wrapText="true">
+                          <graphic>
+                              <FontIcon iconColor="#cd3535" iconLiteral="fas-music" iconSize="32"/>
+                          </graphic>
+                      </Label>
                   </Group>
-               </graphic>
-            </Tab>
-          <Tab fx:id="shortCutsTab" closable="false" styleClass="sTab">
-               <graphic>
-                  <Group>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Shortcuts" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <FontIcon iconColor="WHITE" iconLiteral="fas-keyboard" iconSize="32" />
-                           </graphic>
-                        </Label>
-                     </children>
-                  </Group>
-               </graphic>
-            </Tab>
-            <Tab closable="false" styleClass="sTab" fx:id="xPlayersTab">
-               <graphic>
-                  <Group>
-                     <children>
-                        <Label alignment="CENTER" contentDisplay="BOTTOM" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="124.0" rotate="90.0" style="-fx-text-fill: white;" text="Players" textAlignment="CENTER" wrapText="true">
-                           <graphic>
-                              <FontIcon iconColor="#cd3535" iconLiteral="fas-music" iconSize="32" />
-                           </graphic>
-                        </Label>
-                     </children>
-                  </Group>
-               </graphic>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
+              </graphic>
+           </Tab>
+       </JFXTabPane>
    </center>
 </fx:root>

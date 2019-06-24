@@ -90,7 +90,7 @@ public class Sierpinski {
 	/**
 	 * Calculate the position of the Triangles.
 	 */
-	private final void calcTriangles() {
+	private void calcTriangles() {
 		renderList.clear();
 
 		double acceleration = sierpinskiRootHeight * sierpinskiAcceleration;
@@ -136,19 +136,17 @@ public class Sierpinski {
 	/**
 	 * Draw the triangles.
 	 */
-	private final void drawTriangles() {
+	private void drawTriangles() {
 		visualizerDrawer.gc.setFill(Color.WHITE);
 		// gc.setFill(Color.rgb((int)(255*Math.random()),(int)(255*Math.random()),(int)(255*Math.random())))
 
 		int triangleCount = renderList.size();
 
-		for (int i = 0; i < triangleCount; i++) {
-			Triangle tri = renderList.get(i);
-
-			if (tri.getTopY() < visualizerDrawer.canvasHeight) {
-				drawTriangle(tri);
-			}
-		}
+        for (Triangle triangle : renderList) {
+            if (triangle.getTopY() < visualizerDrawer.canvasHeight) {
+                drawTriangle(triangle);
+            }
+        }
 	}
 
 	/**
@@ -156,7 +154,7 @@ public class Sierpinski {
 	 *
 	 * @param triangle the triangle
 	 */
-	private final void drawTriangle(Triangle triangle) {
+	private void drawTriangle(Triangle triangle) {
 		double topX = triangle.getTopX();
 		double topY = triangle.getTopY();
 		double h = triangle.getHeight();

@@ -44,7 +44,7 @@ public class WebBrowserTabContextMenu extends ContextMenu {
 	/**
 	 * Constructor
 	 * 
-	 * @param tab
+	 * @param webBrowserTabController
 	 * @param webBrowserController
 	 */
 	public WebBrowserTabContextMenu(WebBrowserTabController webBrowserTabController,

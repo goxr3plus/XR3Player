@@ -9,76 +9,73 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<fx:root prefHeight="826.0" prefWidth="1104.0" style="-fx-background-color: transparent;" stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane styleClass="online-music-root">
-         <center>
+<fx:root prefHeight="826.0" prefWidth="1104.0" style="-fx-background-color: transparent;"
+         stylesheets="@../style/application.css" type="StackPane" xmlns="http://javafx.com/javafx/9.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane styleClass="online-music-root">
+        <center>
             <ScrollPane fitToWidth="true" hbarPolicy="NEVER" BorderPane.alignment="CENTER">
-               <content>
-                  <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0">
-                     <children>
-                        <VBox spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Recommendation">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon" iconColor="WHITE" iconLiteral="far-hand-peace" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="recommendationsView" hgap="3.0" vgap="3.0" VBox.vgrow="ALWAYS" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="697.0" spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Editor's Pick">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon1" iconColor="WHITE" iconLiteral="far-gem" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="editorsPickView" hgap="3.0" vgap="3.0" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="468.0" spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Activities">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon2" iconColor="WHITE" iconLiteral="icm-rocket" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="activitiesView" hgap="3.0" vgap="3.0" />
-                           </children>
-                        </VBox>
-                        <VBox spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Genres">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon3" iconColor="WHITE" iconLiteral="far-user" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="genresView" hgap="3.0" vgap="3.0" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="468.0" spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Charts">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon4" iconColor="WHITE" iconLiteral="fas-chart-bar" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="chartsView" hgap="3.0" vgap="3.0" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="239.0" spacing="10.0" styleClass="online-music-root-vbox">
-                           <children>
-                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" styleClass="online-music-title-label" text="Mood">
-                                 <graphic>
-                                    <FontIcon fx:id="fontIcon5" iconColor="WHITE" iconLiteral="far-smile" />
-                                 </graphic></Label>
-                              <FlowPane fx:id="moodView" hgap="3.0" vgap="3.0" />
-                           </children>
-                        </VBox>
-                     </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </VBox>
-               </content>
+                <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                      spacing="20.0">
+                    <padding>
+                        <Insets top="5.0"/>
+                    </padding>
+                    <VBox spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label"
+                               text="Recommendation">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon" iconColor="WHITE" iconLiteral="far-hand-peace"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="recommendationsView" hgap="3.0" vgap="3.0" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    <VBox layoutX="10.0" layoutY="697.0" spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="online-music-title-label" text="Editor's Pick">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon1" iconColor="WHITE" iconLiteral="far-gem"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="editorsPickView" hgap="3.0" vgap="3.0"/>
+                    </VBox>
+                    <VBox layoutX="10.0" layoutY="468.0" spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="online-music-title-label" text="Activities">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon2" iconColor="WHITE" iconLiteral="icm-rocket"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="activitiesView" hgap="3.0" vgap="3.0"/>
+                    </VBox>
+                    <VBox spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label maxWidth="1.7976931348623157E308" styleClass="online-music-title-label"
+                               text="Genres">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon3" iconColor="WHITE" iconLiteral="far-user"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="genresView" hgap="3.0" vgap="3.0"/>
+                    </VBox>
+                    <VBox layoutX="10.0" layoutY="468.0" spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="online-music-title-label" text="Charts">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon4" iconColor="WHITE" iconLiteral="fas-chart-bar"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="chartsView" hgap="3.0" vgap="3.0"/>
+                    </VBox>
+                    <VBox layoutX="10.0" layoutY="239.0" spacing="10.0" styleClass="online-music-root-vbox">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308"
+                               styleClass="online-music-title-label" text="Mood">
+                            <graphic>
+                                <FontIcon fx:id="fontIcon5" iconColor="WHITE" iconLiteral="far-smile"/>
+                            </graphic>
+                        </Label>
+                        <FlowPane fx:id="moodView" hgap="3.0" vgap="3.0"/>
+                    </VBox>
+                </VBox>
             </ScrollPane>
-         </center>
-      </BorderPane>
-   </children>
+        </center>
+    </BorderPane>
 </fx:root>
