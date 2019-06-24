@@ -81,7 +81,7 @@ module XR3Player {
 	requires jave.core;
 	requires jnativehook;
 	requires json;
-	requires jxbrowser;
+	requires jxbrowser.javafx;
 	requires mp3agic;
 	requires org.apache.commons.io;
 	requires org.jsoup;
@@ -90,5 +90,5 @@ module XR3Player {
 	requires reactfx;
 	requires richtextfx;
 	requires zt.zip;
-	requires jxbrowser.javafx;
+	requires jxbrowser;
 }

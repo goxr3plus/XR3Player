@@ -218,7 +218,7 @@
 		<!-- CHROMIUM BROWSER -->
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
-			<artifactId>jxbrowser-win64</artifactId>
+			<artifactId>jxbrowser-win32</artifactId>
 			<version>7.0</version>
 		</dependency>
 
