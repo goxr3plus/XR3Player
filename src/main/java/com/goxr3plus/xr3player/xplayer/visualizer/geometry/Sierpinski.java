@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.scene.paint.Color;
 import com.goxr3plus.xr3player.xplayer.visualizer.core.VisualizerDrawer;
+
+import javafx.scene.paint.Color;
 
 /**
  * -----------------------------------------------------------------------
@@ -144,7 +145,7 @@ public class Sierpinski {
 
 
     for (Triangle triangle : renderList) 
-      if (triangle.getTopY() < visualizerDrawer.canvasHeight) 
+      if (triangle.getTopY() < visualizerDrawer.getCanvasHeight())
           drawTriangle(triangle);
           
 	}

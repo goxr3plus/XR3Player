@@ -10,17 +10,17 @@ import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.DownloadErrorException;
 import com.dropbox.core.v2.files.DownloadZipResult;
 import com.dropbox.core.v2.files.FileMetadata;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
+import com.goxr3plus.xr3player.controllers.dropbox.ProgressOutputStream;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 import javafx.application.Platform;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
-import com.goxr3plus.xr3player.controllers.dropbox.ProgressOutputStream;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DownloadService extends Service<Boolean> {
 
@@ -64,7 +64,7 @@ public class DownloadService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<>() {
+		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
 

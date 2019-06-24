@@ -9,6 +9,18 @@ import org.fxmisc.richtext.InlineCssTextArea;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.javafx.StackedFontIcon;
 
+import com.goxr3plus.xr3player.application.Main;
+import com.goxr3plus.xr3player.controllers.custom.StarBadge;
+import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
+import com.goxr3plus.xr3player.enums.Genre;
+import com.goxr3plus.xr3player.enums.TagTabCategory;
+import com.goxr3plus.xr3player.models.smartcontroller.Media;
+import com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.io.IOAction;
+import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
+
 import javafx.animation.PauseTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -41,17 +53,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.application.Main;
-import com.goxr3plus.xr3player.enums.Genre;
-import com.goxr3plus.xr3player.enums.TagTabCategory;
-import com.goxr3plus.xr3player.controllers.custom.StarBadge;
-import com.goxr3plus.xr3player.controllers.windows.EmotionsWindow.Emotion;
-import com.goxr3plus.xr3player.models.smartcontroller.Media;
-import com.goxr3plus.xr3player.services.smartcontroller.MediaTagsService;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.io.IOAction;
-import com.goxr3plus.xr3player.utils.javafx.DragViewTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 /**
  * Representing the data of SmartController.
@@ -477,7 +478,7 @@ public class MediaTableViewer extends StackPane {
 			/**
 			 * Update the emotion the user is feeling for this Media
 			 */
-			public void updateEmotion(Media media, Node node) {
+			private void updateEmotion(Media media, Node node) {
 				// Show the Window
 				Main.emotionsWindow.show(media.getFileName(), node);// getFileName()
 

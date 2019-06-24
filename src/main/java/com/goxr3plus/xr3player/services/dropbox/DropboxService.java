@@ -17,6 +17,14 @@ import com.dropbox.core.v2.files.ListFolderResult;
 import com.dropbox.core.v2.files.Metadata;
 import com.dropbox.core.v2.files.RelocationResult;
 import com.dropbox.core.v2.users.FullAccount;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
+import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
+import com.goxr3plus.xr3player.enums.DropBoxOperation;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.general.InfoTool;
+import com.goxr3plus.xr3player.utils.general.NetworkingTool;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
+import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -24,14 +32,6 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.enums.DropBoxOperation;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxFile;
-import com.goxr3plus.xr3player.controllers.dropbox.DropboxViewer;
-import com.goxr3plus.xr3player.utils.general.InfoTool;
-import com.goxr3plus.xr3player.utils.general.NetworkingTool;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
-import com.goxr3plus.xr3player.utils.javafx.JavaFXTool;
 
 public class DropboxService extends Service<Boolean> {
 
@@ -185,7 +185,7 @@ public class DropboxService extends Service<Boolean> {
 
 	@Override
 	protected Task<Boolean> createTask() {
-		return new Task<>() {
+		return new Task<Boolean>() {
 			@Override
 			protected Boolean call() throws Exception {
 

@@ -18,15 +18,16 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.stream.Collectors;
 
-import javafx.application.Platform;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import com.goxr3plus.xr3player.application.Main;
 import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController;
 import com.goxr3plus.xr3player.controllers.smartcontroller.SmartController.WorkOnProgress;
 import com.goxr3plus.xr3player.utils.general.DateTimeTool;
 import com.goxr3plus.xr3player.utils.general.ExtensionTool;
 import com.goxr3plus.xr3player.utils.io.IOInfo;
+
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 
 /**
  * Manages the input operations of the SmartController.
@@ -136,7 +137,7 @@ public class InputService extends Service<Void> {
 	 */
 	@Override
 	protected Task<Void> createTask() {
-		return new Task<>() {
+		return new Task<Void>() {
 			/*
 			 * (non-Javadoc)
 			 *
