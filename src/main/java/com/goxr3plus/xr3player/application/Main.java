@@ -63,6 +63,9 @@ public class Main extends Application {
 
 	public static void main(final String[] args) {
 
+		//Init Jave 2
+//		new DefaultFFMPEGLocator();
+
 		// Launch JavaFX Application
 		launch(args);
 	}

@@ -314,7 +314,7 @@ public class MainLoader {
         Main.renameWindow.getWindow().initOwner(window);
         Main.emotionsWindow.getWindow().initOwner(window);
         Main.exportWindow.getWindow().initOwner(window);
-        Main.consoleWindow.getWindow().initOwner(window);
+//        Main.consoleWindow.getWindow().initOwner(window);
         Main.settingsWindow.getWindow().initOwner(window);
         Main.aboutWindow.getWindow().initOwner(window);
         Main.updateWindow.getWindow().initOwner(window);

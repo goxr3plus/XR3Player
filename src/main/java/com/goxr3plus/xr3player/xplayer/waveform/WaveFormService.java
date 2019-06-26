@@ -1,8 +1,5 @@
 package com.goxr3plus.xr3player.xplayer.waveform;
 
-import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.CopyOption;
@@ -13,17 +10,17 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioFormat.Encoding;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
+
+import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
+import com.goxr3plus.xr3player.enums.NotificationType;
+import com.goxr3plus.xr3player.utils.io.IOInfo;
+import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 
 import javafx.application.Platform;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import com.goxr3plus.xr3player.enums.NotificationType;
-import com.goxr3plus.xr3player.controllers.xplayer.XPlayerController;
-import com.goxr3plus.xr3player.utils.io.IOInfo;
-import com.goxr3plus.xr3player.utils.javafx.AlertTool;
 import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
@@ -31,6 +28,9 @@ import ws.schild.jave.EncoderProgressListener;
 import ws.schild.jave.EncodingAttributes;
 import ws.schild.jave.MultimediaInfo;
 import ws.schild.jave.MultimediaObject;
+
+import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class WaveFormService extends Service<Boolean> {
 
@@ -178,14 +178,13 @@ public class WaveFormService extends Service<Boolean> {
 			/**
 			 * Try to process a Non Wav File
 			 *
-			 * @param fileFormat
+			 * @param fileFormat The extension of the file
 			 * @return
 			 * @throws IOException
-			 * @throws UnsupportedAudioFileException
 			 * @throws EncoderException
 			 */
 			private float[] processFromNoWavFile(String fileFormat)
-					throws IOException, UnsupportedAudioFileException, EncoderException {
+					throws IOException, EncoderException {
 				int randomN = random.nextInt(99999);
 
 				// Create temporary files
@@ -222,10 +221,8 @@ public class WaveFormService extends Service<Boolean> {
 			 *
 			 * @param file
 			 * @return
-			 * @throws UnsupportedAudioFileException
-			 * @throws IOException
 			 */
-			private int[] getWavAmplitudes(File file) throws UnsupportedAudioFileException, IOException {
+			private int[] getWavAmplitudes(File file) {
 
 				// Get Audio input stream
 				try (AudioInputStream input = AudioSystem.getAudioInputStream(file)) {
@@ -258,7 +255,7 @@ public class WaveFormService extends Service<Boolean> {
 						float currentCellValue = 0.0f;
 
 						// Variables for the loop
-						int arrayCellValue = 0;
+						int arrayCellValue;
 
 						// Read all the available data on chunks
 						while (pcmDecodedInput.readNBytes(buffer, 0, BUFFER_SIZE) > 0)

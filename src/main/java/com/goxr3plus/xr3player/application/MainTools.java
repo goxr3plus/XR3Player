@@ -1,12 +1,12 @@
 package com.goxr3plus.xr3player.application;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -86,28 +86,30 @@ public class MainTools {
             }
 
             try {
-                // ---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS
-                // ----------------------
-                final HttpURLConnection httpcon = (HttpURLConnection) new URL(
-                        "https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")
-                        .openConnection();
-                httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
-                httpcon.setConnectTimeout(60000);
-                final BufferedReader in = new BufferedReader(new InputStreamReader(httpcon.getInputStream()));
+                // ---------------------- COUNT TOTAL SOURCEFORGE DOWNLOADS  ----------------------
 
-                // Read line by line
-                final String response = in.lines().collect(Collectors.joining());
-                in.close();
+                //Create http  client
+                HttpClient client = HttpClient.newHttpClient();
 
-                // Parse JSON
-                final JSONArray oses = new JSONObject(response).getJSONArray("oses");
+                //Create http request
+                HttpRequest request = HttpRequest.newBuilder(URI.create("https://sourceforge.net/projects/xr3player/files/stats/json?start_date=2015-01-30&end_date=2050-01-30")).GET().build();
 
-                // Count total downloads
-                final int[] counter = {0};
-                oses.forEach(os -> counter[0] += Integer.parseInt(((JSONArray) os).get(1).toString()));
+                //Send request and await for answer
+                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenAccept(response -> {
 
-                Platform.runLater(
-                        () -> Main.loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
+                        // Parse JSON
+                        final JSONArray oses = new JSONObject(response.body()).getJSONArray("oses");
+
+                        // Count total downloads
+                        final int[] counter = {0};
+                        oses.forEach(os -> counter[0] += Integer.parseInt(((JSONArray) os).get(1).toString()));
+
+                        /* Run on JavaFX Thread */
+                        Platform.runLater(
+                            () -> Main.loginMode.getSourceForgeDownloadsLabel().setText("SourceForge: [ " + counter[0] + " ]"));
+
+                    }).get();
 
             } catch (final Exception ex) {
                 ex.printStackTrace();

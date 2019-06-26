@@ -348,6 +348,29 @@
 			<version>2.5.0</version>
 		</dependency>
 
+<!--		<dependency>-->
+<!--			<groupId>com.github.goxr3plus</groupId>-->
+<!--			<artifactId>jave2</artifactId>-->
+<!--			<version>2.5.1</version>-->
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>*</groupId>-->
+<!--					<artifactId>jave-core-test</artifactId>-->
+<!--				</exclusion>-->
+<!--				<exclusion>-->
+<!--					<groupId>*</groupId>-->
+<!--					<artifactId>jave-all-deps</artifactId>-->
+<!--				</exclusion>-->
+<!--				<exclusion>-->
+<!--					<groupId>*</groupId>-->
+<!--					<artifactId>2.5.1</artifactId>-->
+<!--				</exclusion>-->
+<!--				<exclusion>-->
+<!--					<groupId>*</groupId>-->
+<!--					<artifactId>jave-example</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
+<!--		</dependency>-->
 
 		<!-- XR3Capture -->
 <!--		<dependency>-->
@@ -381,15 +404,19 @@
 		<!-- <dependency> <groupId>com.github.goxr3plus</groupId> <artifactId>XR3Converter</artifactId> 
 			<version>V3.1</version> </dependency> -->
 
-		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+		<!-- test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-params</artifactId>

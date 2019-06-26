@@ -79,6 +79,7 @@ module XR3Player {
 	requires javafx.swing;
 	requires javasysmon2;
 	requires jave.core;
+	requires jave.nativebin.win64;
 	requires jnativehook;
 	requires json;
 	requires jxbrowser;
@@ -90,4 +91,5 @@ module XR3Player {
 	requires reactfx;
 	requires richtextfx;
 	requires zt.zip;
+	requires java.net.http;
 }
