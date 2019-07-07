@@ -26,6 +26,19 @@
         <ws.schild.jave.version>2.5.0</ws.schild.jave.version>
 	</properties>
 
+	<profiles>
+		<profile >
+			<id>MaxOsX64</id>
+			<activation>
+				<os>
+					<name>mac os x</name>
+					<family>mac</family>
+					<arch>x86_64</arch>
+				</os>
+			</activation>
+		</profile>
+	</profiles>
+
 	<build>
 		<finalName>XR3Player</finalName>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
@@ -349,12 +362,14 @@
 			<version>${ws.schild.jave.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/ws.schild/jave-nativebin-osx64 -->
+
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/ws.schild/jave-nativebin-osx64 &ndash;&gt;
 		<dependency>
+			<classifier>MacOsX64QQ</classifier>
 			<groupId>ws.schild</groupId>
 			<artifactId>jave-nativebin-osx64</artifactId>
 			<version>${ws.schild.jave.version}</version>
-		</dependency>
+		</dependency>-->
 
 
 		<!--		<dependency>-->
