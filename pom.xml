@@ -23,6 +23,7 @@
 		<ikonli.version>11.3.4</ikonli.version>
 		<javafx.version>12.0.1</javafx.version>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
+        <ws.schild.jave.version>2.5.0</ws.schild.jave.version>
 	</properties>
 
 	<build>
@@ -340,15 +341,23 @@
 		<dependency>
 			<groupId>ws.schild</groupId>
 			<artifactId>jave-core</artifactId>
-			<version>2.5.0</version>
+			<version>${ws.schild.jave.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ws.schild</groupId>
 			<artifactId>jave-nativebin-win64</artifactId>
-			<version>2.5.0</version>
+			<version>${ws.schild.jave.version}</version>
 		</dependency>
 
-<!--		<dependency>-->
+		<!-- https://mvnrepository.com/artifact/ws.schild/jave-nativebin-osx64 -->
+		<dependency>
+			<groupId>ws.schild</groupId>
+			<artifactId>jave-nativebin-osx64</artifactId>
+			<version>${ws.schild.jave.version}</version>
+		</dependency>
+
+
+		<!--		<dependency>-->
 <!--			<groupId>com.github.goxr3plus</groupId>-->
 <!--			<artifactId>jave2</artifactId>-->
 <!--			<version>2.5.1</version>-->
