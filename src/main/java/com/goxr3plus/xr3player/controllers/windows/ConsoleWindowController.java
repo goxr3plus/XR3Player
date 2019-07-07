@@ -157,9 +157,9 @@ public class ConsoleWindowController extends StackPane {
 		// tabPane.getTabs().get(1).setContent(this.speechRecognition);
 	}
 
-	Pattern pattern1 = Pattern.compile("player:[-|+]?\\d+:\\w+");
-	Pattern pattern2 = Pattern.compile("player:[-|+]?\\d+:\\w+:[-|+]?\\d+");
-	Pattern pattern3 = Pattern.compile("player:[-|+]?\\d+:\\w+:[-|+]?\\d+:[s|m|h]");
+	Pattern pattern1 = Pattern.compile("player:[-+]?\\d+:\\w+");
+	Pattern pattern2 = Pattern.compile("player:[-+]?\\d+:\\w+:[-+]?\\d+");
+	Pattern pattern3 = Pattern.compile("player:[-+]?\\d+:\\w+:[-+]?\\d+:[smh]");
 
 	/**
 	 * This method is procceeding the commands for the ConsoleWindow
