@@ -28,14 +28,23 @@
 
 	<profiles>
 		<profile >
-			<id>MaxOsX64</id>
+			<id>MacOsX64</id>
 			<activation>
 				<os>
-					<name>mac os x</name>
 					<family>mac</family>
+					<name>mac os x</name>
 					<arch>x86_64</arch>
 				</os>
 			</activation>
+			<dependencies>
+				<!-- https://mvnrepository.com/artifact/ws.schild/jave-nativebin-osx64 -->
+				<dependency>
+					<groupId>ws.schild</groupId>
+					<artifactId>jave-nativebin-osx64</artifactId>
+					<version>${ws.schild.jave.version}</version>
+				</dependency>
+			</dependencies>
+
 		</profile>
 	</profiles>
 
@@ -362,14 +371,6 @@
 			<version>${ws.schild.jave.version}</version>
 		</dependency>
 
-
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/ws.schild/jave-nativebin-osx64 &ndash;&gt;
-		<dependency>
-			<classifier>MacOsX64QQ</classifier>
-			<groupId>ws.schild</groupId>
-			<artifactId>jave-nativebin-osx64</artifactId>
-			<version>${ws.schild.jave.version}</version>
-		</dependency>-->
 
 
 		<!--		<dependency>-->
