@@ -54,7 +54,7 @@ Started as a media player .... it will finish as an AI ....
 
 To build XR3Player, you will need:
 
-* [JDK 12.0.1]
+* [JDK 12.0.2]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
 
 Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
