@@ -1,27 +1,11 @@
 # Attention for future contributors 
 
-XR3Player has officially passed on Java 12. 
+Check the section HOW TO RUN PROJECT because it needs just 20 seconds of adding some extra VM parameters .
 
-**Master branch** is working with Java 12 and the project is modularized .
-
-> You should have JDK 12.0.1
-
-> Maven 3.6.0 installed
-
-In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
-
-```JAVA
---add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
---add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix
---add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix
---add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix
---add-exports=javafx.base/com.sun.javafx.event=com.jfoenix
---add-opens=java.base/java.lang.reflect=ALL-UNNAMED
---add-exports=javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
---add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
 
 Soon there will be a release V3.129 running on JDK 12.0.1 and later .
+
 ---
 
 ### Latest Version Build with JDK 10.0.2 at [21/04/2019]  , V3.128 [Download](https://goxr3plus.github.io/xr3player.io/)
@@ -68,6 +52,35 @@ Started as a media player .... it will finish as an AI ....
 | ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
 
 -------------------------------------------------------------------------------------
+
+
+# HOW TO RUN PROJECT 
+
+To build XR3Player, you will need:
+
+* [JDK 12.0.1]
+* [Maven](http://maven.apache.org/) - Version 3.6.0++
+
+Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with JDK 12.0.1
+
+In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
+
+```JAVA
+--add-exports
+javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
+--add-exports
+javafx.controls/com.sun.javafx.scene.control=com.jfoenix
+--add-exports
+javafx.base/com.sun.javafx.binding=com.jfoenix
+--add-exports
+javafx.graphics/com.sun.javafx.stage=com.jfoenix
+--add-exports
+javafx.base/com.sun.javafx.event=com.jfoenix
+--add-exports
+javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
+--add-exports
+javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
+```
 
 ## Modular
  - **As XR3Player codebase keeps growing i decided to make it modular so it's main components are the below :**
@@ -142,28 +155,6 @@ Started as a media player .... it will finish as an AI ....
     https://www.google.com/search?q=GNU+LGPL+3.0&oq=GNU+LGPL+3.0&aqs=chrome..69i57j0.6247j0j4&sourceid=chrome&ie=UTF-8
   </p>
 </details>
-
-# How to fork and support this project
-
-To build XR3Player, you will need:
-
-* [JDK 12.0.1]
-* [Maven](http://maven.apache.org/) - Version 3.6.0++
-
-Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with JDK 11
-
-In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
-
-```JAVA
---add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix
---add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix
---add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix
---add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix
---add-exports=javafx.base/com.sun.javafx.event=com.jfoenix
---add-opens=java.base/java.lang.reflect=ALL-UNNAMED
---add-exports=javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
---add-exports=javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
-```
 
 ## About JxBrowser
 
