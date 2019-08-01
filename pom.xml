@@ -23,7 +23,7 @@
 		<ikonli.version>11.3.4</ikonli.version>
 		<javafx.version>12.0.1</javafx.version>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
-		<jave.version>2.5.4</jave.version>
+		<jave.version>2.5.1</jave.version>
 	</properties>
 
 	<build>
@@ -338,28 +338,28 @@
 		</dependency>
 
 		<!-- JAVE2 -->
-		<!--		<dependency>-->
-		<!--			<groupId>ws.schild</groupId>-->
-		<!--			<artifactId>jave-core</artifactId>-->
-		<!--			<version>2.5.0</version>-->
-		<!--		</dependency>-->
-		<!--		<dependency>-->
-		<!--			<groupId>ws.schild</groupId>-->
-		<!--			<artifactId>jave-nativebin-win64</artifactId>-->
-		<!--			<version>2.5.0</version>-->
-		<!--		</dependency>-->
-
 		<dependency>
-			<groupId>com.github.goxr3plus.jave2</groupId>
+			<groupId>ws.schild</groupId>
 			<artifactId>jave-core</artifactId>
 			<version>${jave.version}</version>
 		</dependency>
-
 		<dependency>
-			<groupId>com.github.goxr3plus.jave2</groupId>
+			<groupId>ws.schild</groupId>
 			<artifactId>jave-nativebin-win64</artifactId>
 			<version>${jave.version}</version>
 		</dependency>
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.github.goxr3plus.jave2</groupId>-->
+		<!--			<artifactId>jave-core</artifactId>-->
+		<!--			<version>${jave.version}</version>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>com.github.goxr3plus.jave2</groupId>-->
+		<!--			<artifactId>jave-nativebin-win64</artifactId>-->
+		<!--			<version>${jave.version}</version>-->
+		<!--		</dependency>-->
 
 		<!-- XR3Capture -->
 		<!--		<dependency>-->
