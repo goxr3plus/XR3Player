@@ -57,7 +57,9 @@ To build XR3Player, you will need:
 * [JDK 12.0.1]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
 
-Follow the above instructions and run ``mvn clean package`` , be sure that you are compiling with JDK 12.0.1
+Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
+
+![2019-08-01_18-04-22](https://user-images.githubusercontent.com/20374208/62304551-d5f91900-b486-11e9-80e9-cf802d91ee6f.gif)
 
 In order to run the project you should add the following **VM Options** ( easy using IntelliJ , Eclipse or Netbeans ) :
 
@@ -77,6 +79,8 @@ javafx.graphics/com.sun.javafx.scene=org.controlsfx.controls,
 --add-exports
 javafx.graphics/com.sun.javafx.scene.traversal=org.controlsfx.controls
 ```
+
+Ready to go :) 
 
 ## Modular
  - **As XR3Player codebase keeps growing i decided to make it modular so it's main components are the below :**
