@@ -1,9 +1,6 @@
 # Attention for future contributors 
 
-Check the section HOW TO RUN PROJECT because it needs just 20 seconds of adding some extra VM parameters .
-
-
-Soon there will be a release V3.129 running on JDK 12.0.1 and later .
+Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
 
 ---
 
