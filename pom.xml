@@ -23,7 +23,7 @@
 		<ikonli.version>11.3.4</ikonli.version>
 		<javafx.version>12.0.2</javafx.version>
 		<junit.jupiter.version>5.4.2</junit.jupiter.version>
-		<jave.version>2.5.1</jave.version>
+		<jave.version>2.6.0</jave.version>
 	</properties>
 
 	<build>
@@ -238,7 +238,7 @@
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
 			<artifactId>richtextfx</artifactId>
-			<version>0.10.0</version>
+			<version>0.10.1</version>
 		</dependency>
 
 		<!-- JNative Hook -->
@@ -252,7 +252,7 @@
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.27.2.1</version>
+			<version>3.28.0</version>
 		</dependency>
 
 		<!-- Apache Commons -->
@@ -327,7 +327,7 @@
 		<dependency>
 			<groupId>com.dropbox.core</groupId>
 			<artifactId>dropbox-core-sdk</artifactId>
-			<version>3.1.0</version>
+			<version>3.1.1</version>
 		</dependency>
 
 		<!-- Plularizer -->
