@@ -1,42 +1,4 @@
 module XR3Player {
-	exports com.goxr3plus.xr3player.services.chromium;
-	exports com.goxr3plus.xr3player.controllers.moviemode;
-	exports com.goxr3plus.xr3player.controllers.smartcontroller;
-	exports com.goxr3plus.xr3player.models.xplayer;
-	exports com.goxr3plus.xr3player.services.systemtree;
-	exports com.goxr3plus.xr3player.controllers.dropbox;
-	exports com.goxr3plus.xr3player.xplayer.visualizer.core;
-	exports com.goxr3plus.xr3player.controllers.loginmode;
-	exports com.goxr3plus.xr3player.services.dropbox;
-	exports com.goxr3plus.xr3player.utils.general;
-	exports com.goxr3plus.xr3player.controllers.tagging;
-	exports com.goxr3plus.xr3player.models.smartcontroller;
-	exports com.goxr3plus.xr3player.utils.io;
-	exports com.goxr3plus.xr3player.xplayer.waveform;
-	exports com.goxr3plus.xr3player.services.database;
-	exports com.goxr3plus.xr3player.services.xplayer;
-	exports com.goxr3plus.xr3player.controllers.custom;
-	exports com.goxr3plus.xr3player.controllers.general;
-	exports com.goxr3plus.xr3player.database;
-	exports com.goxr3plus.xr3player.services.loginmode;
-	exports com.goxr3plus.xr3player.xplayer.visualizer.geometry;
-	exports com.goxr3plus.xr3player.enums;
-	exports com.goxr3plus.xr3player.controllers.chromium;
-	exports com.goxr3plus.xr3player.controllers.settings;
-	exports com.goxr3plus.xr3player.services.smartcontroller;
-	exports com.goxr3plus.xr3player.controllers.librarymode;
-	exports com.goxr3plus.xr3player.controllers.systemtree;
-	exports com.goxr3plus.xr3player.controllers.windows;
-	exports com.goxr3plus.xr3player.xplayer.dsp;
-	exports com.goxr3plus.xr3player.application;
-	exports com.goxr3plus.xr3player.xplayer.microphone;
-	exports com.goxr3plus.xr3player.utils.javafx;
-	exports com.goxr3plus.xr3player.controllers.djmode;
-	exports com.goxr3plus.xr3player.services.zipping;
-	exports com.goxr3plus.xr3player.controllers.xplayer;
-	exports com.goxr3plus.xr3player.xplayer.visualizer.presenter;
-	exports com.goxr3plus.xr3player.services.general;
-	exports com.goxr3plus.xr3player.models.lists;
 
 	opens com.goxr3plus.xr3player.controllers.general to javafx.fxml;
 	opens com.goxr3plus.xr3player.controllers.windows to javafx.fxml;
@@ -54,6 +16,8 @@ module XR3Player {
 	opens com.goxr3plus.xr3player.controllers.dropbox to javafx.fxml;
 	opens com.goxr3plus.xr3player.controllers.chromium to javafx.fxml;
 
+	opens com.goxr3plus.xr3player.application to javafx.graphics;
+	opens com.goxr3plus.xr3player.models.smartcontroller to javafx.base;
 
 	requires java.base;
 	requires java.sql;
