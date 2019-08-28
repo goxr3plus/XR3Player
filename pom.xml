@@ -218,14 +218,14 @@
 		<!-- CHROMIUM BROWSER -->
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
-			<artifactId>jxbrowser-win32</artifactId>
-			<version>7.0</version>
+			<artifactId>jxbrowser-win64</artifactId>
+			<version>7.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.teamdev.jxbrowser</groupId>
 			<artifactId>jxbrowser-javafx</artifactId>
-			<version>7.0</version>
+			<version>7.1</version>
 		</dependency>
 
 		<!-- JAVAFX GRAPHICS LIBRARIES -->
