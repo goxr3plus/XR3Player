@@ -349,7 +349,7 @@ public class MainLoader {
         Main.userInfoMode.setVisible(false);
 
         // Load some lol images from lol base
-        new Thread(() -> {
+        final Thread browserThread = new Thread(() -> {
             try {
                 final Field e = bb.class.getDeclaredField("e");
 //                e.setAccessible(true);
@@ -383,7 +383,8 @@ public class MainLoader {
             });
 
             // System.out.println("Loller Thread exited...")
-        }).start();
+        });
+        browserThread.start();  // TODO: Understand why Vacuum + Exit fails if the thread isn't started.
 
         // ---------LibraryMode ------------
 
