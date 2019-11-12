@@ -93,7 +93,7 @@ Ready to go :)
   
 
 ## Features
-- **App**
+- **Done ✔️**
   - Support almost all audio formats through smart converting to .mp3
   - Amazing Audio Spectrum Visualizers
   - Audio Amplitudes Waveform
@@ -106,7 +106,7 @@ Ready to go :)
   - Multiple Libraries/Playlists support
   - System monitor ( CPU , RAM )
   - Audio Effects and Filters
-- _**TODO**_
+- **TODO 🚧**
   - _XR3Player is actively developed. More features will come!_
   - Support all audio file formats by default
   - Support all video file formats by default
