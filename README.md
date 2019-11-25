@@ -3,24 +3,16 @@
 </p>
 <p align="center">
 <sup>
-<b>The most advanced Java Media Player/Organizer you will ever find out there</b>
+<b>The most advanced Java Media Player/Organizer you will ever find out there <a href="https://goxr3plus.github.io/xr3player.io/" target="_blank">V3.128 [Download]</a></b>
 </sup>
 </p>
-
-# Attention for future contributors 
-
-Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
-
----
-
-### Latest Version Build with JDK 10.0.2 at [21/04/2019]  , V3.128 [Download](https://goxr3plus.github.io/xr3player.io/)
-
-To install the **XR3Player**, download and double-click the **[XR3Player_Installer.exe](https://goxr3plus.github.io/xr3player.io/)**
-installer.
 
 | Video|
 |:-:|
 | [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
+
+# Attention for future contributors 
+Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
 
 ## Platform Support ( 64 bit )
 
