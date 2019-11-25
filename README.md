@@ -7,25 +7,6 @@
 </sup>
 </p>
 
-| Video|
-|:-:|
-| [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
-
-# Attention for future contributors 
-Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
-
-## Platform Support ( 64 bit )
-
-| Installer | Windows x64 | MacOS x64| Linux x64 |
-| ------- | :-----: | :-: | :-----: |
-| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (help wanted) | X (help wanted) |
-
-| Installer | Android | IOS|
-| ------- | :-----: | :-----: |
-| Download | X (planning) | X (planning) |
-
-
-
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
@@ -35,6 +16,19 @@ Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of add
 <a href="https://patreon.com/preview/8adae1b75d654b2899e04a9e1111f0eb" title="Donate to this project using Patreon"><img src="https://img.shields.io/badge/patreon-donate-yellow.svg" alt="Patreon donate button" /></a>
 <a href="https://www.paypal.me/GOXR3PLUSCOMPANY" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a>
 [![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player)
+
+| Video|
+|:-:|
+| [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
+
+# Attention for future contributors 
+Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
+
+## Platform Support ( 64 bit )
+
+| Installer | Windows x64 | MacOS x64| Linux x64 | Android | IOS|
+| ------- | :-----: | :-: | :-----: |  :-----: | :-----: |
+| Download | [ link ](https://goxr3plus.github.io/xr3player.io/) | X (help wanted) | X (help wanted) |  X (planning) | X (planning) |
 
 | DJ UI | Chromium Web Browser 
 |:-:|:-:|
