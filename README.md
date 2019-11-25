@@ -1,7 +1,11 @@
-It's been one year now that i have not much time to maintain the project .
-Feel free to take it a step ahead , it's unique :)!
-
----
+<p align="center">
+<img src="https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png">
+</p>
+<p align="center">
+<sup>
+<b>The most advanced Java Media Player/Organizer you will ever find out there</b>
+</sup>
+</p>
 
 # Attention for future contributors 
 
@@ -17,10 +21,6 @@ installer.
 | Video|
 |:-:|
 | [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
-
-
-# ![icon](https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png)   XR3Player
-Started as a media player .... it will finish as an AI ....
 
 ## Platform Support ( 64 bit )
 
