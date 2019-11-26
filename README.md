@@ -5,7 +5,7 @@
 </p>
 <p align="center">
 <sup>
-<b>The most advanced Java Media Player/Organizer you will ever find out there <a href="https://goxr3plus.github.io/xr3player.io/" target="_blank">Download</a></b>
+<b>The most advanced Java Media Player/Organizer you will ever find out there</b>
 </sup>
 </p>
 
