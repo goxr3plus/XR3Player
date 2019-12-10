@@ -28,7 +28,7 @@
 # Attention for future contributors  
 Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
 
-## Platform Support ( 64 bit )
+## Platform Support ( 64 bit ) 
 
 | Installer | Windows x64 | MacOS x64| Linux x64 | Android | IOS|
 | ------- | :-----: | :-: | :-----: |  :-----: | :-----: |
