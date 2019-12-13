@@ -26,7 +26,7 @@
 | [![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png)](https://www.youtube.com/watch?v=7Hai7cavmUY)  |
 
 # Attention for future contributors  
-Check the section **HOW TO RUN PROJECT** because it needs just 20 seconds of adding some extra VM parameters .
+Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of adding some extra VM parameters .
 
 ## Platform Support ( 64 bit ) 
 
