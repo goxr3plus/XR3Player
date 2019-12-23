@@ -5,7 +5,7 @@
 </p>
 <p align="center"> 
 <sup>
-<b>The most advanced Java Media Player/Organizer you will ever find out there   </b>
+<b>The most advanced Java Media Player/Organizer you will ever find out there    </b>
 </sup> 
 </p> 
 
