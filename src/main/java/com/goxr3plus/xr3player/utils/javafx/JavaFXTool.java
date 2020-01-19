@@ -182,7 +182,7 @@ public final class JavaFXTool {
 
 		final File imageFile = specialChooser.prepareToSelectImage(window);
 		if (imageFile == null)
-			return Optional.ofNullable(null);
+			return Optional.empty();
 
 		// Check the given image
 		final Image image = new Image(imageFile.toURI() + "");
@@ -195,7 +195,7 @@ public final class JavaFXTool {
 							+ minimumImageWidth + "*" + minimumImageHeight + " \n\tCurrent is:" + image.getWidth() + "x"
 							+ image.getHeight(),
 					Duration.millis(2000), NotificationType.WARNING);
-			return Optional.ofNullable(null);
+			return Optional.empty();
 		}
 
 		// Copy the File
@@ -211,7 +211,7 @@ public final class JavaFXTool {
 
 		}).start();
 
-		return Optional.ofNullable(imageFile);
+		return Optional.of(imageFile);
 	}
 
 	/**

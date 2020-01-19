@@ -357,7 +357,7 @@ public class LibraryMode extends BorderPane {
             if (((Library) library).getLibraryName().equals(name))
                 return Optional.of((Library) library);
 
-        return Optional.ofNullable(null);
+        return Optional.empty();
     }
 
     /**
