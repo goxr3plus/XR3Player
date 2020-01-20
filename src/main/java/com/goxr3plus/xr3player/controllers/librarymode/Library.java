@@ -951,11 +951,11 @@ public class Library extends StackPane {
         } else {
             // Open
             if (open && !isOpened()) {
-                setLibraryOpened(open, true);
+                setLibraryOpened(true, true);
                 Main.libraryMode.openedLibrariesViewer.insertTab(this);
             } // Close
             else if (!open && isOpened() && controller.isFree(true)) {
-                setLibraryOpened(open, true);
+                setLibraryOpened(false, true);
                 Main.libraryMode.openedLibrariesViewer.removeTab(getLibraryName());
             }
 
