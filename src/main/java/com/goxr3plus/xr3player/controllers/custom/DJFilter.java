@@ -63,14 +63,13 @@ public class DJFilter extends StackPane {
 	 * Constructor
 	 * 
 	 * @param width
-	 * @param height
 	 * @param arcColor
 	 * @param currentValue
 	 * @param minimumValue
 	 * @param maximumValue
 	 */
-	public DJFilter(int width, int height, Color arcColor, double currentValue, double minimumValue,
-			double maximumValue, DJFilterCategory filterCategory) {
+	public DJFilter(int width, Color arcColor, double currentValue, double minimumValue,
+					double maximumValue, DJFilterCategory filterCategory) {
 		this.minimumValue = minimumValue;
 		this.maximumValue = maximumValue;
 		this.filterCategory = filterCategory;
@@ -91,7 +90,7 @@ public class DJFilter extends StackPane {
 		// Event handlers
 		canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
 
-		resizeDisc(width, height);
+		resizeDisc(width);
 		setValue(currentValue, true);
 	}
 
@@ -107,35 +106,25 @@ public class DJFilter extends StackPane {
 	/**
 	 * Resizes the disc to the given values.
 	 *
-	 * @param width1  the width
-	 * @param height1 the height
+	 * @param width  the width, also used for the height.
 	 */
-	public void resizeDisc(double width1, double height1) {
-		int width = (int) Math.round(width1);
+	public void resizeDisc(int width) {
 		int height = width;
 
-		// int height = (int) Math.round(height1)
+		if (width >= 30) {
 
-		// System.out.println("Given:" + width1 + " , Rounded:" + width)
+			double halfWidth = width / 2.00;
+			double halfHeight = height / 2.00;
 
-		if (width == height)
-			if ((width >= 30 && height >= 30)) {
+			setMinSize(width, height);
+			setMaxSize(width, height);
+			setPrefSize(width, height);
+			canvas.setWidth(width);
+			canvas.setHeight(height);
+			canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
 
-				double halfWidth = width / 2.00, halfHeight = height / 2.00;
-
-				// {Maximum,Preferred} Size
-				setMinSize(width, height);
-				setMaxSize(width, height);
-				setPrefSize(width, height);
-				canvas.setWidth(width);
-				canvas.setHeight(height);
-				canvas.setClip(new Circle(halfWidth, halfHeight, halfWidth));
-
-				repaint();
-			} else {
-				// Main.logger.info("DJDisc resizing failed.. \nfor width: " + width + " height:
-				// " + height);
-			}
+			repaint();
+		}
 	}
 
 	/**

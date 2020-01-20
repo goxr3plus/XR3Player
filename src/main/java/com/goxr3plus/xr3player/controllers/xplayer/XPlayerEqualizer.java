@@ -251,7 +251,7 @@ public class XPlayerEqualizer extends BorderPane {
 		 */
 		public CustomDJFilter(final int width, final int height, final Color arcColor, final double currentValue, final double minimumValue,
 			final double maximumValue, final int position, final Equalizer_Filter_Category filterCategory, final String description) {
-			super(width, height, arcColor, currentValue, minimumValue, maximumValue, DJFilterCategory.EQUALIZER_FILTER);
+			super(width, arcColor, currentValue, minimumValue, maximumValue, DJFilterCategory.EQUALIZER_FILTER);
 
 			// Descriptions
 			this.description = description;
