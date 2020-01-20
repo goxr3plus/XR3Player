@@ -397,7 +397,7 @@ public class DropboxService extends Service<Boolean> {
 							// folder)
 
 							if (recursive)
-								listAllFiles(folder, children, recursive, appendToMap);
+								listAllFiles(folder, children, true, appendToMap);
 						} else if (metadata instanceof FileMetadata) { // File
 							// String file = metadata.getPathLower()
 							// String parent = new File(metadata.getPathLower()).getParent().replace("\\",
