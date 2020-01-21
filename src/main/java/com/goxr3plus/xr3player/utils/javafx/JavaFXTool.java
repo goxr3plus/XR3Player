@@ -86,18 +86,18 @@ public final class JavaFXTool {
 	/**
 	 * Searches for any Image that contains the given title -> example
 	 * ["background"] inside the given folder
-	 * 
+	 *
 	 * @return The absolute path of the image file or null if not exists
 	 */
 	public static String getAbsoluteImagePath(final String title, final String folderToSearch) {
-		String absolutePath = null;
 
 		// If Folder not exists return null
 		final File searchingFolder = new File(folderToSearch);
 		if (!searchingFolder.exists())
-			return absolutePath;
+			return null;
 
 		// Try to find the image
+		String absolutePath = null;
 		try (Stream<Path> paths = Files.walk(Paths.get(searchingFolder.getPath()), 1)) {
 			absolutePath = paths.filter(path -> {
 				final File file = path.toFile();
