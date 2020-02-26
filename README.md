@@ -1,3 +1,7 @@
+### Support me using the following code on PI Network app
+![minepi.com/AlexKent](minepi.com/AlexKent)
+
+
 ---
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
 <p align="center">
