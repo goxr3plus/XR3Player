@@ -1,7 +1,4 @@
-### Support me using the following code on PI Network app ( AlexKent) 
-
-[AlexKent ](https://www.minepi.com/AlexKent)
-
+### Support me using the following code on PI Network app [AlexKent](https://www.minepi.com/AlexKent) [![AlexKent](https://user-images.githubusercontent.com/20374208/75432997-f5422100-5957-11ea-87a2-164eb98d83ef.png)](https://www.minepi.com/AlexKent)
 
 ---
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
