@@ -1,6 +1,6 @@
+### Support me using the following code on PI Network app ( AlexKent) 
 
-## ### Support me using the following code on PI Network app
-![https://minepi.com/AlexKent]( https://minepi.com/AlexKent) 
+[AlexKent ](https://www.minepi.com/AlexKent)
 
 
 ---
