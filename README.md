@@ -81,7 +81,7 @@ Ready to go :)
    -  //TODO  [JAmplitudeVisuals](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API) ( Advanced Java Library for representing Audio Amplitude Visualizations ) 
   
   
-   
+    
   
 
 ## Features
