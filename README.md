@@ -14,6 +14,7 @@
 
 ---
 
+[![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player) 
 [![Latest Version](https://img.shields.io/github/release/goxr3plus/XR3Player.svg?style=flat-square)](https://github.com/goxr3plus/XR3Player/releases)
 [![Join the chat at https://gitter.im/XR3Player/Lobby](https://badges.gitter.im/XR3Player/Lobby.svg)](https://gitter.im/XR3Player/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <a href="https://sourceforge.net/projects/xr3player/files/latest/download" rel="nofollow"><img alt="Download XR3Player" src="https://img.shields.io/sourceforge/dt/xr3player.svg"></a>
@@ -177,4 +178,4 @@ Ready to go :)
 
 
 [![Build Status](https://travis-ci.org/goxr3plus/XR3Player.svg?branch=master)](https://travis-ci.org/goxr3plus/XR3Player)
-[![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player) 
+
