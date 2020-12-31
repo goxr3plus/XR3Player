@@ -11,7 +11,7 @@
 <b>The most advanced Java Media Player/Organizer you will ever find out there </b> 
 </sup>     
 </p>    
-  
+   
 ---
 
 [![HitCount](http://hits.dwyl.io/goxr3plus/xr3player.svg)](http://hits.dwyl.io/goxr3plus/xr3player) 
