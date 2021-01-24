@@ -10,7 +10,7 @@
 <sup>   
 <b>The most advanced Java Media Player/Organizer you will ever find out there </b> 
 </sup>       
-</p>       
+</p>        
      
 --- 
  
