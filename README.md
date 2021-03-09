@@ -6,7 +6,7 @@
 <p align="center">
 <img src="https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png">
 </p>    
-<p align="center">      
+<p align="center">       
 <sup>     
 <b>The most advanced Java Media Player/Organizer you will ever find out there </b> 
 </sup>               
