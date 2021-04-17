@@ -51,7 +51,7 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 # HOW TO RUN PROJECT 
 
-To build XR3Player, you will need:
+To build XR3Player, you will need: 
 
 * [JDK 12.0.2]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
