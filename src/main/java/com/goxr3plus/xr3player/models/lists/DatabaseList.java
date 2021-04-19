@@ -1,5 +1,6 @@
 package com.goxr3plus.xr3player.models.lists;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +15,7 @@ import com.goxr3plus.xr3player.utils.general.DateTimeTool;
 /**
  * A special kind of list which is used to save the list to the database and
  * also have it in RAM memory of the computer
- * 
+ *
  * @author GOXR3PLUS
  *
  */
@@ -30,63 +31,14 @@ public class DatabaseList {
 
 	/**
 	 * Constructor
-	 * 
-	 * @param dataBaseTableName
+	 *
+	 * @param dataBaseTableName The name of the database table
 	 */
 	public DatabaseList(String dataBaseTableName) {
 		this.databaseTableName = dataBaseTableName;
 	}
 
 	// ------------Prepared Statements---------------
-
-	/**
-	 * Prepares the DataBase table (if not exists) , i do this to keep backward
-	 * compatibility with previous XR3Player Versions ( Update 57<) Also it creates
-	 * the PreparedStatement to insert Files Paths into the Table
-	 */
-	private void prepareMediaListTable() {
-
-		try {
-			// IF DATABASE DOESN'T EXIST
-			if (!Main.dbManager.doesTableExist(databaseTableName))
-				Main.dbManager.getConnection().createStatement().executeUpdate("CREATE TABLE '" + databaseTableName
-						+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,STARS DOUBLE NOT NULL , TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)");
-
-			// Update 81+ deletes the Emotions Lists from previous databases ( too bad , but
-			// wtf to do.... we have to update bro's)
-			else {
-				// Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF
-				// EXISTS'" + databaseTableName.replace("Original", "") + "'")
-				// Main.dbManager.getConnection().createStatement().executeUpdate("DROP TABLE IF
-				// EXISTS'" + "HateddMediaList" + "'")
-
-				// Main.dbManager.getConnection().commit()
-			}
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-
-		// System.out.println("Column exists " + isColumnExists(databaseTableName,
-		// "STARS"))
-	}
-
-	/**
-	 * Checks if the Specific column exists inside the database
-	 * 
-	 * @param table  The requested table name
-	 * @param column The requested column name
-	 * @return
-	 */
-	public boolean doesColumnExists(String table, String column) {
-		try (PreparedStatement pStatement = Main.dbManager.getConnection()
-				.prepareStatement("SELECT " + column + " FROM '" + table + "'")) {
-			pStatement.executeQuery();
-			return true;
-		} catch (SQLException e) {
-			// e.printStackTrace()
-			return false;
-		}
-	}
 
 	/**
 	 * Uploads the data from the database table to the list , i call this method
@@ -102,14 +54,42 @@ public class DatabaseList {
 				.executeQuery("SELECT* FROM '" + databaseTableName + "'")) {
 
 			// Add all
-			while (resultSet.next())
-				set.add(new FakeMedia(resultSet.getString("PATH"), resultSet.getDouble("STARS"),
-						resultSet.getInt("TIMESPLAYED")));
+			while (resultSet.next()) {
+				FakeMedia fakeMedia = new FakeMedia(
+						resultSet.getString("PATH"),
+						resultSet.getDouble("STARS"),
+						resultSet.getInt("TIMESPLAYED"));
+				set.add(fakeMedia);
+			}
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * Prepares the DataBase table (if not exists) , i do this to keep backward
+	 * compatibility with previous XR3Player Versions ( Update 57<) Also it creates
+	 * the PreparedStatement to insert Files Paths into the Table
+	 */
+	private void prepareMediaListTable() {
+
+		try {
+			// IF DATABASE DOESN'T EXIST
+			if (!Main.dbManager.doesTableExist(databaseTableName)) {
+				try (Connection connection = Main.dbManager.getConnection()) {
+					try (Statement statement = connection.createStatement()) {
+						String sql = "CREATE TABLE '" + databaseTableName
+								+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,STARS DOUBLE NOT NULL , TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)";
+						statement.executeUpdate(sql);
+					}
+				}
+			}
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	/**
@@ -125,7 +105,9 @@ public class DatabaseList {
 		if (!containsFile(path))
 
 			// Try to insert into the database
-			try (PreparedStatement insert = Main.dbManager.getConnection().prepareStatement("INSERT OR IGNORE INTO '"
+			try (PreparedStatement insert = Main.dbManager
+					.getConnection()
+					.prepareStatement("INSERT OR IGNORE INTO '"
 					+ databaseTableName + "' (PATH,STARS,TIMESPLAYED,DATE,HOUR) VALUES (?,?,?,?,?)")) {
 				insert.setString(1, path);
 				insert.setDouble(2, 0.0);
@@ -158,13 +140,16 @@ public class DatabaseList {
 	 * @return true, if successful
 	 */
 	public boolean renameMedia(String oldName, String newName, boolean commit) {
-		boolean[] answer = { false };
+		boolean[] answer = {false};
 
 		// Check if it already exists
-		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(oldName)).findFirst().ifPresent(fakeMedia -> {
-			fakeMedia.setPath(newName);
-			answer[0] = true;
-		});
+		set.stream()
+				.filter(fakeMedia -> fakeMedia.getPath().equals(oldName))
+				.findFirst()
+				.ifPresent(fakeMedia -> {
+					fakeMedia.setPath(newName);
+					answer[0] = true;
+				});
 
 		// Update in the database
 		try (PreparedStatement rename = Main.dbManager.getConnection()
@@ -194,25 +179,28 @@ public class DatabaseList {
 		boolean[] answer = { false };
 		FakeMedia[] fakeM = { null };
 
-		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst().ifPresent(fakeMedia -> {
-			fakeM[0] = fakeMedia;
+		set.stream()
+				.filter(fakeMedia -> fakeMedia.getPath().equals(path))
+				.findFirst()
+				.ifPresent(fakeMedia -> {
+					fakeM[0] = fakeMedia;
 
-			// Try to delete from the database
-			try (PreparedStatement remove = Main.dbManager.getConnection()
-					.prepareStatement("DELETE FROM '" + databaseTableName + "' WHERE PATH=?")) {
-				remove.setString(1, path);
-				remove.executeUpdate();
+					// Try to delete from the database
+					try (PreparedStatement remove = Main.dbManager.getConnection()
+							.prepareStatement("DELETE FROM '" + databaseTableName + "' WHERE PATH=?")) {
+						remove.setString(1, path);
+						remove.executeUpdate();
 
-				// Commit
-				if (commit)
-					Main.dbManager.commit();
+						// Commit
+						if (commit)
+							Main.dbManager.commit();
 
-				answer[0] = true;
-			} catch (SQLException ex) {
-				ex.printStackTrace();
-				answer[0] = false;
-			}
-		});
+						answer[0] = true;
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+						answer[0] = false;
+					}
+				});
 
 		// Check if it was found
 		if (fakeM[0] != null)
@@ -227,17 +215,19 @@ public class DatabaseList {
 	 * @param path The absolute file path
 	 * @return true, if successful
 	 */
-	public boolean containsFile(String path) {
-		boolean[] answer = { false };
+    public boolean containsFile(String path) {
+        boolean[] answer = {false};
 
-		set.stream().filter(fakeMedia -> fakeMedia.getPath().equals(path)).findFirst()
-				.ifPresent(fakeMedia -> answer[0] = true);
-		return answer[0];
-	}
+        set.stream()
+                .filter(fakeMedia -> fakeMedia.getPath().equals(path))
+                .findFirst()
+                .ifPresent(fakeMedia -> answer[0] = true);
+        return answer[0];
+    }
 
 	/**
 	 * Clears all the Media from the List and Database
-	 * 
+	 *
 	 * @return True if succeeded or False if not
 	 */
 	public boolean clearAll(boolean commit) {
