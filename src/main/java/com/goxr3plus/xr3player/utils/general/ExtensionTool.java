@@ -39,7 +39,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isAudioSupported(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
+		return ACCEPTED_AUDIO_EXTENSIONS.contains(extension);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isVideoSupported(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
+		return ACCEPTED_VIDEO_EXTENSIONS.contains(extension);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isImageSupported(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && ExtensionTool.ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
+		return ExtensionTool.ACCEPTED_IMAGE_EXTENSIONS.contains(extension);
 	}
 
 	// ------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isAudio(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && POPULAR_AUDIO_EXTENSIONS.contains(extension);
+		return POPULAR_AUDIO_EXTENSIONS.contains(extension);
 	}
 
 	/**
@@ -100,7 +100,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isVideo(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && POPULAR_VIDEO_EXTENSIONS.contains(extension);
+		return POPULAR_VIDEO_EXTENSIONS.contains(extension);
 	}
 
 	/**
@@ -122,7 +122,7 @@ public final class ExtensionTool {
 	 */
 	public static boolean isImage(final String fileName) {
 		final String extension = IOInfo.getFileExtension(fileName);
-		return extension != null && POPULAR_IMAGE_EXTENSIONS.contains(extension);
+		return POPULAR_IMAGE_EXTENSIONS.contains(extension);
 	}
 
 	/**
