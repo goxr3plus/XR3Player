@@ -13,10 +13,10 @@ import javafx.application.Platform;
 
 public class EmotionListsController {
 
-	public final HatedSongsList hatedMediaList;
-	public final DislikedSongsList dislikedMediaList;
-	public final LikedSongsList likedMediaList;
-	public final LovedSongsList lovedMediaList;
+	public final DatabaseList hatedMediaList;
+	public final DatabaseList dislikedMediaList;
+	public final DatabaseList likedMediaList;
+	public final DatabaseList lovedMediaList;
 
 	public final SmartController hatedMediaListController;
 	public final SmartController dislikedMediaListController;
@@ -39,10 +39,10 @@ public class EmotionListsController {
 				.newSingleThreadExecutor(new ThreadFactoryWithNamePrefix("EmotionsUpdaterService-"));
 
 		// Lists
-		hatedMediaList = new HatedSongsList();
-		dislikedMediaList = new DislikedSongsList();
-		likedMediaList = new LikedSongsList();
-		lovedMediaList = new LovedSongsList();
+		hatedMediaList = DatabaseListFactory.hated();
+		dislikedMediaList = DatabaseListFactory.disliked();
+		likedMediaList = DatabaseListFactory.liked();
+		lovedMediaList = DatabaseListFactory.loved();
 
 		// SmartControllers
 		hatedMediaListController = new SmartController(Genre.EMOTIONSMEDIA, "HatedMediaPlayList",
