@@ -1,7 +1,4 @@
-### [![AlexKent](https://user-images.githubusercontent.com/20374208/75432997-f5422100-5957-11ea-87a2-164eb98d83ef.png)](https://www.minepi.com/AlexKent) Support me joining PI Network app with invitation code [AlexKent](https://www.minepi.com/AlexKent) [![AlexKent](https://user-images.githubusercontent.com/20374208/75432997-f5422100-5957-11ea-87a2-164eb98d83ef.png)](https://www.minepi.com/AlexKent)  
-
-## Due to my busy schedule coding of XR3Player has slown down a little bit
-## But i may get back and continue it adding the latest Java 18 Version
+<p align="center" style="font-size: 40px" > XR3Player is running with Java 17  </p> 
 
 --- 
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
@@ -54,7 +51,7 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 To build XR3Player, you will need: 
 
-* [JDK 12.0.2]
+* [JDK 17]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
 
 Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
@@ -83,9 +80,7 @@ Ready to go :)
    -  //TODO JVisualizations ( Advanced Java Audio Visualizations Library )
    -  //TODO  [JAmplitudeVisuals](https://github.com/goxr3plus/Java-Audio-Wave-Spectrum-API) ( Advanced Java Library for representing Audio Amplitude Visualizations ) 
   
-  
-    
-  
+   
 
 ## Features
 - **Done ✔️**
@@ -149,7 +144,7 @@ Ready to go :)
   </p>
 </details>
 
-## About JxBrowser
+## About JxBrowser  -- JX BROWSER IS BEING REMOVED
 
 >XR3Player uses JxBrowser http://www.teamdev.com/jxbrowser, which is a proprietary software, owned by TeamDev Ltd. The use of JxBrowser >is governed by JxBrowser Product Licence Agreement http://www.teamdev.com/jxbrowser-licence-agreement. 
 >You may not use JxBrowser separately from XR3Player project without explicit permission of TeamDev Ltd.
