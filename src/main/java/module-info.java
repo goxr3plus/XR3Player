@@ -47,7 +47,7 @@ module XR3Player {
 	requires org.apache.commons.io;
 	requires org.controlsfx.controls;
 	requires org.jsoup;
-	requires org.kordamp.iconli.core;
+	requires org.kordamp.ikonli.core;
 	requires org.kordamp.ikonli.javafx;
 	requires reactfx;
 	requires zt.zip;
