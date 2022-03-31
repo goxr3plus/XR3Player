@@ -1,4 +1,4 @@
-### XR3Player is running with Java 17
+<p align="center" style="font-size: 40px" > XR3Player is running with Java 17  </p> 
 
 --- 
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
