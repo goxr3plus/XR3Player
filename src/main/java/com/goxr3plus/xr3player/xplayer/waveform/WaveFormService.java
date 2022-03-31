@@ -21,13 +21,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import ws.schild.jave.AudioAttributes;
 import ws.schild.jave.Encoder;
-import ws.schild.jave.EncoderException;
-import ws.schild.jave.EncoderProgressListener;
-import ws.schild.jave.EncodingAttributes;
-import ws.schild.jave.MultimediaInfo;
+import ws.schild.jave.encode.AudioAttributes;
+import ws.schild.jave.progress.EncoderProgressListener;
+import ws.schild.jave.encode.EncodingAttributes;
+import ws.schild.jave.info.MultimediaInfo;
 import ws.schild.jave.MultimediaObject;
+import ws.schild.jave.EncoderException;
 
 import static java.nio.file.StandardCopyOption.COPY_ATTRIBUTES;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -349,7 +349,7 @@ public class WaveFormService extends Service<Boolean> {
 
 					// Set encoding attributes
 					EncodingAttributes attributes = new EncodingAttributes();
-					attributes.setFormat("wav");
+					attributes.setOutputFormat("wav");
 					attributes.setAudioAttributes(audio);
 
 					// Abort Encoding

@@ -117,7 +117,7 @@ public class TopBar extends BorderPane {
 			// Hide all
 			Main.libraryMode.setVisible(false);
 			Main.userInfoMode.setVisible(false);
-			Main.rootStackPane.getChildren().remove(Main.webBrowser);
+//			Main.rootStackPane.getChildren().remove(Main.webBrowser);
 			Main.movieModeController.setVisible(false);
 
 			// Now decide which one to show
@@ -135,7 +135,7 @@ public class TopBar extends BorderPane {
 				Main.userInfoMode.setVisible(true);
 
 			} else if (newValue == WindowMode.WEBMODE) {
-				Main.rootStackPane.getChildren().add(Main.webBrowser);
+//				Main.rootStackPane.getChildren().add(Main.webBrowser);
 
 			}
 

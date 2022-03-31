@@ -15,11 +15,11 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.util.Duration;
-import ws.schild.jave.AudioAttributes;
+import ws.schild.jave.encode.AudioAttributes;
 import ws.schild.jave.Encoder;
-import ws.schild.jave.EncoderProgressListener;
-import ws.schild.jave.EncodingAttributes;
-import ws.schild.jave.MultimediaInfo;
+import ws.schild.jave.progress.EncoderProgressListener;
+import ws.schild.jave.encode.EncodingAttributes;
+import ws.schild.jave.info.MultimediaInfo;
 import ws.schild.jave.MultimediaObject;
 
 /**
@@ -142,7 +142,7 @@ public class ConverterService extends Service<Boolean> {
 
 						// Encoding attributes
 						final EncodingAttributes attrs = new EncodingAttributes();
-						attrs.setFormat("mp3");
+						attrs.setOutputFormat("mp3");
 						attrs.setAudioAttributes(audio);
 
 						// Encode

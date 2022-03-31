@@ -92,7 +92,7 @@ public class MainExit {
             case WINDOWS:
                 new Thread(() -> {
                     // Disposing all Browsers...
-                    Main.webBrowser.disposeAllBrowsers();
+//                    Main.webBrowser.disposeAllBrowsers();
                     System.exit(exitCode);
                 }).start();
                 break;
@@ -100,7 +100,7 @@ public class MainExit {
             case MAC:
                 Platform.runLater(() -> {
                     // Disposing all Browsers...
-                    Main.webBrowser.disposeAllBrowsers();
+//                    Main.webBrowser.disposeAllBrowsers();
                     System.exit(exitCode);
                 });
                 break;

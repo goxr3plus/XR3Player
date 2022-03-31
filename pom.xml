@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.goxr3plus</groupId>
 	<artifactId>XR3Player</artifactId>
-	<version>3.129</version>
+	<version>3.130</version>
 
 
 	<name>XR3Player</name>
@@ -17,13 +17,13 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<maven.compiler.source>12</maven.compiler.source>
-		<maven.compiler.target>12</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ikonli.version>11.3.4</ikonli.version>
-		<javafx.version>12.0.2</javafx.version>
-		<junit.jupiter.version>5.4.2</junit.jupiter.version>
-		<jave.version>2.6.0</jave.version>
+		<javafx.version>17.0.2</javafx.version>
+		<junit.jupiter.version>5.8.2</junit.jupiter.version>
+		<jave.version>3.2.0</jave.version>
 	</properties>
 
 	<build>
@@ -42,10 +42,10 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>12</source>
-					<target>12</target>
-					<release>12</release>
-					<executable>javac12</executable>
+					<source>17</source>
+					<target>17</target>
+					<release>17</release>
+					<executable>javac17</executable>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -106,26 +106,26 @@
 			</plugin>
 
 			<!-- Copy Assemply dependency -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.1</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/assembly/assembly.xml</descriptor>
-					</descriptors>
-					<finalName>XR3Player Update ${project.version}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-				</configuration>
-				<executions>
-					<execution>
-						<id>create-archive</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<artifactId>maven-assembly-plugin</artifactId>-->
+<!--				<version>3.3.0</version>-->
+<!--				<configuration>-->
+<!--					<descriptors>-->
+<!--						<descriptor>src/assembly/assembly.xml</descriptor>-->
+<!--					</descriptors>-->
+<!--					<finalName>XR3Player Update ${project.version}</finalName>-->
+<!--					<appendAssemblyId>false</appendAssemblyId>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>create-archive</id>-->
+<!--						<phase>package</phase>-->
+<!--						<goals>-->
+<!--							<goal>single</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 
 		</plugins>
 	</build>
@@ -135,14 +135,14 @@
 			<id>jitpack.io</id>
 			<url>https://jitpack.io</url>
 		</repository>
-		<repository>
-			<id>jcenter</id>
-			<url>http://jcenter.bintray.com</url>
-		</repository>
-		<repository>
-			<id>com.teamdev</id>
-			<url>http://maven.teamdev.com/repository/products</url>
-		</repository>
+<!--		<repository>-->
+<!--			<id>jcenter</id>-->
+<!--			<url>http://jcenter.bintray.com</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>com.teamdev</id>-->
+<!--			<url>https://maven.teamdev.com/repository/products</url>-->
+<!--		</repository>-->
 	</repositories>
 
 	<!-- Dependencies -->
@@ -168,7 +168,7 @@
 
 		<dependency>
 			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-swing</artifactId>
+			<artifactId>javafx-swing</artifactId><!---->
 			<version>${javafx.version}</version>
 		</dependency>
 
@@ -218,27 +218,27 @@
 		</dependency>
 
 		<!-- CHROMIUM BROWSER -->
-		<dependency>
-			<groupId>com.teamdev.jxbrowser</groupId>
-			<artifactId>jxbrowser-win64</artifactId>
-			<version>6.23.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.teamdev.jxbrowser</groupId>-->
+<!--			<artifactId>jxbrowser-win64</artifactId>-->
+<!--			<version>6.23.1</version>-->
+<!--		</dependency>-->
 
 		<!-- JAVAFX GRAPHICS LIBRARIES -->
 		<dependency>
 			<groupId>org.controlsfx</groupId>
 			<artifactId>controlsfx</artifactId>
-			<version>11.0.0</version>
+			<version>11.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.jfoenix</groupId>
 			<artifactId>jfoenix</artifactId>
-			<version>9.0.9</version>
+			<version>9.0.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.fxmisc.richtext</groupId>
 			<artifactId>richtextfx</artifactId>
-			<version>0.10.1</version>
+			<version>0.10.9</version>
 		</dependency>
 
 		<!-- JNative Hook -->
@@ -259,12 +259,12 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.7</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
-			<version>1.6</version>
+			<version>1.7</version>
 			<exclusions>
 				<exclusion>
 					<groupId>*</groupId> <!-- Exclude Project-E from Project-B -->
@@ -278,7 +278,7 @@
 			<!-- jsoup HTML parser library @ https://jsoup.org/ -->
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.14.2</version>
+			<version>1.14.3</version>
 		</dependency>
 		<!-- <dependency> <groupId>com.github.cliftonlabs</groupId> <artifactId>json-simple</artifactId> 
 			<version>3.0.2</version> </dependency> -->
@@ -287,7 +287,7 @@
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20180130</version>
+			<version>20220320</version>
 		</dependency>
 
 		<!-- JAVA-GOOGLE-SPEECH-API -->
@@ -334,7 +334,7 @@
 		<dependency>
 			<groupId>org.atteo</groupId>
 			<artifactId>evo-inflector</artifactId>
-			<version>1.2.2</version>
+			<version>1.3</version>
 		</dependency>
 
 		<!-- JAVE2 -->
@@ -385,7 +385,7 @@
 		<dependency>
 			<groupId>org.zeroturnaround</groupId>
 			<artifactId>zt-zip</artifactId>
-			<version>1.13</version>
+			<version>1.14</version>
 			<type>jar</type>
 		</dependency>
 

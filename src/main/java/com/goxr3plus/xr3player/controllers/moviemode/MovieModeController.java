@@ -55,9 +55,9 @@ public class MovieModeController extends BorderPane {
 		imageView1.fitWidthProperty().bind(this.widthProperty());
 		imageView1.fitHeightProperty().bind(this.heightProperty());
 		stack1.setOnMouseReleased(m -> {
-			Main.webBrowser.addNewTabOnTheEnd("https://www1.fmovies.to/movies");
-			Main.topBar.goMode(WindowMode.WEBMODE);
-			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
+//			Main.webBrowser.addNewTabOnTheEnd("https://www1.fmovies.to/movies");
+//			Main.topBar.goMode(WindowMode.WEBMODE);
+//			Main.webBrowser.getTabPane().getSelectionModel().selectLast();
 		});
 	}
 

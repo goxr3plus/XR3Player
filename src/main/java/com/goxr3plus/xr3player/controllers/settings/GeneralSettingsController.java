@@ -158,7 +158,7 @@ public class GeneralSettingsController extends BorderPane {
 					tab -> ((Marquee) ((HBox) tab.getGraphic()).getChildren().get(3)).checkAnimationValidity(value));
 
 			// For the Web Browser
-			Main.webBrowser.setMovingTitlesEnabled(value);
+//			Main.webBrowser.setMovingTitlesEnabled(value);
 
 			Main.topBar.getHighGraphics().setVisible(value);
 			Main.topBar.getHighGraphics().setManaged(value);

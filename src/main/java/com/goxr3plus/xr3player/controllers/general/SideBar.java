@@ -8,7 +8,7 @@ import org.kordamp.ikonli.javafx.StackedFontIcon;
 
 import com.goxr3plus.xr3player.application.Main;
 import com.goxr3plus.xr3player.application.MainExit;
-import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
+//import com.goxr3plus.xr3player.controllers.chromium.WebBrowserTabController;
 import com.goxr3plus.xr3player.controllers.custom.SystemMonitor;
 import com.goxr3plus.xr3player.controllers.custom.SystemMonitor.Monitor;
 import com.goxr3plus.xr3player.controllers.general.TopBar.WindowMode;
@@ -470,13 +470,14 @@ public class SideBar extends StackPane {
 			.bind(djModeStackedFont.getChildren().get(1).visibleProperty().not());
 
 		// BrowserVolumeButton
-		browserVolumeButton.setOnAction(a -> {
-			final boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
-			// Mute or Unmute webrowser tabs
-			Main.webBrowser.getTabPane().getTabs()
-				.forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().setAudioMuted(mute));
-			browserStackedFont.getChildren().get(1).setVisible(!mute);
-		});
+//		browserVolumeButton.setOnAction(a -> {
+//			final boolean mute = !browserStackedFont.getChildren().get(0).isVisible();
+//			// Mute or Unmute webrowser tabs
+//			Main.webBrowser.getTabPane().getTabs()
+//				.forEach(tab -> ((WebBrowserTabController) tab.getContent()).getBrowser().setAudioMuted(mute));
+//			browserStackedFont.getChildren().get(1).setVisible(!mute);
+//		});
+
 		browserStackedFont.getChildren().get(0).visibleProperty()
 			.bind(browserStackedFont.getChildren().get(1).visibleProperty().not());
 

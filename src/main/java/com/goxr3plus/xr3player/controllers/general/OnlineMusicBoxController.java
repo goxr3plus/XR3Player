@@ -98,8 +98,8 @@ public class OnlineMusicBoxController extends StackPane {
 
 		// Mouse Events
 		setOnMouseClicked(m -> {
-			Main.webBrowser.createTabAndSelect(url);
-			Main.topBar.goMode(WindowMode.WEBMODE);
+//			Main.webBrowser.createTabAndSelect(url);
+//			Main.topBar.goMode(WindowMode.WEBMODE);
 		});
 
 		stackLabel.visibleProperty().bind(this.hoverProperty());

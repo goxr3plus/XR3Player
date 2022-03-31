@@ -338,7 +338,7 @@ public class DatabaseManager {
 
 				// Start important services
 				new MediaUpdaterService().start();
-				Main.webBrowser.startChromiumUpdaterService();
+//				Main.webBrowser.startChromiumUpdaterService();
 
 			});
 

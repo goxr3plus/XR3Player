@@ -225,13 +225,13 @@ public abstract class Media {
 		searchButton.setStyle("-fx-cursor:hand");
 		searchButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		searchButton.setOnMouseReleased(m -> {
-			try {
-				Main.webBrowser.createTabAndSelect(
-					"https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
-				Main.topBar.goMode(WindowMode.WEBMODE);
-			} catch (final UnsupportedEncodingException ex) {
-				ex.printStackTrace();
-			}
+//			try {
+//				Main.webBrowser.createTabAndSelect(
+//					"https://www.google.com/search?q=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+//				Main.topBar.goMode(WindowMode.WEBMODE);
+//			} catch (final UnsupportedEncodingException ex) {
+//				ex.printStackTrace();
+//			}
 		});
 
 		// Youtube button
@@ -243,13 +243,13 @@ public abstract class Media {
 		youtubeButton.setStyle("-fx-cursor:hand");
 		youtubeButton.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 		youtubeButton.setOnMouseReleased(m -> {
-			try {
-				Main.webBrowser.createTabAndSelect(
-					"https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
-				Main.topBar.goMode(WindowMode.WEBMODE);
-			} catch (final UnsupportedEncodingException ex) {
-				ex.printStackTrace();
-			}
+//			try {
+//				Main.webBrowser.createTabAndSelect(
+//					"https://www.youtube.com/results?search_query=" + URLEncoder.encode(this.getTitle(), "UTF-8"));
+//				Main.topBar.goMode(WindowMode.WEBMODE);
+//			} catch (final UnsupportedEncodingException ex) {
+//				ex.printStackTrace();
+//			}
 		});
 
 		// Buy button

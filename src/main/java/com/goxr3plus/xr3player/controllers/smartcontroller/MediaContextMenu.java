@@ -238,8 +238,8 @@ public class MediaContextMenu extends ContextMenu {
 	 * @param url
 	 */
 	private void openWebSite(String url) {
-		Main.webBrowser.createTabAndSelect(url);
-		Main.topBar.goMode(WindowMode.WEBMODE);
+//		Main.webBrowser.createTabAndSelect(url);
+//		Main.topBar.goMode(WindowMode.WEBMODE);
 	}
 
 	/**
