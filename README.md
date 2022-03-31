@@ -1,6 +1,6 @@
 ### [![AlexKent](https://user-images.githubusercontent.com/20374208/75432997-f5422100-5957-11ea-87a2-164eb98d83ef.png)](https://www.minepi.com/AlexKent) Support me joining PI Network app with invitation code [AlexKent](https://www.minepi.com/AlexKent) [![AlexKent](https://user-images.githubusercontent.com/20374208/75432997-f5422100-5957-11ea-87a2-164eb98d83ef.png)](https://www.minepi.com/AlexKent)  
 
-## Due to high workload and doing lot's of things the coding of XR3Player has slown down 
+## Due to my busy schedule coding of XR3Player has slown down a little bit
 ## But i may get back and continue it adding the latest Java 18 Version
 
 --- 
