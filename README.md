@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 40px" > XR3Player is running with Java 17  </p> 
+<p align="center" style="font-size: 40px" > XR3Player is running with Java 18 </p> 
 
 --- 
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
@@ -51,7 +51,7 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 To build XR3Player, you will need: 
 
-* [JDK 17]
+* [JDK 18]
 * [Maven](http://maven.apache.org/) - Version 3.6.0++
 
 Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
