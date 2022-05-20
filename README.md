@@ -38,11 +38,11 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 | DJ UI | Chromium Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png) | ![web_browser](https://user-images.githubusercontent.com/20374208/169485711-785cfd5f-c68c-4354-a8ae-6479f329ecdc.jpg) |
 
 | Multiple Users | Advanced UI 
 |:-:|:-:|
-| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
+| ![login_mode](https://user-images.githubusercontent.com/20374208/169485737-11362c9f-57d9-4f57-ac58-2dfa1eac6ed6.jpg) | ![main_mode](https://user-images.githubusercontent.com/20374208/169485764-6809b0aa-d5ef-4099-99d4-31276e0fb9e0.jpg) |
 
 -------------------------------------------------------------------------------------
 
