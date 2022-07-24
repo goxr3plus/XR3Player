@@ -21,9 +21,9 @@
 		<maven.compiler.target>18</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ikonli.version>12.3.1</ikonli.version>
-		<javafx.version>18</javafx.version>
+		<javafx.version>18.0.1</javafx.version>
 		<junit.jupiter.version>5.8.2</junit.jupiter.version>
-		<jave.version>3.2.0</jave.version>
+		<jave.version>3.3.1</jave.version>
 	</properties>
 
 	<build>
@@ -386,7 +386,7 @@
 		<dependency>
 			<groupId>org.zeroturnaround</groupId>
 			<artifactId>zt-zip</artifactId>
-			<version>1.14</version>
+			<version>1.15</version>
 			<type>jar</type>
 		</dependency>
 
