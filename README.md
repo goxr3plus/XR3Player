@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 40px" > XR3Player is running with Java 18 </p> 
+<p align="center" style="font-size: 40px" > XR3Player is running with Java 18 as minimum JDK </p> 
 
 --- 
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
@@ -38,11 +38,11 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 | DJ UI | Chromium Web Browser 
 |:-:|:-:|
-| ![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/web_browser.jpg) |
+| ![First](https://user-images.githubusercontent.com/20374208/48313813-34fdc180-e5ca-11e8-9da7-c6148dc0cbe5.png) | ![web_browser](https://user-images.githubusercontent.com/20374208/169485711-785cfd5f-c68c-4354-a8ae-6479f329ecdc.jpg) |
 
 | Multiple Users | Advanced UI 
 |:-:|:-:|
-| ![First](https://goxr3plus.github.io/xr3player.io/img/xr3player/login_mode.jpg) | ![Sec](https://goxr3plus.github.io/xr3player.io/img/xr3player/main_mode.jpg) |
+| ![login_mode](https://user-images.githubusercontent.com/20374208/169485737-11362c9f-57d9-4f57-ac58-2dfa1eac6ed6.jpg) | ![main_mode](https://user-images.githubusercontent.com/20374208/169485764-6809b0aa-d5ef-4099-99d4-31276e0fb9e0.jpg) |
 
 -------------------------------------------------------------------------------------
 
@@ -153,7 +153,7 @@ Ready to go :)
 ## Specs / Open-source libraries:
 
 
-- [**Ikonli Font Icons packs**](https://aalmiray.github.io/ikonli) Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.
+- [**Ikonli Font Icons packs**](https://github.com/kordamp/ikonli) Ikonli provides icon packs that can be used in Java applications. Currently Swing and JavaFX UI toolkits are supported.
 - [**ControlsFX**](http://fxexperience.com/controlsfx/features/) UI controls and useful API for JavaFX 8.0 and beyond .
 - [**JFoenix**](https://github.com/jfoenixadmin/JFoenix)  JavaFX Material Design Library .
 - [**RichTextFX**](https://github.com/FXMisc/RichTextFX) RichTextFX provides a memory-efficient text area for JavaFX that allows the developer to style ranges of text, display custom objects in-line (no more HTMLEditor), and override the default behavior only where necessary without overriding any other part of the behavior.
