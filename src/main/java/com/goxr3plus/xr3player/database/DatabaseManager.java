@@ -175,6 +175,7 @@ public class DatabaseManager {
 	}
 
 	public Connection getConnection() {
+		manageConnection(Operation.OPEN);
 		return connection;
 	}
 
@@ -192,12 +193,14 @@ public class DatabaseManager {
 	public void manageConnection(final Operation action) {
 		try {
 			// OPEN
-			if (action == Operation.OPEN && connection.isClosed())
+			if (action == Operation.OPEN && connection.isClosed()) {
 				connection = DriverManager.getConnection(
 						"jdbc:sqlite:" + DatabaseTool.getUserFolderAbsolutePathWithSeparator() + "dbFile.db");
-			// CLOSE
-			else if (action == Operation.CLOSE && connection != null && !connection.isClosed())
+				connection.setAutoCommit(false);
+				// CLOSE
+			} else if (action == Operation.CLOSE && connection != null && !connection.isClosed()) {
 				connection.close();
+			}
 		} catch (final SQLException ex) {
 			Main.logger.log(Level.WARNING, "", ex);
 		}
@@ -359,8 +362,7 @@ public class DatabaseManager {
 				protected Void call() throws Exception {
 					// int totalSteps = 4
 
-					// -------------------------- Load all the libraries
-					// -------------------------------------------------
+					// -------------------------- Load all the libraries -------------------------------------------------
 					try (ResultSet resultSet = getConnection().createStatement()
 							.executeQuery("SELECT* FROM LIBRARIES;");
 						 ResultSet dbCounter = getConnection().createStatement()

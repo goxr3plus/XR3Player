@@ -83,6 +83,7 @@ public class DatabaseList {
 						String sql = "CREATE TABLE '" + databaseTableName
 								+ "'(PATH   TEXT  PRIMARY KEY   NOT NULL ,STARS DOUBLE NOT NULL , TIMESPLAYED  INT  NOT NULL,DATE   TEXT   NOT NULL , HOUR  TEXT  NOT NULL)";
 						statement.executeUpdate(sql);
+						Main.dbManager.getConnection().commit();
 					}
 				}
 			}
