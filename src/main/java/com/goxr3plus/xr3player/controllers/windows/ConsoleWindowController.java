@@ -45,8 +45,8 @@ public class ConsoleWindowController extends StackPane {
 	@FXML
 	private BorderPane borderPane;
 
-	@FXML
-	private JFXTextField commandTextField;
+//	@FXML
+//	private JFXTextField commandTextField;
 
 	@FXML
 	private Button go;
@@ -65,7 +65,7 @@ public class ConsoleWindowController extends StackPane {
 	private final Logger logger = Logger.getLogger(getClass().getName());
 
 	/** The Window */
-	private Stage window;
+	private final Stage window = new Stage();
 
 	/**
 	 * The Speech Recognition of the Application
@@ -85,13 +85,6 @@ public class ConsoleWindowController extends StackPane {
 	 */
 	public ConsoleWindowController() {
 
-
-	}
-
-	private Stage initFromConstructor() {
-		Stage window;
-		window = new Stage();
-
 		// ------------------------------------FXMLLOADER
 		final FXMLLoader loader = new FXMLLoader(
 				getClass().getResource(InfoTool.WINDOW_FXMLS + "ConsoleWindowController.fxml"));
@@ -108,14 +101,14 @@ public class ConsoleWindowController extends StackPane {
 		window.initStyle(StageStyle.UTILITY);
 		window.setScene(new Scene(this));
 		this.focusedProperty().addListener((observable, oldValue, newValue) -> {
-			if (window.isFocused())
-				commandTextField.requestFocus();
+//			if (window.isFocused())
+//				commandTextField.requestFocus();
 		});
 		window.getScene().setOnKeyReleased(k -> {
 			if (k.getCode() == KeyCode.ESCAPE)
 				window.close();
 		});
-		return window;
+
 	}
 
 	/**
@@ -123,7 +116,6 @@ public class ConsoleWindowController extends StackPane {
 	 */
 	@FXML
 	private void initialize() {
-		window = initFromConstructor();
 
 		// -- cssTextArea
 		cssTextArea.setEditable(false);
@@ -140,11 +132,11 @@ public class ConsoleWindowController extends StackPane {
 		borderPane.setCenter(vsPane);
 
 		// commandTextField
-		commandTextField.setOnAction(a -> procceedCommand(commandTextField.getText()));
+//		commandTextField.setOnAction(a -> procceedCommand(commandTextField.getText()));
 
 		// go
-		go.setOnAction(a -> procceedCommand(commandTextField.getText()));
-		go.disableProperty().bind(commandTextField.textProperty().isEmpty());
+//		go.setOnAction(a -> procceedCommand(commandTextField.getText()));
+//		go.disableProperty().bind(commandTextField.textProperty().isEmpty());
 
 		// close
 		close.setOnAction(a -> window.close());
