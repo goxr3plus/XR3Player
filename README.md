@@ -1,6 +1,8 @@
 <p align="center" style="font-size: 40px" > XR3Player is running with Java 19 as minimum JDK </p> 
 <p align="center" style="font-size: 40px" > I am busy making mobile apps this period so i am maintining only for now </p> 
+
 --- 
+
 <h3 align="center" > XR3Player ( <a href="https://xr3player.netlify.com/" target="_blank">Download</a>  )</h3>
 <p align="center">
 <img src="https://cloud.githubusercontent.com/assets/20374208/26214265/6b605cae-3c04-11e7-9c14-2cd59e10dd03.png">
