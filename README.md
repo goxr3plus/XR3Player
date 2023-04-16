@@ -75,6 +75,17 @@ In order to run the project you should add the following **VM Options** ( easy u
 
 Ready to go :) 
 
+This is only for me when i build the new installers ( i wrote this to not forget in future )
+
+How i package for the installer : ```Maven clean``` and then ```Maven package``` from the lifecycles .
+
+It prepares a ```XR3Player_lib``` and a ```XR3Player.jar``` and it copies then using the assemply into a zip called XR3Player Update xxx . zip
+
+![image](https://user-images.githubusercontent.com/20374208/232339947-df1ccbe2-b15e-430f-968c-ba0bd0ef9e94.png)
+
+![image](https://user-images.githubusercontent.com/20374208/232339975-308fcc90-5276-4a19-8656-41e5ca424878.png)
+
+
 ## Modular
  - **As XR3Player codebase keeps growing i decided to make it modular so it's main components are the below :**
    - [XR3Player Core](https://github.com/goxr3plus/XR3Player) ( The main code of XR3Player )
