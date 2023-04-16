@@ -1,5 +1,5 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q3WBIC)
-<p align="center" style="font-size: 40px" > XR3Player is running with Java 19 as minimum JDK </p> 
+# XR3Player is running with Java 20 as minimum JDK 
 <p align="center" style="font-size: 40px" > I am busy making mobile apps this period so i am maintining only for now </p> 
 
 --- 
@@ -54,8 +54,8 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 To build XR3Player, you will need: 
 
-* [JDK 19]
-* [Maven](http://maven.apache.org/) - Version 3.6.0++
+* [JDK 20]
+* [Maven](http://maven.apache.org/) - Version 3.8.1++
 
 Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
 
@@ -74,6 +74,17 @@ In order to run the project you should add the following **VM Options** ( easy u
 ```
 
 Ready to go :) 
+
+This is only for me when i build the new installers ( i wrote this to not forget in future )
+
+How i package for the installer : ```Maven clean``` and then ```Maven package``` from the lifecycles .
+
+It prepares a ```XR3Player_lib``` and a ```XR3Player.jar``` and it copies then using the assemply into a zip called XR3Player Update xxx . zip
+
+![image](https://user-images.githubusercontent.com/20374208/232339947-df1ccbe2-b15e-430f-968c-ba0bd0ef9e94.png)
+
+![image](https://user-images.githubusercontent.com/20374208/232339975-308fcc90-5276-4a19-8656-41e5ca424878.png)
+
 
 ## Modular
  - **As XR3Player codebase keeps growing i decided to make it modular so it's main components are the below :**
