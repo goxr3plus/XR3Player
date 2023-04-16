@@ -54,8 +54,8 @@ Check the section **HOW TO RUN PROJECT** because it needs just  20 seconds of ad
 
 To build XR3Player, you will need: 
 
-* [JDK 19]
-* [Maven](http://maven.apache.org/) - Version 3.6.0++
+* [JDK 20]
+* [Maven](http://maven.apache.org/) - Version 3.8.1++
 
 Open IntelliJ and fork the project (https://github.com/goxr3plus/XR3Player).
 
