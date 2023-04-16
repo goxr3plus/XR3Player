@@ -82,6 +82,7 @@
 							<!-- exclude junit, we need runtime dependency only -->
 							<excludeArtifactIds>junit</excludeArtifactIds>
 							<outputDirectory>${project.build.directory}/XR3Player_lib/</outputDirectory>
+							<overWriteIfNewer>true</overWriteIfNewer>
 						</configuration>
 					</execution>
 				</executions>

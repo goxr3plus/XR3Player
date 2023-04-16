@@ -83,7 +83,7 @@ public class Main extends Application {
 		DatabaseTool.getAbsoluteDatabasePathWithSeparator() + "ApplicationProperties.properties", true);
 
 	// Internal Information
-	public static final int APPLICATION_VERSION = 130;
+	public static final int APPLICATION_VERSION = 131;
 	public static final String RELEASE_DATE = "Check updates window";
 
 	private static final Logger[] pin;
