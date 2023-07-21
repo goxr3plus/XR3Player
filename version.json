@@ -3,7 +3,28 @@
   "latestTask": "1108",
   "latestGym": "1104",
   "latestManifest": "1107",
-  "latestAzarina": {
-    "version": 1106
+  "zfa": {
+    "android": {
+      "latest": 1156,
+      "mandatory": false
+    }
+  },
+  "task": {
+    "android": {
+      "latest": 1108,
+      "mandatory": false
+    }
+  },
+  "gym": {
+    "android": {
+      "latest": 1104,
+      "mandatory": false
+    }
+  },
+  "manifest": {
+    "android": {
+      "latest": 1107,
+      "mandatory": false
+    }
   }
 }
