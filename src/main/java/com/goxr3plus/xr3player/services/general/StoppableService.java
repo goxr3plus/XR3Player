@@ -12,8 +12,8 @@ import com.goxr3plus.xr3player.utils.general.NetworkingTool;
 public class StoppableService extends Service<Boolean> {
 
 	public enum StoppableServiceCategory {
-		INTERNET_CHECKER, TIMER_CHECKER;
-	}
+		INTERNET_CHECKER, TIMER_CHECKER
+    }
 
 	private final StoppableServiceCategory category;
 

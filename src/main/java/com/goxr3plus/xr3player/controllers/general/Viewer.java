@@ -167,7 +167,7 @@ public class Viewer extends Region {
 				searchWord.set("");
 			else if (key.getCode() == KeyCode.A && key.isControlDown()) {
 				if (libraryMode != null)
-					if (getItemsObservableList().size() == 0)
+					if (getItemsObservableList().isEmpty())
 						getItemsObservableList().forEach(library -> ((Library) library).setSelected(true));
 					else {
 						boolean select = !((Library) getItemsObservableList().get(0)).isSelected();

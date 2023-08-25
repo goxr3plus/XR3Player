@@ -36,8 +36,8 @@ public class ApplicationSettingsController extends BorderPane {
 	 *
 	 */
 	public enum SettingsTab {
-		GENERERAL, LIBRARIES, PLAYLISTS, SHORTCUTS, XPLAYERS, ANYONE;
-	}
+		GENERERAL, LIBRARIES, PLAYLISTS, SHORTCUTS, XPLAYERS, ANYONE
+    }
 
 	@FXML
 	private Button restoreAllSettings;

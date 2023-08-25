@@ -300,8 +300,8 @@ public class VisualizerWindowController extends StackPane {
 			public String toString() {
 				return "Foreground";
 			}
-		};
-	}
+		}
+    }
 
 	/**
 	 * Replaces the background image of visualizer.

@@ -231,7 +231,7 @@ public class User extends StackPane {
 		nameField.getTooltip().setText(getName());
 		nameField.setOnMouseReleased(m -> {
 			if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2
-					&& Main.loginMode.viewer.centerItemProperty().get() == User.this)// Main.loginMode.teamViewer.getTimeline().getStatus()
+					&& Main.loginMode.viewer.centerItemProperty().get() == this)// Main.loginMode.teamViewer.getTimeline().getStatus()
 																						// != Status.RUNNING)
 				renameUser(nameField);
 		});
@@ -251,7 +251,7 @@ public class User extends StackPane {
 	 * Open display information stack pane for this user
 	 */
 	public void displayInformation() {
-		if (Main.loginMode.viewer.centerItemProperty().get() == User.this)
+		if (Main.loginMode.viewer.centerItemProperty().get() == this)
 			Main.loginMode.userInformation.displayForUser(this);
 	}
 
