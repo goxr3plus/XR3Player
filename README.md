@@ -1,5 +1,5 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q3WBIC)
-# XR3Player is running with Java 20 as minimum JDK 
+# XR3Player is running with Java 21 as minimum JDK 
 <p align="center" style="font-size: 40px" > I am busy making mobile apps this period so i am maintining only for now </p> 
 
 --- 
