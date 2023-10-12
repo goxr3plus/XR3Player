@@ -57,8 +57,8 @@ public class DJDisc extends StackPane {
 		/** The normal. */
 		NORMAL,
 		/** The reversed. */
-		REVERSED;
-	}
+		REVERSED
+    }
 
 	/** The angle. */
 	private int angle;

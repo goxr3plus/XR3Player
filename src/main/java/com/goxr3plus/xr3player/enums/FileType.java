@@ -7,5 +7,5 @@ package com.goxr3plus.xr3player.enums;
  *
  */
 public enum FileType {
-	DIRECTORY, FILE, ZIP;
+	DIRECTORY, FILE, ZIP
 }

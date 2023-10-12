@@ -18,6 +18,6 @@ public enum Operation {
 	/** The refresh. */
 	REFRESH,
 	/** The update */
-	UPDATE_TABLE_VIEW, UNKNOWN;
+	UPDATE_TABLE_VIEW, UNKNOWN
 
 }

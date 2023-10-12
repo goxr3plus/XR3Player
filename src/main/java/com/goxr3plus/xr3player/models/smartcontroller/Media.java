@@ -1045,11 +1045,11 @@ public abstract class Media {
 			preparedUStars.setString(2, getFilePath());
 			if (preparedUStars.executeUpdate() > 0) {// && controller1 != controller) //Check
 				smartController.getItemsObservableList().forEach(media -> {
-					if (media.getFilePath().equals(Media.this.getFilePath()))
+					if (media.getFilePath().equals(this.getFilePath()))
 						media.starsProperty().set(stars.get());
 				});
 				smartController.getFiltersMode().getMediaTableViewer().getTableView().getItems().forEach(media -> {
-					if (media.getFilePath().equals(Media.this.getFilePath()))
+					if (media.getFilePath().equals(this.getFilePath()))
 						media.starsProperty().set(stars.get());
 				});
 			}

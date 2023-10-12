@@ -57,9 +57,9 @@ public class StarWindow extends GridPane {
 	// -------------------------------------
 
 	/** The window. */
-	private final Stage window = new Stage();;
+	private final Stage window = new Stage();
 
-	/** The gc. */
+    /** The gc. */
 	private GraphicsContext gc;
 
 	/** The stars position. */

@@ -190,7 +190,7 @@ public class FilesExportService extends Service<Boolean> {
 
 							// Stream
 							try (ResultSet resultSet = Main.dbManager.getConnection().createStatement()
-									.executeQuery("SELECT* FROM '" + smartController.getDataBaseTableName() + "'");) {
+									.executeQuery("SELECT* FROM '" + smartController.getDataBaseTableName() + "'")) {
 
 								// Make a list of all the items
 								final List<String> list = new ArrayList<>();

@@ -39,9 +39,9 @@ public class XPlayerModel {
 	 * Constructor.
 	 */
 	public XPlayerModel() {
-		songObject = new SimpleObjectProperty<>(XPlayerModel.this, "songObject", null);
-		songExtension = new SimpleStringProperty(XPlayerModel.this, "songExtension", null);
-		songPath = new SimpleStringProperty(XPlayerModel.this, "songPath", null);
+		songObject = new SimpleObjectProperty<>(this, "songObject", null);
+		songExtension = new SimpleStringProperty(this, "songExtension", null);
+		songPath = new SimpleStringProperty(this, "songPath", null);
 		equalizerArray = new float[32];
 	}
 

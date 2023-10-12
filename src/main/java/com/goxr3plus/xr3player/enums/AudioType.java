@@ -22,5 +22,5 @@ public enum AudioType {
 	/**
 	 * Audio is UNKOWN
 	 */
-	UNKNOWN;
+	UNKNOWN
 }

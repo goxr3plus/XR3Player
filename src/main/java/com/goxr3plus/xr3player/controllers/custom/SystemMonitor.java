@@ -54,8 +54,8 @@ public class SystemMonitor extends StackPane {
 		/**
 		 * Monitor the RAM
 		 */
-		RAM;
-	}
+		RAM
+    }
 
 	/** The monitor. */
 	private Monitor monitor;

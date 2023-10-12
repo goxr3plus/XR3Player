@@ -281,8 +281,7 @@ public class MicrophoneAnalyzer extends Microphone {
 			double tmp = c.getMagnitude();
 			if (tmp > max) {
 				max = tmp;
-				;
-				index = i;
+                index = i;
 			}
 		}
 		return index;

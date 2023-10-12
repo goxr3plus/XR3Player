@@ -33,8 +33,8 @@ public class MediaTagsService extends Service<Boolean> {
 
 	public enum AllDetailsServiceOperation {
 
-		ALL, TAGS, ARTWORK_COLUMN;
-	}
+		ALL, TAGS, ARTWORK_COLUMN
+    }
 
 	/**
 	 * Constructor

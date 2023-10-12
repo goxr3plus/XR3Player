@@ -26,6 +26,6 @@ public enum NotificationType {
 	ERROR,
 
 	/** The success. */
-	SUCCESS;
+	SUCCESS
 
 }

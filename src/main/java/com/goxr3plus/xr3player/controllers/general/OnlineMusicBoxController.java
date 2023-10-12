@@ -39,8 +39,8 @@ public class OnlineMusicBoxController extends StackPane {
 
 	// Online-Music-Categories
 	public enum OnlineMusicCategory {
-		RECOMMENDED, GENRES, ACTIVITIES, MOOD, EDITORSPICK, CHARTS;
-	}
+		RECOMMENDED, GENRES, ACTIVITIES, MOOD, EDITORSPICK, CHARTS
+    }
 
 	private final OnlineMusicCategory category;
 

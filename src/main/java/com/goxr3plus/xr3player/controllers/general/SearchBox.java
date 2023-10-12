@@ -48,8 +48,8 @@ public class SearchBox extends HBox {
 
 	public enum SearchBoxType {
 
-		LIBRARYSEARCHBOX, USERSSEARCHBOX;
-	}
+		LIBRARYSEARCHBOX, USERSSEARCHBOX
+    }
 
 	private final SearchBoxType searchBoxType;
 

@@ -247,8 +247,8 @@ public class SmartController extends StackPane {
 	// ---------Security---------------------------
 
 	public enum WorkOnProgress {
-		NONE, INSERTING_FILES, DELETE_FILES, RENAMING_LIBRARY, UPDATING_PLAYLIST, SEARCHING_FILES, EXPORTING_FILES;
-	}
+		NONE, INSERTING_FILES, DELETE_FILES, RENAMING_LIBRARY, UPDATING_PLAYLIST, SEARCHING_FILES, EXPORTING_FILES
+    }
 
 	public volatile WorkOnProgress workOnProgress = WorkOnProgress.NONE;
 
@@ -886,7 +886,7 @@ public class SmartController extends StackPane {
 	 * Goes on the Previous List.
 	 */
 	public void goPrevious() {
-		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive()
+		if (this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive()
 				&& totalInDataBase.get() != 0 && currentPage.get() > 0) {
 			currentPage.set(currentPage.get() - 1);
 			loadService.startService(false, true, false);
@@ -897,7 +897,7 @@ public class SmartController extends StackPane {
 	 * Goes on the Next List.
 	 */
 	public void goNext() {
-		if (SmartController.this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive()
+		if (this.genre != Genre.SEARCHWINDOW && isFree(false) && !searchService.isActive()
 				&& totalInDataBase.get() != 0 && currentPage.get() < getMaximumList()) {
 			currentPage.set(currentPage.get() + 1);
 			loadService.startService(false, true, false);

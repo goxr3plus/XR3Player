@@ -5,6 +5,7 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -70,7 +71,7 @@ public class MainTools {
                 // ---------------------- COUNT TOTAL GITHUB DOWNLOADS ----------------------
                 final String text2 = "GitHub: [ " + Arrays
                         .stream(IOUtils
-                                .toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), "UTF-8")
+                                .toString(new URL("https://api.github.com/repos/goxr3plus/XR3Player/releases"), StandardCharsets.UTF_8)
                                 .split("\"download_count\":"))
                         .skip(1).mapToInt(l -> Integer.parseInt(l.split(",")[0])).sum() + " ]";
                 Platform.runLater(() -> Main.loginMode.getGitHubDownloadsLabel().setText(text2));

@@ -25,8 +25,8 @@ import com.goxr3plus.xr3player.xplayer.visualizer.geometry.ResizableCanvas;
 public class DJFilter extends StackPane {
 
 	public enum DJFilterCategory {
-		EQUALIZER_FILTER, VOLUME_FILTER;
-	}
+		EQUALIZER_FILTER, VOLUME_FILTER
+    }
 
 	/** The listeners. */
 	private final ArrayList<DJFilterListener> listeners = new ArrayList<>();

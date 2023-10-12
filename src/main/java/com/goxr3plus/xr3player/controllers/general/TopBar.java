@@ -78,9 +78,9 @@ public class TopBar extends BorderPane {
 		/**
 		 * The window is on movie mode
 		 */
-		MOVIEMODE;
+		MOVIEMODE
 
-	}
+    }
 
 	/**
 	 * Constructor.

@@ -80,8 +80,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		MONO,
 
 		/** The stereo. */
-		STEREO;
-	}
+		STEREO
+    }
 
 	/**
 	 * Indicates the Type of The Sample.
@@ -94,8 +94,8 @@ public class KJDSPAudioDataConsumer implements KJAudioDataConsumer {
 		EIGHT_BIT,
 
 		/** The sixteen bit. */
-		SIXTEEN_BIT;
-	}
+		SIXTEEN_BIT
+    }
 
 	/**
 	 * Default constructor creates a DSPAC with DEFAULT_SAMPLE_SIZE and DEFAULT_FPS

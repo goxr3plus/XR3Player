@@ -55,8 +55,8 @@ public class WaveFormService extends Service<Boolean> {
 	 *
 	 */
 	public enum WaveFormJob {
-		AMPLITUDES_AND_WAVEFORM, WAVEFORM;
-	}
+		AMPLITUDES_AND_WAVEFORM, WAVEFORM
+    }
 
 	/**
 	 * Constructor.

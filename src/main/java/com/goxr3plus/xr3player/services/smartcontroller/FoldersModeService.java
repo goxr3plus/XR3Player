@@ -153,7 +153,7 @@ public class FoldersModeService extends Service<Void> {
 						String query = "SELECT(PATH) FROM '"
 								+ smartControllerFoldersMode.getSmartController().getDataBaseTableName() + "'";
 						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement()
-								.executeQuery(query);) {
+								.executeQuery(query)) {
 
 							// Fetch the items from the database
 							while (resultSet.next())

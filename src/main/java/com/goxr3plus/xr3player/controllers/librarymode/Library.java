@@ -151,7 +151,7 @@ public class Library extends StackPane {
         /**
          * Songs have been copied into the database.
          */
-        DATABASE_PATH;
+        DATABASE_PATH
     }
 
     /**
@@ -486,7 +486,7 @@ public class Library extends StackPane {
         nameLabel.getTooltip().setText(libraryName);
         nameLabel.setOnMouseReleased(m -> {
             if (m.getButton() == MouseButton.PRIMARY && m.getClickCount() == 2
-                    && Main.libraryMode.viewer.centerItemProperty().get() == Library.this)// Main.libraryMode.teamViewer.getTimeline().getStatus()
+                    && Main.libraryMode.viewer.centerItemProperty().get() == this)// Main.libraryMode.teamViewer.getTimeline().getStatus()
                 // != Status.RUNNING)
                 renameLibrary(nameLabel);
         });
@@ -497,13 +497,13 @@ public class Library extends StackPane {
         ratingLabel.textProperty().bind(starsProperty().asString());
         ratingLabel.setOnMouseReleased(m -> {
             if (m.getButton() == MouseButton.PRIMARY
-                    && Main.libraryMode.viewer.centerItemProperty().get() == Library.this)
+                    && Main.libraryMode.viewer.centerItemProperty().get() == this)
                 updateLibraryStars(ratingLabel);
         });
 
         // ----InformationLabel
         informationLabel.setOnMouseReleased(m -> {
-            if (Main.libraryMode.viewer.centerItemProperty().get() == Library.this)
+            if (Main.libraryMode.viewer.centerItemProperty().get() == this)
                 Main.libraryMode.libraryInformation.showWindow(this);
         });
 
@@ -597,7 +597,7 @@ public class Library extends StackPane {
         if (setStars(stars)) {
             // Try
             try (PreparedStatement libUStars = Main.dbManager.getConnection()
-                    .prepareStatement("UPDATE LIBRARIES SET STARS=? WHERE NAME=?;");) {
+                    .prepareStatement("UPDATE LIBRARIES SET STARS=? WHERE NAME=?;")) {
 
                 // SQLITE COMMIT
                 libUStars.setDouble(1, stars);
@@ -933,7 +933,7 @@ public class Library extends StackPane {
     }
 
     public enum LibraryStatus {
-        OPENED, CLOSED;
+        OPENED, CLOSED
     }
 
     /**
