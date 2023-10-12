@@ -1487,7 +1487,7 @@ public class XPlayerController extends StackPane {
 		// DjVisualizer
 		if (this.getKey() == 1 || this.getKey() == 2) {
 			djVisualizer = new XPlayerVisualizer(this, false);
-			djVisualizer.setDisplayMode(Integer.parseInt(VisualizerType.VERTICAL_VOLUME_METER.toString()));
+			djVisualizer.setDisplayMode(VisualizerType.VERTICAL_VOLUME_METER.getValue());
 		}
 
 		// Select the correct toggle
