@@ -1,11 +1,11 @@
 {
-  "latest": "1214",
+  "latest": "1215",
   "latestTask": "1109",
   "latestGym": "1106",
   "latestManifest": "1110",
   "zfa": {
     "android": {
-      "latest": 1214,
+      "latest": 1215,
       "mandatory": false,
       "lastMandatoryVersion": 1205
     }
