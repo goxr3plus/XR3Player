@@ -6,7 +6,7 @@
   "zfa": {
     "android": {
       "latest": 1231,
-      "mandatory": true,
+      "mandatory": false,
       "lastMandatoryVersion": 1231
     }
   },
