@@ -7,7 +7,7 @@
     "android": {
       "latest": 1231,
       "mandatory": false,
-      "lastMandatoryVersion": 1231
+      "lastMandatoryVersion": 1228
     }
   },
   "task": {
