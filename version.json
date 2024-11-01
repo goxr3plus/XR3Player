@@ -1,30 +1,30 @@
 {
-  "latest": "1275",
-  "latestTask": "1109",
+  "latest": "1277",
+  "latestTask": "1130",
   "latestGym": "1106",
-  "latestManifest": "1110",
+  "latestManifest": "1112",
   "zfa": {
     "android": {
-      "latest": 1275,
+      "latest": 1277,
       "mandatory": true,
-      "lastMandatoryVersion": 1275
+      "lastMandatoryVersion": 1277
     }
   },
   "task": {
     "android": {
-      "latest": 1108,
-      "mandatory": false
+      "latest": 1130,
+      "mandatory": true
     }
   },
   "gym": {
     "android": {
-      "latest": 1104,
-      "mandatory": false
+      "latest": 1100,
+      "mandatory": true
     }
   },
   "manifest": {
     "android": {
-      "latest": 1107,
+      "latest": 1112,
       "mandatory": false
     }
   }
