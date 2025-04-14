@@ -6,7 +6,7 @@
   "zfa": {
     "android": {
       "latest": 1334,
-      "lastMandatoryVersion": 1334
+      "lastMandatoryVersion": 1291
     }
   },
   "task": {
