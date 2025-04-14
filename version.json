@@ -5,9 +5,8 @@
   "latestManifest": "1112",
   "zfa": {
     "android": {
-      "latest": 1277,
-      "mandatory": true,
-      "lastMandatoryVersion": 1277
+      "latest": 1334,
+      "lastMandatoryVersion": 1334
     }
   },
   "task": {
