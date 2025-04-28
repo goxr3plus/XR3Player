@@ -1,3 +1,5 @@
+Reminder for vibe coders .... i made all this before ai tools like chatgpt , claude , gemini etc back in 2013-2018 ( so the code is not the best or perfect i was junior developer back then ) 
+
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q3WBIC)
 # XR3Player is running with Java 21 as minimum JDK 
 <p align="center" style="font-size: 40px" > I am busy making mobile apps this period so i am maintining only for now </p> 
