@@ -46,8 +46,8 @@ public class FiltersModeService extends Service<Void> {
 
 	private enum Filter {
 
-		ARTIST, ALBUM, GENRE, YEAR, BPM, KEY, COMPOSER, BIT_RATE;
-	}
+		ARTIST, ALBUM, GENRE, YEAR, BPM, KEY, COMPOSER, BIT_RATE
+    }
 
 	/**
 	 * The operation to be done by the Service
@@ -225,7 +225,7 @@ public class FiltersModeService extends Service<Void> {
 						String query = "SELECT" + (operation == Operation.UPDATE_TABLE_VIEW ? "*" : "(PATH)") + "FROM '"
 								+ smartControllerArtistsMode.getSmartController().getDataBaseTableName() + "'";
 						try (ResultSet resultSet = Main.dbManager.getConnection().createStatement()
-								.executeQuery(query);) {
+								.executeQuery(query)) {
 
 							int counter = 0;
 							// Fetch the items from the database

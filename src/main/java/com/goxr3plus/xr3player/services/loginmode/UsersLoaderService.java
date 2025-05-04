@@ -154,7 +154,7 @@ public class UsersLoaderService extends Service<Boolean> {
 								try (Connection connection = DriverManager
 										.getConnection("jdbc:sqlite:" + dbFileAbsolutePath);
 									 ResultSet dbCounter = connection.createStatement()
-											 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
+											 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;")) {
 
 									final int[] totalLibraries = {0};
 									totalLibraries[0] += dbCounter.getInt(1);

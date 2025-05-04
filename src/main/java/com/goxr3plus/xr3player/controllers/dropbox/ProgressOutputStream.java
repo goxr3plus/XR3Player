@@ -61,6 +61,6 @@ public class ProgressOutputStream extends OutputStream {
 	}
 
 	public interface Listener {
-		public void progress(long completed, long totalSize);
+		void progress(long completed, long totalSize);
 	}
 }

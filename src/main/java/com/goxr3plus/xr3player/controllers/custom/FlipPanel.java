@@ -92,7 +92,7 @@ public class FlipPanel extends StackPane {
 		flipToFront.setOnFinished(event -> {
 			front.setCache(false);
 			back.setCache(false);
-			fireEvent(new FlipEvent(FlipPanel.this, FlipPanel.this, FlipEvent.FLIP_TO_FRONT_FINISHED));
+			fireEvent(new FlipEvent(this, this, FlipEvent.FLIP_TO_FRONT_FINISHED));
 		});
 		flipToFront.play();
 	}
@@ -114,7 +114,7 @@ public class FlipPanel extends StackPane {
 		flipToBack.setOnFinished(event -> {
 			front.setCache(false);
 			back.setCache(false);
-			fireEvent(new FlipEvent(FlipPanel.this, FlipPanel.this, FlipEvent.FLIP_TO_BACK_FINISHED));
+			fireEvent(new FlipEvent(this, this, FlipEvent.FLIP_TO_BACK_FINISHED));
 		});
 		flipToBack.play();
 	}

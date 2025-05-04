@@ -6,5 +6,5 @@ package com.goxr3plus.xr3player.enums;
  */
 public enum FileLinkType {
 
-	SYMBOLIC_LINK, HARD_LINK, SHORTCUT, ORIGINAL_FILE, UNKNOWN;
+	SYMBOLIC_LINK, HARD_LINK, SHORTCUT, ORIGINAL_FILE, UNKNOWN
 }

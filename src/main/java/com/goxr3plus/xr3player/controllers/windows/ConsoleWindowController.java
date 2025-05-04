@@ -77,8 +77,8 @@ public class ConsoleWindowController extends StackPane {
 	 *
 	 */
 	public enum ConsoleTab {
-		CONSOLE, SPEECH_RECOGNITION;
-	}
+		CONSOLE, SPEECH_RECOGNITION
+    }
 
 	/**
 	 * Constructor

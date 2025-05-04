@@ -366,7 +366,7 @@ public class DatabaseManager {
 					try (ResultSet resultSet = getConnection().createStatement()
 							.executeQuery("SELECT* FROM LIBRARIES;");
 						 ResultSet dbCounter = getConnection().createStatement()
-								 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;");) {
+								 .executeQuery("SELECT COUNT(NAME) FROM LIBRARIES;")) {
 
 						totalLibraries = dbCounter.getInt(1);
 
