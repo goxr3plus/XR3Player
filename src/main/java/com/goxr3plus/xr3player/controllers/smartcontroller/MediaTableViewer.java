@@ -852,7 +852,7 @@ public class MediaTableViewer extends StackPane {
 					} else if (code == KeyCode.ENTER)
 						Main.xPlayersList.getXPlayerController(0)
 								.playSong(getSelectionModel().getSelectedItem().getFilePath());
-					else if (key.isControlDown() && code == KeyCode.I)
+					else if (code == KeyCode.I)
 						// More than 1 selected?
 						if (getSelectedCount() > 1)
 							Main.tagWindow
