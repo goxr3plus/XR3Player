@@ -56,8 +56,7 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	public final static int DISPLAYMODE_MAXIMUM = VisualizerType.values().length - 2; // -1 cause i count from 0
 
 	/** The display mode. */
-	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(
-			Integer.parseInt(VisualizerType.CIRCLE_WITH_LINES.toString()));
+	public final SimpleIntegerProperty displayMode = new SimpleIntegerProperty(VisualizerType.CIRCLE_WITH_LINES.getValue());
 
 	/** The Constant DEFAULT_FPS. */
 	private static final int DEFAULT_FPS = 60;
@@ -799,86 +798,48 @@ public class VisualizerModel extends ResizableCanvas implements KJDigitalSignalP
 	public enum VisualizerType {
 
 		/** OSCILLOSCOPE */
-		OSCILLOSCOPE {
-			@Override
-			public String toString() {
-				return "0";
-			}
-		},
+		OSCILLOSCOPE (0),
 
 		/** OSCILLOSCOPE */
-		STEREO_OSCILLOSCOPE {
-			@Override
-			public String toString() {
-				return "1";
-			}
-		},
+		STEREO_OSCILLOSCOPE (1),
 
 		/** OSCILLOSCOPE */
-		OSCILLOSCOPE_LINES {
-			@Override
-			public String toString() {
-				return "2";
-			}
-		},
+		OSCILLOSCOPE_LINES (2),
 
 		/** The display spectrum bars. */
-		SPECTRUM_BARS {
-			@Override
-			public String toString() {
-				return "3";
-			}
-		},
+		SPECTRUM_BARS (3),
 
 		/** Display a VOLUME_METER */
-		VOLUME_METER {
-			@Override
-			public String toString() {
-				return "4";
-			}
-		},
+		VOLUME_METER (4),
+
 		/** The display rosette with polyspiral. */
-		ROSETTE {
-			@Override
-			public String toString() {
-				return "5";
-			}
-		},
+		ROSETTE (5),
+
 		/** Display A Circle With Lines on it's circumference */
-		CIRCLE_WITH_LINES {
-			@Override
-			public String toString() {
-				return "6";
-			}
-		},
+		CIRCLE_WITH_LINES (6),
+
 		/** Display Sierpinski Triangles */
-		SIERPINSKI {
-			@Override
-			public String toString() {
-				return "7";
-			}
-		},
+		SIERPINSKI (7),
+
 		/** Display SPRITE3D */
-		SPRITE3D {
-			@Override
-			public String toString() {
-				return "8";
-			}
-		},
+		SPRITE3D (8),
+
 		/** Display Julia Fractals */
-		VERTICAL_VOLUME_METER {
-			@Override
-			public String toString() {
-				return "9";
-			}
-		},
+		VERTICAL_VOLUME_METER (9),
+
 		/** Display Julia Fractals */
-		JULIAFRACTALS {
-			@Override
-			public String toString() {
-				return "10";
-			}
-		},
+		JULIAFRACTALS (10);
+
+		private final int value;
+
+
+		private VisualizerType(int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
 
 	}
 

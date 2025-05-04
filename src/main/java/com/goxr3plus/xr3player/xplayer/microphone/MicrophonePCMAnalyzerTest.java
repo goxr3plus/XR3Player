@@ -113,7 +113,7 @@ public class MicrophonePCMAnalyzerTest extends Application {
 		}).start();
 
 		// Visualizer
-		visualizer.setDisplayMode(Integer.parseInt(VisualizerType.CIRCLE_WITH_LINES.toString()));
+		visualizer.setDisplayMode(VisualizerType.CIRCLE_WITH_LINES.getValue());
 		visualizer.setupDSP(microphone.getTargetDataLine());
 		visualizer.startDSP(microphone.getTargetDataLine());
 		visualizer.startVisualizer();

@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -162,18 +163,26 @@ public class VisualizerStackController extends StackPane {
 	 * Goes to the next Spectrum Analyzer
 	 */
 	public void nextSpectrumAnalyzer() {
-		xPlayerController.visualizer.displayMode
-				.set((xPlayerController.visualizer.displayMode.get() + 1 > VisualizerModel.DISPLAYMODE_MAXIMUM) ? 0
-						: xPlayerController.visualizer.displayMode.get() + 1);
+		final SimpleIntegerProperty displayMode = xPlayerController.visualizer.displayMode;
+		final int modeVal = displayMode.get();
+		final int displaymodeMaximum = VisualizerModel.DISPLAYMODE_MAXIMUM;
+		final int nextMode = modeVal + 1;
+		displayMode.set((nextMode > displaymodeMaximum)
+				? 0
+				: nextMode);
 	}
 
 	/**
 	 * Goes to the previous Spectrum Analyzer
 	 */
 	public void previousSpectrumAnalyzer() {
-		xPlayerController.visualizer.displayMode.set(xPlayerController.visualizer.displayMode.get() - 1 >= 0
-				? xPlayerController.visualizer.displayMode.get() - 1
-				: VisualizerModel.DISPLAYMODE_MAXIMUM);
+		final SimpleIntegerProperty displayMode = xPlayerController.visualizer.displayMode;
+		final int modeVal = displayMode.get();
+		final int displaymodeMaximum = VisualizerModel.DISPLAYMODE_MAXIMUM;
+		final int nextMode = modeVal - 1;
+		displayMode.set(nextMode >= 0
+				? nextMode
+				: displaymodeMaximum);
 	}
 
 }
